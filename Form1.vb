@@ -28,11 +28,11 @@ Public Class Form1
 
                 Select Case userRole
                     Case "employee"
-                        MsgBox("slavery")
+                        MsgBox("eeeeeee")
                     Case "manager"
-                        MsgBox("burat")
+                        MsgBox("mmmmmmm")
                     Case "owner"
-                        MsgBox("etitss")
+                        MsgBox("ooooooo")
                     Case Else
                         MsgBox("Role not recognized")
                 End Select

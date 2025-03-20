@@ -25,10 +25,10 @@ Partial Class Form1
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'TextBox1
@@ -57,31 +57,14 @@ Partial Class Form1
         Me.Button1.UseVisualStyleBackColor = True
         Me.Button1.Visible = False
         '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(139, 7)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(169, 144)
-        Me.Button2.TabIndex = 3
-        Me.Button2.Text = "Employee"
-        Me.Button2.UseVisualStyleBackColor = True
-        '
-        'Button3
-        '
-        Me.Button3.Location = New System.Drawing.Point(139, 157)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(169, 144)
-        Me.Button3.TabIndex = 4
-        Me.Button3.Text = "Manager"
-        Me.Button3.UseVisualStyleBackColor = True
-        '
         'Button4
         '
+        Me.Button4.BackgroundImage = Global.DIMSUM_SHITSTEM.My.Resources.Resources.owner
+        Me.Button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Button4.Location = New System.Drawing.Point(139, 307)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(169, 144)
         Me.Button4.TabIndex = 5
-        Me.Button4.Text = "Owner"
         Me.Button4.UseVisualStyleBackColor = True
         '
         'Button5
@@ -93,6 +76,26 @@ Partial Class Form1
         Me.Button5.Text = "Back"
         Me.Button5.UseVisualStyleBackColor = True
         Me.Button5.Visible = False
+        '
+        'Button3
+        '
+        Me.Button3.BackgroundImage = Global.DIMSUM_SHITSTEM.My.Resources.Resources.manager
+        Me.Button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Button3.Location = New System.Drawing.Point(139, 157)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(169, 144)
+        Me.Button3.TabIndex = 4
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.BackgroundImage = Global.DIMSUM_SHITSTEM.My.Resources.Resources.crew
+        Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Button2.Location = New System.Drawing.Point(139, 7)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(169, 144)
+        Me.Button2.TabIndex = 3
+        Me.Button2.UseVisualStyleBackColor = True
         '
         'Form1
         '
