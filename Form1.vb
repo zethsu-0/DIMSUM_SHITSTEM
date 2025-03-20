@@ -33,6 +33,8 @@ Public Class Form1
                         MsgBox("mmmmmmm")
                     Case "owner"
                         MsgBox("ooooooo")
+                        Form2.Show()
+
                     Case Else
                         MsgBox("Role not recognized")
                 End Select
