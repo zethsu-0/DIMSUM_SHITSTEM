@@ -51,7 +51,6 @@ Public Class ADD_PRODUCT
         End If
 
     End Sub
-
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         If MessageBox.Show("Are you sure you want to delete this record?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
             STOCKSBindingSource.RemoveCurrent()
