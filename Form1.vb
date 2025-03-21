@@ -34,7 +34,7 @@ Public Class Form1
                     Case "owner"
                         MsgBox("ooooooo")
                         Form2.Show()
-
+                        Me.Hide()
                     Case Else
                         MsgBox("Role not recognized")
                 End Select
@@ -96,5 +96,10 @@ Public Class Form1
         Button4.Visible = True
         TextBox1.Text = ""
         TextBox2.Text = ""
+    End Sub
+
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        Form3.Show()
+        Me.Hide()
     End Sub
 End Class
