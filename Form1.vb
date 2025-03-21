@@ -98,7 +98,7 @@ Public Class Form1
         TextBox2.Text = ""
     End Sub
 
-    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+    Private Sub Button6_Click(sender As Object, e As EventArgs)
         Form3.Show()
         Me.Hide()
     End Sub
