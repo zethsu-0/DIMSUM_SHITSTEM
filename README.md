@@ -18,7 +18,11 @@ then execute
       
 4. tapos punta kayo sa Programmability then right click store procedure 
             paste nyo to  
-            
+
+		SET ANSI_NULLS ON
+		GO
+		SET QUOTED_IDENTIFIER ON
+		GO
             CREATE PROCEDURE [dbo].[login1]  
 	            @user varchar(50),  
 	            @pass varchar(50),  
