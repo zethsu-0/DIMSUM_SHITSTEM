@@ -1,6 +1,12 @@
 ﻿Public Class Form2
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Form3.Show()
+        Dim sure = MessageBox.Show("Open Stocks?", "Confirm", CType(vbOKCancel, MessageBoxButtons))
+        If sure = MsgBoxResult.Ok Then
+            Form3.Show()
+            Me.Hide()
+        Else
+            Return
+        End If
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click

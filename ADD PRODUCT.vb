@@ -11,6 +11,8 @@ Public Class ADD_PRODUCT
         Me.STOCKSTableAdapter.Fill(Me.SHITSTEMDataSet.STOCKS)
         STOCKSDataGridView.ClearSelection()
         ClearFormFields()
+
+        Me.FormBorderStyle = Windows.Forms.FormBorderStyle.FixedSingle 'or FixedDialog
     End Sub
 
     Private Sub ClearFormFields()

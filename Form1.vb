@@ -7,6 +7,7 @@ Public Class Form1
         Opencon()
         con.Close()
 
+
     End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
@@ -35,6 +36,7 @@ Public Class Form1
                         MsgBox("ooooooo")
                         Form2.Show()
                         Me.Hide()
+                        showRolefields()
                     Case Else
                         MsgBox("Role not recognized")
                 End Select
@@ -54,7 +56,7 @@ Public Class Form1
         Button3.Visible = False
         Button4.Visible = False
         Button5.Visible = True
-
+        Label1.Visible = True
         roleSelect = "employee"
     End Sub
 
@@ -64,7 +66,7 @@ Public Class Form1
         Button3.Visible = False
         Button4.Visible = False
         Button5.Visible = True
-
+        Label2.Visible = True
         roleSelect = "manager"
     End Sub
 
@@ -74,7 +76,7 @@ Public Class Form1
         Button3.Visible = False
         Button4.Visible = False
         Button5.Visible = True
-
+        Label3.Visible = True
         roleSelect = "owner"
     End Sub
 
@@ -94,8 +96,12 @@ Public Class Form1
         Button2.Visible = True
         Button3.Visible = True
         Button4.Visible = True
+        Button5.Visible = False
         TextBox1.Text = ""
         TextBox2.Text = ""
+        Label1.Visible = False
+        Label2.Visible = False
+        Label3.Visible = False
     End Sub
 
     Private Sub Button6_Click(sender As Object, e As EventArgs)
