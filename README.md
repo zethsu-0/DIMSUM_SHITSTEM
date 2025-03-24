@@ -11,7 +11,7 @@ PARA SA SQLDATABASE:
                         item_no VARCHAR(50) PRIMARY KEY,  
                         product_name VARCHAR(50),  
                         quatity VARCHAR(50),  
-                        price VARCHAR(50))  "
+                        price VARCHAR(50)) 
       
 then execute
 
