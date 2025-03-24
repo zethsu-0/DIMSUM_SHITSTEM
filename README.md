@@ -1,0 +1,5 @@
+OPEN NYO SQL
+MGA NASA DATA BASE:
+      TABLE: "LOGIN"
+            "STOCKS"
+      STORED PROCEDURE:
