@@ -9,7 +9,7 @@ Public Class Form1
 
 
     End Sub
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
 
         con.Open()
         cmd = New SqlCommand("login1", con)
@@ -93,12 +93,15 @@ Public Class Form1
         Button1.Visible = True
     End Sub
     Public Sub showRolefields()
+        Button1.Visible = False
         Button2.Visible = True
         Button3.Visible = True
         Button4.Visible = True
         Button5.Visible = False
         TextBox1.Text = ""
         TextBox2.Text = ""
+        TextBox1.Visible = False
+        TextBox2.Visible = False
         Label1.Visible = False
         Label2.Visible = False
         Label3.Visible = False
