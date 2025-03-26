@@ -47,4 +47,4 @@ then execute
 
 5. tapos sa module na babaguhin
 
-		con.ConnectionString = "Data Source=KUPAL\SQLEXPRESS;Initial Catalog=[pangalan ng database nyo];Integrated Security=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True"
+		con.ConnectionString = "Data Source=[name ng sever];Initial Catalog=[pangalan ng database nyo];Integrated Security=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True"
