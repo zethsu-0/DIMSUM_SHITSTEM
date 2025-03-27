@@ -52,8 +52,8 @@
         Button1.Visible = True
         Label1.Visible = False
     End Sub
-
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        Employees.Show()
+        Me.Hide()
     End Sub
 End Class

@@ -67,7 +67,7 @@ Partial Class Employees
         Me.EmployeesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.EmployeesDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6})
         Me.EmployeesDataGridView.DataSource = Me.EmployeesBindingSource
-        Me.EmployeesDataGridView.Location = New System.Drawing.Point(12, 12)
+        Me.EmployeesDataGridView.Location = New System.Drawing.Point(12, 48)
         Me.EmployeesDataGridView.Name = "EmployeesDataGridView"
         Me.EmployeesDataGridView.Size = New System.Drawing.Size(764, 244)
         Me.EmployeesDataGridView.TabIndex = 1

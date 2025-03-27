@@ -36,23 +36,25 @@ Partial Class Form2
         '
         Me.Button1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Button1.BackColor = System.Drawing.Color.Silver
         Me.Button1.Location = New System.Drawing.Point(24, 125)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(357, 194)
         Me.Button1.TabIndex = 0
         Me.Button1.Text = "VIEW DATABASE"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.Button1.UseVisualStyleBackColor = False
         '
         'Button2
         '
         Me.Button2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button2.BackColor = System.Drawing.Color.Silver
         Me.Button2.Location = New System.Drawing.Point(431, 125)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(357, 194)
         Me.Button2.TabIndex = 1
         Me.Button2.Text = "CASHIER"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.Button2.UseVisualStyleBackColor = False
         '
         'Button3
         '
@@ -79,7 +81,7 @@ Partial Class Form2
         Me.Button4.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button4.Location = New System.Drawing.Point(24, 125)
+        Me.Button4.Location = New System.Drawing.Point(24, 126)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(357, 193)
         Me.Button4.TabIndex = 4
@@ -92,7 +94,7 @@ Partial Class Form2
         Me.Button5.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button5.Location = New System.Drawing.Point(431, 125)
+        Me.Button5.Location = New System.Drawing.Point(431, 126)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(357, 193)
         Me.Button5.TabIndex = 5
