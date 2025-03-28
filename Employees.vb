@@ -7,6 +7,7 @@ Public Class Employees
     Private originalTable As DataTable
 
     Private Sub Employees_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         'TODO: This line of code loads data into the 'SHITSTEMDataSet22.login' table. You can move, or remove it, as needed.
         Me.LoginTableAdapter.Fill(Me.SHITSTEMDataSet2.login)
 
@@ -22,8 +23,7 @@ Public Class Employees
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim confirm = MessageBox.Show("are you sure you want to Exit?", "Confirm", CType(vbOKCancel, MessageBoxButtons))
         If confirm = MsgBoxResult.Ok Then
-            Form2.Show()
-            Me.Hide()
+            Me.Close()
         Else
             Return
         End If

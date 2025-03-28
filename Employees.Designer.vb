@@ -47,7 +47,7 @@ Partial Class Employees
         'Button1
         '
         Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button1.Location = New System.Drawing.Point(703, 391)
+        Me.Button1.Location = New System.Drawing.Point(1183, 401)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(113, 31)
         Me.Button1.TabIndex = 24
@@ -57,7 +57,7 @@ Partial Class Employees
         'Button2
         '
         Me.Button2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button2.Location = New System.Drawing.Point(703, 283)
+        Me.Button2.Location = New System.Drawing.Point(1183, 293)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(113, 31)
         Me.Button2.TabIndex = 25
@@ -67,7 +67,7 @@ Partial Class Employees
         'Button3
         '
         Me.Button3.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button3.Location = New System.Drawing.Point(703, 337)
+        Me.Button3.Location = New System.Drawing.Point(1183, 347)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(113, 31)
         Me.Button3.TabIndex = 26
@@ -150,7 +150,7 @@ Partial Class Employees
         'Button4
         '
         Me.Button4.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button4.Location = New System.Drawing.Point(12, 283)
+        Me.Button4.Location = New System.Drawing.Point(492, 293)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(113, 31)
         Me.Button4.TabIndex = 28
@@ -159,14 +159,18 @@ Partial Class Employees
         '
         'Employees
         '
-        Me.ClientSize = New System.Drawing.Size(828, 574)
+        Me.ClientSize = New System.Drawing.Size(1308, 584)
         Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.LoginDataGridView)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Location = New System.Drawing.Point(240, 40)
         Me.Name = "Employees"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.ShowIcon = False
+        Me.ShowInTaskbar = False
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         CType(Me.SHITSTEMDataSet2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LoginBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LoginDataGridView, System.ComponentModel.ISupportInitialize).EndInit()

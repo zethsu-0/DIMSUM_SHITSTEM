@@ -35,10 +35,12 @@ Partial Class Form2
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.Panel1 = New System.Windows.Forms.Panel()
         CType(Me.SHITSTEMDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LoginBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
+        Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Button2
@@ -50,9 +52,9 @@ Partial Class Form2
         Me.Button2.FlatAppearance.BorderColor = System.Drawing.Color.Black
         Me.Button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Yellow
         Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button2.Location = New System.Drawing.Point(3, 182)
+        Me.Button2.Location = New System.Drawing.Point(3, 214)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(226, 65)
+        Me.Button2.Size = New System.Drawing.Size(229, 54)
         Me.Button2.TabIndex = 1
         Me.Button2.Text = "CASHIER"
         Me.Button2.UseVisualStyleBackColor = False
@@ -64,9 +66,9 @@ Partial Class Form2
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button3.Location = New System.Drawing.Point(3, 395)
+        Me.Button3.Location = New System.Drawing.Point(3, 334)
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(226, 68)
+        Me.Button3.Size = New System.Drawing.Size(229, 58)
         Me.Button3.TabIndex = 2
         Me.Button3.Text = "Logout"
         Me.Button3.UseVisualStyleBackColor = True
@@ -78,9 +80,9 @@ Partial Class Form2
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Button4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Yellow
         Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button4.Location = New System.Drawing.Point(3, 111)
+        Me.Button4.Location = New System.Drawing.Point(3, 94)
         Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(226, 65)
+        Me.Button4.Size = New System.Drawing.Size(229, 54)
         Me.Button4.TabIndex = 4
         Me.Button4.Text = "STOCKS"
         Me.Button4.UseVisualStyleBackColor = True
@@ -94,9 +96,9 @@ Partial Class Form2
         Me.Button5.FlatAppearance.BorderColor = System.Drawing.Color.Black
         Me.Button5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Yellow
         Me.Button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button5.Location = New System.Drawing.Point(3, 253)
+        Me.Button5.Location = New System.Drawing.Point(3, 154)
         Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(226, 65)
+        Me.Button5.Size = New System.Drawing.Size(229, 54)
         Me.Button5.TabIndex = 5
         Me.Button5.Text = "EMPLOYEES"
         Me.Button5.UseVisualStyleBackColor = False
@@ -137,12 +139,12 @@ Partial Class Form2
         Me.TableLayoutPanel1.ColumnCount = 1
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.GroupBox1, 0, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.Button3, 0, 5)
         Me.TableLayoutPanel1.Controls.Add(Me.Button4, 0, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.Button2, 0, 3)
+        Me.TableLayoutPanel1.Controls.Add(Me.Button3, 0, 5)
         Me.TableLayoutPanel1.Controls.Add(Me.Button1, 0, 4)
-        Me.TableLayoutPanel1.Controls.Add(Me.Button2, 0, 2)
-        Me.TableLayoutPanel1.Controls.Add(Me.Button5, 0, 3)
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(1, 3)
+        Me.TableLayoutPanel1.Controls.Add(Me.Button5, 0, 2)
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(3, 3)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 6
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 23.22061!))
@@ -151,7 +153,7 @@ Partial Class Form2
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.35588!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.35588!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.35588!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(232, 466)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(235, 395)
         Me.TableLayoutPanel1.TabIndex = 0
         '
         'GroupBox1
@@ -164,7 +166,7 @@ Partial Class Form2
         Me.GroupBox1.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.GroupBox1.Location = New System.Drawing.Point(3, 3)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(226, 102)
+        Me.GroupBox1.Size = New System.Drawing.Size(229, 85)
         Me.GroupBox1.TabIndex = 10
         Me.GroupBox1.TabStop = False
         '
@@ -176,29 +178,40 @@ Partial Class Form2
         Me.Button1.FlatAppearance.BorderColor = System.Drawing.Color.Black
         Me.Button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Yellow
         Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Location = New System.Drawing.Point(3, 324)
+        Me.Button1.Location = New System.Drawing.Point(3, 274)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(226, 65)
+        Me.Button1.Size = New System.Drawing.Size(229, 54)
         Me.Button1.TabIndex = 11
         Me.Button1.Text = "PRODUCTS"
         Me.Button1.UseVisualStyleBackColor = True
+        '
+        'Panel1
+        '
+        Me.Panel1.Controls.Add(Me.TableLayoutPanel1)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Left
+        Me.Panel1.Location = New System.Drawing.Point(0, 0)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(243, 401)
+        Me.Panel1.TabIndex = 1
         '
         'Form2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(839, 469)
-        Me.Controls.Add(Me.TableLayoutPanel1)
+        Me.ClientSize = New System.Drawing.Size(839, 401)
+        Me.Controls.Add(Me.Panel1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form2"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.SHITSTEMDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LoginBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
     Friend WithEvents Button2 As Button
@@ -212,4 +225,5 @@ Partial Class Form2
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
     Friend WithEvents Button1 As Button
     Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents Panel1 As Panel
 End Class

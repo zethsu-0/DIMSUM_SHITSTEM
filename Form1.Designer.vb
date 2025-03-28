@@ -175,7 +175,7 @@ Partial Class Form1
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(125, 46)
         Me.Button6.TabIndex = 11
-        Me.Button6.Text = "Login"
+        Me.Button6.Text = "Signup(testing lang)"
         Me.Button6.UseVisualStyleBackColor = False
         '
         'Form1

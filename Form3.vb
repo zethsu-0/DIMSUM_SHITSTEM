@@ -5,29 +5,29 @@ Imports ZXing
 Public Class Form3
 
     Private editmemo As Boolean = False
+    Private openform As Boolean = False
 
     Private Sub Form3_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         Opencon()
         con.Close()
         STOCKSDataGridView.Width = 946
         Me.STOCKSTableAdapter.Fill(Me.SHITSTEMDataSet.STOCKS)
         STOCKSDataGridView.ClearSelection()
 
+
+
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Dim confirm = MessageBox.Show("are you sure you want to Exit?", "Confirm", CType(vbOKCancel, MessageBoxButtons))
         If confirm = MsgBoxResult.Ok Then
-            Form2.Show()
-            Me.Hide()
+            Me.Close()
         Else
             Return
         End If
     End Sub
 
-    Private Sub Form3_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        Form2.Show()
-    End Sub
 
     Private Sub Form3_Click(sender As Object, e As EventArgs) Handles Me.Click
         STOCKSDataGridView.ClearSelection()

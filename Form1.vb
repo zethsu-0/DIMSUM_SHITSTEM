@@ -41,6 +41,7 @@ Public Class Form1
                             form2.user_id = user_id ' Pass user_id to Form2
                             form2.Show()
                             Me.Hide()
+                            showRolefields()
                         Else
                             MessageBox.Show("Please enter a valid User ID!", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                         End If

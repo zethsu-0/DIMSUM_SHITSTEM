@@ -4,8 +4,19 @@ Imports Microsoft.VisualBasic.ApplicationServices
 
 Public Class Form2
 
-    Public Property user_id As String
 
+    Public Property user_id As String
+    Private lastOpenedForm As Form = Nothing
+
+
+    Private Sub OpenNewForm(newForm As Form)
+        If lastOpenedForm IsNot Nothing AndAlso Not lastOpenedForm.IsDisposed Then
+            lastOpenedForm.Close()
+        End If
+
+        lastOpenedForm = newForm
+        newForm.Show()
+    End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         Dim confirm = MessageBox.Show("are you sure you want to log out?", "Confirm", CType(vbOKCancel, MessageBoxButtons))
@@ -19,21 +30,30 @@ Public Class Form2
     End Sub
 
     Private Sub Form2_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        Me.Hide()
         Form1.Show()
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        Dim sure = MessageBox.Show("Open Stocks?", "Confirm", CType(vbOKCancel, MessageBoxButtons))
-        If sure = MsgBoxResult.Ok Then
-            Form3.Show()
-            Me.Hide()
+
+        Dim sure As DialogResult = MessageBox.Show(Me, "Open Stocks?", "Confirm", MessageBoxButtons.OKCancel, MessageBoxIcon.Question)
+        If sure = DialogResult.OK Then
+            Dim form3 As New Form3()
+            form3.Owner = Me
+            OpenNewForm(form3)
+        End If
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        Dim sure As DialogResult = MessageBox.Show(Me, "Open Enployee Database?", "Confirm", MessageBoxButtons.OKCancel, MessageBoxIcon.Question)
+        If sure = DialogResult.OK Then
+            Dim employees As New Employees()
+            employees.Owner = Me
+            OpenNewForm(employees)
         Else
             Return
         End If
-
     End Sub
-
-
 
 
     Private Sub Form2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -47,6 +67,11 @@ Public Class Form2
         End If
 
     End Sub
+
+    Private Sub Form2_Click(sender As Object, e As EventArgs) Handles Me.Click
+
+    End Sub
+
     Private Sub GetUserFullName()
         Try
 
@@ -79,19 +104,4 @@ Public Class Form2
     End Sub
 
 
-
-    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
-        Dim sure = MessageBox.Show("Open Enployee Database?", "Confirm", CType(vbOKCancel, MessageBoxButtons))
-        If sure = MsgBoxResult.Ok Then
-            Employees.Show()
-            Me.Hide()
-        Else
-            Return
-        End If
-    End Sub
-
-
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-
-    End Sub
 End Class
