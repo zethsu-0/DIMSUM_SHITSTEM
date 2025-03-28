@@ -16,11 +16,15 @@ Public Class Users
         'TODO: This line of code loads data into the 'SHITSTEMDataSet.login' table. You can move, or remove it, as needed.
         Me.LoginTableAdapter.Fill(Me.SHITSTEMDataSet.login)
 
-
         Opencon()
         con.Close()
 
 
+    End Sub
+
+    Private Sub users_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        Form1.Show()
+        Me.Hide()
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
@@ -50,7 +54,7 @@ Public Class Users
         firstname = TextBox1.Text
         age = TextBox3.Text
         address = TextBox4.Text
-        Phone_no = Convert.ToString(TextBox5.Text)
+        Phone_no = TextBox5.Text.Trim()
         password = TextBox6.Text
         role = ComboBox1.Text
 
@@ -81,9 +85,10 @@ Public Class Users
                 TextBox1.Text = ""
                 TextBox2.Text = ""
                 TextBox3.Text = ""
-                TextBox4.Text = ""
-                TextBox6.Text = ""
-                TextBox7.Text = ""
+            TextBox4.Text = ""
+            TextBox5.Text = ""
+            TextBox6.Text = ""
+            TextBox7.Text = ""
                 ComboBox1.Text = ""
 
 
@@ -94,7 +99,7 @@ Public Class Users
         ' End Try
     End Sub
 
-    Private Sub LoginBindingNavigatorSaveItem_Click(sender As Object, e As EventArgs)
+    Private Sub LoginBInt32indingNavigatorSaveItem_Click(sender As Object, e As EventArgs)
         Me.Validate()
         Me.LoginBindingSource.EndEdit()
         Me.TableAdapterManager.UpdateAll(Me.SHITSTEMDataSet)
@@ -106,5 +111,19 @@ Public Class Users
         Me.LoginBindingSource.EndEdit()
         Me.TableAdapterManager.UpdateAll(Me.SHITSTEMDataSet)
 
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+
+        TextBox1.Text = ""
+        TextBox2.Text = ""
+        TextBox3.Text = ""
+        TextBox4.Text = ""
+        TextBox5.Text = ""
+        TextBox6.Text = ""
+        TextBox7.Text = ""
+        ComboBox1.Text = ""
+        Form1.Show()
+        Me.Hide()
     End Sub
 End Class

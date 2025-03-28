@@ -65,4 +65,8 @@ Public Class Employees
         Me.TableAdapterManager.UpdateAll(Me.SHITSTEMDataSet2)
 
     End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        Users.Show()
+    End Sub
 End Class

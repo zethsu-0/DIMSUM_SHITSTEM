@@ -378,8 +378,8 @@ Partial Class Form3
         '
         'STOCKSDataGridView
         '
-        Me.STOCKSDataGridView.AllowUserToResizeColumns = False
-        Me.STOCKSDataGridView.AllowUserToResizeRows = False
+        Me.STOCKSDataGridView.AllowUserToAddRows = False
+        Me.STOCKSDataGridView.AllowUserToDeleteRows = False
         Me.STOCKSDataGridView.AutoGenerateColumns = False
         Me.STOCKSDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.STOCKSDataGridView.ColumnHeadersHeight = 40

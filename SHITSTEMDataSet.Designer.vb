@@ -1153,7 +1153,7 @@ Partial Public Class SHITSTEMDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Overloads Function AddloginRow(ByVal user_id As String, ByVal firstname As String, ByVal lastname As String, ByVal role As String, ByVal age As String, ByVal address As String, ByVal Phone_no As Integer, ByVal password As String) As loginRow
+        Public Overloads Function AddloginRow(ByVal user_id As String, ByVal firstname As String, ByVal lastname As String, ByVal role As String, ByVal age As String, ByVal address As String, ByVal Phone_no As String, ByVal password As String) As loginRow
             Dim rowloginRow As loginRow = CType(Me.NewRow,loginRow)
             Dim columnValuesArray() As Object = New Object() {user_id, firstname, lastname, role, age, address, Phone_no, password}
             rowloginRow.ItemArray = columnValuesArray
@@ -1209,7 +1209,7 @@ Partial Public Class SHITSTEMDataSet
             MyBase.Columns.Add(Me.columnage)
             Me.columnaddress = New Global.System.Data.DataColumn("address", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnaddress)
-            Me.columnPhone_no = New Global.System.Data.DataColumn("Phone_no", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnPhone_no = New Global.System.Data.DataColumn("Phone_no", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnPhone_no)
             Me.columnpassword = New Global.System.Data.DataColumn("password", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnpassword)
@@ -1739,9 +1739,9 @@ Partial Public Class SHITSTEMDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Property Phone_no() As Integer
+        Public Property Phone_no() As String
             Get
-                Return CType(Me(Me.tablelogin.Phone_noColumn),Integer)
+                Return CType(Me(Me.tablelogin.Phone_noColumn),String)
             End Get
             Set
                 Me(Me.tablelogin.Phone_noColumn) = value

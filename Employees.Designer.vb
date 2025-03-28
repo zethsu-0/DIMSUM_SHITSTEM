@@ -38,6 +38,7 @@ Partial Class Employees
         Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Button4 = New System.Windows.Forms.Button()
         CType(Me.SHITSTEMDataSet2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LoginBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LoginDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -46,7 +47,7 @@ Partial Class Employees
         'Button1
         '
         Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button1.Location = New System.Drawing.Point(703, 531)
+        Me.Button1.Location = New System.Drawing.Point(703, 391)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(113, 31)
         Me.Button1.TabIndex = 24
@@ -66,7 +67,7 @@ Partial Class Employees
         'Button3
         '
         Me.Button3.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button3.Location = New System.Drawing.Point(703, 470)
+        Me.Button3.Location = New System.Drawing.Point(703, 337)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(113, 31)
         Me.Button3.TabIndex = 26
@@ -146,9 +147,20 @@ Partial Class Employees
         Me.DataGridViewTextBoxColumn7.HeaderText = "Phone_no"
         Me.DataGridViewTextBoxColumn7.Name = "DataGridViewTextBoxColumn7"
         '
+        'Button4
+        '
+        Me.Button4.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button4.Location = New System.Drawing.Point(12, 283)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(113, 31)
+        Me.Button4.TabIndex = 28
+        Me.Button4.Text = "Add Employee"
+        Me.Button4.UseVisualStyleBackColor = True
+        '
         'Employees
         '
         Me.ClientSize = New System.Drawing.Size(828, 574)
+        Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.LoginDataGridView)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button2)
@@ -176,4 +188,5 @@ Partial Class Employees
     Friend WithEvents DataGridViewTextBoxColumn5 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn6 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn7 As DataGridViewTextBoxColumn
+    Friend WithEvents Button4 As Button
 End Class

@@ -28,9 +28,9 @@ Public Class Form1
             If roleSelect = userRole Then
 
                 Select Case userRole
-                    Case "employee"
+                    Case "Employee"
                         MsgBox("eeeeeee")
-                    Case "manager"
+                    Case "Manager"
                         MsgBox("mmmmmmm")
                     Case "Owner"
                         MsgBox("ooooooo")
@@ -44,7 +44,6 @@ Public Class Form1
                         Else
                             MessageBox.Show("Please enter a valid User ID!", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                         End If
-
 
                     Case Else
                         MsgBox("Role not recognized")
@@ -116,6 +115,11 @@ Public Class Form1
 
     Private Sub Button6_Click(sender As Object, e As EventArgs)
         Form3.Show()
+        Me.Hide()
+    End Sub
+
+    Private Sub Button6_Click_1(sender As Object, e As EventArgs) Handles Button6.Click
+        Users.Show()
         Me.Hide()
     End Sub
 End Class
