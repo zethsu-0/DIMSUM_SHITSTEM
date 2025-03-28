@@ -1,13 +1,11 @@
-﻿Public Class Form2
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Button3.Visible = False
-        Button2.Visible = False
-        Button1.Visible = False
-        Label1.Visible = True
-        Button5.Visible = True
-        Button6.Visible = True
-        Button4.Visible = True
-    End Sub
+﻿Imports System.Data.SqlClient
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement
+Imports Microsoft.VisualBasic.ApplicationServices
+
+Public Class Form2
+
+    Public Property user_id As String
+
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         Dim confirm = MessageBox.Show("are you sure you want to log out?", "Confirm", CType(vbOKCancel, MessageBoxButtons))
@@ -35,25 +33,65 @@
 
     End Sub
 
+
+
+
     Private Sub Form2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        initialize()
+        Opencon()
+        If Not String.IsNullOrEmpty(user_id) Then
+            GetUserFullName()
+            con.Close()
+        Else
+            Label3.Text = "Invalid User ID"
+            con.Close()
+        End If
+
+    End Sub
+    Private Sub GetUserFullName()
+        Try
+
+            Dim query As String = "SELECT firstname, lastname FROM login WHERE user_id = @user_id"
+
+            Using command As New SqlCommand(query, con)
+
+                command.Parameters.Add("@user_id", SqlDbType.NVarChar).Value = user_id
+
+                Dim reader As SqlDataReader = command.ExecuteReader()
+
+                If reader.Read() Then
+                    Dim firstName As String = reader("firstname").ToString()
+                    Dim lastName As String = reader("lastname").ToString()
+
+                    Label3.Text = firstName & " " & lastName
+                    con.Close()
+                Else
+                    Label3.Text = "User not found"
+                    con.Close()
+                End If
+
+                reader.Close()
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error retrieving user data: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            con.Close()
+        End Try
+
     End Sub
 
-    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
-        initialize()
-    End Sub
 
-    Private Sub initialize()
-        Button3.Visible = True
-        Button6.Visible = False
-        Button4.Visible = False
-        Button5.Visible = False
-        Button2.Visible = True
-        Button1.Visible = True
-        Label1.Visible = False
-    End Sub
+
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
-        Employees.Show()
-        Me.Hide()
+        Dim sure = MessageBox.Show("Open Enployee Database?", "Confirm", CType(vbOKCancel, MessageBoxButtons))
+        If sure = MsgBoxResult.Ok Then
+            Employees.Show()
+            Me.Hide()
+        Else
+            Return
+        End If
+    End Sub
+
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
     End Sub
 End Class

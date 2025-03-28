@@ -23,112 +23,157 @@ Partial Class Employees
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Me.SHITSTEMDataSet = New DIMSUM_SHITSTEM.SHITSTEMDataSet()
-        Me.EmployeesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.EmployeesTableAdapter = New DIMSUM_SHITSTEM.SHITSTEMDataSetTableAdapters.EmployeesTableAdapter()
-        Me.TableAdapterManager = New DIMSUM_SHITSTEM.SHITSTEMDataSetTableAdapters.TableAdapterManager()
-        Me.EmployeesDataGridView = New System.Windows.Forms.DataGridView()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.SHITSTEMDataSet2 = New DIMSUM_SHITSTEM.SHITSTEMDataSet2()
+        Me.LoginBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.LoginTableAdapter = New DIMSUM_SHITSTEM.SHITSTEMDataSet2TableAdapters.loginTableAdapter()
+        Me.TableAdapterManager = New DIMSUM_SHITSTEM.SHITSTEMDataSet2TableAdapters.TableAdapterManager()
+        Me.LoginDataGridView = New System.Windows.Forms.DataGridView()
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        CType(Me.SHITSTEMDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.EmployeesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.EmployeesDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.DataGridViewTextBoxColumn7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        CType(Me.SHITSTEMDataSet2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LoginBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LoginDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'SHITSTEMDataSet
+        'Button1
         '
-        Me.SHITSTEMDataSet.DataSetName = "SHITSTEMDataSet"
-        Me.SHITSTEMDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button1.Location = New System.Drawing.Point(703, 531)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(113, 31)
+        Me.Button1.TabIndex = 24
+        Me.Button1.Text = "Back"
+        Me.Button1.UseVisualStyleBackColor = True
         '
-        'EmployeesBindingSource
+        'Button2
         '
-        Me.EmployeesBindingSource.DataMember = "Employees"
-        Me.EmployeesBindingSource.DataSource = Me.SHITSTEMDataSet
+        Me.Button2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button2.Location = New System.Drawing.Point(703, 283)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(113, 31)
+        Me.Button2.TabIndex = 25
+        Me.Button2.Text = "Edit"
+        Me.Button2.UseVisualStyleBackColor = True
         '
-        'EmployeesTableAdapter
+        'Button3
         '
-        Me.EmployeesTableAdapter.ClearBeforeFill = True
+        Me.Button3.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button3.Location = New System.Drawing.Point(703, 470)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(113, 31)
+        Me.Button3.TabIndex = 26
+        Me.Button3.Text = "Save"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'SHITSTEMDataSet2
+        '
+        Me.SHITSTEMDataSet2.DataSetName = "SHITSTEMDataSet2"
+        Me.SHITSTEMDataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'LoginBindingSource
+        '
+        Me.LoginBindingSource.DataMember = "login"
+        Me.LoginBindingSource.DataSource = Me.SHITSTEMDataSet2
+        '
+        'LoginTableAdapter
+        '
+        Me.LoginTableAdapter.ClearBeforeFill = True
         '
         'TableAdapterManager
         '
         Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
-        Me.TableAdapterManager.EmployeesTableAdapter = Me.EmployeesTableAdapter
-        Me.TableAdapterManager.loginTableAdapter = Nothing
-        Me.TableAdapterManager.STOCKSTableAdapter = Nothing
-        Me.TableAdapterManager.UpdateOrder = DIMSUM_SHITSTEM.SHITSTEMDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
+        Me.TableAdapterManager.loginTableAdapter = Me.LoginTableAdapter
+        Me.TableAdapterManager.UpdateOrder = DIMSUM_SHITSTEM.SHITSTEMDataSet2TableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
         '
-        'EmployeesDataGridView
+        'LoginDataGridView
         '
-        Me.EmployeesDataGridView.AutoGenerateColumns = False
-        Me.EmployeesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.EmployeesDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6})
-        Me.EmployeesDataGridView.DataSource = Me.EmployeesBindingSource
-        Me.EmployeesDataGridView.Location = New System.Drawing.Point(12, 48)
-        Me.EmployeesDataGridView.Name = "EmployeesDataGridView"
-        Me.EmployeesDataGridView.Size = New System.Drawing.Size(764, 244)
-        Me.EmployeesDataGridView.TabIndex = 1
+        Me.LoginDataGridView.AutoGenerateColumns = False
+        Me.LoginDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.LoginDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6, Me.DataGridViewTextBoxColumn7})
+        Me.LoginDataGridView.DataSource = Me.LoginBindingSource
+        Me.LoginDataGridView.Location = New System.Drawing.Point(12, 40)
+        Me.LoginDataGridView.Name = "LoginDataGridView"
+        Me.LoginDataGridView.Size = New System.Drawing.Size(792, 228)
+        Me.LoginDataGridView.TabIndex = 27
         '
         'DataGridViewTextBoxColumn1
         '
-        Me.DataGridViewTextBoxColumn1.DataPropertyName = "Id"
-        Me.DataGridViewTextBoxColumn1.HeaderText = "Id"
+        Me.DataGridViewTextBoxColumn1.DataPropertyName = "user_id"
+        Me.DataGridViewTextBoxColumn1.HeaderText = "user_id"
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
         '
         'DataGridViewTextBoxColumn2
         '
-        Me.DataGridViewTextBoxColumn2.DataPropertyName = "First_Name"
-        Me.DataGridViewTextBoxColumn2.HeaderText = "First_Name"
+        Me.DataGridViewTextBoxColumn2.DataPropertyName = "firstname"
+        Me.DataGridViewTextBoxColumn2.HeaderText = "firstname"
         Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
         '
         'DataGridViewTextBoxColumn3
         '
-        Me.DataGridViewTextBoxColumn3.DataPropertyName = "Last_Name"
-        Me.DataGridViewTextBoxColumn3.HeaderText = "Last_Name"
+        Me.DataGridViewTextBoxColumn3.DataPropertyName = "lastname"
+        Me.DataGridViewTextBoxColumn3.HeaderText = "lastname"
         Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
         '
         'DataGridViewTextBoxColumn4
         '
-        Me.DataGridViewTextBoxColumn4.DataPropertyName = "Age"
-        Me.DataGridViewTextBoxColumn4.HeaderText = "Age"
+        Me.DataGridViewTextBoxColumn4.DataPropertyName = "role"
+        Me.DataGridViewTextBoxColumn4.HeaderText = "role"
         Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
         '
         'DataGridViewTextBoxColumn5
         '
-        Me.DataGridViewTextBoxColumn5.DataPropertyName = "Address"
-        Me.DataGridViewTextBoxColumn5.HeaderText = "Address"
+        Me.DataGridViewTextBoxColumn5.DataPropertyName = "age"
+        Me.DataGridViewTextBoxColumn5.HeaderText = "age"
         Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
         '
         'DataGridViewTextBoxColumn6
         '
-        Me.DataGridViewTextBoxColumn6.DataPropertyName = "Phone_No"
-        Me.DataGridViewTextBoxColumn6.HeaderText = "Phone_No"
+        Me.DataGridViewTextBoxColumn6.DataPropertyName = "address"
+        Me.DataGridViewTextBoxColumn6.HeaderText = "address"
         Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
+        '
+        'DataGridViewTextBoxColumn7
+        '
+        Me.DataGridViewTextBoxColumn7.DataPropertyName = "Phone_no"
+        Me.DataGridViewTextBoxColumn7.HeaderText = "Phone_no"
+        Me.DataGridViewTextBoxColumn7.Name = "DataGridViewTextBoxColumn7"
         '
         'Employees
         '
-        Me.ClientSize = New System.Drawing.Size(788, 409)
-        Me.Controls.Add(Me.EmployeesDataGridView)
+        Me.ClientSize = New System.Drawing.Size(828, 574)
+        Me.Controls.Add(Me.LoginDataGridView)
+        Me.Controls.Add(Me.Button3)
+        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.Button1)
         Me.Name = "Employees"
-        CType(Me.SHITSTEMDataSet, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.EmployeesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.EmployeesDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        CType(Me.SHITSTEMDataSet2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LoginBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LoginDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
-
-    Friend WithEvents SHITSTEMDataSet As SHITSTEMDataSet
-    Friend WithEvents EmployeesBindingSource As BindingSource
-    Friend WithEvents EmployeesTableAdapter As SHITSTEMDataSetTableAdapters.EmployeesTableAdapter
-    Friend WithEvents TableAdapterManager As SHITSTEMDataSetTableAdapters.TableAdapterManager
-    Friend WithEvents EmployeesDataGridView As DataGridView
+    Friend WithEvents Button1 As Button
+    Friend WithEvents Button2 As Button
+    Friend WithEvents Button3 As Button
+    Friend WithEvents SHITSTEMDataSet2 As SHITSTEMDataSet2
+    Friend WithEvents LoginBindingSource As BindingSource
+    Friend WithEvents LoginTableAdapter As SHITSTEMDataSet2TableAdapters.loginTableAdapter
+    Friend WithEvents TableAdapterManager As SHITSTEMDataSet2TableAdapters.TableAdapterManager
+    Friend WithEvents LoginDataGridView As DataGridView
     Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn4 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn5 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn6 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn7 As DataGridViewTextBoxColumn
 End Class
