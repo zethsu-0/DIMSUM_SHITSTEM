@@ -19,12 +19,12 @@ Public Class Form2
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        Dim confirm = MessageBox.Show("are you sure you want to log out?", "Confirm", CType(vbOKCancel, MessageBoxButtons))
-        If confirm = MsgBoxResult.Ok Then
-            Form1.Show()
+        Dim sure As DialogResult = MessageBox.Show(Me, "Are you sure you want to Logout?", "Confirm", MessageBoxButtons.OKCancel, MessageBoxIcon.Question)
+        If sure = DialogResult.OK Then
+            Dim form1 As New Form1()
+            form1.Owner = Me
+            OpenNewForm(form1)
             Me.Hide()
-        Else
-            Return
         End If
 
     End Sub

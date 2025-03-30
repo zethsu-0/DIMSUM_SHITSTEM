@@ -415,7 +415,6 @@ Partial Class Form3
         'TableAdapterManager
         '
         Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
-        Me.TableAdapterManager.EmployeesTableAdapter = Nothing
         Me.TableAdapterManager.loginTableAdapter = Nothing
         Me.TableAdapterManager.STOCKSTableAdapter = Me.STOCKSTableAdapter
         Me.TableAdapterManager.UpdateOrder = DIMSUM_SHITSTEM.SHITSTEMDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete

@@ -22,10 +22,6 @@ Public Class Users
 
     End Sub
 
-    Private Sub users_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        Form1.Show()
-        Me.Hide()
-    End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         lastname = TextBox2.Text
@@ -123,7 +119,6 @@ Public Class Users
         TextBox6.Text = ""
         TextBox7.Text = ""
         ComboBox1.Text = ""
-        Form1.Show()
         Me.Hide()
     End Sub
 End Class

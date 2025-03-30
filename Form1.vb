@@ -121,6 +121,5 @@ Public Class Form1
 
     Private Sub Button6_Click_1(sender As Object, e As EventArgs) Handles Button6.Click
         Users.Show()
-        Me.Hide()
     End Sub
 End Class

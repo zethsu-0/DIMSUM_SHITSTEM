@@ -8,9 +8,6 @@ Public Class Employees
 
     Private Sub Employees_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        'TODO: This line of code loads data into the 'SHITSTEMDataSet22.login' table. You can move, or remove it, as needed.
-        Me.LoginTableAdapter.Fill(Me.SHITSTEMDataSet2.login)
-
         Opencon()
         con.Close()
         LoginDataGridView.ReadOnly = True
@@ -68,5 +65,9 @@ Public Class Employees
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         Users.Show()
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        Me.LoginTableAdapter.Fill(Me.SHITSTEMDataSet2.login)
     End Sub
 End Class

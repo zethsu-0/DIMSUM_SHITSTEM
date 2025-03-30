@@ -39,6 +39,7 @@ Partial Class Employees
         Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Button4 = New System.Windows.Forms.Button()
+        Me.Button5 = New System.Windows.Forms.Button()
         CType(Me.SHITSTEMDataSet2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LoginBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LoginDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -157,9 +158,19 @@ Partial Class Employees
         Me.Button4.Text = "Add Employee"
         Me.Button4.UseVisualStyleBackColor = True
         '
+        'Button5
+        '
+        Me.Button5.Location = New System.Drawing.Point(694, 11)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(110, 23)
+        Me.Button5.TabIndex = 29
+        Me.Button5.Text = "Refresh"
+        Me.Button5.UseVisualStyleBackColor = True
+        '
         'Employees
         '
         Me.ClientSize = New System.Drawing.Size(1308, 584)
+        Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.LoginDataGridView)
         Me.Controls.Add(Me.Button3)
@@ -193,4 +204,5 @@ Partial Class Employees
     Friend WithEvents DataGridViewTextBoxColumn6 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn7 As DataGridViewTextBoxColumn
     Friend WithEvents Button4 As Button
+    Friend WithEvents Button5 As Button
 End Class

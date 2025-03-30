@@ -49,18 +49,19 @@ Public Class Form3
         Dim Price As String = TextBox5.Text
 
         Try
-            con.Open()
-
-            Dim Filesize As UInt32
-            Dim mstream As New System.IO.MemoryStream
-            PictureBox1.Image.Save(mstream, System.Drawing.Imaging.ImageFormat.Png)
-            Dim arrimage() As Byte = mstream.GetBuffer()
-            Filesize = mstream.Length
-            mstream.Close()
 
             If TextBox8.Text = "" Or TextBox7.Text = "" Or TextBox6.Text = "" Or TextBox5.Text = "" Then
                 MessageBox.Show("Please Fill all the SHITS")
             Else
+                con.Open()
+
+                Dim Filesize As UInt32
+                Dim mstream As New System.IO.MemoryStream
+                PictureBox1.Image.Save(mstream, System.Drawing.Imaging.ImageFormat.Png)
+                Dim arrimage() As Byte = mstream.GetBuffer()
+                Filesize = mstream.Length
+                mstream.Close()
+
 
                 Dim insertQuery As String = "INSERT INTO STOCKS (Item_No, Product_name, Quatity, Price, Barcode) VALUES (@Item_no, @Product_name, @Quatity, @Price, @Barcode)"
                 Using insertCmd As New SqlCommand(insertQuery, con)
