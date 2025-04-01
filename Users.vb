@@ -55,14 +55,14 @@ Public Class Users
         role = ComboBox1.Text
 
 
-
-        If TextBox1.Text = "" Or TextBox2.Text = "" Or TextBox3.Text = "" Or TextBox4.Text = "" Then
+        Try
+            If TextBox1.Text = "" Or TextBox2.Text = "" Or TextBox3.Text = "" Or TextBox4.Text = "" Then
                 MessageBox.Show("Please Fill all the SHITS")
             Else
 
 
-            Dim insertQuery As String = "INSERT INTO login (firstname, lastname, age, address, Phone_no, password,role, user_id) VALUES (@firstname, @lastname, @age, @address,@Phone_no,@password,@role,@user_id)"
-            Using insertCmd As New SqlCommand(insertQuery, con)
+                Dim insertQuery As String = "INSERT INTO login (firstname, lastname, age, address, Phone_no, password,role, user_id) VALUES (@firstname, @lastname, @age, @address,@Phone_no,@password,@role,@user_id)"
+                Using insertCmd As New SqlCommand(insertQuery, con)
                     insertCmd.Parameters.AddWithValue("@user_id", user_id)
                     insertCmd.Parameters.AddWithValue("@firstname", firstname)
                     insertCmd.Parameters.AddWithValue("@lastname", lastname)
@@ -81,18 +81,18 @@ Public Class Users
                 TextBox1.Text = ""
                 TextBox2.Text = ""
                 TextBox3.Text = ""
-            TextBox4.Text = ""
-            TextBox5.Text = ""
-            TextBox6.Text = ""
-            TextBox7.Text = ""
+                TextBox4.Text = ""
+                TextBox5.Text = ""
+                TextBox6.Text = ""
+                TextBox7.Text = ""
                 ComboBox1.Text = ""
 
 
                 Me.LoginTableAdapter.Fill(Me.SHITSTEMDataSet.login)
             End If
-        ' Catch ex As Exception
-        MessageBox.Show(firstname & lastname & age & address & Phone_no & password & role & user_id)
-        ' End Try
+        Catch ex As Exception
+            MessageBox.Show(firstname & lastname & age & address & Phone_no & password & role & user_id)
+        End Try
     End Sub
 
     Private Sub LoginBInt32indingNavigatorSaveItem_Click(sender As Object, e As EventArgs)

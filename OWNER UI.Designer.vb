@@ -182,7 +182,7 @@ Partial Class Form2
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(229, 54)
         Me.Button1.TabIndex = 11
-        Me.Button1.Text = "PRODUCTS"
+        Me.Button1.Text = "EARNINGS"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'Panel1
