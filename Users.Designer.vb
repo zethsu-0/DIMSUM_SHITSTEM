@@ -240,7 +240,6 @@ Partial Class Users
         'TableAdapterManager
         '
         Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
-        Me.TableAdapterManager.EmployeesTableAdapter = Nothing
         Me.TableAdapterManager.loginTableAdapter = Me.LoginTableAdapter
         Me.TableAdapterManager.STOCKSTableAdapter = Nothing
         Me.TableAdapterManager.UpdateOrder = DIMSUM_SHITSTEM.SHITSTEMDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete

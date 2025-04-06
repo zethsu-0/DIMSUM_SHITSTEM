@@ -337,4 +337,6 @@ Public Class Form3
             TextBox1.Text = taxed_price.ToString()
         End If
     End Sub
+
+
 End Class

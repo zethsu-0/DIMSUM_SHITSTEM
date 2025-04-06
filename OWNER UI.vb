@@ -66,6 +66,8 @@ Public Class Form2
             con.Close()
         End If
 
+        Timer1.Interval = 1000
+        Timer1.Start()
     End Sub
 
     Private Sub Form2_Click(sender As Object, e As EventArgs) Handles Me.Click
@@ -104,6 +106,17 @@ Public Class Form2
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Sales.Show()
+        Dim sure As DialogResult = MessageBox.Show(Me, "Open Enployee Database?", "Confirm", MessageBoxButtons.OKCancel, MessageBoxIcon.Question)
+        If sure = DialogResult.OK Then
+            Dim sales As New Sales()
+            sales.Owner = Me
+            OpenNewForm(Sales)
+        Else
+            Return
+        End If
+    End Sub
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        Label1.Text = DateTime.Now.ToString("hh:mm:ss tt")
     End Sub
 End Class

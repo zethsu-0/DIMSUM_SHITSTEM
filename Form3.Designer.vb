@@ -39,6 +39,15 @@ Partial Class Form3
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.STOCKSDataGridView = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewImageColumn1 = New System.Windows.Forms.DataGridViewImageColumn()
+        Me.STOCKSBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.SHITSTEMDataSet = New DIMSUM_SHITSTEM.SHITSTEMDataSet()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -51,15 +60,6 @@ Partial Class Form3
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewImageColumn1 = New System.Windows.Forms.DataGridViewImageColumn()
-        Me.STOCKSBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.SHITSTEMDataSet = New DIMSUM_SHITSTEM.SHITSTEMDataSet()
         Me.STOCKSTableAdapter = New DIMSUM_SHITSTEM.SHITSTEMDataSetTableAdapters.STOCKSTableAdapter()
         Me.TableAdapterManager = New DIMSUM_SHITSTEM.SHITSTEMDataSetTableAdapters.TableAdapterManager()
         Me.ProductGroupsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
@@ -69,10 +69,10 @@ Partial Class Form3
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.STOCKSDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TabPage2.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.STOCKSBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SHITSTEMDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPage2.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ProductGroupsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -232,6 +232,58 @@ Partial Class Form3
         Me.STOCKSDataGridView.Size = New System.Drawing.Size(1310, 455)
         Me.STOCKSDataGridView.TabIndex = 0
         '
+        'DataGridViewTextBoxColumn1
+        '
+        Me.DataGridViewTextBoxColumn1.DataPropertyName = "item_no"
+        Me.DataGridViewTextBoxColumn1.HeaderText = "item_no"
+        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+        '
+        'DataGridViewTextBoxColumn2
+        '
+        Me.DataGridViewTextBoxColumn2.DataPropertyName = "product_name"
+        Me.DataGridViewTextBoxColumn2.HeaderText = "product_name"
+        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+        '
+        'DataGridViewTextBoxColumn3
+        '
+        Me.DataGridViewTextBoxColumn3.DataPropertyName = "product_group"
+        Me.DataGridViewTextBoxColumn3.HeaderText = "product_group"
+        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
+        '
+        'DataGridViewTextBoxColumn4
+        '
+        Me.DataGridViewTextBoxColumn4.DataPropertyName = "quatity"
+        Me.DataGridViewTextBoxColumn4.HeaderText = "quatity"
+        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
+        '
+        'DataGridViewTextBoxColumn5
+        '
+        Me.DataGridViewTextBoxColumn5.DataPropertyName = "price"
+        Me.DataGridViewTextBoxColumn5.HeaderText = "price"
+        Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
+        '
+        'DataGridViewTextBoxColumn6
+        '
+        Me.DataGridViewTextBoxColumn6.DataPropertyName = "taxed_price"
+        Me.DataGridViewTextBoxColumn6.HeaderText = "taxed_price"
+        Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
+        '
+        'DataGridViewImageColumn1
+        '
+        Me.DataGridViewImageColumn1.DataPropertyName = "barcode"
+        Me.DataGridViewImageColumn1.HeaderText = "barcode"
+        Me.DataGridViewImageColumn1.Name = "DataGridViewImageColumn1"
+        '
+        'STOCKSBindingSource
+        '
+        Me.STOCKSBindingSource.DataMember = "STOCKS"
+        Me.STOCKSBindingSource.DataSource = Me.SHITSTEMDataSet
+        '
+        'SHITSTEMDataSet
+        '
+        Me.SHITSTEMDataSet.DataSetName = "SHITSTEMDataSet"
+        Me.SHITSTEMDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
         'TabPage2
         '
         Me.TabPage2.AutoScroll = True
@@ -374,58 +426,6 @@ Partial Class Form3
         Me.Button1.Text = "Clear"
         Me.Button1.UseVisualStyleBackColor = True
         '
-        'DataGridViewTextBoxColumn1
-        '
-        Me.DataGridViewTextBoxColumn1.DataPropertyName = "item_no"
-        Me.DataGridViewTextBoxColumn1.HeaderText = "item_no"
-        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
-        '
-        'DataGridViewTextBoxColumn2
-        '
-        Me.DataGridViewTextBoxColumn2.DataPropertyName = "product_name"
-        Me.DataGridViewTextBoxColumn2.HeaderText = "product_name"
-        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
-        '
-        'DataGridViewTextBoxColumn3
-        '
-        Me.DataGridViewTextBoxColumn3.DataPropertyName = "product_group"
-        Me.DataGridViewTextBoxColumn3.HeaderText = "product_group"
-        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
-        '
-        'DataGridViewTextBoxColumn4
-        '
-        Me.DataGridViewTextBoxColumn4.DataPropertyName = "quatity"
-        Me.DataGridViewTextBoxColumn4.HeaderText = "quatity"
-        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
-        '
-        'DataGridViewTextBoxColumn5
-        '
-        Me.DataGridViewTextBoxColumn5.DataPropertyName = "price"
-        Me.DataGridViewTextBoxColumn5.HeaderText = "price"
-        Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
-        '
-        'DataGridViewTextBoxColumn6
-        '
-        Me.DataGridViewTextBoxColumn6.DataPropertyName = "taxed_price"
-        Me.DataGridViewTextBoxColumn6.HeaderText = "taxed_price"
-        Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
-        '
-        'DataGridViewImageColumn1
-        '
-        Me.DataGridViewImageColumn1.DataPropertyName = "barcode"
-        Me.DataGridViewImageColumn1.HeaderText = "barcode"
-        Me.DataGridViewImageColumn1.Name = "DataGridViewImageColumn1"
-        '
-        'STOCKSBindingSource
-        '
-        Me.STOCKSBindingSource.DataMember = "STOCKS"
-        Me.STOCKSBindingSource.DataSource = Me.SHITSTEMDataSet
-        '
-        'SHITSTEMDataSet
-        '
-        Me.SHITSTEMDataSet.DataSetName = "SHITSTEMDataSet"
-        Me.SHITSTEMDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
         'STOCKSTableAdapter
         '
         Me.STOCKSTableAdapter.ClearBeforeFill = True
@@ -433,10 +433,8 @@ Partial Class Form3
         'TableAdapterManager
         '
         Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
-        Me.TableAdapterManager.EmployeesTableAdapter = Nothing
         Me.TableAdapterManager.loginTableAdapter = Nothing
         Me.TableAdapterManager.ProductGroupsTableAdapter = Nothing
-        Me.TableAdapterManager.SalesTableAdapter = Nothing
         Me.TableAdapterManager.STOCKSTableAdapter = Me.STOCKSTableAdapter
         Me.TableAdapterManager.UpdateOrder = DIMSUM_SHITSTEM.SHITSTEMDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
         '
@@ -468,11 +466,11 @@ Partial Class Form3
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         CType(Me.STOCKSDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.STOCKSBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SHITSTEMDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage2.ResumeLayout(False)
         Me.TabPage2.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.STOCKSBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.SHITSTEMDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ProductGroupsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 

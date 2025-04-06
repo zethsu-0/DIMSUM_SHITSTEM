@@ -30,17 +30,20 @@ Partial Class Form2
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.SHITSTEMDataSet = New DIMSUM_SHITSTEM.SHITSTEMDataSet()
-        Me.LoginBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        CType(Me.SHITSTEMDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LoginBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SHITSTEMDataSet = New DIMSUM_SHITSTEM.SHITSTEMDataSet()
+        Me.LoginBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.TableLayoutPanel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.Panel1.SuspendLayout()
+        CType(Me.SHITSTEMDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LoginBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Button2
@@ -121,16 +124,6 @@ Partial Class Form2
         Me.Label3.TabIndex = 8
         Me.Label3.Text = "Label3"
         '
-        'SHITSTEMDataSet
-        '
-        Me.SHITSTEMDataSet.DataSetName = "SHITSTEMDataSet"
-        Me.SHITSTEMDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'LoginBindingSource
-        '
-        Me.LoginBindingSource.DataMember = "login"
-        Me.LoginBindingSource.DataSource = Me.SHITSTEMDataSet
-        '
         'TableLayoutPanel1
         '
         Me.TableLayoutPanel1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -194,24 +187,58 @@ Partial Class Form2
         Me.Panel1.Size = New System.Drawing.Size(243, 401)
         Me.Panel1.TabIndex = 1
         '
+        'SHITSTEMDataSet
+        '
+        Me.SHITSTEMDataSet.DataSetName = "SHITSTEMDataSet"
+        Me.SHITSTEMDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'LoginBindingSource
+        '
+        Me.LoginBindingSource.DataMember = "login"
+        Me.LoginBindingSource.DataSource = Me.SHITSTEMDataSet
+        '
+        'DateTimePicker1
+        '
+        Me.DateTimePicker1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.DateTimePicker1.Location = New System.Drawing.Point(628, 12)
+        Me.DateTimePicker1.Name = "DateTimePicker1"
+        Me.DateTimePicker1.Size = New System.Drawing.Size(199, 20)
+        Me.DateTimePicker1.TabIndex = 2
+        '
+        'Label1
+        '
+        Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(550, 19)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(39, 13)
+        Me.Label1.TabIndex = 9
+        Me.Label1.Text = "Label1"
+        '
+        'Timer1
+        '
+        '
         'Form2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(839, 401)
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.DateTimePicker1)
         Me.Controls.Add(Me.Panel1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form2"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
-        CType(Me.SHITSTEMDataSet, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LoginBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        CType(Me.SHITSTEMDataSet, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LoginBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents Button2 As Button
@@ -226,4 +253,7 @@ Partial Class Form2
     Friend WithEvents Button1 As Button
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents Panel1 As Panel
+    Friend WithEvents DateTimePicker1 As DateTimePicker
+    Friend WithEvents Label1 As Label
+    Friend WithEvents Timer1 As Timer
 End Class
