@@ -1,17 +1,25 @@
 PARA SA SQLDATABASE:  
       1. GAWA KAYO DATABASE  
       2. New Query(Ctrl + N)  
-      3. paste nyo to " 
+      3. paste nyo to 
 
                   CREATE TABLE login (  
-                        username VARCHAR(50) PRIMARY KEY,  
+                        user_id VARCHAR(50) PRIMARY KEY,
+			firstname  VARCHAR(50),
+   			lastname  VARCHAR(50),
                         password VARCHAR(50),  
-                        role VARCHAR(50))  
+                        role VARCHAR(50),
+			age VARCHAR(50),
+   			address  VARCHAR(50),
+      			phone_no  VARCHAR(50),
+      			)  
                   CREATE TABLE stocks (  
                         item_no VARCHAR(50) PRIMARY KEY,  
                         product_name VARCHAR(50),  
                         quatity VARCHAR(50),  
-                        price VARCHAR(50)) 
+                        price VARCHAR(50),
+			taxed_price  VARCHAR(50),
+   			barcode BINARY(MAX)) 
       
 then execute
 
@@ -24,16 +32,16 @@ then execute
 		SET QUOTED_IDENTIFIER ON
 		GO
             CREATE PROCEDURE [dbo].[login1]  
-	            @user varchar(50),  
+	            @user_id varchar(50),  
 	            @pass varchar(50),  
 	            @result int output,  
 	            @role varchar(50) output  
             AS  
             BEGIN  
 	      SET NOCOUNT ON;  
-	            if exists(select 1 from login where username = @user and password = @pass)  
+	            if exists(select 1 from login where user_id = @user_id and password = @pass)  
 	            begin  
-	            select @role = role from login where username = @user and password = @pass;
+	            select @role = role from login where user_id = @user_id and password = @pass;
                set @result = 1;  
 	      end  
 	      else  
