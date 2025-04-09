@@ -499,7 +499,7 @@ Partial Public Class SHITSTEMDataSet
         
         Private columnproduct_group As Global.System.Data.DataColumn
         
-        Private columnquatity As Global.System.Data.DataColumn
+        Private columnQuantity As Global.System.Data.DataColumn
         
         Private columnprice As Global.System.Data.DataColumn
         
@@ -568,9 +568,9 @@ Partial Public Class SHITSTEMDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public ReadOnly Property quatityColumn() As Global.System.Data.DataColumn
+        Public ReadOnly Property QuantityColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columnquatity
+                Return Me.columnQuantity
             End Get
         End Property
         
@@ -635,9 +635,9 @@ Partial Public Class SHITSTEMDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Overloads Function AddSTOCKSRow(ByVal item_no As String, ByVal product_name As String, ByVal product_group As String, ByVal quatity As Integer, ByVal price As Decimal, ByVal taxed_price As Decimal, ByVal barcode() As Byte) As STOCKSRow
+        Public Overloads Function AddSTOCKSRow(ByVal item_no As String, ByVal product_name As String, ByVal product_group As String, ByVal Quantity As Integer, ByVal price As Decimal, ByVal taxed_price As Decimal, ByVal barcode() As Byte) As STOCKSRow
             Dim rowSTOCKSRow As STOCKSRow = CType(Me.NewRow,STOCKSRow)
-            Dim columnValuesArray() As Object = New Object() {item_no, product_name, product_group, quatity, price, taxed_price, barcode}
+            Dim columnValuesArray() As Object = New Object() {item_no, product_name, product_group, Quantity, price, taxed_price, barcode}
             rowSTOCKSRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowSTOCKSRow)
             Return rowSTOCKSRow
@@ -669,7 +669,7 @@ Partial Public Class SHITSTEMDataSet
             Me.columnitem_no = MyBase.Columns("item_no")
             Me.columnproduct_name = MyBase.Columns("product_name")
             Me.columnproduct_group = MyBase.Columns("product_group")
-            Me.columnquatity = MyBase.Columns("quatity")
+            Me.columnQuantity = MyBase.Columns("Quantity")
             Me.columnprice = MyBase.Columns("price")
             Me.columntaxed_price = MyBase.Columns("taxed_price")
             Me.columnbarcode = MyBase.Columns("barcode")
@@ -684,8 +684,8 @@ Partial Public Class SHITSTEMDataSet
             MyBase.Columns.Add(Me.columnproduct_name)
             Me.columnproduct_group = New Global.System.Data.DataColumn("product_group", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnproduct_group)
-            Me.columnquatity = New Global.System.Data.DataColumn("quatity", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnquatity)
+            Me.columnQuantity = New Global.System.Data.DataColumn("Quantity", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnQuantity)
             Me.columnprice = New Global.System.Data.DataColumn("price", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnprice)
             Me.columntaxed_price = New Global.System.Data.DataColumn("taxed_price", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
@@ -2360,7 +2360,7 @@ Partial Public Class SHITSTEMDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Overloads Function AddOrdersRow(ByVal Product_name As String, ByVal Quantity As String, ByVal Price As String, ByVal Total_price As String) As OrdersRow
+        Public Overloads Function AddOrdersRow(ByVal Product_name As String, ByVal Quantity As String, ByVal Price As String, ByVal Total_price As Decimal) As OrdersRow
             Dim rowOrdersRow As OrdersRow = CType(Me.NewRow,OrdersRow)
             Dim columnValuesArray() As Object = New Object() {Product_name, Quantity, Price, Total_price}
             rowOrdersRow.ItemArray = columnValuesArray
@@ -2400,12 +2400,11 @@ Partial Public Class SHITSTEMDataSet
             MyBase.Columns.Add(Me.columnQuantity)
             Me.columnPrice = New Global.System.Data.DataColumn("Price", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnPrice)
-            Me.columnTotal_price = New Global.System.Data.DataColumn("Total_price", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnTotal_price = New Global.System.Data.DataColumn("Total_price", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnTotal_price)
             Me.columnProduct_name.MaxLength = 50
             Me.columnQuantity.MaxLength = 50
             Me.columnPrice.MaxLength = 50
-            Me.columnTotal_price.MaxLength = 50
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -2593,16 +2592,16 @@ Partial Public Class SHITSTEMDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Property quatity() As Integer
+        Public Property Quantity() As Integer
             Get
                 Try 
-                    Return CType(Me(Me.tableSTOCKS.quatityColumn),Integer)
+                    Return CType(Me(Me.tableSTOCKS.QuantityColumn),Integer)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'quatity' in table 'STOCKS' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Quantity' in table 'STOCKS' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableSTOCKS.quatityColumn) = value
+                Me(Me.tableSTOCKS.QuantityColumn) = value
             End Set
         End Property
         
@@ -2677,14 +2676,14 @@ Partial Public Class SHITSTEMDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Function IsquatityNull() As Boolean
-            Return Me.IsNull(Me.tableSTOCKS.quatityColumn)
+        Public Function IsQuantityNull() As Boolean
+            Return Me.IsNull(Me.tableSTOCKS.QuantityColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Sub SetquatityNull()
-            Me(Me.tableSTOCKS.quatityColumn) = Global.System.Convert.DBNull
+        Public Sub SetQuantityNull()
+            Me(Me.tableSTOCKS.QuantityColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -3100,10 +3099,10 @@ Partial Public Class SHITSTEMDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Property Total_price() As String
+        Public Property Total_price() As Decimal
             Get
                 Try 
-                    Return CType(Me(Me.tableOrders.Total_priceColumn),String)
+                    Return CType(Me(Me.tableOrders.Total_priceColumn),Decimal)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'Total_price' in table 'Orders' is DBNull.", e)
                 End Try
@@ -3547,7 +3546,7 @@ Namespace SHITSTEMDataSetTableAdapters
             tableMapping.ColumnMappings.Add("item_no", "item_no")
             tableMapping.ColumnMappings.Add("product_name", "product_name")
             tableMapping.ColumnMappings.Add("product_group", "product_group")
-            tableMapping.ColumnMappings.Add("quatity", "quatity")
+            tableMapping.ColumnMappings.Add("Quantity", "Quantity")
             tableMapping.ColumnMappings.Add("price", "price")
             tableMapping.ColumnMappings.Add("taxed_price", "taxed_price")
             tableMapping.ColumnMappings.Add("barcode", "barcode")
@@ -3558,9 +3557,9 @@ Namespace SHITSTEMDataSetTableAdapters
                 "_name = 1 AND [product_name] IS NULL) OR ([product_name] = @Original_product_nam"& _ 
                 "e)) AND ((@IsNull_price = 1 AND [price] IS NULL) OR ([price] = @Original_price))"& _ 
                 " AND ((@IsNull_product_group = 1 AND [product_group] IS NULL) OR ([product_group"& _ 
-                "] = @Original_product_group)) AND ((@IsNull_quatity = 1 AND [quatity] IS NULL) O"& _ 
-                "R ([quatity] = @Original_quatity)) AND ((@IsNull_taxed_price = 1 AND [taxed_pric"& _ 
-                "e] IS NULL) OR ([taxed_price] = @Original_taxed_price)))"
+                "] = @Original_product_group)) AND ((@IsNull_Quantity = 1 AND [Quantity] IS NULL)"& _ 
+                " OR ([Quantity] = @Original_Quantity)) AND ((@IsNull_taxed_price = 1 AND [taxed_"& _ 
+                "price] IS NULL) OR ([taxed_price] = @Original_taxed_price)))"
             Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_item_no", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "item_no", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_product_name", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "product_name", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
@@ -3569,45 +3568,45 @@ Namespace SHITSTEMDataSetTableAdapters
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_price", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 10, 2, "price", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_product_group", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "product_group", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_product_group", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "product_group", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_quatity", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "quatity", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_quatity", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "quatity", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_Quantity", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Quantity", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Quantity", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Quantity", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_taxed_price", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "taxed_price", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_taxed_price", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 10, 2, "taxed_price", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
             Me._adapter.InsertCommand.CommandText = "INSERT INTO [STOCKS] ([item_no], [product_name], [barcode], [price], [product_gro"& _ 
-                "up], [quatity], [taxed_price]) VALUES (@item_no, @product_name, @barcode, @price"& _ 
-                ", @product_group, @quatity, @taxed_price);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT item_no, product_name, barcod"& _ 
-                "e, price, product_group, quatity, taxed_price FROM STOCKS WHERE (item_no = @item"& _ 
-                "_no)"
+                "up], [Quantity], [taxed_price]) VALUES (@item_no, @product_name, @barcode, @pric"& _ 
+                "e, @product_group, @Quantity, @taxed_price);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT item_no, product_name, barc"& _ 
+                "ode, price, product_group, Quantity, taxed_price FROM STOCKS WHERE (item_no = @i"& _ 
+                "tem_no)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@item_no", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "item_no", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@product_name", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "product_name", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@barcode", Global.System.Data.SqlDbType.VarBinary, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "barcode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@price", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 10, 2, "price", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@product_group", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "product_group", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@quatity", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "quatity", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Quantity", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Quantity", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@taxed_price", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 10, 2, "taxed_price", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
             Me._adapter.UpdateCommand.CommandText = "UPDATE [STOCKS] SET [item_no] = @item_no, [product_name] = @product_name, [barcod"& _ 
-                "e] = @barcode, [price] = @price, [product_group] = @product_group, [quatity] = @"& _ 
-                "quatity, [taxed_price] = @taxed_price WHERE (([item_no] = @Original_item_no) AND"& _ 
-                " ((@IsNull_product_name = 1 AND [product_name] IS NULL) OR ([product_name] = @Or"& _ 
-                "iginal_product_name)) AND ((@IsNull_price = 1 AND [price] IS NULL) OR ([price] ="& _ 
-                " @Original_price)) AND ((@IsNull_product_group = 1 AND [product_group] IS NULL) "& _ 
-                "OR ([product_group] = @Original_product_group)) AND ((@IsNull_quatity = 1 AND [q"& _ 
-                "uatity] IS NULL) OR ([quatity] = @Original_quatity)) AND ((@IsNull_taxed_price ="& _ 
-                " 1 AND [taxed_price] IS NULL) OR ([taxed_price] = @Original_taxed_price)));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SEL"& _ 
-                "ECT item_no, product_name, barcode, price, product_group, quatity, taxed_price F"& _ 
-                "ROM STOCKS WHERE (item_no = @item_no)"
+                "e] = @barcode, [price] = @price, [product_group] = @product_group, [Quantity] = "& _ 
+                "@Quantity, [taxed_price] = @taxed_price WHERE (([item_no] = @Original_item_no) A"& _ 
+                "ND ((@IsNull_product_name = 1 AND [product_name] IS NULL) OR ([product_name] = @"& _ 
+                "Original_product_name)) AND ((@IsNull_price = 1 AND [price] IS NULL) OR ([price]"& _ 
+                " = @Original_price)) AND ((@IsNull_product_group = 1 AND [product_group] IS NULL"& _ 
+                ") OR ([product_group] = @Original_product_group)) AND ((@IsNull_Quantity = 1 AND"& _ 
+                " [Quantity] IS NULL) OR ([Quantity] = @Original_Quantity)) AND ((@IsNull_taxed_p"& _ 
+                "rice = 1 AND [taxed_price] IS NULL) OR ([taxed_price] = @Original_taxed_price)))"& _ 
+                ";"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT item_no, product_name, barcode, price, product_group, Quantity, taxed_"& _ 
+                "price FROM STOCKS WHERE (item_no = @item_no)"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@item_no", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "item_no", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@product_name", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "product_name", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@barcode", Global.System.Data.SqlDbType.VarBinary, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "barcode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@price", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 10, 2, "price", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@product_group", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "product_group", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@quatity", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "quatity", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Quantity", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Quantity", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@taxed_price", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 10, 2, "taxed_price", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_item_no", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "item_no", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_product_name", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "product_name", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
@@ -3616,8 +3615,8 @@ Namespace SHITSTEMDataSetTableAdapters
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_price", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 10, 2, "price", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_product_group", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "product_group", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_product_group", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "product_group", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_quatity", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "quatity", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_quatity", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "quatity", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_Quantity", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Quantity", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Quantity", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Quantity", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_taxed_price", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "taxed_price", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_taxed_price", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 10, 2, "taxed_price", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
         End Sub
@@ -3635,8 +3634,8 @@ Namespace SHITSTEMDataSetTableAdapters
             Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(0) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT item_no, product_name, barcode, price, product_group, quatity, taxed_price"& _ 
-                " FROM STOCKS"
+            Me._commandCollection(0).CommandText = "SELECT item_no, product_name, barcode, price, product_group, Quantity, taxed_pric"& _ 
+                "e FROM STOCKS"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
@@ -3696,7 +3695,7 @@ Namespace SHITSTEMDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
-        Public Overloads Overridable Function Delete(ByVal Original_item_no As String, ByVal Original_product_name As String, ByVal Original_price As Global.System.Nullable(Of Decimal), ByVal Original_product_group As String, ByVal Original_quatity As Global.System.Nullable(Of Integer), ByVal Original_taxed_price As Global.System.Nullable(Of Decimal)) As Integer
+        Public Overloads Overridable Function Delete(ByVal Original_item_no As String, ByVal Original_product_name As String, ByVal Original_price As Global.System.Nullable(Of Decimal), ByVal Original_product_group As String, ByVal Original_Quantity As Global.System.Nullable(Of Integer), ByVal Original_taxed_price As Global.System.Nullable(Of Decimal)) As Integer
             If (Original_item_no Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_item_no")
             Else
@@ -3723,9 +3722,9 @@ Namespace SHITSTEMDataSetTableAdapters
                 Me.Adapter.DeleteCommand.Parameters(5).Value = CType(0,Object)
                 Me.Adapter.DeleteCommand.Parameters(6).Value = CType(Original_product_group,String)
             End If
-            If (Original_quatity.HasValue = true) Then
+            If (Original_Quantity.HasValue = true) Then
                 Me.Adapter.DeleteCommand.Parameters(7).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(8).Value = CType(Original_quatity.Value,Integer)
+                Me.Adapter.DeleteCommand.Parameters(8).Value = CType(Original_Quantity.Value,Integer)
             Else
                 Me.Adapter.DeleteCommand.Parameters(7).Value = CType(1,Object)
                 Me.Adapter.DeleteCommand.Parameters(8).Value = Global.System.DBNull.Value
@@ -3756,7 +3755,7 @@ Namespace SHITSTEMDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert(ByVal item_no As String, ByVal product_name As String, ByVal barcode() As Byte, ByVal price As Global.System.Nullable(Of Decimal), ByVal product_group As String, ByVal quatity As Global.System.Nullable(Of Integer), ByVal taxed_price As Global.System.Nullable(Of Decimal)) As Integer
+        Public Overloads Overridable Function Insert(ByVal item_no As String, ByVal product_name As String, ByVal barcode() As Byte, ByVal price As Global.System.Nullable(Of Decimal), ByVal product_group As String, ByVal Quantity As Global.System.Nullable(Of Integer), ByVal taxed_price As Global.System.Nullable(Of Decimal)) As Integer
             If (item_no Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("item_no")
             Else
@@ -3782,8 +3781,8 @@ Namespace SHITSTEMDataSetTableAdapters
             Else
                 Me.Adapter.InsertCommand.Parameters(4).Value = CType(product_group,String)
             End If
-            If (quatity.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(5).Value = CType(quatity.Value,Integer)
+            If (Quantity.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(5).Value = CType(Quantity.Value,Integer)
             Else
                 Me.Adapter.InsertCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
@@ -3811,7 +3810,7 @@ Namespace SHITSTEMDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
-        Public Overloads Overridable Function Update(ByVal item_no As String, ByVal product_name As String, ByVal barcode() As Byte, ByVal price As Global.System.Nullable(Of Decimal), ByVal product_group As String, ByVal quatity As Global.System.Nullable(Of Integer), ByVal taxed_price As Global.System.Nullable(Of Decimal), ByVal Original_item_no As String, ByVal Original_product_name As String, ByVal Original_price As Global.System.Nullable(Of Decimal), ByVal Original_product_group As String, ByVal Original_quatity As Global.System.Nullable(Of Integer), ByVal Original_taxed_price As Global.System.Nullable(Of Decimal)) As Integer
+        Public Overloads Overridable Function Update(ByVal item_no As String, ByVal product_name As String, ByVal barcode() As Byte, ByVal price As Global.System.Nullable(Of Decimal), ByVal product_group As String, ByVal Quantity As Global.System.Nullable(Of Integer), ByVal taxed_price As Global.System.Nullable(Of Decimal), ByVal Original_item_no As String, ByVal Original_product_name As String, ByVal Original_price As Global.System.Nullable(Of Decimal), ByVal Original_product_group As String, ByVal Original_Quantity As Global.System.Nullable(Of Integer), ByVal Original_taxed_price As Global.System.Nullable(Of Decimal)) As Integer
             If (item_no Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("item_no")
             Else
@@ -3837,8 +3836,8 @@ Namespace SHITSTEMDataSetTableAdapters
             Else
                 Me.Adapter.UpdateCommand.Parameters(4).Value = CType(product_group,String)
             End If
-            If (quatity.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(5).Value = CType(quatity.Value,Integer)
+            If (Quantity.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(5).Value = CType(Quantity.Value,Integer)
             Else
                 Me.Adapter.UpdateCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
@@ -3873,9 +3872,9 @@ Namespace SHITSTEMDataSetTableAdapters
                 Me.Adapter.UpdateCommand.Parameters(12).Value = CType(0,Object)
                 Me.Adapter.UpdateCommand.Parameters(13).Value = CType(Original_product_group,String)
             End If
-            If (Original_quatity.HasValue = true) Then
+            If (Original_Quantity.HasValue = true) Then
                 Me.Adapter.UpdateCommand.Parameters(14).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(Original_quatity.Value,Integer)
+                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(Original_Quantity.Value,Integer)
             Else
                 Me.Adapter.UpdateCommand.Parameters(14).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(15).Value = Global.System.DBNull.Value
@@ -3906,8 +3905,8 @@ Namespace SHITSTEMDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
-        Public Overloads Overridable Function Update(ByVal product_name As String, ByVal barcode() As Byte, ByVal price As Global.System.Nullable(Of Decimal), ByVal product_group As String, ByVal quatity As Global.System.Nullable(Of Integer), ByVal taxed_price As Global.System.Nullable(Of Decimal), ByVal Original_item_no As String, ByVal Original_product_name As String, ByVal Original_price As Global.System.Nullable(Of Decimal), ByVal Original_product_group As String, ByVal Original_quatity As Global.System.Nullable(Of Integer), ByVal Original_taxed_price As Global.System.Nullable(Of Decimal)) As Integer
-            Return Me.Update(Original_item_no, product_name, barcode, price, product_group, quatity, taxed_price, Original_item_no, Original_product_name, Original_price, Original_product_group, Original_quatity, Original_taxed_price)
+        Public Overloads Overridable Function Update(ByVal product_name As String, ByVal barcode() As Byte, ByVal price As Global.System.Nullable(Of Decimal), ByVal product_group As String, ByVal Quantity As Global.System.Nullable(Of Integer), ByVal taxed_price As Global.System.Nullable(Of Decimal), ByVal Original_item_no As String, ByVal Original_product_name As String, ByVal Original_price As Global.System.Nullable(Of Decimal), ByVal Original_product_group As String, ByVal Original_Quantity As Global.System.Nullable(Of Integer), ByVal Original_taxed_price As Global.System.Nullable(Of Decimal)) As Integer
+            Return Me.Update(Original_item_no, product_name, barcode, price, product_group, Quantity, taxed_price, Original_item_no, Original_product_name, Original_price, Original_product_group, Original_Quantity, Original_taxed_price)
         End Function
     End Class
     

@@ -1,4 +1,5 @@
 ﻿Imports System.Data.SqlClient
+Imports System.Web.UI
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 Imports Microsoft.VisualBasic.ApplicationServices
 
@@ -34,25 +35,18 @@ Public Class Form2
         Form1.Show()
     End Sub
 
+    Private PRODUCTS_TAB As New PRODUCTS_TAB()
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-
-        Dim sure As DialogResult = MessageBox.Show(Me, "Open Stocks?", "Confirm", MessageBoxButtons.OKCancel, MessageBoxIcon.Question)
-        If sure = DialogResult.OK Then
-            Dim form3 As New Form3()
-            form3.Owner = Me
-            OpenNewForm(form3)
-        End If
+        Me.Panel2.Controls.Clear()
+        Me.Panel2.Controls.Add(PRODUCTS_TAB)
+        PRODUCTS_TAB.Dock = DockStyle.Fill
     End Sub
 
+    Private EMPLOYEE_TAB As New EMPLOYEE_TAB()
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
-        Dim sure As DialogResult = MessageBox.Show(Me, "Open Enployee Database?", "Confirm", MessageBoxButtons.OKCancel, MessageBoxIcon.Question)
-        If sure = DialogResult.OK Then
-            Dim employees As New Employees()
-            employees.Owner = Me
-            OpenNewForm(employees)
-        Else
-            Return
-        End If
+        Me.Panel2.Controls.Clear()
+        Me.Panel2.Controls.Add(EMPLOYEE_TAB)
+        EMPLOYEE_TAB.Dock = DockStyle.Fill
     End Sub
 
 
@@ -118,5 +112,10 @@ Public Class Form2
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         Label1.Text = DateTime.Now.ToString("hh:mm:ss tt")
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        CASHIER.Show()
+
     End Sub
 End Class

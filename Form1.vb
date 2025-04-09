@@ -115,7 +115,7 @@ Public Class Form1
     End Sub
 
     Private Sub Button6_Click(sender As Object, e As EventArgs)
-        Form3.Show()
+        PRODUCTS.Show()
         Me.Hide()
     End Sub
 

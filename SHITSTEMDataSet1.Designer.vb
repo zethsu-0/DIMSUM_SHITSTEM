@@ -1054,7 +1054,7 @@ Partial Public Class SHITSTEMDataSet1
         
         Private columnproduct_name As Global.System.Data.DataColumn
         
-        Private columnquatity As Global.System.Data.DataColumn
+        Private columnQuantity As Global.System.Data.DataColumn
         
         Private columnprice As Global.System.Data.DataColumn
         
@@ -1111,9 +1111,9 @@ Partial Public Class SHITSTEMDataSet1
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public ReadOnly Property quatityColumn() As Global.System.Data.DataColumn
+        Public ReadOnly Property QuantityColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columnquatity
+                Return Me.columnQuantity
             End Get
         End Property
         
@@ -1162,9 +1162,9 @@ Partial Public Class SHITSTEMDataSet1
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Overloads Function AddSTOCKSRow(ByVal item_no As String, ByVal product_name As String, ByVal quatity As Integer, ByVal price As Integer) As STOCKSRow
+        Public Overloads Function AddSTOCKSRow(ByVal item_no As String, ByVal product_name As String, ByVal Quantity As Integer, ByVal price As Integer) As STOCKSRow
             Dim rowSTOCKSRow As STOCKSRow = CType(Me.NewRow,STOCKSRow)
-            Dim columnValuesArray() As Object = New Object() {item_no, product_name, quatity, price}
+            Dim columnValuesArray() As Object = New Object() {item_no, product_name, Quantity, price}
             rowSTOCKSRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowSTOCKSRow)
             Return rowSTOCKSRow
@@ -1195,7 +1195,7 @@ Partial Public Class SHITSTEMDataSet1
         Friend Sub InitVars()
             Me.columnitem_no = MyBase.Columns("item_no")
             Me.columnproduct_name = MyBase.Columns("product_name")
-            Me.columnquatity = MyBase.Columns("quatity")
+            Me.columnQuantity = MyBase.Columns("Quantity")
             Me.columnprice = MyBase.Columns("price")
         End Sub
         
@@ -1206,8 +1206,8 @@ Partial Public Class SHITSTEMDataSet1
             MyBase.Columns.Add(Me.columnitem_no)
             Me.columnproduct_name = New Global.System.Data.DataColumn("product_name", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnproduct_name)
-            Me.columnquatity = New Global.System.Data.DataColumn("quatity", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnquatity)
+            Me.columnQuantity = New Global.System.Data.DataColumn("Quantity", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnQuantity)
             Me.columnprice = New Global.System.Data.DataColumn("price", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnprice)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnitem_no}, true))
@@ -1653,16 +1653,16 @@ Partial Public Class SHITSTEMDataSet1
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Property quatity() As Integer
+        Public Property Quantity() As Integer
             Get
                 Try 
-                    Return CType(Me(Me.tableSTOCKS.quatityColumn),Integer)
+                    Return CType(Me(Me.tableSTOCKS.QuantityColumn),Integer)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'quatity' in table 'STOCKS' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Quantity' in table 'STOCKS' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableSTOCKS.quatityColumn) = value
+                Me(Me.tableSTOCKS.QuantityColumn) = value
             End Set
         End Property
         
@@ -1695,14 +1695,14 @@ Partial Public Class SHITSTEMDataSet1
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Function IsquatityNull() As Boolean
-            Return Me.IsNull(Me.tableSTOCKS.quatityColumn)
+        Public Function IsQuantityNull() As Boolean
+            Return Me.IsNull(Me.tableSTOCKS.QuantityColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Sub SetquatityNull()
-            Me(Me.tableSTOCKS.quatityColumn) = Global.System.Convert.DBNull
+        Public Sub SetQuantityNull()
+            Me(Me.tableSTOCKS.QuantityColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -2913,53 +2913,53 @@ Namespace SHITSTEMDataSet1TableAdapters
             tableMapping.DataSetTable = "STOCKS"
             tableMapping.ColumnMappings.Add("item_no", "item_no")
             tableMapping.ColumnMappings.Add("product_name", "product_name")
-            tableMapping.ColumnMappings.Add("quatity", "quatity")
+            tableMapping.ColumnMappings.Add("Quantity", "Quantity")
             tableMapping.ColumnMappings.Add("price", "price")
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.DeleteCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.DeleteCommand.Connection = Me.Connection
             Me._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[STOCKS] WHERE (([item_no] = @Original_item_no) AND ((@IsNull_p"& _ 
                 "roduct_name = 1 AND [product_name] IS NULL) OR ([product_name] = @Original_produ"& _ 
-                "ct_name)) AND ((@IsNull_quatity = 1 AND [quatity] IS NULL) OR ([quatity] = @Orig"& _ 
-                "inal_quatity)) AND ((@IsNull_price = 1 AND [price] IS NULL) OR ([price] = @Origi"& _ 
+                "ct_name)) AND ((@IsNull_Quantity = 1 AND [Quantity] IS NULL) OR ([Quantity] = @Orig"& _ 
+                "inal_Quantity)) AND ((@IsNull_price = 1 AND [price] IS NULL) OR ([price] = @Origi"& _ 
                 "nal_price)))"
             Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_item_no", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "item_no", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_product_name", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "product_name", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_product_name", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "product_name", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_quatity", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "quatity", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_quatity", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "quatity", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_Quantity", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Quantity", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Quantity", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Quantity", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_price", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "price", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_price", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "price", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[STOCKS] ([item_no], [product_name], [quatity], [price]) VALUES"& _ 
-                " (@item_no, @product_name, @quatity, @price);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT item_no, product_name, qua"& _ 
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[STOCKS] ([item_no], [product_name], [Quantity], [price]) VALUES"& _ 
+                " (@item_no, @product_name, @Quantity, @price);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT item_no, product_name, qua"& _ 
                 "tity, price FROM STOCKS WHERE (item_no = @item_no)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@item_no", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "item_no", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@product_name", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "product_name", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@quatity", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "quatity", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Quantity", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Quantity", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@price", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "price", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
             Me._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[STOCKS] SET [item_no] = @item_no, [product_name] = @product_name, ["& _ 
-                "quatity] = @quatity, [price] = @price WHERE (([item_no] = @Original_item_no) AND"& _ 
+                "Quantity] = @Quantity, [price] = @price WHERE (([item_no] = @Original_item_no) AND"& _ 
                 " ((@IsNull_product_name = 1 AND [product_name] IS NULL) OR ([product_name] = @Or"& _ 
-                "iginal_product_name)) AND ((@IsNull_quatity = 1 AND [quatity] IS NULL) OR ([quat"& _ 
-                "ity] = @Original_quatity)) AND ((@IsNull_price = 1 AND [price] IS NULL) OR ([pri"& _ 
-                "ce] = @Original_price)));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT item_no, product_name, quatity, price FROM STO"& _ 
+                "iginal_product_name)) AND ((@IsNull_Quantity = 1 AND [Quantity] IS NULL) OR ([quat"& _ 
+                "ity] = @Original_Quantity)) AND ((@IsNull_price = 1 AND [price] IS NULL) OR ([pri"& _ 
+                "ce] = @Original_price)));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT item_no, product_name, Quantity, price FROM STO"& _ 
                 "CKS WHERE (item_no = @item_no)"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@item_no", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "item_no", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@product_name", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "product_name", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@quatity", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "quatity", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Quantity", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Quantity", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@price", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "price", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_item_no", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "item_no", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_product_name", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "product_name", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_product_name", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "product_name", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_quatity", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "quatity", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_quatity", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "quatity", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_Quantity", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Quantity", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Quantity", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Quantity", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_price", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "price", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_price", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "price", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
         End Sub
@@ -2977,7 +2977,7 @@ Namespace SHITSTEMDataSet1TableAdapters
             Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(0) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT item_no, product_name, quatity, price FROM dbo.STOCKS"
+            Me._commandCollection(0).CommandText = "SELECT item_no, product_name, Quantity, price FROM dbo.STOCKS"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
@@ -3037,7 +3037,7 @@ Namespace SHITSTEMDataSet1TableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
-        Public Overloads Overridable Function Delete(ByVal Original_item_no As String, ByVal Original_product_name As String, ByVal Original_quatity As Global.System.Nullable(Of Integer), ByVal Original_price As Global.System.Nullable(Of Integer)) As Integer
+        Public Overloads Overridable Function Delete(ByVal Original_item_no As String, ByVal Original_product_name As String, ByVal Original_Quantity As Global.System.Nullable(Of Integer), ByVal Original_price As Global.System.Nullable(Of Integer)) As Integer
             If (Original_item_no Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_item_no")
             Else
@@ -3050,9 +3050,9 @@ Namespace SHITSTEMDataSet1TableAdapters
                 Me.Adapter.DeleteCommand.Parameters(1).Value = CType(0,Object)
                 Me.Adapter.DeleteCommand.Parameters(2).Value = CType(Original_product_name,String)
             End If
-            If (Original_quatity.HasValue = true) Then
+            If (Original_Quantity.HasValue = true) Then
                 Me.Adapter.DeleteCommand.Parameters(3).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(4).Value = CType(Original_quatity.Value,Integer)
+                Me.Adapter.DeleteCommand.Parameters(4).Value = CType(Original_Quantity.Value,Integer)
             Else
                 Me.Adapter.DeleteCommand.Parameters(3).Value = CType(1,Object)
                 Me.Adapter.DeleteCommand.Parameters(4).Value = Global.System.DBNull.Value
@@ -3083,7 +3083,7 @@ Namespace SHITSTEMDataSet1TableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert(ByVal item_no As String, ByVal product_name As String, ByVal quatity As Global.System.Nullable(Of Integer), ByVal price As Global.System.Nullable(Of Integer)) As Integer
+        Public Overloads Overridable Function Insert(ByVal item_no As String, ByVal product_name As String, ByVal Quantity As Global.System.Nullable(Of Integer), ByVal price As Global.System.Nullable(Of Integer)) As Integer
             If (item_no Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("item_no")
             Else
@@ -3094,8 +3094,8 @@ Namespace SHITSTEMDataSet1TableAdapters
             Else
                 Me.Adapter.InsertCommand.Parameters(1).Value = CType(product_name,String)
             End If
-            If (quatity.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(2).Value = CType(quatity.Value,Integer)
+            If (Quantity.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(2).Value = CType(Quantity.Value,Integer)
             Else
                 Me.Adapter.InsertCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
@@ -3123,7 +3123,7 @@ Namespace SHITSTEMDataSet1TableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
-        Public Overloads Overridable Function Update(ByVal item_no As String, ByVal product_name As String, ByVal quatity As Global.System.Nullable(Of Integer), ByVal price As Global.System.Nullable(Of Integer), ByVal Original_item_no As String, ByVal Original_product_name As String, ByVal Original_quatity As Global.System.Nullable(Of Integer), ByVal Original_price As Global.System.Nullable(Of Integer)) As Integer
+        Public Overloads Overridable Function Update(ByVal item_no As String, ByVal product_name As String, ByVal Quantity As Global.System.Nullable(Of Integer), ByVal price As Global.System.Nullable(Of Integer), ByVal Original_item_no As String, ByVal Original_product_name As String, ByVal Original_Quantity As Global.System.Nullable(Of Integer), ByVal Original_price As Global.System.Nullable(Of Integer)) As Integer
             If (item_no Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("item_no")
             Else
@@ -3134,8 +3134,8 @@ Namespace SHITSTEMDataSet1TableAdapters
             Else
                 Me.Adapter.UpdateCommand.Parameters(1).Value = CType(product_name,String)
             End If
-            If (quatity.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(2).Value = CType(quatity.Value,Integer)
+            If (Quantity.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(2).Value = CType(Quantity.Value,Integer)
             Else
                 Me.Adapter.UpdateCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
@@ -3156,9 +3156,9 @@ Namespace SHITSTEMDataSet1TableAdapters
                 Me.Adapter.UpdateCommand.Parameters(5).Value = CType(0,Object)
                 Me.Adapter.UpdateCommand.Parameters(6).Value = CType(Original_product_name,String)
             End If
-            If (Original_quatity.HasValue = true) Then
+            If (Original_Quantity.HasValue = true) Then
                 Me.Adapter.UpdateCommand.Parameters(7).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(Original_quatity.Value,Integer)
+                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(Original_Quantity.Value,Integer)
             Else
                 Me.Adapter.UpdateCommand.Parameters(7).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(8).Value = Global.System.DBNull.Value
@@ -3189,8 +3189,8 @@ Namespace SHITSTEMDataSet1TableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
-        Public Overloads Overridable Function Update(ByVal product_name As String, ByVal quatity As Global.System.Nullable(Of Integer), ByVal price As Global.System.Nullable(Of Integer), ByVal Original_item_no As String, ByVal Original_product_name As String, ByVal Original_quatity As Global.System.Nullable(Of Integer), ByVal Original_price As Global.System.Nullable(Of Integer)) As Integer
-            Return Me.Update(Original_item_no, product_name, quatity, price, Original_item_no, Original_product_name, Original_quatity, Original_price)
+        Public Overloads Overridable Function Update(ByVal product_name As String, ByVal Quantity As Global.System.Nullable(Of Integer), ByVal price As Global.System.Nullable(Of Integer), ByVal Original_item_no As String, ByVal Original_product_name As String, ByVal Original_Quantity As Global.System.Nullable(Of Integer), ByVal Original_price As Global.System.Nullable(Of Integer)) As Integer
+            Return Me.Update(Original_item_no, product_name, Quantity, price, Original_item_no, Original_product_name, Original_Quantity, Original_price)
         End Function
     End Class
     
