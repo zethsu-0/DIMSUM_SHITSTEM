@@ -6,7 +6,7 @@
         Opencon()
         con.Close()
         LoginDataGridView.ReadOnly = True
-        Me.LoginTableAdapter.Fill(Me.SHITSTEMDataSet2.login)
+        Me.LoginTableAdapter.Fill(Me.SHITSTEMDataSet.login)
         LoginDataGridView.ClearSelection()
         LoginBindingSource.Filter = "role <> 'Owner'"
     End Sub
@@ -22,11 +22,11 @@
         If MessageBox.Show("Save Update?", "Confirm Update", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
             Me.Validate()
             LoginBindingSource.EndEdit()
-            TableAdapterManager.UpdateAll(Me.SHITSTEMDataSet2)
+            TableAdapterManager.UpdateAll(Me.SHITSTEMDataSet)
             LoginDataGridView.ClearSelection()
             con.Close()
         Else
-            Me.LoginTableAdapter.Fill(Me.SHITSTEMDataSet2.login)
+            Me.LoginTableAdapter.Fill(Me.SHITSTEMDataSet.login)
             LoginDataGridView.ClearSelection()
             LoginDataGridView.ReadOnly = True
             MessageBox.Show("No updates were made")
@@ -38,14 +38,14 @@
     Private Sub LoginBindingNavigatorSaveItem_Click(sender As Object, e As EventArgs)
         Me.Validate()
         Me.LoginBindingSource.EndEdit()
-        Me.TableAdapterManager.UpdateAll(Me.SHITSTEMDataSet2)
+        Me.TableAdapterManager.UpdateAll(Me.SHITSTEMDataSet)
 
     End Sub
 
     Private Sub LoginBindingNavigatorSaveItem_Click_1(sender As Object, e As EventArgs)
         Me.Validate()
         Me.LoginBindingSource.EndEdit()
-        Me.TableAdapterManager.UpdateAll(Me.SHITSTEMDataSet2)
+        Me.TableAdapterManager.UpdateAll(Me.SHITSTEMDataSet)
 
     End Sub
 
@@ -54,6 +54,6 @@
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
-        Me.LoginTableAdapter.Fill(Me.SHITSTEMDataSet2.login)
+        Me.LoginTableAdapter.Fill(Me.SHITSTEMDataSet.login)
     End Sub
 End Class

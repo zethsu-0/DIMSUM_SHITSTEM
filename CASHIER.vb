@@ -1,214 +1,148 @@
 ﻿Imports System.Data.SqlClient
-
+Imports System.Drawing.Text
 Public Class CASHIER
 
-    Dim item_no As String = ""
-    Dim Product_name As String = ""
-    Dim StockQuantity As Integer = 0
-    Dim Price As Decimal = 0
-    Dim cartQuantity As Integer = 0
-    Dim Total_price As Decimal = 0
     Private Sub CASHIER_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' Load existing orders into the dataset
+
+        Dim deleteButtonColumn As New DataGridViewButtonColumn()
+        deleteButtonColumn.Name = "DeleteButton"
+        deleteButtonColumn.HeaderText = " "
+        deleteButtonColumn.Text = " —— "
+        deleteButtonColumn.Width = 25
+        deleteButtonColumn.UseColumnTextForButtonValue = True
+
+
+        If Not OrdersDataGridView.Columns.Contains("DeleteButton") Then
+            OrdersDataGridView.Columns.Add(deleteButtonColumn)
+        End If
+
         Me.OrdersTableAdapter.Fill(Me.SHITSTEMDataSet.Orders)
+        For Each column As DataGridViewColumn In OrdersDataGridView.Columns
+            column.Name = column.DataPropertyName
+        Next
         OrdersDataGridView.ClearSelection()
         OrdersDataGridView.CurrentCell = Nothing
-        OrdersDataGridView.DefaultCellStyle.SelectionBackColor = OrdersDataGridView.DefaultCellStyle.BackColor
-        OrdersDataGridView.DefaultCellStyle.SelectionForeColor = OrdersDataGridView.DefaultCellStyle.ForeColor
         Opencon()
         con.Close()
         resetcart()
+        snacks_tabbtn.PerformClick()
+
+        AddHandler OrdersDataGridView.CellValueChanged, AddressOf UpdateTotalSum
+        AddHandler OrdersDataGridView.RowsRemoved, AddressOf UpdateTotalSum
+        AddHandler OrdersDataGridView.RowsAdded, AddressOf UpdateTotalSum
+
+
+
+
     End Sub
 
-    Private Sub checkproduct()
-        Try
-            Opencon()
-            Dim query As String = "SELECT Product_name, quantity, taxed_price FROM STOCKS WHERE Item_no = @Item_no"
+    Private CASHIER_MENU_FOOD_TAB As New CASHIER_MENU_FOOD_TAB()
+    Private Sub snacks_tabbtn_Click_1(sender As Object, e As EventArgs) Handles snacks_tabbtn.Click
+        Dim ordersUC As New CASHIER_MENU_FOOD_TAB()
 
-            Using cmd As New SqlCommand(query, con)
-                cmd.Parameters.AddWithValue("@Item_no", item_no)
-                Using reader As SqlDataReader = cmd.ExecuteReader()
-                    If reader.Read() Then
-                        Product_name = reader("Product_name").ToString()
-                        StockQuantity = Convert.ToInt32(reader("quantity"))
-                        Price = Convert.ToDecimal(reader("taxed_price"))
-                    Else
-                        MsgBox("Item not found in stocks.", vbCritical)
-                        Exit Sub
-                    End If
-                End Using
-            End Using
+        AddHandler ordersUC.RefreshOrdersRequested, AddressOf RefreshOrders
 
-            If StockQuantity <= 0 Then
-                MsgBox("Not enough stock available!", vbExclamation)
-                Exit Sub
-            End If
+        Me.Panel3.Controls.Clear()
+        Me.Panel3.Controls.Add(ordersUC)
+        ordersUC.Dock = DockStyle.Fill
 
-        Catch ex As Exception
-            MsgBox("Error checking product: " & ex.Message, vbCritical)
-        Finally
-            If con.State = ConnectionState.Open Then con.Close()
-        End Try
     End Sub
-
-    Private Sub Insertproduct()
+    Private Sub RefreshOrders(sender As Object, e As EventArgs)
         Try
-            Opencon()
-
-            Dim existingcartQuantity As Decimal = 0
-            Dim existingUnitPrice As Decimal = 0
-            Dim checkCartQuery As String = "SELECT Quantity, Price FROM Orders WHERE Product_name = @Product_name"
-
-            Using cmd As New SqlCommand(checkCartQuery, con)
-                cmd.Parameters.AddWithValue("@Product_name", Product_name)
-                Using reader As SqlDataReader = cmd.ExecuteReader()
-                    If reader.Read() Then
-                        existingcartQuantity = Convert.ToInt32(reader("Quantity"))
-                        existingUnitPrice = Convert.ToDecimal(reader("Price"))
-                    End If
-                End Using
-            End Using
-
-            If existingcartQuantity > 0 Then
-                ' Update existing cart item
-                Dim updateQuery As String = "UPDATE Orders SET Quantity = Quantity + @cartQuantity, Total_price = (Quantity + @cartQuantity) * @UnitPrice WHERE Product_name = @Product_name"
-
-                Using updateCmd As New SqlCommand(updateQuery, con)
-                    updateCmd.Parameters.AddWithValue("@cartQuantity", cartQuantity)
-                    updateCmd.Parameters.AddWithValue("@UnitPrice", Price)
-                    updateCmd.Parameters.AddWithValue("@Product_name", Product_name)
-                    updateCmd.ExecuteNonQuery()
-                End Using
-            Else
-                ' Insert new cart item
-                Dim insertQuery As String = "INSERT INTO Orders (Product_name, Quantity, Price, Total_price) VALUES (@Product_name, @Quantity, @Price, @Total_price)"
-
-                Using insertCmd As New SqlCommand(insertQuery, con)
-                    insertCmd.Parameters.AddWithValue("@Product_name", Product_name)
-                    insertCmd.Parameters.AddWithValue("@Quantity", cartQuantity)
-                    insertCmd.Parameters.AddWithValue("@Price", Price)
-                    insertCmd.Parameters.AddWithValue("@Total_price", cartQuantity * Price)
-                    insertCmd.ExecuteNonQuery()
-                End Using
-            End If
-
-            ' Update stock quantity
-            Dim updateStockQuery As String = "UPDATE STOCKS SET quantity = quantity - @cartQuantity WHERE Product_name = @Product_name"
-
-            Using stockCmd As New SqlCommand(updateStockQuery, con)
-                stockCmd.Parameters.AddWithValue("@cartQuantity", cartQuantity)
-                stockCmd.Parameters.AddWithValue("@Product_name", Product_name)
-                stockCmd.ExecuteNonQuery()
-            End Using
-
             Me.OrdersTableAdapter.Fill(Me.SHITSTEMDataSet.Orders)
+            OrdersDataGridView.DataSource = Me.SHITSTEMDataSet.Orders ' Adjust if needed
         Catch ex As Exception
-            MsgBox("Error inserting product: " & ex.Message, vbCritical)
-        Finally
-            If con.State = ConnectionState.Open Then con.Close()
-
+            MessageBox.Show("Error refreshing orders: " & ex.Message)
         End Try
-        Me.OrdersTableAdapter.Fill(Me.SHITSTEMDataSet.Orders)
     End Sub
-
+    Private Sub checkoutbtn_Click(sender As Object, e As EventArgs) Handles checkoutbtn.Click
+        resetcart()
+    End Sub
     Public Sub resetcart()
         Dim delquery As String = "DELETE FROM Orders"
         Using cmd As New SqlCommand(delquery, con)
             con.Open()
             cmd.ExecuteNonQuery()
             con.Close()
+
             Me.OrdersTableAdapter.Fill(Me.SHITSTEMDataSet.Orders)
-                    
         End Using
     End Sub
-    Private Sub checkoutbtn_Click(sender As Object, e As EventArgs) Handles checkoutbtn.Click
-        resetcart()
+
+    Private Sub UpdateTotalSum(sender As Object, e As EventArgs)
+        Dim totalSum As Decimal = 0
+
+        Try
+            Opencon()
+
+            Dim sumQuery As String = "SELECT SUM(Total_price) FROM Orders"
+
+            Using cmd As New SqlCommand(sumQuery, con)
+                Dim result = cmd.ExecuteScalar()
+                If result IsNot DBNull.Value Then
+                    totalSum = Convert.ToDecimal(result)
+                End If
+            End Using
+
+        Catch ex As Exception
+            MsgBox("Error calculating total: " & ex.Message, vbCritical)
+        Finally
+            If con.State = ConnectionState.Open Then con.Close()
+        End Try
+
+        lbltotal.Text = totalSum.ToString("C2")
+        OrdersDataGridView.NotifyCurrentCellDirty(True)
     End Sub
 
-    Private Sub prod_1_Click(sender As Object, e As EventArgs) Handles prod_1.Click
-        item_no = "001"
-        cartQuantity = 1
 
-        checkproduct()
 
-        If StockQuantity > 0 Then
-            Insertproduct()
+
+
+    Private Sub Guna2Button2_Click(sender As Object, e As EventArgs) Handles Guna2Button2.Click
+        RECEIPT.Show()
+    End Sub
+
+    Private Sub OrdersDataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles OrdersDataGridView.CellContentClick
+        If e.RowIndex >= 0 Then
+
+            If OrdersDataGridView.Columns.Contains("Product_name") Then
+
+                Dim productName As String = OrdersDataGridView.Rows(e.RowIndex).Cells("Product_name").Value.ToString()
+                    Dim result As DialogResult = MessageBox.Show("Are you sure you want to delete this item?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
+                    If result = DialogResult.Yes Then
+
+                        DeleteItem(productName)
+
+                        OrdersDataGridView.Rows.RemoveAt(e.RowIndex)
+
+                        Me.OrdersTableAdapter.Fill(Me.SHITSTEMDataSet.Orders)
+
+                End If
+            Else
+                MessageBox.Show("Product_name column not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
         End If
+    End Sub
+    Private Sub DeleteItem(productName As String)
+        Try
+            Opencon()
 
-        cartQuantity = 0
+            Dim deleteQuery As String = "DELETE FROM Orders WHERE Product_name = @Product_name"
+
+            Using deleteCmd As New SqlCommand(deleteQuery, con)
+                deleteCmd.Parameters.AddWithValue("@Product_name", productName)
+                deleteCmd.ExecuteNonQuery()
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error deleting item: " & ex.Message)
+        Finally
+            If con.State = ConnectionState.Open Then con.Close()
+        End Try
     End Sub
 
-
-    Private Sub prod_2_Click(sender As Object, e As EventArgs) Handles prod_2.Click
-        item_no = "002"
-        cartQuantity = 1
-
-        checkproduct()
-
-        If StockQuantity > 0 Then
-            Insertproduct()
-        End If
-
-        cartQuantity = 0
-    End Sub
-
-    Private Sub prod_3_Click(sender As Object, e As EventArgs) Handles prod_3.Click
-        item_no = "003"
-        cartQuantity = 1
-
-        checkproduct()
-
-        If StockQuantity > 0 Then
-            Insertproduct()
-        End If
-
-        cartQuantity = 0
-    End Sub
-
-    Private Sub prod_4_Click(sender As Object, e As EventArgs) Handles prod_4.Click
-        item_no = "004"
-        cartQuantity = 1
-
-        checkproduct()
-
-        If StockQuantity > 0 Then
-            Insertproduct()
-        End If
-
-        cartQuantity = 0
-    End Sub
-
-    Private Sub prod_5_Click(sender As Object, e As EventArgs) Handles prod_5.Click
-        item_no = "005"
-        cartQuantity = 1
-
-        checkproduct()
-
-        If StockQuantity > 0 Then
-            Insertproduct()
-        End If
-
-        cartQuantity = 0
-    End Sub
-
-    Private Sub prod_6_Click(sender As Object, e As EventArgs) Handles prod_6.Click
-
-    End Sub
-
-    Private Sub prod_7_Click(sender As Object, e As EventArgs) Handles prod_7.Click
-
-    End Sub
-
-    Private Sub prod_8_Click(sender As Object, e As EventArgs) Handles prod_8.Click
-        item_no = "006"
-        cartQuantity = 1
-
-        checkproduct()
-
-        If StockQuantity > 0 Then
-            Insertproduct()
-        End If
-
-        cartQuantity = 0
+    Private Sub Guna2Button5_Click(sender As Object, e As EventArgs) Handles Guna2Button5.Click
+        For Each col As DataGridViewColumn In OrdersDataGridView.Columns
+            Debug.WriteLine("Column: " & col.Name)
+        Next
     End Sub
 End Class

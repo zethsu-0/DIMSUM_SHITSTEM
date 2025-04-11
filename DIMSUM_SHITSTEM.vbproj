@@ -71,12 +71,24 @@
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="FontAwesome.Sharp, Version=6.6.0.0, Culture=neutral, PublicKeyToken=d16d1e4e568ec10f, processorArchitecture=MSIL">
+      <HintPath>packages\FontAwesome.Sharp.6.6.0\lib\net472\FontAwesome.Sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="FontAwesome.WPF, Version=4.7.0.37774, Culture=neutral, PublicKeyToken=0758b07a11a4f466, processorArchitecture=MSIL">
+      <HintPath>packages\FontAwesome.UWP.4.7.0.9\lib\net40\FontAwesome.WPF.dll</HintPath>
+    </Reference>
     <Reference Include="Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261, processorArchitecture=MSIL">
       <HintPath>packages\Guna.UI2.WinForms.2.0.4.7\lib\net472\Guna.UI2.dll</HintPath>
     </Reference>
     <Reference Include="MessagingToolkit.Barcode, Version=1.7.0.1, Culture=neutral, PublicKeyToken=4d44dd7196d3c1ac, processorArchitecture=x86">
       <HintPath>packages\MessagingToolkit.Barcode.1.7.0.2\lib\net40\WPF\x86\MessagingToolkit.Barcode.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="SixLabors.Fonts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d998eea7b14cab13, processorArchitecture=MSIL">
       <HintPath>packages\SixLabors.Fonts.1.0.1\lib\netstandard2.0\SixLabors.Fonts.dll</HintPath>
     </Reference>
@@ -109,13 +121,16 @@
       <HintPath>packages\System.Text.Encoding.CodePages.5.0.0\lib\net461\System.Text.Encoding.CodePages.dll</HintPath>
     </Reference>
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="WindowsBase" />
     <Reference Include="zxing, Version=0.16.10.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
       <HintPath>packages\ZXing.Net.0.16.10\lib\net47\zxing.dll</HintPath>
     </Reference>
@@ -143,6 +158,18 @@
     <Compile Include="CASHIER.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="CASHIER_MENU_FOOD_TAB.Designer.vb">
+      <DependentUpon>CASHIER_MENU_FOOD_TAB.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CASHIER_MENU_FOOD_TAB.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CrystalReport1.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CrystalReport1.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Form3.Designer.vb">
       <DependentUpon>Form3.vb</DependentUpon>
     </Compile>
@@ -154,12 +181,6 @@
     </Compile>
     <Compile Include="PRODUCTS_TAB.vb">
       <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Sales.Designer.vb">
-      <DependentUpon>Sales.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Sales.vb">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.vb">
       <SubType>Form</SubType>
@@ -192,6 +213,18 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="RECEIPT.Designer.vb">
+      <DependentUpon>RECEIPT.vb</DependentUpon>
+    </Compile>
+    <Compile Include="RECEIPT.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SALES_TAB.Designer.vb">
+      <DependentUpon>SALES_TAB.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SALES_TAB.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="SHITSTEMDataSet.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -201,22 +234,6 @@
     <Compile Include="SHITSTEMDataSet.vb">
       <DependentUpon>SHITSTEMDataSet.xsd</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="Employees.Designer.vb">
-      <DependentUpon>Employees.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Employees.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SHITSTEMDataSet1.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SHITSTEMDataSet1.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="SHITSTEMDataSet2.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SHITSTEMDataSet2.xsd</DependentUpon>
     </Compile>
     <Compile Include="EMPLOYEE_TAB.Designer.vb">
       <DependentUpon>EMPLOYEE_TAB.vb</DependentUpon>
@@ -235,14 +252,18 @@
     <EmbeddedResource Include="CASHIER.resx">
       <DependentUpon>CASHIER.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CASHIER_MENU_FOOD_TAB.resx">
+      <DependentUpon>CASHIER_MENU_FOOD_TAB.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CrystalReport1.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CrystalReport1.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form3.resx">
       <DependentUpon>Form3.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PRODUCTS_TAB.resx">
       <DependentUpon>PRODUCTS_TAB.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Sales.resx">
-      <DependentUpon>Sales.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
@@ -259,11 +280,14 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Employees.resx">
-      <DependentUpon>Employees.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="EMPLOYEE_TAB.resx">
       <DependentUpon>EMPLOYEE_TAB.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RECEIPT.resx">
+      <DependentUpon>RECEIPT.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SALES_TAB.resx">
+      <DependentUpon>SALES_TAB.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Users.resx">
       <DependentUpon>Users.vb</DependentUpon>
@@ -295,28 +319,6 @@
       <DependentUpon>SHITSTEMDataSet.xsd</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="SHITSTEMDataSet1.xsc">
-      <DependentUpon>SHITSTEMDataSet1.xsd</DependentUpon>
-    </None>
-    <None Include="SHITSTEMDataSet1.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>SHITSTEMDataSet1.Designer.vb</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="SHITSTEMDataSet1.xss">
-      <DependentUpon>SHITSTEMDataSet1.xsd</DependentUpon>
-    </None>
-    <None Include="SHITSTEMDataSet2.xsc">
-      <DependentUpon>SHITSTEMDataSet2.xsd</DependentUpon>
-    </None>
-    <None Include="SHITSTEMDataSet2.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>SHITSTEMDataSet2.Designer.vb</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="SHITSTEMDataSet2.xss">
-      <DependentUpon>SHITSTEMDataSet2.xsd</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\crew.png" />
@@ -329,6 +331,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\bar-chart.png" />
+    <None Include="Resources\producticon.png" />
     <None Include="Resources\icon.jpg" />
   </ItemGroup>
   <ItemGroup>
@@ -342,6 +346,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

@@ -1,9 +1,8 @@
 ﻿Imports System.Data.SqlClient
-Imports System.Reflection
-Imports System.Reflection.Emit
 Imports System.Windows.Forms.DataVisualization.Charting
-Public Class Sales
-    Private Sub Sales_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+Public Class SALES_TAB
+    Private Sub SALES_TAB_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'TODO: This line of code loads data into the 'SHITSTEMDataSet.DailySales' table. You can move, or remove it, as needed.
         Me.DailySalesTableAdapter.Fill(Me.SHITSTEMDataSet.DailySales)
         'TODO: This line of code loads data into the 'SHITSTEMDataSet.MonthlySales' table. You can move, or remove it, as needed.
@@ -91,7 +90,7 @@ Public Class Sales
                 Dim point As DataPoint = New DataPoint()
                 point.SetValueXY(reader2("Day").ToString(), Convert.ToDouble(reader2("Earned")))
 
-                If Index Mod 2 = 0 Then
+                If index Mod 2 = 0 Then
                     point.Color = color3 ' Even index -> DarkBlue
                 Else
                     point.Color = color4 ' Odd index -> Red
@@ -99,7 +98,7 @@ Public Class Sales
 
 
                 series2.Points.Add(point)
-                Index += 1
+                index += 1
 
             End While
             Chart2.Series.Add(series2)
@@ -114,15 +113,6 @@ Public Class Sales
         Label2.Text = DateTime.Now.ToString("dddd, MMMM dd, yyyy")
 
 
-    End Sub
-
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim confirm = MessageBox.Show("are you sure you want to Exit?", "Confirm", CType(vbOKCancel, MessageBoxButtons))
-        If confirm = MsgBoxResult.Ok Then
-            Me.Close()
-        Else
-            Return
-        End If
     End Sub
 
 End Class

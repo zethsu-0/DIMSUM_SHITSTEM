@@ -9,6 +9,9 @@ Public Class Form2
     Public Property user_id As String
     Private lastOpenedForm As Form = Nothing
 
+    Private PRODUCTS_TAB As New PRODUCTS_TAB()
+    Private EMPLOYEE_TAB As New EMPLOYEE_TAB()
+    Private SALES_TAB As New SALES_TAB()
 
     Private Sub OpenNewForm(newForm As Form)
         If lastOpenedForm IsNot Nothing AndAlso Not lastOpenedForm.IsDisposed Then
@@ -19,35 +22,11 @@ Public Class Form2
         newForm.Show()
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        Dim sure As DialogResult = MessageBox.Show(Me, "Are you sure you want to Logout?", "Confirm", MessageBoxButtons.OKCancel, MessageBoxIcon.Question)
-        If sure = DialogResult.OK Then
-            Dim form1 As New Form1()
-            form1.Owner = Me
-            OpenNewForm(form1)
-            Me.Hide()
-        End If
-
-    End Sub
-
     Private Sub Form2_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         Me.Hide()
         Form1.Show()
     End Sub
 
-    Private PRODUCTS_TAB As New PRODUCTS_TAB()
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        Me.Panel2.Controls.Clear()
-        Me.Panel2.Controls.Add(PRODUCTS_TAB)
-        PRODUCTS_TAB.Dock = DockStyle.Fill
-    End Sub
-
-    Private EMPLOYEE_TAB As New EMPLOYEE_TAB()
-    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
-        Me.Panel2.Controls.Clear()
-        Me.Panel2.Controls.Add(EMPLOYEE_TAB)
-        EMPLOYEE_TAB.Dock = DockStyle.Fill
-    End Sub
 
 
     Private Sub Form2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -99,23 +78,40 @@ Public Class Form2
 
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim sure As DialogResult = MessageBox.Show(Me, "Open Enployee Database?", "Confirm", MessageBoxButtons.OKCancel, MessageBoxIcon.Question)
-        If sure = DialogResult.OK Then
-            Dim sales As New Sales()
-            sales.Owner = Me
-            OpenNewForm(Sales)
-        Else
-            Return
-        End If
-    End Sub
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         Label1.Text = DateTime.Now.ToString("hh:mm:ss tt")
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        CASHIER.Show()
+    Private Sub productbtn_Click(sender As Object, e As EventArgs) Handles productbtn.Click
+        Me.SplitContainer1.Panel2.Controls.Clear()
+        Me.SplitContainer1.Panel2.Controls.Add(PRODUCTS_TAB)
+        PRODUCTS_TAB.Dock = DockStyle.Fill
+    End Sub
 
+    Private Sub salesbtn_Click(sender As Object, e As EventArgs) Handles salesbtn.Click
+        Me.SplitContainer1.Panel2.Controls.Clear()
+        Me.SplitContainer1.Panel2.Controls.Add(SALES_TAB)
+        EMPLOYEE_TAB.Dock = DockStyle.Fill
+    End Sub
+
+    Private Sub employeebtn_Click(sender As Object, e As EventArgs) Handles employeebtn.Click
+        Me.SplitContainer1.Panel2.Controls.Clear()
+        Me.SplitContainer1.Panel2.Controls.Add(EMPLOYEE_TAB)
+        EMPLOYEE_TAB.Dock = DockStyle.Fill
+    End Sub
+
+    Private Sub cashierbtn_Click(sender As Object, e As EventArgs) Handles cashierbtn.Click
+        CASHIER.Show()
+    End Sub
+
+    Private Sub logoutbtn_Click(sender As Object, e As EventArgs) Handles logoutbtn.Click
+        Dim sure As DialogResult = MessageBox.Show(Me, "Are you sure you want to Logout?", "Confirm", MessageBoxButtons.OKCancel, MessageBoxIcon.Question)
+        If sure = DialogResult.OK Then
+            Dim form1 As New Form1()
+            form1.Owner = Me
+            OpenNewForm(form1)
+            Me.Hide()
+        End If
     End Sub
 End Class

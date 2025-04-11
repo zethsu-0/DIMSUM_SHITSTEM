@@ -38,12 +38,15 @@ Public Class Users
         End If
 
         con.Open()
-        Dim cmd As New SqlCommand("SELECT COUNT(*) FROM Employees", con)
+        Dim cmd As New SqlCommand("SELECT COUNT(*) FROM login", con)
         Dim empcount As Integer = CInt(cmd.ExecuteScalar())
+
+            user_id = roleid & "_" & lastname & "_" & "2025" & empcount + 1
+            TextBox7.Text = user_id
         con.Close()
 
-        user_id = roleid & "_" & lastname & "_" & "2025" & empcount + 1
-        TextBox7.Text = user_id
+
+
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
