@@ -1,4 +1,5 @@
-﻿Imports System.Data.SqlClient
+﻿Imports System.ComponentModel
+Imports System.Data.SqlClient
 Imports System.Web.UI
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 Imports Microsoft.VisualBasic.ApplicationServices
@@ -24,7 +25,7 @@ Public Class Form2
 
     Private Sub Form2_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         Me.Hide()
-        Form1.Show()
+        LOGIN_PAGE.Show()
     End Sub
 
 
@@ -41,10 +42,8 @@ Public Class Form2
 
         Timer1.Interval = 1000
         Timer1.Start()
-    End Sub
 
-    Private Sub Form2_Click(sender As Object, e As EventArgs) Handles Me.Click
-
+        salesbtn.PerformClick()
     End Sub
 
     Private Sub GetUserFullName()
@@ -108,10 +107,19 @@ Public Class Form2
     Private Sub logoutbtn_Click(sender As Object, e As EventArgs) Handles logoutbtn.Click
         Dim sure As DialogResult = MessageBox.Show(Me, "Are you sure you want to Logout?", "Confirm", MessageBoxButtons.OKCancel, MessageBoxIcon.Question)
         If sure = DialogResult.OK Then
-            Dim form1 As New Form1()
-            form1.Owner = Me
-            OpenNewForm(form1)
-            Me.Hide()
+            ' Open login form first
+
+            ' Close all other open forms
+            For Each frm As Form In Application.OpenForms.Cast(Of Form).ToList()
+                If Not frm Is LOGIN_PAGE Then
+                    frm.Close()
+                End If
+            Next
+            LOGIN_PAGE.Show()
         End If
+    End Sub
+
+    Private Sub Form2_Closed(sender As Object, e As EventArgs) Handles Me.Closed
+        LOGIN_PAGE.Show()
     End Sub
 End Class

@@ -31,7 +31,7 @@ Partial Class Form2
         Me.SHITSTEMDataSet = New DIMSUM_SHITSTEM.SHITSTEMDataSet()
         Me.LoginBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.Guna2BorderlessForm1 = New Guna.UI2.WinForms.Guna2BorderlessForm(Me.components)
+        Me.Guna2BorderlessLOGIN_PAGE = New Guna.UI2.WinForms.Guna2BorderlessForm(Me.components)
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.Guna2ControlBox1 = New Guna.UI2.WinForms.Guna2ControlBox()
         Me.Guna2ControlBox2 = New Guna.UI2.WinForms.Guna2ControlBox()
@@ -104,11 +104,11 @@ Partial Class Form2
         'Timer1
         '
         '
-        'Guna2BorderlessForm1
+        'Guna2BorderlessLOGIN_PAGE
         '
-        Me.Guna2BorderlessForm1.ContainerControl = Me
-        Me.Guna2BorderlessForm1.DockIndicatorTransparencyValue = 0.6R
-        Me.Guna2BorderlessForm1.TransparentWhileDrag = True
+        Me.Guna2BorderlessLOGIN_PAGE.ContainerControl = Me
+        Me.Guna2BorderlessLOGIN_PAGE.DockIndicatorTransparencyValue = 0.6R
+        Me.Guna2BorderlessLOGIN_PAGE.TransparentWhileDrag = True
         '
         'Panel4
         '
@@ -151,6 +151,7 @@ Partial Class Form2
         'SplitContainer1
         '
         Me.SplitContainer1.AllowDrop = True
+        Me.SplitContainer1.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.SplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SplitContainer1.Location = New System.Drawing.Point(0, 39)
         Me.SplitContainer1.Name = "SplitContainer1"
@@ -195,10 +196,10 @@ Partial Class Form2
         Me.TableLayoutPanel1.ColumnCount = 1
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.Panel1, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.salesbtn, 0, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.cashierbtn, 0, 4)
         Me.TableLayoutPanel1.Controls.Add(Me.employeebtn, 0, 3)
-        Me.TableLayoutPanel1.Controls.Add(Me.salesbtn, 0, 2)
-        Me.TableLayoutPanel1.Controls.Add(Me.productbtn, 0, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.productbtn, 0, 2)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
@@ -291,13 +292,13 @@ Partial Class Form2
         Me.salesbtn.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left
         Me.salesbtn.ImageSize = New System.Drawing.Size(50, 50)
         Me.salesbtn.IndicateFocus = True
-        Me.salesbtn.Location = New System.Drawing.Point(5, 143)
+        Me.salesbtn.Location = New System.Drawing.Point(5, 74)
         Me.salesbtn.Margin = New System.Windows.Forms.Padding(5)
         Me.salesbtn.Name = "salesbtn"
         Me.salesbtn.Size = New System.Drawing.Size(140, 59)
         Me.salesbtn.TabIndex = 1
-        Me.salesbtn.Text = "SALES"
-        Me.salesbtn.TextOffset = New System.Drawing.Point(20, 0)
+        Me.salesbtn.Text = "DASHBOARD"
+        Me.salesbtn.TextOffset = New System.Drawing.Point(30, 0)
         '
         'productbtn
         '
@@ -317,7 +318,7 @@ Partial Class Form2
         Me.productbtn.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left
         Me.productbtn.ImageSize = New System.Drawing.Size(50, 50)
         Me.productbtn.IndicateFocus = True
-        Me.productbtn.Location = New System.Drawing.Point(5, 74)
+        Me.productbtn.Location = New System.Drawing.Point(5, 143)
         Me.productbtn.Margin = New System.Windows.Forms.Padding(5)
         Me.productbtn.Name = "productbtn"
         Me.productbtn.Size = New System.Drawing.Size(140, 59)
@@ -374,7 +375,7 @@ Partial Class Form2
     Friend WithEvents DateTimePicker1 As DateTimePicker
     Friend WithEvents Label1 As Label
     Friend WithEvents Timer1 As Timer
-    Friend WithEvents Guna2BorderlessForm1 As Guna.UI2.WinForms.Guna2BorderlessForm
+    Friend WithEvents Guna2BorderlessLOGIN_PAGE As Guna.UI2.WinForms.Guna2BorderlessForm
     Friend WithEvents Panel4 As Panel
     Friend WithEvents Guna2ControlBox2 As Guna.UI2.WinForms.Guna2ControlBox
     Friend WithEvents Guna2ControlBox1 As Guna.UI2.WinForms.Guna2ControlBox

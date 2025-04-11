@@ -7,7 +7,7 @@ Public Class CASHIER
         Dim deleteButtonColumn As New DataGridViewButtonColumn()
         deleteButtonColumn.Name = "DeleteButton"
         deleteButtonColumn.HeaderText = " "
-        deleteButtonColumn.Text = " —— "
+        deleteButtonColumn.Text = "−"
         deleteButtonColumn.Width = 25
         deleteButtonColumn.UseColumnTextForButtonValue = True
 
@@ -30,10 +30,6 @@ Public Class CASHIER
         AddHandler OrdersDataGridView.CellValueChanged, AddressOf UpdateTotalSum
         AddHandler OrdersDataGridView.RowsRemoved, AddressOf UpdateTotalSum
         AddHandler OrdersDataGridView.RowsAdded, AddressOf UpdateTotalSum
-
-
-
-
     End Sub
 
     Private CASHIER_MENU_FOOD_TAB As New CASHIER_MENU_FOOD_TAB()
@@ -70,59 +66,69 @@ Public Class CASHIER
     End Sub
 
     Private Sub UpdateTotalSum(sender As Object, e As EventArgs)
-        Dim totalSum As Decimal = 0
-
         Try
-            Opencon()
-
-            Dim sumQuery As String = "SELECT SUM(Total_price) FROM Orders"
-
-            Using cmd As New SqlCommand(sumQuery, con)
-                Dim result = cmd.ExecuteScalar()
-                If result IsNot DBNull.Value Then
-                    totalSum = Convert.ToDecimal(result)
+            Dim totalSum As Decimal = 0
+            For Each row As DataGridViewRow In OrdersDataGridView.Rows
+                If Not row.IsNewRow AndAlso row.Cells("Total_price").Value IsNot Nothing Then
+                    totalSum += Convert.ToDecimal(row.Cells("Total_price").Value)
                 End If
-            End Using
-
+            Next
+            lbltotal.Text = totalSum.ToString("C2")
         Catch ex As Exception
             MsgBox("Error calculating total: " & ex.Message, vbCritical)
-        Finally
-            If con.State = ConnectionState.Open Then con.Close()
         End Try
-
-        lbltotal.Text = totalSum.ToString("C2")
-        OrdersDataGridView.NotifyCurrentCellDirty(True)
     End Sub
-
-
-
-
 
     Private Sub Guna2Button2_Click(sender As Object, e As EventArgs) Handles Guna2Button2.Click
         RECEIPT.Show()
     End Sub
 
+
+    Private Sub UpdateItemQuantity(productName As String, newQuantity As Integer, newTotal As Decimal)
+        Try
+            Opencon()
+
+            Dim updateQuery As String = "UPDATE Orders SET Quantity = @Quantity, Total_price = @TotalPrice WHERE Product_name = @ProductName"
+
+            Using updateCmd As New SqlCommand(updateQuery, con)
+                updateCmd.Parameters.AddWithValue("@Quantity", newQuantity)
+                updateCmd.Parameters.AddWithValue("@TotalPrice", newTotal)
+                updateCmd.Parameters.AddWithValue("@ProductName", productName)
+                updateCmd.ExecuteNonQuery()
+            End Using
+
+        Catch ex As Exception
+            MessageBox.Show("Error updating quantity: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            If con.State = ConnectionState.Open Then con.Close()
+        End Try
+
+        UpdateTotalSum(Me, EventArgs.Empty)
+    End Sub
     Private Sub OrdersDataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles OrdersDataGridView.CellContentClick
         If e.RowIndex >= 0 Then
+            Dim productName As String = OrdersDataGridView.Rows(e.RowIndex).Cells("Product_name").Value.ToString()
+            Dim currentQty As Integer = Convert.ToInt32(OrdersDataGridView.Rows(e.RowIndex).Cells("Quantity").Value)
+            Dim productPrice As Decimal = Convert.ToDecimal(OrdersDataGridView.Rows(e.RowIndex).Cells("Price").Value)
 
-            If OrdersDataGridView.Columns.Contains("Product_name") Then
+            If currentQty > 1 Then
+                ' Reduce quantity by 1
+                Dim newQty = currentQty - 1
+                Dim newTotal = newQty * productPrice
 
-                Dim productName As String = OrdersDataGridView.Rows(e.RowIndex).Cells("Product_name").Value.ToString()
-                    Dim result As DialogResult = MessageBox.Show("Are you sure you want to delete this item?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
-                    If result = DialogResult.Yes Then
+                ' Update database
+                UpdateItemQuantity(productName, newQty, newTotal)
 
-                        DeleteItem(productName)
-
-                        OrdersDataGridView.Rows.RemoveAt(e.RowIndex)
-
-                        Me.OrdersTableAdapter.Fill(Me.SHITSTEMDataSet.Orders)
-
-                End If
+                ' Refresh grid
+                Me.OrdersTableAdapter.Fill(Me.SHITSTEMDataSet.Orders)
             Else
-                MessageBox.Show("Product_name column not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                ' If quantity is 1, delete the item completely
+                DeleteItem(productName)
+                Me.OrdersTableAdapter.Fill(Me.SHITSTEMDataSet.Orders)
             End If
         End If
     End Sub
+
     Private Sub DeleteItem(productName As String)
         Try
             Opencon()
@@ -140,9 +146,12 @@ Public Class CASHIER
         End Try
     End Sub
 
-    Private Sub Guna2Button5_Click(sender As Object, e As EventArgs) Handles Guna2Button5.Click
-        For Each col As DataGridViewColumn In OrdersDataGridView.Columns
-            Debug.WriteLine("Column: " & col.Name)
-        Next
+    Public Property user_Role As String
+    Private Sub CASHIER_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
+
+        If user_Role = "Employee" Then
+            LOGIN_PAGE.Show()
+        End If
     End Sub
+
 End Class

@@ -1,9 +1,10 @@
 ﻿Imports System.Data.SqlClient
+Imports Guna.UI2.WinForms
 
-Public Class Form1
+Public Class LOGIN_PAGE
 
     Dim roleSelect As String = ""
-    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub LOGIN_PAGE_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Opencon()
         con.Close()
 
@@ -29,16 +30,27 @@ Public Class Form1
 
                 Select Case userRole
                     Case "Employee"
-                        MsgBox("eeeeeee")
+
+                        Dim user_Role As String = userRole
+
+                        If Not String.IsNullOrEmpty(user_Role) Then
+                            Dim CASHIER As New CASHIER()
+                            CASHIER.user_Role = user_Role
+                            CASHIER.Show()
+                            Me.Hide()
+                            showRolefields()
+                        Else
+                            MessageBox.Show("Please enter a valid User ID!", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                        End If
                     Case "Manager"
                         MsgBox("mmmmmmm")
                     Case "Owner"
                         MsgBox("ooooooo")
                         Dim user_id As String = TextBox1.Text
 
-                        If Not String.IsNullOrEmpty(user_id) Then ' Ensure user_id is entered
+                        If Not String.IsNullOrEmpty(user_id) Then
                             Dim form2 As New Form2()
-                            form2.user_id = user_id ' Pass user_id to Form2
+                            form2.user_id = user_id
                             form2.Show()
                             Me.Hide()
                             showRolefields()
@@ -121,5 +133,39 @@ Public Class Form1
 
     Private Sub Button6_Click_1(sender As Object, e As EventArgs) Handles Button6.Click
         Users.Show()
+    End Sub
+
+    Dim txt1 As Boolean = False
+    Dim txt2 As Boolean = False
+    Private Sub TextBox1_Click(sender As Object, e As EventArgs)
+        txt1 = True
+        If txt1 = True Then
+            TextBox1.Text = ""
+        End If
+
+    End Sub
+    Private Sub TextBox2_Click(sender As Object, e As EventArgs)
+        txt2 = True
+        If txt2 = True Then
+            TextBox2.PasswordChar = "*"
+            TextBox2.Text = ""
+        End If
+    End Sub
+
+    Private Sub LOGIN_PAGE_Click(sender As Object, e As EventArgs) Handles Me.Click
+        Me.ActiveControl = Nothing
+    End Sub
+
+    Private Sub TextBox1_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox1.KeyDown
+        If e.Control AndAlso e.KeyCode = Keys.A Then
+            TextBox1.SelectAll()
+            e.SuppressKeyPress = True
+        End If
+    End Sub
+    Private Sub TextBox2_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox2.KeyDown
+        If e.Control AndAlso e.KeyCode = Keys.A Then
+            TextBox2.SelectAll()
+            e.SuppressKeyPress = True
+        End If
     End Sub
 End Class

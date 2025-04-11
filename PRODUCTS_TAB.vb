@@ -158,19 +158,14 @@ Public Class PRODUCTS_TAB
 
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        Dim Filesize As UInt32
-        Dim mstream As New System.IO.MemoryStream
-        PictureBox1.Image.Save(mstream, System.Drawing.Imaging.ImageFormat.Png)
-        Dim arrimage() As Byte = mstream.GetBuffer()
-        Filesize = mstream.Length
-        mstream.Close()
+
 
 
 
         If MessageBox.Show("Are you sure you want to update this product?", "Confirm Update", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
 
             If TextBox8.Text = "" Or TextBox7.Text = "" Or TextBox6.Text = "" Or TextBox5.Text = "" Then
-                MessageBox.Show("Please fill in all fields" & vbCrLf & vbCrLf & "Or Select From the Grid", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                MessageBox.Show("Please fill in all fields", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Else
                 Item_no = TextBox8.Text
                 Product_name = TextBox7.Text
@@ -179,7 +174,12 @@ Public Class PRODUCTS_TAB
                 taxed_price = TextBox1.Text
                 product_group = ComboBox1.Text
 
-
+                Dim Filesize As UInt32
+                Dim mstream As New System.IO.MemoryStream
+                PictureBox1.Image.Save(mstream, System.Drawing.Imaging.ImageFormat.Png)
+                Dim arrimage() As Byte = mstream.GetBuffer()
+                Filesize = mstream.Length
+                mstream.Close()
 
                 Dim query As String = "UPDATE stocks SET Item_no=@Item_no,Product_name=@Product_name,product_group=@product_group,Quantity=@Quantity,Price=@Price, taxed_price=@taxed_price, barcode = @barcode WHERE Item_no = @Item_no"
                 Using cmd As New SqlCommand(query, con)

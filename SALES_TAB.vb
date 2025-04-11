@@ -2,11 +2,31 @@
 Imports System.Windows.Forms.DataVisualization.Charting
 
 Public Class SALES_TAB
+
+
     Private Sub SALES_TAB_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'TODO: This line of code loads data into the 'SHITSTEMDataSet.DailySales' table. You can move, or remove it, as needed.
         Me.DailySalesTableAdapter.Fill(Me.SHITSTEMDataSet.DailySales)
         'TODO: This line of code loads data into the 'SHITSTEMDataSet.MonthlySales' table. You can move, or remove it, as needed.
         Me.MonthlySalesTableAdapter.Fill(Me.SHITSTEMDataSet.MonthlySales)
+        Me.STOCKSTableAdapter.Fill(Me.SHITSTEMDataSet.STOCKS)
+
+        Dim dt As New DataTable()
+        Dim query As String = "SELECT * FROM STOCKS"
+        Using filtercmd As New SqlCommand(query, con)
+            Using da As New SqlDataAdapter(filtercmd)
+                da.Fill(dt)
+            End Using
+        End Using
+
+        Dim outOfStockView As New DataView(dt)
+        outOfStockView.RowFilter = "Quantity = 0"
+        DataGridView1.DataSource = outOfStockView
+
+        ' Filter for low-stock (Quantity < 5 but > 0)
+        Dim lowStockView As New DataView(dt)
+        lowStockView.RowFilter = "Quantity <= 5 AND Quantity > 0"
+        STOCKSDataGridView.DataSource = lowStockView
 
         Opencon()
         Dim cmd As New SqlCommand("SELECT Month, Earned FROM MonthlySales", con)
@@ -113,6 +133,28 @@ Public Class SALES_TAB
         Label2.Text = DateTime.Now.ToString("dddd, MMMM dd, yyyy")
 
 
+    End Sub
+
+    Private Sub SALES_TAB_ParentChanged(sender As Object, e As EventArgs) Handles Me.ParentChanged
+        If Me.Visible Then
+            Dim dt As New DataTable()
+            Dim query As String = "SELECT * FROM STOCKS"
+            Using filtercmd As New SqlCommand(query, con)
+                Using da As New SqlDataAdapter(filtercmd)
+                    da.Fill(dt)
+                End Using
+            End Using
+
+            Dim outOfStockView As New DataView(dt)
+            outOfStockView.RowFilter = "Quantity = 0"
+            DataGridView1.DataSource = outOfStockView
+
+            ' Filter for low-stock (Quantity < 5 but > 0)
+            Dim lowStockView As New DataView(dt)
+            lowStockView.RowFilter = "Quantity <= 5 AND Quantity > 0"
+            STOCKSDataGridView.DataSource = lowStockView
+            Me.STOCKSTableAdapter.Fill(Me.SHITSTEMDataSet.STOCKS)
+        End If
     End Sub
 
 End Class

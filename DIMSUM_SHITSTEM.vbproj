@@ -182,11 +182,11 @@
     <Compile Include="PRODUCTS_TAB.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Form1.vb">
+    <Compile Include="LOGIN_PAGE.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <Compile Include="LOGIN_PAGE.Designer.vb">
+      <DependentUpon>LOGIN_PAGE.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PRODUCTS.Designer.vb">
@@ -265,8 +265,8 @@
     <EmbeddedResource Include="PRODUCTS_TAB.resx">
       <DependentUpon>PRODUCTS_TAB.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <EmbeddedResource Include="LOGIN_PAGE.resx">
+      <DependentUpon>LOGIN_PAGE.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PRODUCTS.resx">
       <DependentUpon>PRODUCTS.vb</DependentUpon>

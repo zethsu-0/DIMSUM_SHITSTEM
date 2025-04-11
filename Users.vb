@@ -25,7 +25,7 @@ Public Class Users
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         lastname = TextBox2.Text
-
+        firstname = TextBox1.Text
         Dim roleid As String
         If ComboBox1.Text = "Employee" Then
             roleid = "Em"
@@ -37,13 +37,8 @@ Public Class Users
             roleid = "Own"
         End If
 
-        con.Open()
-        Dim cmd As New SqlCommand("SELECT COUNT(*) FROM login", con)
-        Dim empcount As Integer = CInt(cmd.ExecuteScalar())
-
-            user_id = roleid & "_" & lastname & "_" & "2025" & empcount + 1
-            TextBox7.Text = user_id
-        con.Close()
+        user_id = firstname
+        TextBox7.Text = user_id
 
 
 
@@ -59,7 +54,7 @@ Public Class Users
 
 
         Try
-            If TextBox1.Text = "" Or TextBox2.Text = "" Or TextBox3.Text = "" Or TextBox4.Text = "" Then
+            If TextBox1.Text = "" Or TextBox2.Text = "" Or TextBox3.Text = "" Or TextBox4.Text = "" Or TextBox5.Text = "" Or TextBox6.Text = "" Or ComboBox1.Text = "" Then
                 MessageBox.Show("Please Fill all the SHITS")
             Else
 
