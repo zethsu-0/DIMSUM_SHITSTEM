@@ -78,7 +78,7 @@ Partial Class CASHIER
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel2.Location = New System.Drawing.Point(0, 0)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(190, 668)
+        Me.Panel2.Size = New System.Drawing.Size(190, 618)
         Me.Panel2.TabIndex = 1
         '
         'Guna2Button4
@@ -171,9 +171,9 @@ Partial Class CASHIER
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Controls.Add(Me.checkoutbtn)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Right
-        Me.Panel1.Location = New System.Drawing.Point(972, 0)
+        Me.Panel1.Location = New System.Drawing.Point(408, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(353, 621)
+        Me.Panel1.Size = New System.Drawing.Size(353, 571)
         Me.Panel1.TabIndex = 8
         '
         'Guna2HtmlLabel1
@@ -415,7 +415,7 @@ Partial Class CASHIER
         Me.Panel3.BackColor = System.Drawing.Color.Silver
         Me.Panel3.Location = New System.Drawing.Point(15, 175)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(951, 446)
+        Me.Panel3.Size = New System.Drawing.Size(387, 396)
         Me.Panel3.TabIndex = 9
         '
         'orderlabel
@@ -436,7 +436,7 @@ Partial Class CASHIER
         Me.Guna2ControlBox1.FillColor = System.Drawing.Color.White
         Me.Guna2ControlBox1.HoverState.FillColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.Guna2ControlBox1.IconColor = System.Drawing.Color.Black
-        Me.Guna2ControlBox1.Location = New System.Drawing.Point(1280, 3)
+        Me.Guna2ControlBox1.Location = New System.Drawing.Point(716, 3)
         Me.Guna2ControlBox1.Name = "Guna2ControlBox1"
         Me.Guna2ControlBox1.Size = New System.Drawing.Size(40, 40)
         Me.Guna2ControlBox1.TabIndex = 11
@@ -450,7 +450,7 @@ Partial Class CASHIER
         Me.Guna2Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Guna2Panel1.Location = New System.Drawing.Point(190, 0)
         Me.Guna2Panel1.Name = "Guna2Panel1"
-        Me.Guna2Panel1.Size = New System.Drawing.Size(1325, 47)
+        Me.Guna2Panel1.Size = New System.Drawing.Size(761, 47)
         Me.Guna2Panel1.TabIndex = 12
         '
         'Guna2ControlBox2
@@ -461,7 +461,7 @@ Partial Class CASHIER
         Me.Guna2ControlBox2.FillColor = System.Drawing.Color.White
         Me.Guna2ControlBox2.HoverState.FillColor = System.Drawing.Color.Silver
         Me.Guna2ControlBox2.IconColor = System.Drawing.Color.Black
-        Me.Guna2ControlBox2.Location = New System.Drawing.Point(1239, 3)
+        Me.Guna2ControlBox2.Location = New System.Drawing.Point(675, 3)
         Me.Guna2ControlBox2.Name = "Guna2ControlBox2"
         Me.Guna2ControlBox2.Size = New System.Drawing.Size(40, 40)
         Me.Guna2ControlBox2.TabIndex = 12
@@ -476,14 +476,14 @@ Partial Class CASHIER
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel4.Location = New System.Drawing.Point(190, 47)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(1325, 621)
+        Me.Panel4.Size = New System.Drawing.Size(761, 571)
         Me.Panel4.TabIndex = 13
         '
         'CASHIER
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1515, 668)
+        Me.ClientSize = New System.Drawing.Size(951, 618)
         Me.Controls.Add(Me.Panel4)
         Me.Controls.Add(Me.Guna2Panel1)
         Me.Controls.Add(Me.Panel2)

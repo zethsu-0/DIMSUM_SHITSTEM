@@ -159,9 +159,6 @@ Public Class PRODUCTS_TAB
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
 
-
-
-
         If MessageBox.Show("Are you sure you want to update this product?", "Confirm Update", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
 
             If TextBox8.Text = "" Or TextBox7.Text = "" Or TextBox6.Text = "" Or TextBox5.Text = "" Then

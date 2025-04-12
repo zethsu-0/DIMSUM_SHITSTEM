@@ -7,6 +7,7 @@ Imports Microsoft.VisualBasic.ApplicationServices
 Public Class Form2
 
 
+    Public Property user_role As String
     Public Property user_id As String
     Private lastOpenedForm As Form = Nothing
 
@@ -23,15 +24,10 @@ Public Class Form2
         newForm.Show()
     End Sub
 
-    Private Sub Form2_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        Me.Hide()
-        LOGIN_PAGE.Show()
-    End Sub
-
-
-
     Private Sub Form2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Opencon()
+
+
         If Not String.IsNullOrEmpty(user_id) Then
             GetUserFullName()
             con.Close()
@@ -39,13 +35,18 @@ Public Class Form2
             Label3.Text = "Invalid User ID"
             con.Close()
         End If
-
+        If user_role = "Manager" Then
+            Label2.Text = "HELLO MANAGER"
+        End If
         Timer1.Interval = 1000
         Timer1.Start()
-
         salesbtn.PerformClick()
-    End Sub
 
+    End Sub
+    Private Sub Form2_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        Me.Hide()
+        LOGIN_PAGE.Show()
+    End Sub
     Private Sub GetUserFullName()
         Try
 
@@ -89,15 +90,21 @@ Public Class Form2
     End Sub
 
     Private Sub salesbtn_Click(sender As Object, e As EventArgs) Handles salesbtn.Click
+        Dim tab As New EMPLOYEE_TAB()
+        tab.user_Role = user_role
+
         Me.SplitContainer1.Panel2.Controls.Clear()
         Me.SplitContainer1.Panel2.Controls.Add(SALES_TAB)
         EMPLOYEE_TAB.Dock = DockStyle.Fill
     End Sub
 
     Private Sub employeebtn_Click(sender As Object, e As EventArgs) Handles employeebtn.Click
+        Dim tab As New EMPLOYEE_TAB()
+        tab.user_Role = user_role
+
         Me.SplitContainer1.Panel2.Controls.Clear()
-        Me.SplitContainer1.Panel2.Controls.Add(EMPLOYEE_TAB)
-        EMPLOYEE_TAB.Dock = DockStyle.Fill
+        Me.SplitContainer1.Panel2.Controls.Add(tab)
+        tab.Dock = DockStyle.Fill
     End Sub
 
     Private Sub cashierbtn_Click(sender As Object, e As EventArgs) Handles cashierbtn.Click
@@ -119,7 +126,4 @@ Public Class Form2
         End If
     End Sub
 
-    Private Sub Form2_Closed(sender As Object, e As EventArgs) Handles Me.Closed
-        LOGIN_PAGE.Show()
-    End Sub
 End Class

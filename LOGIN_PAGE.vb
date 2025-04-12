@@ -27,10 +27,8 @@ Public Class LOGIN_PAGE
         Dim userRole As String = If(cmd.Parameters("@role").Value IsNot DBNull.Value, cmd.Parameters("@role").Value.ToString(), "")
         If CInt(cmd.Parameters("@result").Value = 1) Then
             If roleSelect = userRole Then
-
                 Select Case userRole
                     Case "Employee"
-
                         Dim user_Role As String = userRole
 
                         If Not String.IsNullOrEmpty(user_Role) Then
@@ -42,14 +40,34 @@ Public Class LOGIN_PAGE
                         Else
                             MessageBox.Show("Please enter a valid User ID!", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                         End If
+
+
                     Case "Manager"
-                        MsgBox("mmmmmmm")
+
+                        Dim user_Role As String = userRole
+                        Dim user_id As String = TextBox1.Text
+
+
+                        If Not String.IsNullOrEmpty(user_Role) Then
+                            Dim form2 As New Form2()
+                            form2.user_role = user_Role
+                            form2.user_id = user_id
+                            form2.Show()
+                            Me.Hide()
+                            showRolefields()
+                        Else
+                            MessageBox.Show("Please enter a valid User ID!", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                        End If
+
                     Case "Owner"
                         MsgBox("ooooooo")
+
+                        Dim user_Role As String = userRole
                         Dim user_id As String = TextBox1.Text
 
                         If Not String.IsNullOrEmpty(user_id) Then
                             Dim form2 As New Form2()
+                            form2.user_role = user_Role
                             form2.user_id = user_id
                             form2.Show()
                             Me.Hide()

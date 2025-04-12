@@ -40,9 +40,9 @@ Partial Class Form2
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Guna2CirclePictureBox1 = New Guna.UI2.WinForms.Guna2CirclePictureBox()
+        Me.salesbtn = New Guna.UI2.WinForms.Guna2Button()
         Me.cashierbtn = New Guna.UI2.WinForms.Guna2Button()
         Me.employeebtn = New Guna.UI2.WinForms.Guna2Button()
-        Me.salesbtn = New Guna.UI2.WinForms.Guna2Button()
         Me.productbtn = New Guna.UI2.WinForms.Guna2Button()
         Me.Guna2HtmlLabel1 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         CType(Me.SHITSTEMDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -233,6 +233,31 @@ Partial Class Form2
         Me.Guna2CirclePictureBox1.TabIndex = 1
         Me.Guna2CirclePictureBox1.TabStop = False
         '
+        'salesbtn
+        '
+        Me.salesbtn.Animated = True
+        Me.salesbtn.BorderRadius = 15
+        Me.salesbtn.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton
+        Me.salesbtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray
+        Me.salesbtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
+        Me.salesbtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.salesbtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
+        Me.salesbtn.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.salesbtn.FillColor = System.Drawing.Color.Transparent
+        Me.salesbtn.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.salesbtn.ForeColor = System.Drawing.Color.Black
+        Me.salesbtn.Image = Global.DIMSUM_SHITSTEM.My.Resources.Resources.bar_chart
+        Me.salesbtn.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left
+        Me.salesbtn.ImageSize = New System.Drawing.Size(50, 50)
+        Me.salesbtn.IndicateFocus = True
+        Me.salesbtn.Location = New System.Drawing.Point(5, 74)
+        Me.salesbtn.Margin = New System.Windows.Forms.Padding(5)
+        Me.salesbtn.Name = "salesbtn"
+        Me.salesbtn.Size = New System.Drawing.Size(140, 59)
+        Me.salesbtn.TabIndex = 1
+        Me.salesbtn.Text = "DASHBOARD"
+        Me.salesbtn.TextOffset = New System.Drawing.Point(30, 0)
+        '
         'cashierbtn
         '
         Me.cashierbtn.Animated = True
@@ -275,31 +300,6 @@ Partial Class Form2
         Me.employeebtn.TabIndex = 2
         Me.employeebtn.Text = "EMPLOYEES"
         '
-        'salesbtn
-        '
-        Me.salesbtn.Animated = True
-        Me.salesbtn.BorderRadius = 15
-        Me.salesbtn.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton
-        Me.salesbtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray
-        Me.salesbtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
-        Me.salesbtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
-        Me.salesbtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
-        Me.salesbtn.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.salesbtn.FillColor = System.Drawing.Color.Transparent
-        Me.salesbtn.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.salesbtn.ForeColor = System.Drawing.Color.Black
-        Me.salesbtn.Image = Global.DIMSUM_SHITSTEM.My.Resources.Resources.bar_chart
-        Me.salesbtn.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left
-        Me.salesbtn.ImageSize = New System.Drawing.Size(50, 50)
-        Me.salesbtn.IndicateFocus = True
-        Me.salesbtn.Location = New System.Drawing.Point(5, 74)
-        Me.salesbtn.Margin = New System.Windows.Forms.Padding(5)
-        Me.salesbtn.Name = "salesbtn"
-        Me.salesbtn.Size = New System.Drawing.Size(140, 59)
-        Me.salesbtn.TabIndex = 1
-        Me.salesbtn.Text = "DASHBOARD"
-        Me.salesbtn.TextOffset = New System.Drawing.Point(30, 0)
-        '
         'productbtn
         '
         Me.productbtn.Animated = True
@@ -328,13 +328,13 @@ Partial Class Form2
         '
         'Guna2HtmlLabel1
         '
-        Me.Guna2HtmlLabel1.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.Guna2HtmlLabel1.AutoSize = False
         Me.Guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent
         Me.Guna2HtmlLabel1.Font = New System.Drawing.Font("ITC Kabel", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2HtmlLabel1.ForeColor = System.Drawing.Color.Yellow
         Me.Guna2HtmlLabel1.Location = New System.Drawing.Point(269, 212)
         Me.Guna2HtmlLabel1.Name = "Guna2HtmlLabel1"
-        Me.Guna2HtmlLabel1.Size = New System.Drawing.Size(235, 37)
+        Me.Guna2HtmlLabel1.Size = New System.Drawing.Size(235, 36)
         Me.Guna2HtmlLabel1.TabIndex = 0
         Me.Guna2HtmlLabel1.Text = "DIMSUM FACTORY"
         '
@@ -358,7 +358,6 @@ Partial Class Form2
         Me.Panel4.PerformLayout()
         Me.SplitContainer1.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel2.ResumeLayout(False)
-        Me.SplitContainer1.Panel2.PerformLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
         Me.TableLayoutPanel1.ResumeLayout(False)

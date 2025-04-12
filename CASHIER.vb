@@ -52,7 +52,63 @@ Public Class CASHIER
         End Try
     End Sub
     Private Sub checkoutbtn_Click(sender As Object, e As EventArgs) Handles checkoutbtn.Click
-        resetcart()
+        Try
+            ' Calculate the total sum
+            Dim totalSum As Decimal = 0
+            For Each row As DataGridViewRow In OrdersDataGridView.Rows
+                If Not row.IsNewRow AndAlso row.Cells("Total_price").Value IsNot Nothing Then
+                    totalSum += Convert.ToDecimal(row.Cells("Total_price").Value)
+                End If
+            Next
+            Dim insertQuery As String = "INSERT INTO DailySales (Earned, Day) VALUES (@Earned, @Day)"
+            Using cmd As New SqlCommand(insertQuery, con)
+                cmd.Parameters.AddWithValue("@Earned", totalSum)
+                cmd.Parameters.AddWithValue("@Day", DateTime.Now.Date)
+
+                con.Open()
+                cmd.ExecuteNonQuery()
+                con.Close()
+            End Using
+
+            Dim currentDay As String = DateTime.Today.DayOfWeek.ToString()
+
+            Dim query As String = "IF EXISTS (SELECT 1 FROM WeeklySales WHERE Day = @day)
+                          UPDATE WeeklySales SET Earned = Earned + @earned WHERE Day = @day
+                       ELSE
+                          INSERT INTO WeeklySales (Day, Earned) VALUES (@day, @earned)"
+            Using cmd As New SqlCommand(query, con)
+                cmd.Parameters.AddWithValue("@day", currentDay)
+                cmd.Parameters.AddWithValue("@earned", totalSum)
+                con.Open()
+                cmd.ExecuteNonQuery()
+                con.Close()
+            End Using
+
+            Dim currentMonth As String = DateTime.Now.ToString("MMMM")
+
+            Dim monthlysalesq As String = "IF EXISTS (SELECT 1 FROM MonthlySales WHERE Month = @month)
+                                UPDATE MonthlySales SET Earned = Earned + @earned WHERE Month = @month
+                             ELSE
+                                INSERT INTO MonthlySales (Month, Earned) VALUES (@month, @earned)"
+
+            Using cmd As New SqlCommand(monthlysalesq, con)
+                cmd.Parameters.AddWithValue("@month", currentMonth)
+                cmd.Parameters.AddWithValue("@earned", totalSum)
+                con.Open()
+                cmd.ExecuteNonQuery()
+                con.Close()
+            End Using
+            ' Reset cart
+            resetcart()
+
+            MessageBox.Show("Checkout complete! Total: " & totalSum.ToString("C2"))
+        Catch ex As Exception
+            MessageBox.Show("Error during checkout: " & ex.Message)
+        Finally
+            If con.State = ConnectionState.Open Then con.Close()
+        End Try
+
+
     End Sub
     Public Sub resetcart()
         Dim delquery As String = "DELETE FROM Orders"
@@ -145,7 +201,6 @@ Public Class CASHIER
 
     Public Property user_Role As String
     Private Sub CASHIER_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
-
         If user_Role = "Employee" Then
             LOGIN_PAGE.Show()
         End If

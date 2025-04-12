@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{7A692563-EB19-48D9-B01B-1610699A7DD6}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>DIMSUM_SHITSTEM.Form2</StartupObject>
+    <StartupObject>DIMSUM_SHITSTEM.LOGIN_PAGE</StartupObject>
     <RootNamespace>DIMSUM_SHITSTEM</RootNamespace>
     <AssemblyName>DIMSUM_SHITSTEM</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -331,6 +331,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\refresh.png" />
     <None Include="Resources\bar-chart.png" />
     <None Include="Resources\producticon.png" />
     <None Include="Resources\icon.jpg" />

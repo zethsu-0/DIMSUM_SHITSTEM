@@ -42,20 +42,18 @@ Partial Class SALES_TAB
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Chart1 = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.EarnedLabel1 = New System.Windows.Forms.Label()
-        Me.DailySalesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.SHITSTEMDataSet = New DIMSUM_SHITSTEM.SHITSTEMDataSet()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.DailySalesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.SHITSTEMDataSet = New DIMSUM_SHITSTEM.SHITSTEMDataSet()
         Me.DailySalesTableAdapter = New DIMSUM_SHITSTEM.SHITSTEMDataSetTableAdapters.DailySalesTableAdapter()
         Me.TableAdapterManager = New DIMSUM_SHITSTEM.SHITSTEMDataSetTableAdapters.TableAdapterManager()
         Me.MonthlySalesTableAdapter = New DIMSUM_SHITSTEM.SHITSTEMDataSetTableAdapters.MonthlySalesTableAdapter()
         Me.WeeklySalesTableAdapter = New DIMSUM_SHITSTEM.SHITSTEMDataSetTableAdapters.WeeklySalesTableAdapter()
         Me.MonthlySalesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.WeeklySalesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
@@ -69,6 +67,8 @@ Partial Class SALES_TAB
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Guna2CircleButton1 = New Guna.UI2.WinForms.Guna2CircleButton()
         Me.STOCKSTableAdapter = New DIMSUM_SHITSTEM.SHITSTEMDataSetTableAdapters.STOCKSTableAdapter()
         Me.Panel5.SuspendLayout()
         CType(Me.Chart2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -79,20 +79,21 @@ Partial Class SALES_TAB
         CType(Me.SHITSTEMDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.MonthlySalesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.WeeklySalesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel1.SuspendLayout()
-        Me.Panel2.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.STOCKSBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.STOCKSDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel5
         '
+        Me.Panel5.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel5.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.Panel5.Controls.Add(Me.Chart2)
-        Me.Panel5.Location = New System.Drawing.Point(344, 172)
+        Me.Panel5.Location = New System.Drawing.Point(790, 425)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(803, 151)
+        Me.Panel5.Size = New System.Drawing.Size(430, 337)
         Me.Panel5.TabIndex = 6
         '
         'Chart2
@@ -106,7 +107,7 @@ Partial Class SALES_TAB
         Series1.ChartArea = "ChartArea1"
         Series1.Name = "Series1"
         Me.Chart2.Series.Add(Series1)
-        Me.Chart2.Size = New System.Drawing.Size(803, 151)
+        Me.Chart2.Size = New System.Drawing.Size(430, 337)
         Me.Chart2.TabIndex = 1
         Me.Chart2.Text = "Chart4"
         Title1.Name = "Title1"
@@ -115,11 +116,13 @@ Partial Class SALES_TAB
         '
         'Panel3
         '
+        Me.Panel3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.Panel3.Controls.Add(Me.Chart1)
-        Me.Panel3.Location = New System.Drawing.Point(344, 18)
+        Me.Panel3.Location = New System.Drawing.Point(790, 37)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(803, 148)
+        Me.Panel3.Size = New System.Drawing.Size(430, 373)
         Me.Panel3.TabIndex = 5
         '
         'Chart1
@@ -133,7 +136,7 @@ Partial Class SALES_TAB
         Series2.ChartArea = "ChartArea1"
         Series2.Name = "Series1"
         Me.Chart1.Series.Add(Series2)
-        Me.Chart1.Size = New System.Drawing.Size(803, 148)
+        Me.Chart1.Size = New System.Drawing.Size(430, 373)
         Me.Chart1.TabIndex = 1
         Me.Chart1.Text = "Chart1"
         Title2.Name = "Title1"
@@ -143,34 +146,26 @@ Partial Class SALES_TAB
         'Panel4
         '
         Me.Panel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.Panel4.Controls.Add(Me.EarnedLabel1)
+        Me.Panel4.Controls.Add(Me.Label6)
         Me.Panel4.Controls.Add(Me.Label3)
         Me.Panel4.Controls.Add(Me.Label2)
         Me.Panel4.Controls.Add(Me.Label1)
-        Me.Panel4.Location = New System.Drawing.Point(13, 18)
+        Me.Panel4.Location = New System.Drawing.Point(363, 37)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(325, 239)
         Me.Panel4.TabIndex = 2
         '
-        'EarnedLabel1
+        'Label6
         '
-        Me.EarnedLabel1.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.DailySalesBindingSource, "Earned", True))
-        Me.EarnedLabel1.Font = New System.Drawing.Font("Palatino Linotype", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.EarnedLabel1.Location = New System.Drawing.Point(133, 60)
-        Me.EarnedLabel1.Name = "EarnedLabel1"
-        Me.EarnedLabel1.Size = New System.Drawing.Size(123, 44)
-        Me.EarnedLabel1.TabIndex = 5
-        Me.EarnedLabel1.Text = "Label4"
-        '
-        'DailySalesBindingSource
-        '
-        Me.DailySalesBindingSource.DataMember = "DailySales"
-        Me.DailySalesBindingSource.DataSource = Me.SHITSTEMDataSet
-        '
-        'SHITSTEMDataSet
-        '
-        Me.SHITSTEMDataSet.DataSetName = "SHITSTEMDataSet"
-        Me.SHITSTEMDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        Me.Label6.AutoSize = True
+        Me.Label6.BackColor = System.Drawing.Color.Transparent
+        Me.Label6.Font = New System.Drawing.Font("Poppins", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(125, 58)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(87, 56)
+        Me.Label6.TabIndex = 5
+        Me.Label6.Text = "000"
+        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Label3
         '
@@ -206,6 +201,16 @@ Partial Class SALES_TAB
         Me.Label1.Text = "Earned Today"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'DailySalesBindingSource
+        '
+        Me.DailySalesBindingSource.DataMember = "DailySales"
+        Me.DailySalesBindingSource.DataSource = Me.SHITSTEMDataSet
+        '
+        'SHITSTEMDataSet
+        '
+        Me.SHITSTEMDataSet.DataSetName = "SHITSTEMDataSet"
+        Me.SHITSTEMDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
         'DailySalesTableAdapter
         '
         Me.DailySalesTableAdapter.ClearBeforeFill = True
@@ -240,32 +245,10 @@ Partial Class SALES_TAB
         Me.WeeklySalesBindingSource.DataMember = "WeeklySales"
         Me.WeeklySalesBindingSource.DataSource = Me.SHITSTEMDataSet
         '
-        'Panel1
-        '
-        Me.Panel1.Controls.Add(Me.Label5)
-        Me.Panel1.Controls.Add(Me.Label4)
-        Me.Panel1.Controls.Add(Me.DataGridView1)
-        Me.Panel1.Controls.Add(Me.STOCKSDataGridView)
-        Me.Panel1.Location = New System.Drawing.Point(6, 429)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1147, 365)
-        Me.Panel1.TabIndex = 7
-        '
-        'Panel2
-        '
-        Me.Panel2.BackColor = System.Drawing.Color.White
-        Me.Panel2.Controls.Add(Me.Panel4)
-        Me.Panel2.Controls.Add(Me.Panel5)
-        Me.Panel2.Controls.Add(Me.Panel3)
-        Me.Panel2.Location = New System.Drawing.Point(3, 3)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(1150, 420)
-        Me.Panel2.TabIndex = 8
-        '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(683, 192)
+        Me.Label5.Location = New System.Drawing.Point(14, 575)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(97, 13)
         Me.Label5.TabIndex = 4
@@ -274,7 +257,7 @@ Partial Class SALES_TAB
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(679, 15)
+        Me.Label4.Location = New System.Drawing.Point(10, 397)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(101, 13)
         Me.Label4.TabIndex = 3
@@ -309,7 +292,7 @@ Partial Class SALES_TAB
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle2
-        Me.DataGridView1.Location = New System.Drawing.Point(682, 43)
+        Me.DataGridView1.Location = New System.Drawing.Point(13, 413)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
@@ -391,7 +374,7 @@ Partial Class SALES_TAB
         DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.STOCKSDataGridView.DefaultCellStyle = DataGridViewCellStyle6
-        Me.STOCKSDataGridView.Location = New System.Drawing.Point(682, 214)
+        Me.STOCKSDataGridView.Location = New System.Drawing.Point(13, 597)
         Me.STOCKSDataGridView.Name = "STOCKSDataGridView"
         Me.STOCKSDataGridView.ReadOnly = True
         DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
@@ -437,6 +420,39 @@ Partial Class SALES_TAB
         Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
         Me.DataGridViewTextBoxColumn4.ReadOnly = True
         '
+        'Panel1
+        '
+        Me.Panel1.BackColor = System.Drawing.Color.White
+        Me.Panel1.Controls.Add(Me.Label5)
+        Me.Panel1.Controls.Add(Me.Guna2CircleButton1)
+        Me.Panel1.Controls.Add(Me.STOCKSDataGridView)
+        Me.Panel1.Controls.Add(Me.Label4)
+        Me.Panel1.Controls.Add(Me.Panel4)
+        Me.Panel1.Controls.Add(Me.DataGridView1)
+        Me.Panel1.Controls.Add(Me.Panel5)
+        Me.Panel1.Controls.Add(Me.Panel3)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel1.Location = New System.Drawing.Point(0, 0)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(1223, 797)
+        Me.Panel1.TabIndex = 8
+        '
+        'Guna2CircleButton1
+        '
+        Me.Guna2CircleButton1.DisabledState.BorderColor = System.Drawing.Color.DarkGray
+        Me.Guna2CircleButton1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
+        Me.Guna2CircleButton1.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.Guna2CircleButton1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
+        Me.Guna2CircleButton1.FillColor = System.Drawing.Color.White
+        Me.Guna2CircleButton1.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.Guna2CircleButton1.ForeColor = System.Drawing.Color.White
+        Me.Guna2CircleButton1.Image = Global.DIMSUM_SHITSTEM.My.Resources.Resources.refresh
+        Me.Guna2CircleButton1.Location = New System.Drawing.Point(13, 13)
+        Me.Guna2CircleButton1.Name = "Guna2CircleButton1"
+        Me.Guna2CircleButton1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle
+        Me.Guna2CircleButton1.Size = New System.Drawing.Size(36, 36)
+        Me.Guna2CircleButton1.TabIndex = 7
+        '
         'STOCKSTableAdapter
         '
         Me.STOCKSTableAdapter.ClearBeforeFill = True
@@ -447,7 +463,6 @@ Partial Class SALES_TAB
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
         Me.AutoSize = True
-        Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "SALES_TAB"
         Me.Size = New System.Drawing.Size(1223, 797)
@@ -461,12 +476,11 @@ Partial Class SALES_TAB
         CType(Me.SHITSTEMDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.MonthlySalesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.WeeklySalesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Panel1.ResumeLayout(False)
-        Me.Panel1.PerformLayout()
-        Me.Panel2.ResumeLayout(False)
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.STOCKSBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.STOCKSDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -486,9 +500,7 @@ Partial Class SALES_TAB
     Friend WithEvents MonthlySalesBindingSource As BindingSource
     Friend WithEvents MonthlySalesTableAdapter As SHITSTEMDataSetTableAdapters.MonthlySalesTableAdapter
     Friend WithEvents WeeklySalesTableAdapter As SHITSTEMDataSetTableAdapters.WeeklySalesTableAdapter
-    Friend WithEvents EarnedLabel1 As Label
     Friend WithEvents Panel1 As Panel
-    Friend WithEvents Panel2 As Panel
     Friend WithEvents STOCKSBindingSource As BindingSource
     Friend WithEvents STOCKSTableAdapter As SHITSTEMDataSetTableAdapters.STOCKSTableAdapter
     Friend WithEvents DataGridView1 As DataGridView
@@ -503,4 +515,6 @@ Partial Class SALES_TAB
     Friend WithEvents DataGridViewTextBoxColumn8 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn9 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn10 As DataGridViewTextBoxColumn
+    Friend WithEvents Label6 As Label
+    Friend WithEvents Guna2CircleButton1 As Guna.UI2.WinForms.Guna2CircleButton
 End Class
