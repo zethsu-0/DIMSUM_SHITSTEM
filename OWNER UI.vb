@@ -90,12 +90,12 @@ Public Class Form2
     End Sub
 
     Private Sub salesbtn_Click(sender As Object, e As EventArgs) Handles salesbtn.Click
-        Dim tab As New EMPLOYEE_TAB()
+        Dim tab As New SALES_TAB()
         tab.user_Role = user_role
 
         Me.SplitContainer1.Panel2.Controls.Clear()
-        Me.SplitContainer1.Panel2.Controls.Add(SALES_TAB)
-        EMPLOYEE_TAB.Dock = DockStyle.Fill
+        Me.SplitContainer1.Panel2.Controls.Add(tab)
+        tab.Dock = DockStyle.Fill
     End Sub
 
     Private Sub employeebtn_Click(sender As Object, e As EventArgs) Handles employeebtn.Click
@@ -114,9 +114,6 @@ Public Class Form2
     Private Sub logoutbtn_Click(sender As Object, e As EventArgs) Handles logoutbtn.Click
         Dim sure As DialogResult = MessageBox.Show(Me, "Are you sure you want to Logout?", "Confirm", MessageBoxButtons.OKCancel, MessageBoxIcon.Question)
         If sure = DialogResult.OK Then
-            ' Open login form first
-
-            ' Close all other open forms
             For Each frm As Form In Application.OpenForms.Cast(Of Form).ToList()
                 If Not frm Is LOGIN_PAGE Then
                     frm.Close()

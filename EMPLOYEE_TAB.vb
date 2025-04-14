@@ -74,7 +74,6 @@ Public Class EMPLOYEE_TAB
 
 
     Private Sub addbtn_Click(sender As Object, e As EventArgs) Handles addbtn.Click
-        password = TextBox6.Text
         allowedit = False
         Try
             con.Open()
@@ -89,7 +88,7 @@ Public Class EMPLOYEE_TAB
                 age = TextBox3.Text
                 address = TextBox4.Text
                 Phone_no = TextBox5.Text
-
+                password = TextBox6.Text
                 Dim insertQuery As String = "INSERT INTO login (firstname, lastname, age, address, Phone_no, password,role, user_id) VALUES (@firstname, @lastname, @age, @address,@Phone_no,@password,@role,@user_id)"
                 Using insertCmd As New SqlCommand(insertQuery, con)
                     insertCmd.Parameters.AddWithValue("@user_id", user_id)
@@ -248,4 +247,5 @@ Public Class EMPLOYEE_TAB
         ' Format the user ID (e.g. Em001)
         user_id = count.ToString("D3")
     End Sub
+
 End Class

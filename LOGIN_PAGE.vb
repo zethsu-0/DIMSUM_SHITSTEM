@@ -1,17 +1,33 @@
 ﻿Imports System.Data.SqlClient
+Imports System.Windows.Interop
 Imports Guna.UI2.WinForms
 
 Public Class LOGIN_PAGE
-
+    Dim count As Integer = 0
     Dim roleSelect As String = ""
     Private Sub LOGIN_PAGE_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        loadscreen()
         Opencon()
         con.Close()
-
-
+        ifownerexists()
     End Sub
-    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
 
+    Private Sub ifownerexists()
+        con.Open()
+        Dim query As String = "SELECT COUNT(*) FROM Login WHERE role = 'Owner'"
+        Dim cmd As New SqlCommand(query, con)
+
+        count = Convert.ToInt32(cmd.ExecuteScalar())
+
+        If count > 0 Then
+            Button6.Visible = False
+        Else
+            Button6.Visible = True
+        End If
+        con.Close()
+    End Sub
+
+    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
         con.Open()
         cmd = New SqlCommand("login1", con)
         With cmd
@@ -108,13 +124,20 @@ Public Class LOGIN_PAGE
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        Showloginfields()
-        Button2.Visible = False
-        Button3.Visible = False
-        Button4.Visible = False
-        Button5.Visible = True
-        Label3.Visible = True
-        roleSelect = "Owner"
+        If count = 0 Then
+            MsgBox("Owner does not exists yet")
+        Else
+            Showloginfields()
+            Button2.Visible = False
+            Button3.Visible = False
+            Button4.Visible = False
+            Button5.Visible = True
+            Label3.Visible = True
+            roleSelect = "Owner"
+        End If
+
+
+
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
@@ -128,6 +151,7 @@ Public Class LOGIN_PAGE
         TextBox1.Visible = True
         TextBox2.Visible = True
         Button1.Visible = True
+        Guna2CheckBox1.Visible = True
     End Sub
     Public Sub showRolefields()
         Button1.Visible = False
@@ -142,6 +166,7 @@ Public Class LOGIN_PAGE
         Label1.Visible = False
         Label2.Visible = False
         Label3.Visible = False
+        Guna2CheckBox1.Visible = False
     End Sub
 
     Private Sub Button6_Click(sender As Object, e As EventArgs)
@@ -150,7 +175,10 @@ Public Class LOGIN_PAGE
     End Sub
 
     Private Sub Button6_Click_1(sender As Object, e As EventArgs) Handles Button6.Click
-        Users.Show()
+        Dim users As New Users()
+        users.ShowDialog()
+
+        ifownerexists()
     End Sub
 
     Dim txt1 As Boolean = False
@@ -180,10 +208,31 @@ Public Class LOGIN_PAGE
             e.SuppressKeyPress = True
         End If
     End Sub
-    Private Sub TextBox2_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox2.KeyDown
+    Private Sub TextBox2_KeyDown(sender As Object, e As KeyEventArgs)
         If e.Control AndAlso e.KeyCode = Keys.A Then
             TextBox2.SelectAll()
             e.SuppressKeyPress = True
         End If
+    End Sub
+
+
+    Private loadingscreen As New loadingscreen()
+    Private Sub loadscreen()
+        Me.Controls.Add(loadingscreen)
+        loadingscreen.BringToFront()
+        loadingscreen.Dock = DockStyle.Fill
+    End Sub
+
+    Private Sub Guna2CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles Guna2CheckBox1.CheckedChanged
+        If Guna2CheckBox1.Checked = True Then
+            TextBox2.PasswordChar = Nothing
+        End If
+        If Guna2CheckBox1.Checked = False Then
+            TextBox2.PasswordChar = "*"
+        End If
+    End Sub
+
+    Private Sub Panel1_DoubleClick(sender As Object, e As EventArgs) Handles Panel1.DoubleClick
+        Me.WindowState = FormWindowState.Minimized
     End Sub
 End Class

@@ -36,8 +36,6 @@ Public Class CASHIER_MENU_FOOD_TAB
 
     End Sub
 
-
-
     Private Sub GenerateProductButtons()
         FlowLayoutPanel1.Controls.Clear()
 
@@ -98,8 +96,6 @@ Public Class CASHIER_MENU_FOOD_TAB
 
             Me.cartQuantity = 0
 
-            Console.WriteLine("--------------------")
-
         Else
 
             MessageBox.Show("Error: Button is missing associated product data.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -143,6 +139,7 @@ Public Class CASHIER_MENU_FOOD_TAB
 
             Dim existingcartQuantity As Decimal = 0
             Dim existingUnitPrice As Decimal = 0
+            Dim profit As Decimal = Price * 1.02
             Dim checkCartQuery As String = "SELECT Quantity, Price FROM Orders WHERE Product_name = @Product_name"
 
             Using cmd As New SqlCommand(checkCartQuery, con)
@@ -162,7 +159,7 @@ Public Class CASHIER_MENU_FOOD_TAB
 
                 Using updateCmd As New SqlCommand(updateQuery, con)
                     updateCmd.Parameters.AddWithValue("@Quantity", newQuantity)
-                    updateCmd.Parameters.AddWithValue("@TotalPrice", newQuantity * Price)
+                    updateCmd.Parameters.AddWithValue("@TotalPrice", newQuantity * profit)
                     updateCmd.Parameters.AddWithValue("@Product_name", Product_name)
                     updateCmd.ExecuteNonQuery()
                 End Using
@@ -173,8 +170,8 @@ Public Class CASHIER_MENU_FOOD_TAB
                 Using insertCmd As New SqlCommand(insertQuery, con)
                     insertCmd.Parameters.AddWithValue("@Product_name", Product_name)
                     insertCmd.Parameters.AddWithValue("@Quantity", cartQuantity)
-                    insertCmd.Parameters.AddWithValue("@Price", Price)
-                    insertCmd.Parameters.AddWithValue("@Total_price", cartQuantity * Price)
+                    insertCmd.Parameters.AddWithValue("@Price", profit)
+                    insertCmd.Parameters.AddWithValue("@Total_price", cartQuantity * profit)
                     insertCmd.ExecuteNonQuery()
                 End Using
             End If

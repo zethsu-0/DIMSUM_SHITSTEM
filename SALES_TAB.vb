@@ -1,16 +1,22 @@
 ﻿Imports System.Data.SqlClient
+Imports System.Reflection
 Imports System.Windows.Forms.DataVisualization.Charting
 
 Public Class SALES_TAB
 
-
+    Public Property user_Role As String
     Private Sub SALES_TAB_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.DailySalesTableAdapter.Fill(Me.SHITSTEMDataSet.DailySales)
         Me.MonthlySalesTableAdapter.Fill(Me.SHITSTEMDataSet.MonthlySales)
+        Me.WeeklySalesTableAdapter.Fill(Me.SHITSTEMDataSet.WeeklySales)
         Me.STOCKSTableAdapter.Fill(Me.SHITSTEMDataSet.STOCKS)
 
-
-
+        If user_Role = "Owner" Then
+            profitpanel.Visible = True
+            Label1.Visible = True
+            Label3.Visible = True
+            profitlbl.Visible = True
+        End If
         Dim dt As New DataTable()
         Dim query As String = "SELECT * FROM STOCKS"
         Using filtercmd As New SqlCommand(query, con)
@@ -37,100 +43,136 @@ Public Class SALES_TAB
         LoadCharts()
     End Sub
     Private Sub LoadCharts()
-        ' === MonthlySales Chart ===
+        ' === MonthlySales: Profit to Chart1, Sales_Total to Chart3 ===
         Opencon()
-        Dim cmd As New SqlCommand("SELECT Month, Earned FROM MonthlySales", con)
+        Dim cmd As New SqlCommand("SELECT Month, Profit, Sales_Total FROM MonthlySales", con)
         Dim reader As SqlDataReader
 
         Chart1.Series.Clear()
-        Dim series As New Series("Earned")
-        series.ChartType = SeriesChartType.Column
-        series.BorderWidth = 2
-        series.IsValueShownAsLabel = True
+        Chart3.Series.Clear()
 
-        With Chart1.ChartAreas(0)
-            .AxisY.Maximum = Double.NaN  ' Let the chart auto scale
-            .AxisY.Minimum = Double.NaN
-            .AxisY.IntervalAutoMode = DataVisualization.Charting.IntervalAutoMode.VariableCount
-            .AxisY.LabelStyle.Format = "N0" ' Use thousand separators, and adjust the label angle
-        End With
-        Dim color1 As Color = Color.DarkOrange
-        Dim color2 As Color = Color.Gray
+        Dim profitSeries As New Series("Monthly Profit")
+        Dim salesSeries As New Series("Monthly Sales")
 
+        profitSeries.ChartType = SeriesChartType.Column
+        salesSeries.ChartType = SeriesChartType.Column
 
+        profitSeries.IsValueShownAsLabel = True
+        salesSeries.IsValueShownAsLabel = True
 
         Try
             reader = cmd.ExecuteReader()
             Dim index As Integer = 0
+
             While reader.Read()
-                Dim point As New DataPoint()
-                point.SetValueXY(reader("Month").ToString(), Convert.ToDouble(reader("Earned")))
-                point.Color = If(index Mod 2 = 0, color1, color2)
-                series.Points.Add(point)
+                Dim month = reader("Month").ToString()
+                Dim profit = Convert.ToDecimal(reader("Profit"))
+                Dim sales = Convert.ToDecimal(reader("Sales_Total"))
+
+                ' Profit to Chart1
+                Dim profitPoint As New DataPoint()
+                profitPoint.SetValueXY(month, profit)
+                profitSeries.Points.Add(profitPoint)
+
+                ' Sales_Total to Chart3
+                Dim salesPoint As New DataPoint()
+                salesPoint.SetValueXY(month, sales)
+                salesSeries.Points.Add(salesPoint)
+
                 index += 1
             End While
-            Chart1.Series.Add(series)
+
+            Chart1.Series.Add(profitSeries)
+            Chart3.Series.Add(salesSeries)
+
         Catch ex As Exception
-            MessageBox.Show("Error loading monthly chart: " & ex.Message)
+            MessageBox.Show("Error loading MonthlySales: " & ex.Message)
         Finally
             con.Close()
         End Try
 
-        ' === WeeklySales Chart ===
+        ' === WeeklySales: Profit to Chart2, Sales_Total to Chart4 ===
         Opencon()
-        Dim cmd2 As New SqlCommand("SELECT Day, Earned FROM WeeklySales", con)
+        Dim cmd2 As New SqlCommand("SELECT Day, Profit, Sales_Total FROM WeeklySales", con)
         Dim reader2 As SqlDataReader
 
         Chart2.Series.Clear()
-        Dim series2 As New Series("Daily Sales")
-        series2.ChartType = SeriesChartType.Column
-        series2.BorderWidth = 2
-        series2.IsValueShownAsLabel = True
+        Chart4.Series.Clear()
 
-        With Chart2.ChartAreas(0)
-            .AxisY.Maximum = Double.NaN  ' Let the chart auto scale
-            .AxisY.Minimum = Double.NaN
-            .AxisY.IntervalAutoMode = DataVisualization.Charting.IntervalAutoMode.VariableCount
-            .AxisY.LabelStyle.Format = "N0" ' U se thousand separators, and adjust the label angle
-        End With
+        Dim profitSeries2 As New Series("Weekly Profit")
+        Dim salesSeries2 As New Series("Weekly Sales")
 
-        Dim color3 As Color = Color.DarkOrange
-        Dim color4 As Color = Color.Gray
+        profitSeries2.ChartType = SeriesChartType.Column
+        salesSeries2.ChartType = SeriesChartType.Column
+
+        profitSeries2.IsValueShownAsLabel = True
+        salesSeries2.IsValueShownAsLabel = True
 
         Try
             reader2 = cmd2.ExecuteReader()
             Dim index As Integer = 0
+
             While reader2.Read()
-                Dim point As New DataPoint()
-                point.SetValueXY(reader2("Day").ToString(), Convert.ToDouble(reader2("Earned")))
-                point.Color = If(index Mod 2 = 0, color3, color4)
-                series2.Points.Add(point)
+                Dim day = reader2("Day").ToString()
+                Dim profit = Convert.ToDecimal(reader2("Profit"))
+                Dim sales = Convert.ToDecimal(reader2("Sales_Total"))
+
+                ' Profit to Chart2
+                Dim profitPoint As New DataPoint()
+                profitPoint.SetValueXY(day, profit)
+                profitSeries2.Points.Add(profitPoint)
+
+                ' Sales to Chart4
+                Dim salesPoint As New DataPoint()
+                salesPoint.SetValueXY(day, sales)
+                salesSeries2.Points.Add(salesPoint)
+
                 index += 1
             End While
-            Chart2.Series.Add(series2)
+
+            Chart2.Series.Add(profitSeries2)
+            Chart4.Series.Add(salesSeries2)
+
         Catch ex As Exception
-            MessageBox.Show("Error loading weekly chart: " & ex.Message)
+            MessageBox.Show("Error loading WeeklySales: " & ex.Message)
         Finally
             con.Close()
         End Try
     End Sub
 
-    Public Sub dailytotalearn()
-        Dim dailyearned As Decimal = 0
-        Dim earnedquery As String = "SELECT SUM(Earned) FROM DailySales"
 
-        Using earnedcmd As New SqlCommand(earnedquery, con)
+
+    Public Sub dailytotalearn()
+        Dim dailyProfit As Decimal = 0
+        Dim dailySales_total As Decimal = 0
+
+        Dim query As String = "SELECT SUM(Profit) AS TotalProfit, SUM(Sales_total) AS TotalSales 
+                                FROM DailySales 
+                                WHERE CONVERT(date, Day) = CONVERT(date, GETDATE())"
+
+        Using cmd As New SqlCommand(query, con)
             con.Open()
-            Dim result = earnedcmd.ExecuteScalar()
-            If result IsNot DBNull.Value Then
-                dailyearned = Convert.ToDecimal(result)
-            End If
+            Using reader As SqlDataReader = cmd.ExecuteReader()
+                If reader.Read() Then
+                    If Not IsDBNull(reader("TotalProfit")) Then
+                        dailyProfit = Convert.ToDecimal(reader("TotalProfit"))
+                        profitlbl.Text = "Profit: " & dailyProfit.ToString("C2")
+                    End If
+
+                    If Not IsDBNull(reader("TotalSales")) Then
+                        dailySales_total = Convert.ToDecimal(reader("TotalSales"))
+                        salesTotallbl.Text = "Sales: " & dailySales_total.ToString("C2")
+                    End If
+                End If
+            End Using
             con.Close()
         End Using
 
-        Label6.Text = dailyearned.ToString("C2")
+        ' Update labels
 
+        ' Make sure this label exists
     End Sub
+
     Private Sub SALES_TAB_ParentChanged(sender As Object, e As EventArgs) Handles Me.ParentChanged
         If Me.Visible Then
             Dim dt As New DataTable()
@@ -156,6 +198,10 @@ Public Class SALES_TAB
     Private Sub Guna2CircleButton1_Click(sender As Object, e As EventArgs) Handles Guna2CircleButton1.Click
         dailytotalearn()
         LoadCharts()
+        Me.DailySalesTableAdapter.Fill(Me.SHITSTEMDataSet.DailySales)
+        Me.MonthlySalesTableAdapter.Fill(Me.SHITSTEMDataSet.MonthlySales)
+        Me.WeeklySalesTableAdapter.Fill(Me.SHITSTEMDataSet.WeeklySales)
         Me.STOCKSTableAdapter.Fill(Me.SHITSTEMDataSet.STOCKS)
     End Sub
+
 End Class

@@ -60,16 +60,18 @@ Partial Class Form2
         'Label2
         '
         Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Poppins", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.Color.White
         Me.Label2.Location = New System.Drawing.Point(3, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(90, 13)
+        Me.Label2.Size = New System.Drawing.Size(121, 26)
         Me.Label2.TabIndex = 7
         Me.Label2.Text = "HELLO OWNER:"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(63, 32)
+        Me.Label3.Location = New System.Drawing.Point(63, 42)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(39, 13)
         Me.Label3.TabIndex = 8
@@ -204,9 +206,9 @@ Partial Class Form2
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 5
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 24.85549!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 17.91908!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 17.05202!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(150, 346)
@@ -214,19 +216,19 @@ Partial Class Form2
         '
         'Panel1
         '
-        Me.Panel1.Controls.Add(Me.Guna2CirclePictureBox1)
         Me.Panel1.Controls.Add(Me.Label2)
+        Me.Panel1.Controls.Add(Me.Guna2CirclePictureBox1)
         Me.Panel1.Controls.Add(Me.Label3)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(3, 3)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(144, 63)
+        Me.Panel1.Size = New System.Drawing.Size(144, 80)
         Me.Panel1.TabIndex = 0
         '
         'Guna2CirclePictureBox1
         '
         Me.Guna2CirclePictureBox1.ImageRotate = 0!
-        Me.Guna2CirclePictureBox1.Location = New System.Drawing.Point(6, 13)
+        Me.Guna2CirclePictureBox1.Location = New System.Drawing.Point(6, 27)
         Me.Guna2CirclePictureBox1.Name = "Guna2CirclePictureBox1"
         Me.Guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle
         Me.Guna2CirclePictureBox1.Size = New System.Drawing.Size(51, 50)
@@ -250,10 +252,10 @@ Partial Class Form2
         Me.salesbtn.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left
         Me.salesbtn.ImageSize = New System.Drawing.Size(50, 50)
         Me.salesbtn.IndicateFocus = True
-        Me.salesbtn.Location = New System.Drawing.Point(5, 74)
+        Me.salesbtn.Location = New System.Drawing.Point(5, 91)
         Me.salesbtn.Margin = New System.Windows.Forms.Padding(5)
         Me.salesbtn.Name = "salesbtn"
-        Me.salesbtn.Size = New System.Drawing.Size(140, 59)
+        Me.salesbtn.Size = New System.Drawing.Size(140, 52)
         Me.salesbtn.TabIndex = 1
         Me.salesbtn.Text = "DASHBOARD"
         Me.salesbtn.TextOffset = New System.Drawing.Point(30, 0)
@@ -318,10 +320,10 @@ Partial Class Form2
         Me.productbtn.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left
         Me.productbtn.ImageSize = New System.Drawing.Size(50, 50)
         Me.productbtn.IndicateFocus = True
-        Me.productbtn.Location = New System.Drawing.Point(5, 143)
+        Me.productbtn.Location = New System.Drawing.Point(5, 153)
         Me.productbtn.Margin = New System.Windows.Forms.Padding(5)
         Me.productbtn.Name = "productbtn"
-        Me.productbtn.Size = New System.Drawing.Size(140, 59)
+        Me.productbtn.Size = New System.Drawing.Size(140, 49)
         Me.productbtn.TabIndex = 0
         Me.productbtn.Text = "PRODUCT"
         Me.productbtn.TextOffset = New System.Drawing.Point(20, 0)

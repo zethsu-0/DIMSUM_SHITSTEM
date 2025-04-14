@@ -52,56 +52,84 @@ Public Class CASHIER
         End Try
     End Sub
     Private Sub checkoutbtn_Click(sender As Object, e As EventArgs) Handles checkoutbtn.Click
-        Try
-            ' Calculate the total sum
-            Dim totalSum As Decimal = 0
+         Try
+            Dim totalProfit As Decimal = 0
+            Dim Sales_total As Decimal = 0
+
             For Each row As DataGridViewRow In OrdersDataGridView.Rows
-                If Not row.IsNewRow AndAlso row.Cells("Total_price").Value IsNot Nothing Then
-                    totalSum += Convert.ToDecimal(row.Cells("Total_price").Value)
+                If Not row.IsNewRow AndAlso row.Cells("Price").Value IsNot Nothing AndAlso row.Cells("Quantity").Value IsNot Nothing Then
+                    Dim price As Decimal = Convert.ToDecimal(row.Cells("Price").Value)
+                    Dim quantity As Integer = Convert.ToInt32(row.Cells("Quantity").Value)
+
+                    Dim itemTotal As Decimal = price * quantity
+                    Dim itemProfit As Decimal = itemTotal * 0.02D
+
+                    Sales_total += itemTotal
+                    totalProfit += itemProfit
                 End If
             Next
-            Dim insertQuery As String = "INSERT INTO DailySales (Earned, Day) VALUES (@Earned, @Day)"
-            Using cmd As New SqlCommand(insertQuery, con)
-                cmd.Parameters.AddWithValue("@Earned", totalSum)
-                cmd.Parameters.AddWithValue("@Day", DateTime.Now.Date)
 
-                con.Open()
+            ' INSERT into DailySales
+            Dim insertQuery As String = "INSERT INTO DailySales (Day, Sales_total, Profit) VALUES (@Day, @Sales_total, @Profit)"
+            Using cmd As New SqlCommand(insertQuery, con)
+                cmd.Parameters.AddWithValue("@Day", DateTime.Now.Date)
+                cmd.Parameters.AddWithValue("@Sales_total", Sales_total)
+                cmd.Parameters.AddWithValue("@Profit", totalProfit)
+
+                If con.State = ConnectionState.Closed Then con.Open()
                 cmd.ExecuteNonQuery()
                 con.Close()
             End Using
 
+            ' Update or Insert into WeeklySales
             Dim currentDay As String = DateTime.Today.DayOfWeek.ToString()
 
-            Dim query As String = "IF EXISTS (SELECT 1 FROM WeeklySales WHERE Day = @day)
-                          UPDATE WeeklySales SET Earned = Earned + @earned WHERE Day = @day
-                       ELSE
-                          INSERT INTO WeeklySales (Day, Earned) VALUES (@day, @earned)"
-            Using cmd As New SqlCommand(query, con)
+            Dim weeklyQuery As String = "
+        IF EXISTS (SELECT 1 FROM WeeklySales WHERE Day = @day)
+            UPDATE WeeklySales 
+            SET Sales_total = Sales_total + @Sales_total, Profit = Profit + @Profit 
+            WHERE Day = @day
+        ELSE
+            INSERT INTO WeeklySales (Day, Sales_total, Profit) 
+            VALUES (@day, @Sales_total, @Profit)
+    "
+            Using cmd As New SqlCommand(weeklyQuery, con)
                 cmd.Parameters.AddWithValue("@day", currentDay)
-                cmd.Parameters.AddWithValue("@earned", totalSum)
+                cmd.Parameters.AddWithValue("@Sales_total", Sales_total)
+                cmd.Parameters.AddWithValue("@Profit", totalProfit)
                 con.Open()
                 cmd.ExecuteNonQuery()
                 con.Close()
             End Using
 
+            ' Update or Insert into MonthlySales
             Dim currentMonth As String = DateTime.Now.ToString("MMMM")
 
-            Dim monthlysalesq As String = "IF EXISTS (SELECT 1 FROM MonthlySales WHERE Month = @month)
-                                UPDATE MonthlySales SET Earned = Earned + @earned WHERE Month = @month
-                             ELSE
-                                INSERT INTO MonthlySales (Month, Earned) VALUES (@month, @earned)"
-
+            Dim monthlysalesq As String = "
+        IF EXISTS (SELECT 1 FROM MonthlySales WHERE Month = @month)
+            UPDATE MonthlySales 
+            SET Sales_total = Sales_total + @Sales_total, Profit = Profit + @Profit 
+            WHERE Month = @month
+        ELSE
+            INSERT INTO MonthlySales (Month, Sales_total, Profit) 
+            VALUES (@month, @Sales_total, @Profit)
+    "
             Using cmd As New SqlCommand(monthlysalesq, con)
                 cmd.Parameters.AddWithValue("@month", currentMonth)
-                cmd.Parameters.AddWithValue("@earned", totalSum)
+                cmd.Parameters.AddWithValue("@Sales_total", Sales_total)
+                cmd.Parameters.AddWithValue("@Profit", totalProfit)
                 con.Open()
                 cmd.ExecuteNonQuery()
                 con.Close()
             End Using
+
             ' Reset cart
             resetcart()
 
-            MessageBox.Show("Checkout complete! Total: " & totalSum.ToString("C2"))
+            MessageBox.Show("Checkout complete!" & vbCrLf &
+                    "Sales Total: " & Sales_total.ToString("C2") & vbCrLf &
+                    "Profit: " & totalProfit.ToString("C2"))
+
         Catch ex As Exception
             MessageBox.Show("Error during checkout: " & ex.Message)
         Finally
@@ -169,8 +197,11 @@ Public Class CASHIER
                 Dim newQty = currentQty - 1
                 Dim newTotal = newQty * productPrice
 
+
+                RestockItem(productName, 1)
                 ' Update database
                 UpdateItemQuantity(productName, newQty, newTotal)
+
 
                 ' Refresh grid
                 Me.OrdersTableAdapter.Fill(Me.SHITSTEMDataSet.Orders)
@@ -181,13 +212,46 @@ Public Class CASHIER
             End If
         End If
     End Sub
-
+    Private Sub RestockItem(productName As String, quantity As Integer)
+        Try
+            Opencon()
+            Dim updateStockQuery As String = "UPDATE STOCKS SET quantity = quantity + @qty WHERE Product_name = @Product_name"
+            Using cmd As New SqlCommand(updateStockQuery, con)
+                cmd.Parameters.AddWithValue("@qty", quantity)
+                cmd.Parameters.AddWithValue("@Product_name", productName)
+                cmd.ExecuteNonQuery()
+            End Using
+        Catch ex As Exception
+            MsgBox("Error restocking: " & ex.Message)
+        Finally
+            If con.State = ConnectionState.Open Then con.Close()
+        End Try
+    End Sub
     Private Sub DeleteItem(productName As String)
         Try
             Opencon()
 
-            Dim deleteQuery As String = "DELETE FROM Orders WHERE Product_name = @Product_name"
+            ' Get quantity to return to stock
+            Dim quantityToReturn As Integer = 0
+            Dim getQtyQuery As String = "SELECT Quantity FROM Orders WHERE Product_name = @Product_name"
+            Using qtyCmd As New SqlCommand(getQtyQuery, con)
+                qtyCmd.Parameters.AddWithValue("@Product_name", productName)
+                Dim result = qtyCmd.ExecuteScalar()
+                If result IsNot Nothing Then
+                    quantityToReturn = Convert.ToInt32(result)
+                End If
+            End Using
 
+            ' Add back to stock
+            Dim updateStockQuery As String = "UPDATE STOCKS SET quantity = quantity + @qty WHERE Product_name = @Product_name"
+            Using stockCmd As New SqlCommand(updateStockQuery, con)
+                stockCmd.Parameters.AddWithValue("@qty", quantityToReturn)
+                stockCmd.Parameters.AddWithValue("@Product_name", productName)
+                stockCmd.ExecuteNonQuery()
+            End Using
+
+            ' Now delete from orders
+            Dim deleteQuery As String = "DELETE FROM Orders WHERE Product_name = @Product_name"
             Using deleteCmd As New SqlCommand(deleteQuery, con)
                 deleteCmd.Parameters.AddWithValue("@Product_name", productName)
                 deleteCmd.ExecuteNonQuery()

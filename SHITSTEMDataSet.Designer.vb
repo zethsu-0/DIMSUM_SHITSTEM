@@ -1463,7 +1463,13 @@ Partial Public Class SHITSTEMDataSet
     Partial Public Class DailySalesDataTable
         Inherits Global.System.Data.TypedTableBase(Of DailySalesRow)
         
-        Private columnEarned As Global.System.Data.DataColumn
+        Private columnSales_total As Global.System.Data.DataColumn
+        
+        Private columnProfit As Global.System.Data.DataColumn
+        
+        Private columnDay As Global.System.Data.DataColumn
+        
+        Private columnID As Global.System.Data.DataColumn
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
@@ -1502,9 +1508,33 @@ Partial Public Class SHITSTEMDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public ReadOnly Property EarnedColumn() As Global.System.Data.DataColumn
+        Public ReadOnly Property Sales_totalColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columnEarned
+                Return Me.columnSales_total
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property ProfitColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnProfit
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property DayColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnDay
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property IDColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnID
             End Get
         End Property
         
@@ -1545,12 +1575,18 @@ Partial Public Class SHITSTEMDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Overloads Function AddDailySalesRow(ByVal Earned As Decimal) As DailySalesRow
+        Public Overloads Function AddDailySalesRow(ByVal Sales_total As Decimal, ByVal Profit As Decimal, ByVal Day As Date) As DailySalesRow
             Dim rowDailySalesRow As DailySalesRow = CType(Me.NewRow,DailySalesRow)
-            Dim columnValuesArray() As Object = New Object() {Earned}
+            Dim columnValuesArray() As Object = New Object() {Sales_total, Profit, Day, Nothing}
             rowDailySalesRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowDailySalesRow)
             Return rowDailySalesRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Function FindByID(ByVal ID As Integer) As DailySalesRow
+            Return CType(Me.Rows.Find(New Object() {ID}),DailySalesRow)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1570,14 +1606,30 @@ Partial Public Class SHITSTEMDataSet
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Friend Sub InitVars()
-            Me.columnEarned = MyBase.Columns("Earned")
+            Me.columnSales_total = MyBase.Columns("Sales_total")
+            Me.columnProfit = MyBase.Columns("Profit")
+            Me.columnDay = MyBase.Columns("Day")
+            Me.columnID = MyBase.Columns("ID")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Private Sub InitClass()
-            Me.columnEarned = New Global.System.Data.DataColumn("Earned", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnEarned)
+            Me.columnSales_total = New Global.System.Data.DataColumn("Sales_total", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnSales_total)
+            Me.columnProfit = New Global.System.Data.DataColumn("Profit", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnProfit)
+            Me.columnDay = New Global.System.Data.DataColumn("Day", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnDay)
+            Me.columnID = New Global.System.Data.DataColumn("ID", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnID)
+            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnID}, true))
+            Me.columnID.AutoIncrement = true
+            Me.columnID.AutoIncrementSeed = -1
+            Me.columnID.AutoIncrementStep = -1
+            Me.columnID.AllowDBNull = false
+            Me.columnID.ReadOnly = true
+            Me.columnID.Unique = true
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1717,7 +1769,9 @@ Partial Public Class SHITSTEMDataSet
         
         Private columnMonth As Global.System.Data.DataColumn
         
-        Private columnEarned As Global.System.Data.DataColumn
+        Private columnSales_total As Global.System.Data.DataColumn
+        
+        Private columnProfit As Global.System.Data.DataColumn
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
@@ -1764,9 +1818,17 @@ Partial Public Class SHITSTEMDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public ReadOnly Property EarnedColumn() As Global.System.Data.DataColumn
+        Public ReadOnly Property Sales_totalColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columnEarned
+                Return Me.columnSales_total
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property ProfitColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnProfit
             End Get
         End Property
         
@@ -1807,9 +1869,9 @@ Partial Public Class SHITSTEMDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Overloads Function AddMonthlySalesRow(ByVal Month As String, ByVal Earned As String) As MonthlySalesRow
+        Public Overloads Function AddMonthlySalesRow(ByVal Month As String, ByVal Sales_total As String, ByVal Profit As Decimal) As MonthlySalesRow
             Dim rowMonthlySalesRow As MonthlySalesRow = CType(Me.NewRow,MonthlySalesRow)
-            Dim columnValuesArray() As Object = New Object() {Month, Earned}
+            Dim columnValuesArray() As Object = New Object() {Month, Sales_total, Profit}
             rowMonthlySalesRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowMonthlySalesRow)
             Return rowMonthlySalesRow
@@ -1833,7 +1895,8 @@ Partial Public Class SHITSTEMDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Friend Sub InitVars()
             Me.columnMonth = MyBase.Columns("Month")
-            Me.columnEarned = MyBase.Columns("Earned")
+            Me.columnSales_total = MyBase.Columns("Sales_total")
+            Me.columnProfit = MyBase.Columns("Profit")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1841,10 +1904,12 @@ Partial Public Class SHITSTEMDataSet
         Private Sub InitClass()
             Me.columnMonth = New Global.System.Data.DataColumn("Month", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnMonth)
-            Me.columnEarned = New Global.System.Data.DataColumn("Earned", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnEarned)
+            Me.columnSales_total = New Global.System.Data.DataColumn("Sales_total", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnSales_total)
+            Me.columnProfit = New Global.System.Data.DataColumn("Profit", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnProfit)
             Me.columnMonth.MaxLength = 2147483647
-            Me.columnEarned.MaxLength = 2147483647
+            Me.columnSales_total.MaxLength = 2147483647
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1982,9 +2047,11 @@ Partial Public Class SHITSTEMDataSet
     Partial Public Class WeeklySalesDataTable
         Inherits Global.System.Data.TypedTableBase(Of WeeklySalesRow)
         
-        Private columnEarned As Global.System.Data.DataColumn
+        Private columnSales_total As Global.System.Data.DataColumn
         
         Private columnDay As Global.System.Data.DataColumn
+        
+        Private columnProfit As Global.System.Data.DataColumn
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
@@ -2023,9 +2090,9 @@ Partial Public Class SHITSTEMDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public ReadOnly Property EarnedColumn() As Global.System.Data.DataColumn
+        Public ReadOnly Property Sales_totalColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columnEarned
+                Return Me.columnSales_total
             End Get
         End Property
         
@@ -2034,6 +2101,14 @@ Partial Public Class SHITSTEMDataSet
         Public ReadOnly Property DayColumn() As Global.System.Data.DataColumn
             Get
                 Return Me.columnDay
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property ProfitColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnProfit
             End Get
         End Property
         
@@ -2074,9 +2149,9 @@ Partial Public Class SHITSTEMDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Overloads Function AddWeeklySalesRow(ByVal Earned As Decimal, ByVal Day As String) As WeeklySalesRow
+        Public Overloads Function AddWeeklySalesRow(ByVal Sales_total As Decimal, ByVal Day As String, ByVal Profit As Decimal) As WeeklySalesRow
             Dim rowWeeklySalesRow As WeeklySalesRow = CType(Me.NewRow,WeeklySalesRow)
-            Dim columnValuesArray() As Object = New Object() {Earned, Day}
+            Dim columnValuesArray() As Object = New Object() {Sales_total, Day, Profit}
             rowWeeklySalesRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowWeeklySalesRow)
             Return rowWeeklySalesRow
@@ -2099,17 +2174,20 @@ Partial Public Class SHITSTEMDataSet
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Friend Sub InitVars()
-            Me.columnEarned = MyBase.Columns("Earned")
+            Me.columnSales_total = MyBase.Columns("Sales_total")
             Me.columnDay = MyBase.Columns("Day")
+            Me.columnProfit = MyBase.Columns("Profit")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Private Sub InitClass()
-            Me.columnEarned = New Global.System.Data.DataColumn("Earned", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnEarned)
+            Me.columnSales_total = New Global.System.Data.DataColumn("Sales_total", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnSales_total)
             Me.columnDay = New Global.System.Data.DataColumn("Day", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnDay)
+            Me.columnProfit = New Global.System.Data.DataColumn("Profit", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnProfit)
             Me.columnDay.MaxLength = 50
         End Sub
         
@@ -2871,29 +2949,94 @@ Partial Public Class SHITSTEMDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Property Earned() As Decimal
+        Public Property Sales_total() As Decimal
             Get
                 Try 
-                    Return CType(Me(Me.tableDailySales.EarnedColumn),Decimal)
+                    Return CType(Me(Me.tableDailySales.Sales_totalColumn),Decimal)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Earned' in table 'DailySales' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Sales_total' in table 'DailySales' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableDailySales.EarnedColumn) = value
+                Me(Me.tableDailySales.Sales_totalColumn) = value
             End Set
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Function IsEarnedNull() As Boolean
-            Return Me.IsNull(Me.tableDailySales.EarnedColumn)
+        Public Property Profit() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableDailySales.ProfitColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Profit' in table 'DailySales' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableDailySales.ProfitColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property Day() As Date
+            Get
+                Try 
+                    Return CType(Me(Me.tableDailySales.DayColumn),Date)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Day' in table 'DailySales' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableDailySales.DayColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property ID() As Integer
+            Get
+                Return CType(Me(Me.tableDailySales.IDColumn),Integer)
+            End Get
+            Set
+                Me(Me.tableDailySales.IDColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Function IsSales_totalNull() As Boolean
+            Return Me.IsNull(Me.tableDailySales.Sales_totalColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Sub SetEarnedNull()
-            Me(Me.tableDailySales.EarnedColumn) = Global.System.Convert.DBNull
+        Public Sub SetSales_totalNull()
+            Me(Me.tableDailySales.Sales_totalColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Function IsProfitNull() As Boolean
+            Return Me.IsNull(Me.tableDailySales.ProfitColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Sub SetProfitNull()
+            Me(Me.tableDailySales.ProfitColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Function IsDayNull() As Boolean
+            Return Me.IsNull(Me.tableDailySales.DayColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Sub SetDayNull()
+            Me(Me.tableDailySales.DayColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
@@ -2929,16 +3072,31 @@ Partial Public Class SHITSTEMDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Property Earned() As String
+        Public Property Sales_total() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableMonthlySales.EarnedColumn),String)
+                    Return CType(Me(Me.tableMonthlySales.Sales_totalColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Earned' in table 'MonthlySales' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Sales_total' in table 'MonthlySales' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableMonthlySales.EarnedColumn) = value
+                Me(Me.tableMonthlySales.Sales_totalColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property Profit() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableMonthlySales.ProfitColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Profit' in table 'MonthlySales' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableMonthlySales.ProfitColumn) = value
             End Set
         End Property
         
@@ -2956,14 +3114,26 @@ Partial Public Class SHITSTEMDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Function IsEarnedNull() As Boolean
-            Return Me.IsNull(Me.tableMonthlySales.EarnedColumn)
+        Public Function IsSales_totalNull() As Boolean
+            Return Me.IsNull(Me.tableMonthlySales.Sales_totalColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Sub SetEarnedNull()
-            Me(Me.tableMonthlySales.EarnedColumn) = Global.System.Convert.DBNull
+        Public Sub SetSales_totalNull()
+            Me(Me.tableMonthlySales.Sales_totalColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Function IsProfitNull() As Boolean
+            Return Me.IsNull(Me.tableMonthlySales.ProfitColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Sub SetProfitNull()
+            Me(Me.tableMonthlySales.ProfitColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
@@ -2984,16 +3154,16 @@ Partial Public Class SHITSTEMDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Property Earned() As Decimal
+        Public Property Sales_total() As Decimal
             Get
                 Try 
-                    Return CType(Me(Me.tableWeeklySales.EarnedColumn),Decimal)
+                    Return CType(Me(Me.tableWeeklySales.Sales_totalColumn),Decimal)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Earned' in table 'WeeklySales' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Sales_total' in table 'WeeklySales' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableWeeklySales.EarnedColumn) = value
+                Me(Me.tableWeeklySales.Sales_totalColumn) = value
             End Set
         End Property
         
@@ -3014,14 +3184,29 @@ Partial Public Class SHITSTEMDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Function IsEarnedNull() As Boolean
-            Return Me.IsNull(Me.tableWeeklySales.EarnedColumn)
+        Public Property Profit() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableWeeklySales.ProfitColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Profit' in table 'WeeklySales' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableWeeklySales.ProfitColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Function IsSales_totalNull() As Boolean
+            Return Me.IsNull(Me.tableWeeklySales.Sales_totalColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Sub SetEarnedNull()
-            Me(Me.tableWeeklySales.EarnedColumn) = Global.System.Convert.DBNull
+        Public Sub SetSales_totalNull()
+            Me(Me.tableWeeklySales.Sales_totalColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -3034,6 +3219,18 @@ Partial Public Class SHITSTEMDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Public Sub SetDayNull()
             Me(Me.tableWeeklySales.DayColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Function IsProfitNull() As Boolean
+            Return Me.IsNull(Me.tableWeeklySales.ProfitColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Sub SetProfitNull()
+            Me(Me.tableWeeklySales.ProfitColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
@@ -4856,13 +5053,54 @@ Namespace SHITSTEMDataSetTableAdapters
             Dim tableMapping As Global.System.Data.Common.DataTableMapping = New Global.System.Data.Common.DataTableMapping()
             tableMapping.SourceTable = "Table"
             tableMapping.DataSetTable = "DailySales"
-            tableMapping.ColumnMappings.Add("Earned", "Earned")
+            tableMapping.ColumnMappings.Add("Sales_total", "Sales_total")
+            tableMapping.ColumnMappings.Add("Profit", "Profit")
+            tableMapping.ColumnMappings.Add("Day", "Day")
+            tableMapping.ColumnMappings.Add("ID", "ID")
             Me._adapter.TableMappings.Add(tableMapping)
+            Me._adapter.DeleteCommand = New Global.System.Data.SqlClient.SqlCommand()
+            Me._adapter.DeleteCommand.Connection = Me.Connection
+            Me._adapter.DeleteCommand.CommandText = "DELETE FROM [DailySales] WHERE (((@IsNull_Sales_total = 1 AND [Sales_total] IS NU"& _ 
+                "LL) OR ([Sales_total] = @Original_Sales_total)) AND ((@IsNull_Day = 1 AND [Day] "& _ 
+                "IS NULL) OR ([Day] = @Original_Day)) AND ([ID] = @Original_ID) AND ((@IsNull_Pro"& _ 
+                "fit = 1 AND [Profit] IS NULL) OR ([Profit] = @Original_Profit)))"
+            Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_Sales_total", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Sales_total", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Sales_total", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 10, 2, "Sales_total", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_Day", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Day", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Day", Global.System.Data.SqlDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Day", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_ID", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_Profit", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Profit", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Profit", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 10, 2, "Profit", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[DailySales] ([Earned]) VALUES (@Earned)"
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO [DailySales] ([Sales_total], [Day], [Profit]) VALUES (@Sales_total, @"& _ 
+                "Day, @Profit);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Sales_total, Day, ID, Profit FROM DailySales WHERE (ID = "& _ 
+                "SCOPE_IDENTITY())"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Earned", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 10, 2, "Earned", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Sales_total", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 10, 2, "Sales_total", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Day", Global.System.Data.SqlDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Day", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Profit", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 10, 2, "Profit", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
+            Me._adapter.UpdateCommand.Connection = Me.Connection
+            Me._adapter.UpdateCommand.CommandText = "UPDATE [DailySales] SET [Sales_total] = @Sales_total, [Day] = @Day, [Profit] = @P"& _ 
+                "rofit WHERE (((@IsNull_Sales_total = 1 AND [Sales_total] IS NULL) OR ([Sales_tot"& _ 
+                "al] = @Original_Sales_total)) AND ((@IsNull_Day = 1 AND [Day] IS NULL) OR ([Day]"& _ 
+                " = @Original_Day)) AND ([ID] = @Original_ID) AND ((@IsNull_Profit = 1 AND [Profi"& _ 
+                "t] IS NULL) OR ([Profit] = @Original_Profit)));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Sales_total, Day, ID, Pr"& _ 
+                "ofit FROM DailySales WHERE (ID = @ID)"
+            Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Sales_total", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 10, 2, "Sales_total", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Day", Global.System.Data.SqlDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Day", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Profit", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 10, 2, "Profit", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_Sales_total", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Sales_total", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Sales_total", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 10, 2, "Sales_total", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_Day", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Day", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Day", Global.System.Data.SqlDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Day", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_ID", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_Profit", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Profit", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Profit", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 10, 2, "Profit", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ID", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "ID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -4878,7 +5116,7 @@ Namespace SHITSTEMDataSetTableAdapters
             Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(0) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT Earned FROM dbo.DailySales"
+            Me._commandCollection(0).CommandText = "SELECT Sales_total, Day, ID, Profit FROM DailySales"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
@@ -4937,12 +5175,64 @@ Namespace SHITSTEMDataSetTableAdapters
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
+        Public Overloads Overridable Function Delete(ByVal Original_Sales_total As Global.System.Nullable(Of Decimal), ByVal Original_Day As Global.System.Nullable(Of Date), ByVal Original_ID As Integer, ByVal Original_Profit As Global.System.Nullable(Of Decimal)) As Integer
+            If (Original_Sales_total.HasValue = true) Then
+                Me.Adapter.DeleteCommand.Parameters(0).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(1).Value = CType(Original_Sales_total.Value,Decimal)
+            Else
+                Me.Adapter.DeleteCommand.Parameters(0).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(1).Value = Global.System.DBNull.Value
+            End If
+            If (Original_Day.HasValue = true) Then
+                Me.Adapter.DeleteCommand.Parameters(2).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(3).Value = CType(Original_Day.Value,Date)
+            Else
+                Me.Adapter.DeleteCommand.Parameters(2).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(3).Value = Global.System.DBNull.Value
+            End If
+            Me.Adapter.DeleteCommand.Parameters(4).Value = CType(Original_ID,Integer)
+            If (Original_Profit.HasValue = true) Then
+                Me.Adapter.DeleteCommand.Parameters(5).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(6).Value = CType(Original_Profit.Value,Decimal)
+            Else
+                Me.Adapter.DeleteCommand.Parameters(5).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(6).Value = Global.System.DBNull.Value
+            End If
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
+            If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.DeleteCommand.Connection.Open
+            End If
+            Try 
+                Dim returnValue As Integer = Me.Adapter.DeleteCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.DeleteCommand.Connection.Close
+                End If
+            End Try
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert(ByVal Earned As Global.System.Nullable(Of Decimal)) As Integer
-            If (Earned.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(0).Value = CType(Earned.Value,Decimal)
+        Public Overloads Overridable Function Insert(ByVal Sales_total As Global.System.Nullable(Of Decimal), ByVal Day As Global.System.Nullable(Of Date), ByVal Profit As Global.System.Nullable(Of Decimal)) As Integer
+            If (Sales_total.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(0).Value = CType(Sales_total.Value,Decimal)
             Else
                 Me.Adapter.InsertCommand.Parameters(0).Value = Global.System.DBNull.Value
+            End If
+            If (Day.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(1).Value = CType(Day.Value,Date)
+            Else
+                Me.Adapter.InsertCommand.Parameters(1).Value = Global.System.DBNull.Value
+            End If
+            If (Profit.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(2).Value = CType(Profit.Value,Decimal)
+            Else
+                Me.Adapter.InsertCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -4957,6 +5247,72 @@ Namespace SHITSTEMDataSetTableAdapters
                     Me.Adapter.InsertCommand.Connection.Close
                 End If
             End Try
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
+        Public Overloads Overridable Function Update(ByVal Sales_total As Global.System.Nullable(Of Decimal), ByVal Day As Global.System.Nullable(Of Date), ByVal Profit As Global.System.Nullable(Of Decimal), ByVal Original_Sales_total As Global.System.Nullable(Of Decimal), ByVal Original_Day As Global.System.Nullable(Of Date), ByVal Original_ID As Integer, ByVal Original_Profit As Global.System.Nullable(Of Decimal), ByVal ID As Integer) As Integer
+            If (Sales_total.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(0).Value = CType(Sales_total.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(0).Value = Global.System.DBNull.Value
+            End If
+            If (Day.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(1).Value = CType(Day.Value,Date)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(1).Value = Global.System.DBNull.Value
+            End If
+            If (Profit.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(2).Value = CType(Profit.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(2).Value = Global.System.DBNull.Value
+            End If
+            If (Original_Sales_total.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(3).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(4).Value = CType(Original_Sales_total.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(3).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(4).Value = Global.System.DBNull.Value
+            End If
+            If (Original_Day.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(5).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(Original_Day.Value,Date)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(5).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(6).Value = Global.System.DBNull.Value
+            End If
+            Me.Adapter.UpdateCommand.Parameters(7).Value = CType(Original_ID,Integer)
+            If (Original_Profit.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(Original_Profit.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(9).Value = Global.System.DBNull.Value
+            End If
+            Me.Adapter.UpdateCommand.Parameters(10).Value = CType(ID,Integer)
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
+            If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.UpdateCommand.Connection.Open
+            End If
+            Try 
+                Dim returnValue As Integer = Me.Adapter.UpdateCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.UpdateCommand.Connection.Close
+                End If
+            End Try
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
+        Public Overloads Overridable Function Update(ByVal Sales_total As Global.System.Nullable(Of Decimal), ByVal Day As Global.System.Nullable(Of Date), ByVal Profit As Global.System.Nullable(Of Decimal), ByVal Original_Sales_total As Global.System.Nullable(Of Decimal), ByVal Original_Day As Global.System.Nullable(Of Date), ByVal Original_ID As Integer, ByVal Original_Profit As Global.System.Nullable(Of Decimal)) As Integer
+            Return Me.Update(Sales_total, Day, Profit, Original_Sales_total, Original_Day, Original_ID, Original_Profit, Original_ID)
         End Function
     End Class
     
@@ -5088,14 +5444,17 @@ Namespace SHITSTEMDataSetTableAdapters
             tableMapping.SourceTable = "Table"
             tableMapping.DataSetTable = "MonthlySales"
             tableMapping.ColumnMappings.Add("Month", "Month")
-            tableMapping.ColumnMappings.Add("Earned", "Earned")
+            tableMapping.ColumnMappings.Add("Sales_total", "Sales_total")
+            tableMapping.ColumnMappings.Add("Profit", "Profit")
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[MonthlySales] ([Month], [Earned]) VALUES (@Month, @Earned)"
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO [MonthlySales] ([Month], [Sales_total], [Profit]) VALUES (@Month, @Sa"& _ 
+                "les_total, @Profit)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Month", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Month", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Earned", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Earned", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Sales_total", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 10, 2, "Sales_total", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Profit", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 10, 2, "Profit", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -5111,7 +5470,7 @@ Namespace SHITSTEMDataSetTableAdapters
             Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(0) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT Month, Earned FROM dbo.MonthlySales"
+            Me._commandCollection(0).CommandText = "SELECT Month, Sales_total, Profit FROM MonthlySales"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
@@ -5171,16 +5530,21 @@ Namespace SHITSTEMDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert(ByVal Month As String, ByVal Earned As String) As Integer
+        Public Overloads Overridable Function Insert(ByVal Month As String, ByVal Sales_total As Global.System.Nullable(Of Decimal), ByVal Profit As Global.System.Nullable(Of Decimal)) As Integer
             If (Month Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(0).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.InsertCommand.Parameters(0).Value = CType(Month,String)
             End If
-            If (Earned Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(1).Value = Global.System.DBNull.Value
+            If (Sales_total.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(1).Value = CType(Sales_total.Value,Decimal)
             Else
-                Me.Adapter.InsertCommand.Parameters(1).Value = CType(Earned,String)
+                Me.Adapter.InsertCommand.Parameters(1).Value = Global.System.DBNull.Value
+            End If
+            If (Profit.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(2).Value = CType(Profit.Value,Decimal)
+            Else
+                Me.Adapter.InsertCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -5325,15 +5689,18 @@ Namespace SHITSTEMDataSetTableAdapters
             Dim tableMapping As Global.System.Data.Common.DataTableMapping = New Global.System.Data.Common.DataTableMapping()
             tableMapping.SourceTable = "Table"
             tableMapping.DataSetTable = "WeeklySales"
-            tableMapping.ColumnMappings.Add("Earned", "Earned")
+            tableMapping.ColumnMappings.Add("Sales_total", "Sales_total")
             tableMapping.ColumnMappings.Add("Day", "Day")
+            tableMapping.ColumnMappings.Add("Profit", "Profit")
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO [WeeklySales] ([Earned], [Day]) VALUES (@Earned, @Day)"
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO [WeeklySales] ([Sales_total], [Day], [Profit]) VALUES (@Sales_total, "& _ 
+                "@Day, @Profit)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Earned", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 10, 2, "Earned", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Sales_total", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 10, 2, "Sales_total", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Day", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Day", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Profit", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 10, 2, "Profit", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -5349,7 +5716,7 @@ Namespace SHITSTEMDataSetTableAdapters
             Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(0) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT Earned, Day FROM WeeklySales"
+            Me._commandCollection(0).CommandText = "SELECT Sales_total, Day, Profit FROM WeeklySales"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
@@ -5409,9 +5776,9 @@ Namespace SHITSTEMDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert(ByVal Earned As Global.System.Nullable(Of Decimal), ByVal Day As String) As Integer
-            If (Earned.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(0).Value = CType(Earned.Value,Decimal)
+        Public Overloads Overridable Function Insert(ByVal Sales_total As Global.System.Nullable(Of Decimal), ByVal Day As String, ByVal Profit As Global.System.Nullable(Of Decimal)) As Integer
+            If (Sales_total.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(0).Value = CType(Sales_total.Value,Decimal)
             Else
                 Me.Adapter.InsertCommand.Parameters(0).Value = Global.System.DBNull.Value
             End If
@@ -5419,6 +5786,11 @@ Namespace SHITSTEMDataSetTableAdapters
                 Me.Adapter.InsertCommand.Parameters(1).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.InsertCommand.Parameters(1).Value = CType(Day,String)
+            End If
+            If (Profit.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(2).Value = CType(Profit.Value,Decimal)
+            Else
+                Me.Adapter.InsertCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
