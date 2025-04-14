@@ -16,13 +16,17 @@ Public Class CASHIER_MENU_FOOD_TAB
     Dim Total_price As Decimal = 0
 
 
-
     Private Sub CASHIER_MENU_FOOD_TAB_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.OrdersTableAdapter.Fill(Me.SHITSTEMDataSet.Orders)
         Opencon()
         con.Close()
         resetcart()
 
+        countingproducts()
+        GenerateProductButtons()
+
+    End Sub
+    Private Sub countingproducts()
         con.Open()
         Dim cmd As New SqlCommand("SELECT COUNT(*) FROM STOCKS", con)
         Dim count As Integer = CInt(cmd.ExecuteScalar())
@@ -32,8 +36,6 @@ Public Class CASHIER_MENU_FOOD_TAB
         End If
         Dim prodcount = count
         con.Close()
-        GenerateProductButtons()
-
     End Sub
 
     Private Sub GenerateProductButtons()
@@ -85,15 +87,6 @@ Public Class CASHIER_MENU_FOOD_TAB
 
             Me.checkproduct()
 
-
-            If Me.StockQuantity > 0 Then
-                Me.Insertproduct()
-            Else
-                Console.WriteLine($"Skipping Insert for item {specificItemNo} - StockQuantity is {Me.StockQuantity}")
-
-            End If
-
-
             Me.cartQuantity = 0
 
         Else
@@ -139,7 +132,7 @@ Public Class CASHIER_MENU_FOOD_TAB
 
             Dim existingcartQuantity As Decimal = 0
             Dim existingUnitPrice As Decimal = 0
-            Dim profit As Decimal = Price * 1.02
+            Dim profit As Decimal = Price * 1.15
             Dim checkCartQuery As String = "SELECT Quantity, Price FROM Orders WHERE Product_name = @Product_name"
 
             Using cmd As New SqlCommand(checkCartQuery, con)
@@ -153,7 +146,7 @@ Public Class CASHIER_MENU_FOOD_TAB
             End Using
 
             If existingcartQuantity > 0 Then
-                ' Update existing cart item
+                ' Update existing order items
                 Dim newQuantity As Integer = existingcartQuantity + cartQuantity
                 Dim updateQuery As String = "UPDATE Orders SET Quantity = @Quantity, Total_price = @TotalPrice WHERE Product_name = @Product_name"
 
@@ -164,14 +157,15 @@ Public Class CASHIER_MENU_FOOD_TAB
                     updateCmd.ExecuteNonQuery()
                 End Using
             Else
-                ' Insert new cart item
-                Dim insertQuery As String = "INSERT INTO Orders (Product_name, Quantity, Price, Total_price) VALUES (@Product_name, @Quantity, @Price, @Total_price)"
+                ' Insert new order items
+                Dim insertQuery As String = "INSERT INTO Orders (Product_name, Quantity, Price, Total_price, OrderDate) VALUES (@Product_name, @Quantity, @Price, @Total_price, @OrderDate)"
 
                 Using insertCmd As New SqlCommand(insertQuery, con)
                     insertCmd.Parameters.AddWithValue("@Product_name", Product_name)
                     insertCmd.Parameters.AddWithValue("@Quantity", cartQuantity)
                     insertCmd.Parameters.AddWithValue("@Price", profit)
                     insertCmd.Parameters.AddWithValue("@Total_price", cartQuantity * profit)
+                    insertCmd.Parameters.AddWithValue("@OrderDate", DateTime.Now.Date)
                     insertCmd.ExecuteNonQuery()
                 End Using
             End If
@@ -199,10 +193,6 @@ Public Class CASHIER_MENU_FOOD_TAB
         RaiseEvent RefreshOrdersRequested(Me, EventArgs.Empty)
 
 
-
-    End Sub
-
-    Private Sub Insertproduct()
 
     End Sub
     Public Event RefreshOrdersRequested As EventHandler
