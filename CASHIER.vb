@@ -1,5 +1,6 @@
 ﻿Imports System.Data.SqlClient
 Imports System.Drawing.Text
+Imports System.IO
 Imports Guna.UI2.WinForms
 Public Class CASHIER
 
@@ -44,7 +45,6 @@ Public Class CASHIER
         GenerateProductButtons()
     End Sub
 
-
     Private Sub countingproducts()
         con.Open()
         Dim cmd As New SqlCommand("SELECT COUNT(*) FROM STOCKS", con)
@@ -57,32 +57,51 @@ Public Class CASHIER
         con.Close()
     End Sub
 
-
+    'THIS IS FOR THE BUTTONS IN CASHIER
     Private Sub GenerateProductButtons()
         FlowLayoutPanel1.Controls.Clear()
 
-
-        Dim query As String = "SELECT Item_no, Product_name FROM STOCKS ORDER BY Item_no"
+        Dim query As String = "SELECT Item_no, Product_name, Product_image FROM STOCKS ORDER BY Item_no"
         Using cmd As New SqlCommand(query, con)
             con.Open()
             Using reader As SqlDataReader = cmd.ExecuteReader()
                 While reader.Read()
                     Dim itemNo As String = reader("Item_no").ToString()
                     Dim productName As String = reader("Product_name").ToString()
+                    Dim imagePath As String = reader("Product_image").ToString()
+
+                    Dim imageBytes As Byte() = Nothing
+                    If Not IsDBNull(reader("Product_image")) Then
+                        imageBytes = CType(reader("Product_image"), Byte())
+                    End If
 
                     Dim btn As New Guna2Button()
                     btn.Name = "DynamicGunaBtn" & itemNo
                     btn.Text = productName
                     btn.Size = New Size(120, 120)
                     btn.Margin = New Padding(20, 20, 20, 20)
-                    btn.BorderRadius = 15
+                    btn.BorderRadius = 0
                     btn.BorderThickness = 2
                     btn.FillColor = Color.Transparent
-                    btn.ForeColor = Color.Black
-                    btn.TextOffset = New Point(0, 30)
-                    ' btn.BackgroundImage = System.Drawing.Image.FromFile("C:\Users\herod\Downloads\aakk.png")
-                    btn.BackgroundImageLayout = ImageLayout.Stretch
+                    btn.ForeColor = Color.White
+                    btn.TextOffset = New Point(0, 20)
+                    btn.ImageSize = New Size(60, 60)
+                    btn.TextAlign = HorizontalAlignment.Center
+                    btn.ImageAlign = HorizontalAlignment.Center
                     btn.Tag = itemNo
+
+                    btn.Font = New Font("ITC Kabel", 12, FontStyle.Bold)
+                    If imageBytes IsNot Nothing Then
+                        Using ms As New MemoryStream(imageBytes)
+                            ' Set the image as the background of the button
+                            btn.BackgroundImage = Image.FromStream(ms)
+                            btn.BackgroundImageLayout = ImageLayout.Stretch ' Adjust the image layout as needed
+                        End Using
+                    Else
+                        ' Optional: Set a default image if Product_image is empty
+                        btn.BackgroundImage = My.Resources.icon ' Replace with your default image resource
+                        btn.BackgroundImageLayout = ImageLayout.Stretch
+                    End If
 
                     AddHandler btn.Click, AddressOf DynamicButton_Click
                     FlowLayoutPanel1.Controls.Add(btn)
@@ -100,22 +119,14 @@ Public Class CASHIER
 
         If clickedButton.Tag IsNot Nothing AndAlso TypeOf clickedButton.Tag Is String Then
             Dim specificItemNo As String = DirectCast(clickedButton.Tag, String)
-
             Me.item_no = specificItemNo
             Me.cartQuantity = 1
-
-
             Me.addproduct()
-
             Me.cartQuantity = 0
-
         Else
-
             MessageBox.Show("Error: Button is missing associated product data.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
     End Sub
-
-
 
     Private Sub addproduct()
         Try
@@ -416,6 +427,7 @@ Public Class CASHIER
 
         UpdateTotalSum(Me, EventArgs.Empty)
     End Sub
+
     Private Sub OrdersDataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles OrdersDataGridView.CellContentClick
         If e.RowIndex >= 0 Then
             Dim productName As String = OrdersDataGridView.Rows(e.RowIndex).Cells("Product_name").Value.ToString()
@@ -429,14 +441,13 @@ Public Class CASHIER
 
 
                 RestockItem(productName, 1)
-                ' Update database
                 UpdateItemQuantity(productName, newQty, newTotal)
 
 
-                ' Refresh grid
+
                 Me.OrdersTableAdapter.Fill(Me.SHITSTEMDataSet.Orders)
             Else
-                ' If quantity is 1, delete the item completely
+
                 DeleteItem(productName)
                 Me.OrdersTableAdapter.Fill(Me.SHITSTEMDataSet.Orders)
             End If
@@ -503,10 +514,9 @@ Public Class CASHIER
     Private Async Sub Guna2Button2_Click_1(sender As Object, e As EventArgs) Handles Guna2Button2.Click
         RECEIPT.Show()
 
-        ' Wait for a specified duration (e.g., 2 seconds)
-        Await Task.Delay(2000) ' 2000 milliseconds = 2 seconds
+        Await Task.Delay(2000)
 
-        ' Call resetcart after the delay
+
         resetcart()
     End Sub
 End Class

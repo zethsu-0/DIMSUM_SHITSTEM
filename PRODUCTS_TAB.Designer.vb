@@ -23,8 +23,9 @@ Partial Class PRODUCTS_TAB
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.STOCKSDataGridView = New System.Windows.Forms.DataGridView()
+        Me.Product_image = New System.Windows.Forms.DataGridViewImageColumn()
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -63,6 +64,9 @@ Partial Class PRODUCTS_TAB
         Me.Guna2TabControl1 = New Guna.UI2.WinForms.Guna2TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.Guna2Button1 = New Guna.UI2.WinForms.Guna2Button()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.Label9 = New System.Windows.Forms.Label()
         CType(Me.STOCKSDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.STOCKSBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SHITSTEMDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -71,6 +75,7 @@ Partial Class PRODUCTS_TAB
         Me.Guna2TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage4.SuspendLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'STOCKSDataGridView
@@ -79,22 +84,28 @@ Partial Class PRODUCTS_TAB
         Me.STOCKSDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.STOCKSDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.STOCKSDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.STOCKSDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6, Me.DataGridViewImageColumn1})
+        Me.STOCKSDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Product_image, Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6, Me.DataGridViewImageColumn1})
         Me.STOCKSDataGridView.DataSource = Me.STOCKSBindingSource
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.STOCKSDataGridView.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.White
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.STOCKSDataGridView.DefaultCellStyle = DataGridViewCellStyle3
         Me.STOCKSDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
         Me.STOCKSDataGridView.Location = New System.Drawing.Point(3, 3)
         Me.STOCKSDataGridView.Name = "STOCKSDataGridView"
         Me.STOCKSDataGridView.RowHeadersVisible = False
         Me.STOCKSDataGridView.Size = New System.Drawing.Size(1052, 546)
         Me.STOCKSDataGridView.TabIndex = 0
+        '
+        'Product_image
+        '
+        Me.Product_image.DataPropertyName = "Product_image"
+        Me.Product_image.HeaderText = "Product_image"
+        Me.Product_image.Name = "Product_image"
         '
         'DataGridViewTextBoxColumn1
         '
@@ -394,6 +405,7 @@ Partial Class PRODUCTS_TAB
         '
         Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
         Me.TableAdapterManager.DailySalesTableAdapter = Nothing
+        Me.TableAdapterManager.DailySummaryTableAdapter = Nothing
         Me.TableAdapterManager.loginTableAdapter = Nothing
         Me.TableAdapterManager.MonthlySalesTableAdapter = Nothing
         Me.TableAdapterManager.OrdersTableAdapter = Nothing
@@ -445,6 +457,9 @@ Partial Class PRODUCTS_TAB
         '
         'TabPage4
         '
+        Me.TabPage4.Controls.Add(Me.Label9)
+        Me.TabPage4.Controls.Add(Me.Guna2Button1)
+        Me.TabPage4.Controls.Add(Me.PictureBox2)
         Me.TabPage4.Controls.Add(Me.ComboBox1)
         Me.TabPage4.Controls.Add(Me.Label8)
         Me.TabPage4.Controls.Add(Me.GroupBox1)
@@ -475,6 +490,38 @@ Partial Class PRODUCTS_TAB
         Me.TabPage4.Text = "MANAGE PRODUCTS"
         Me.TabPage4.UseVisualStyleBackColor = True
         '
+        'Guna2Button1
+        '
+        Me.Guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray
+        Me.Guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
+        Me.Guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.Guna2Button1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
+        Me.Guna2Button1.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.Guna2Button1.ForeColor = System.Drawing.Color.White
+        Me.Guna2Button1.Location = New System.Drawing.Point(450, 470)
+        Me.Guna2Button1.Name = "Guna2Button1"
+        Me.Guna2Button1.Size = New System.Drawing.Size(152, 39)
+        Me.Guna2Button1.TabIndex = 93
+        Me.Guna2Button1.Text = "add an image"
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.BackColor = System.Drawing.Color.Gray
+        Me.PictureBox2.Location = New System.Drawing.Point(450, 311)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(152, 116)
+        Me.PictureBox2.TabIndex = 92
+        Me.PictureBox2.TabStop = False
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(572, 444)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(30, 13)
+        Me.Label9.TabIndex = 94
+        Me.Label9.Text = "clear"
+        '
         'PRODUCTS_TAB
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -492,6 +539,7 @@ Partial Class PRODUCTS_TAB
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage4.ResumeLayout(False)
         Me.TabPage4.PerformLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -500,13 +548,6 @@ Partial Class PRODUCTS_TAB
     Friend WithEvents STOCKSTableAdapter As SHITSTEMDataSetTableAdapters.STOCKSTableAdapter
     Friend WithEvents TableAdapterManager As SHITSTEMDataSetTableAdapters.TableAdapterManager
     Friend WithEvents STOCKSDataGridView As DataGridView
-    Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn4 As DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn5 As DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn6 As DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewImageColumn1 As DataGridViewImageColumn
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents RadioButton2 As RadioButton
     Friend WithEvents RadioButton1 As RadioButton
@@ -534,4 +575,15 @@ Partial Class PRODUCTS_TAB
     Friend WithEvents Guna2TabControl1 As Guna.UI2.WinForms.Guna2TabControl
     Friend WithEvents TabPage1 As TabPage
     Friend WithEvents TabPage4 As TabPage
+    Friend WithEvents PictureBox2 As PictureBox
+    Friend WithEvents Guna2Button1 As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents Product_image As DataGridViewImageColumn
+    Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn4 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn5 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn6 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewImageColumn1 As DataGridViewImageColumn
+    Friend WithEvents Label9 As Label
 End Class

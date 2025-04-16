@@ -1,4 +1,5 @@
 ﻿Imports System.Data.SqlClient
+Imports System.IO
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 Imports ZXing
 
@@ -38,9 +39,8 @@ Public Class PRODUCTS_TAB
 
     Private Sub Button5_Click_1(sender As Object, e As EventArgs) Handles Button5.Click
 
-
         Try
-            If TextBox8.Text = "" Or TextBox7.Text = "" Or TextBox6.Text = "" Or TextBox5.Text = "" Then
+            If TextBox8.Text = "" Or TextBox7.Text = "" Or TextBox6.Text = "" Or TextBox5.Text = "" Or PictureBox2.Image Is Nothing Then
                 MessageBox.Show("Please Fill all the SHITS")
             Else
                 con.Open()
@@ -60,9 +60,16 @@ Public Class PRODUCTS_TAB
                 Filesize = mstream.Length
                 mstream.Close()
 
+                Dim Filesize2 As UInt32
+                Dim mstream2 As New System.IO.MemoryStream
+                PictureBox2.Image.Save(mstream2, System.Drawing.Imaging.ImageFormat.Png)
+                Dim arrimage2() As Byte = mstream2.GetBuffer()
+                Filesize2 = mstream2.Length
+                mstream2.Close()
+
                 ' Insert into database
-                Dim insertQuery As String = "INSERT INTO STOCKS (Item_No, Product_name,product_group, Quantity, Price,taxed_price, Barcode) 
-                                     VALUES (@Item_no, @Product_name,@product_group, @Quantity, @Price,@taxed_price, @Barcode)"
+                Dim insertQuery As String = "INSERT INTO STOCKS (Item_No, Product_name, product_group, Quantity, Price, taxed_price, Barcode, Product_image) 
+                             VALUES (@Item_no, @Product_name, @product_group, @Quantity, @Price, @taxed_price, @Barcode, @Product_image)"
                 Using insertCmd As New SqlCommand(insertQuery, con)
                     insertCmd.Parameters.AddWithValue("@Item_no", Item_no)
                     insertCmd.Parameters.AddWithValue("@Product_name", Product_name)
@@ -71,22 +78,14 @@ Public Class PRODUCTS_TAB
                     insertCmd.Parameters.AddWithValue("@Price", Price)
                     insertCmd.Parameters.AddWithValue("@taxed_price", taxed_price)
                     insertCmd.Parameters.AddWithValue("@Barcode", arrimage)
+                    insertCmd.Parameters.AddWithValue("@Product_image", arrimage2)
 
                     insertCmd.ExecuteNonQuery()
                     con.Close()
                 End Using
 
                 ' Clear fields after insert
-                TextBox7.Text = ""
-                TextBox8.Text = ""
-                TextBox6.Text = ""
-                TextBox5.Text = ""
-                TextBox1.Text = ""
-                TextBox2.Text = ""
-                ComboBox1.Text = ""
-                PictureBox1.Image = Nothing
-                RadioButton1.Checked = False
-                RadioButton2.Checked = False
+                clearform()
                 Me.STOCKSTableAdapter.Fill(Me.SHITSTEMDataSet.STOCKS)
             End If
         Catch ex As Exception
@@ -111,17 +110,7 @@ Public Class PRODUCTS_TAB
                     cmd.ExecuteNonQuery()
                     con.Close()
                     MessageBox.Show(Product_name & "DELETED")
-                    TextBox7.Text = ""
-                    TextBox8.Text = ""
-                    TextBox6.Text = ""
-                    TextBox5.Text = ""
-                    TextBox1.Text = ""
-                    TextBox2.Text = ""
-                    ComboBox1.Text = ""
-                    PictureBox1.Image = Nothing
-                    Button5.Visible = True
-                    RadioButton1.Checked = False
-                    RadioButton2.Checked = False
+                    clearform()
                     Me.STOCKSTableAdapter.Fill(Me.SHITSTEMDataSet.STOCKS)
 
                 End Using
@@ -135,6 +124,11 @@ Public Class PRODUCTS_TAB
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        clearform()
+    End Sub
+
+
+    Private Sub clearform()
         STOCKSDataGridView.ClearSelection()
         TextBox7.Text = ""
         TextBox8.Text = ""
@@ -146,15 +140,13 @@ Public Class PRODUCTS_TAB
         RadioButton1.Checked = False
         RadioButton2.Checked = False
         PictureBox1.Image = Nothing
+        PictureBox2.Image = Nothing
         Button5.Visible = False
         TextBox8.Enabled = True
         Button5.Visible = True
         TextBox7.ReadOnly = False
         TextBox8.ReadOnly = False
     End Sub
-
-
-
 
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
@@ -178,7 +170,14 @@ Public Class PRODUCTS_TAB
                 Filesize = mstream.Length
                 mstream.Close()
 
-                Dim query As String = "UPDATE stocks SET Item_no=@Item_no,Product_name=@Product_name,product_group=@product_group,Quantity=@Quantity,Price=@Price, taxed_price=@taxed_price, barcode = @barcode WHERE Item_no = @Item_no"
+                Dim Filesize2 As UInt32
+                Dim mstream2 As New System.IO.MemoryStream
+                PictureBox2.Image.Save(mstream2, System.Drawing.Imaging.ImageFormat.Png)
+                Dim arrimage2() As Byte = mstream2.GetBuffer()
+                Filesize2 = mstream2.Length
+                mstream2.Close()
+
+                Dim query As String = "UPDATE stocks SET Item_no=@Item_no,Product_name=@Product_name,product_group=@product_group,Quantity=@Quantity,Price=@Price, taxed_price=@taxed_price, barcode = @barcode,product_image=@product_image WHERE Item_no = @Item_no"
                 Using cmd As New SqlCommand(query, con)
                     cmd.Parameters.AddWithValue("@Item_no", Item_no)
                     cmd.Parameters.AddWithValue("@Product_name", Product_name)
@@ -187,19 +186,11 @@ Public Class PRODUCTS_TAB
                     cmd.Parameters.AddWithValue("@Price", Price)
                     cmd.Parameters.AddWithValue("@taxed_price", taxed_price)
                     cmd.Parameters.AddWithValue("@barcode", arrimage)
+                    cmd.Parameters.AddWithValue("@product_image", arrimage2)
                     con.Open()
                     cmd.ExecuteNonQuery()
                     con.Close()
-                    TextBox7.Text = ""
-                    TextBox8.Text = ""
-                    TextBox6.Text = ""
-                    TextBox5.Text = ""
-                    TextBox1.Text = ""
-                    TextBox2.Text = ""
-                    ComboBox1.Text = ""
-                    PictureBox1.Image = Nothing
-                    PictureBox1.Image = Nothing
-                    Button5.Visible = False
+                    clearform()
                     Me.STOCKSTableAdapter.Fill(Me.SHITSTEMDataSet.STOCKS)
 
                 End Using
@@ -236,6 +227,16 @@ Public Class PRODUCTS_TAB
                             TextBox8.ReadOnly = True
                             RadioButton1.Checked = False
                             RadioButton2.Checked = False
+
+                            If Not IsDBNull(dt.Rows(0)("product_image")) Then
+                                Dim imageData() As Byte = CType(dt.Rows(0)("product_image"), Byte())
+                                Using ms As New MemoryStream(imageData)
+                                    PictureBox2.Image = Image.FromStream(ms)
+                                    PictureBox2.SizeMode = PictureBoxSizeMode.StretchImage
+                                End Using
+                            Else
+                                PictureBox2.Image = Nothing
+                            End If
                         Else
 
                             TextBox8.Text = ""
@@ -315,8 +316,6 @@ Public Class PRODUCTS_TAB
             End If
         End If
         Barcodegenerator()
-
-
     End Sub
 
 
@@ -340,5 +339,53 @@ Public Class PRODUCTS_TAB
 
     Private Sub TextBox5_TextChanged(sender As Object, e As EventArgs) Handles TextBox5.TextChanged
         TextBox1.Text = taxed_price
+    End Sub
+
+    Private Sub Guna2Button1_Click(sender As Object, e As EventArgs) Handles Guna2Button1.Click
+        Dim openFileDialog As New OpenFileDialog()
+
+        With openFileDialog
+            .Title = "Select an Image"
+            .Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp"
+            .Multiselect = False
+        End With
+
+        If openFileDialog.ShowDialog() = DialogResult.OK Then
+            Dim selectedFile As String = openFileDialog.FileName
+
+            ' ✅ Check file size (example: max 1MB)
+            Dim fileInfo As New FileInfo(selectedFile)
+            If fileInfo.Length > 1048576 Then ' 1MB = 1048576 bytes
+                MessageBox.Show("Image size must be less than 1MB.", "File Too Large", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Exit Sub
+            End If
+
+            ' ✅ Load and resize image
+            Dim originalImage As Image = Image.FromFile(selectedFile)
+            Dim resizedImage As Image = ResizeImage(originalImage, 200, 200) ' Adjust size as needed
+
+            ' ✅ Set to PictureBox
+            PictureBox2.Image = resizedImage
+            PictureBox2.SizeMode = PictureBoxSizeMode.StretchImage
+        End If
+    End Sub
+    Private Function ResizeImage(img As Image, maxWidth As Integer, maxHeight As Integer) As Image
+        Dim ratioX As Double = maxWidth / img.Width
+        Dim ratioY As Double = maxHeight / img.Height
+        Dim ratio As Double = Math.Min(ratioX, ratioY)
+
+        Dim newWidth As Integer = CInt(img.Width * ratio)
+        Dim newHeight As Integer = CInt(img.Height * ratio)
+
+        Dim newImage As New Bitmap(newWidth, newHeight)
+        Using g As Graphics = Graphics.FromImage(newImage)
+            g.DrawImage(img, 0, 0, newWidth, newHeight)
+        End Using
+
+        Return newImage
+    End Function
+
+    Private Sub Label9_Click(sender As Object, e As EventArgs) Handles Label9.Click
+        PictureBox2.Image = Nothing
     End Sub
 End Class

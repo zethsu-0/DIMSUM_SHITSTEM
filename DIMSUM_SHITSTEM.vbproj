@@ -158,12 +158,6 @@
     <Compile Include="CASHIER.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CASHIER_MENU_FOOD_TAB.Designer.vb">
-      <DependentUpon>CASHIER_MENU_FOOD_TAB.vb</DependentUpon>
-    </Compile>
-    <Compile Include="CASHIER_MENU_FOOD_TAB.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="CrystalReport1.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -257,9 +251,6 @@
   <ItemGroup>
     <EmbeddedResource Include="CASHIER.resx">
       <DependentUpon>CASHIER.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CASHIER_MENU_FOOD_TAB.resx">
-      <DependentUpon>CASHIER_MENU_FOOD_TAB.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CrystalReport1.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
