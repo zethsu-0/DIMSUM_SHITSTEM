@@ -1,5 +1,7 @@
-﻿Imports System.Data.SqlClient
+﻿Imports System.ComponentModel
+Imports System.Data.SqlClient
 Imports System.Drawing.Text
+Imports System.Globalization
 Imports System.IO
 Imports Guna.UI2.WinForms
 Public Class CASHIER
@@ -35,7 +37,6 @@ Public Class CASHIER
         Opencon()
         con.Close()
         resetcart()
-        snacks_tabbtn.PerformClick()
 
         AddHandler OrdersDataGridView.CellValueChanged, AddressOf UpdateTotalSum
         AddHandler OrdersDataGridView.RowsRemoved, AddressOf UpdateTotalSum
@@ -57,50 +58,56 @@ Public Class CASHIER
         con.Close()
     End Sub
 
+
     'THIS IS FOR THE BUTTONS IN CASHIER
-    Private Sub GenerateProductButtons()
+    Private Sub GenerateProductButtons(Optional groupFilter As String = "", Optional searchTerm As String = "")
         FlowLayoutPanel1.Controls.Clear()
 
-        Dim query As String = "SELECT Item_no, Product_name, Product_image FROM STOCKS ORDER BY Item_no"
+        Dim query As String = "SELECT Item_no, Product_name, Product_image FROM STOCKS WHERE 1=1"
+
+        If groupFilter <> "" Then
+            query &= " AND product_group = @groupFilter"
+        End If
+        If searchTerm <> "" Then
+            query &= " AND (Item_no = @search OR Product_name LIKE @searchPattern)"
+        End If
+
         Using cmd As New SqlCommand(query, con)
+            If groupFilter <> "" Then
+                cmd.Parameters.AddWithValue("@groupFilter", groupFilter)
+            End If
+            If searchTerm <> "" Then
+                cmd.Parameters.AddWithValue("@search", searchTerm)
+                cmd.Parameters.AddWithValue("@searchPattern", "%" & searchTerm & "%")
+            End If
+
             con.Open()
             Using reader As SqlDataReader = cmd.ExecuteReader()
                 While reader.Read()
                     Dim itemNo As String = reader("Item_no").ToString()
                     Dim productName As String = reader("Product_name").ToString()
-                    Dim imagePath As String = reader("Product_image").ToString()
-
-                    Dim imageBytes As Byte() = Nothing
-                    If Not IsDBNull(reader("Product_image")) Then
-                        imageBytes = CType(reader("Product_image"), Byte())
-                    End If
 
                     Dim btn As New Guna2Button()
                     btn.Name = "DynamicGunaBtn" & itemNo
                     btn.Text = productName
                     btn.Size = New Size(120, 120)
                     btn.Margin = New Padding(20, 20, 20, 20)
-                    btn.BorderRadius = 0
+                    btn.BorderRadius = 15
                     btn.BorderThickness = 2
                     btn.FillColor = Color.Transparent
-                    btn.ForeColor = Color.White
-                    btn.TextOffset = New Point(0, 20)
+                    btn.ForeColor = Color.Black
+                    btn.TextOffset = New Point(0, 40)
                     btn.ImageSize = New Size(60, 60)
                     btn.TextAlign = HorizontalAlignment.Center
                     btn.ImageAlign = HorizontalAlignment.Center
                     btn.Tag = itemNo
 
-                    btn.Font = New Font("ITC Kabel", 12, FontStyle.Bold)
-                    If imageBytes IsNot Nothing Then
+                    If Not IsDBNull(reader("Product_image")) Then
+                        Dim imageBytes As Byte() = CType(reader("Product_image"), Byte())
                         Using ms As New MemoryStream(imageBytes)
-                            ' Set the image as the background of the button
                             btn.BackgroundImage = Image.FromStream(ms)
-                            btn.BackgroundImageLayout = ImageLayout.Stretch ' Adjust the image layout as needed
+                            btn.BackgroundImageLayout = ImageLayout.Stretch
                         End Using
-                    Else
-                        ' Optional: Set a default image if Product_image is empty
-                        btn.BackgroundImage = My.Resources.icon ' Replace with your default image resource
-                        btn.BackgroundImageLayout = ImageLayout.Stretch
                     End If
 
                     AddHandler btn.Click, AddressOf DynamicButton_Click
@@ -113,14 +120,33 @@ Public Class CASHIER
 
 
     Private Sub DynamicButton_Click(sender As Object, e As EventArgs)
-
         Dim clickedButton As Guna2Button = DirectCast(sender, Guna2Button)
 
 
         If clickedButton.Tag IsNot Nothing AndAlso TypeOf clickedButton.Tag Is String Then
             Dim specificItemNo As String = DirectCast(clickedButton.Tag, String)
+            Dim group As String = ""
+
+            Dim query As String = "SELECT product_group FROM STOCKS WHERE Item_no = @itemNo"
+            Using cmd As New SqlCommand(query, con)
+                cmd.Parameters.AddWithValue("@itemNo", specificItemNo)
+                con.Open()
+                Dim result = cmd.ExecuteScalar()
+                If result IsNot Nothing Then
+                    group = result.ToString()
+                End If
+                con.Close()
+            End Using
+
             Me.item_no = specificItemNo
-            Me.cartQuantity = 1
+
+            ' DITO KUNG ILAN YUNG MABEBENTA BY PINDOT
+            If group = "Siomai" Then
+                Me.cartQuantity = 4
+            Else
+                Me.cartQuantity = 1
+            End If
+
             Me.addproduct()
             Me.cartQuantity = 0
         Else
@@ -164,10 +190,10 @@ Public Class CASHIER
             Dim existingcartQuantity As Decimal = 0
             Dim existingUnitPrice As Decimal = 0
             Dim profit As Decimal = Price * 1.15
-            Dim checkCartQuery As String = "SELECT Quantity, Price FROM Orders WHERE Product_name = @Product_name"
+            Dim checkCartQuery As String = "SELECT Quantity, Price FROM Orders WHERE Item_No = @Item_No"
 
             Using cmd As New SqlCommand(checkCartQuery, con)
-                cmd.Parameters.AddWithValue("@Product_name", Product_name)
+                cmd.Parameters.AddWithValue("@Item_No", item_no)
                 Using reader As SqlDataReader = cmd.ExecuteReader()
                     If reader.Read() Then
                         existingcartQuantity = Convert.ToInt32(reader("Quantity"))
@@ -179,19 +205,21 @@ Public Class CASHIER
             If existingcartQuantity > 0 Then
                 ' Update existing order items
                 Dim newQuantity As Integer = existingcartQuantity + cartQuantity
-                Dim updateQuery As String = "UPDATE Orders SET Quantity = @Quantity, Total_price = @TotalPrice WHERE Product_name = @Product_name"
+                Dim updateQuery As String = "UPDATE Orders SET Quantity = @Quantity, Total_price = @TotalPrice WHERE Item_No = @Item_No"
 
                 Using updateCmd As New SqlCommand(updateQuery, con)
                     updateCmd.Parameters.AddWithValue("@Quantity", newQuantity)
                     updateCmd.Parameters.AddWithValue("@TotalPrice", newQuantity * profit)
                     updateCmd.Parameters.AddWithValue("@Product_name", Product_name)
+                    updateCmd.Parameters.AddWithValue("@Item_No", item_no)
                     updateCmd.ExecuteNonQuery()
                 End Using
             Else
                 ' Insert new order items
-                Dim insertQuery As String = "INSERT INTO Orders (Product_name, Quantity, Price, Total_price, OrderDate) VALUES (@Product_name, @Quantity, @Price, @Total_price, @OrderDate)"
+                Dim insertQuery As String = "INSERT INTO Orders (Item_No,Product_name, Quantity, Price, Total_price, OrderDate) VALUES (@Item_No,@Product_name, @Quantity, @Price, @Total_price, @OrderDate)"
 
                 Using insertCmd As New SqlCommand(insertQuery, con)
+                    insertCmd.Parameters.AddWithValue("@Item_No", item_no)
                     insertCmd.Parameters.AddWithValue("@Product_name", Product_name)
                     insertCmd.Parameters.AddWithValue("@Quantity", cartQuantity)
                     insertCmd.Parameters.AddWithValue("@Price", profit)
@@ -202,11 +230,12 @@ Public Class CASHIER
             End If
 
             ' Update stock quantity
-            Dim updateStockQuery As String = "UPDATE STOCKS SET quantity = quantity - @cartQuantity WHERE Product_name = @Product_name"
+            Dim updateStockQuery As String = "UPDATE STOCKS SET quantity = quantity - @cartQuantity WHERE Item_No = @Item_No"
 
             Using stockCmd As New SqlCommand(updateStockQuery, con)
                 stockCmd.Parameters.AddWithValue("@cartQuantity", cartQuantity)
                 stockCmd.Parameters.AddWithValue("@Product_name", Product_name)
+                stockCmd.Parameters.AddWithValue("@Item_No", item_no)
                 stockCmd.ExecuteNonQuery()
             End Using
 
@@ -232,14 +261,13 @@ Public Class CASHIER
     Private Sub RefreshOrders(sender As Object, e As EventArgs)
         Try
             Me.OrdersTableAdapter.Fill(Me.SHITSTEMDataSet.Orders)
-            OrdersDataGridView.DataSource = Me.SHITSTEMDataSet.Orders ' Adjust if needed
+            OrdersDataGridView.DataSource = Me.SHITSTEMDataSet.Orders
         Catch ex As Exception
             MessageBox.Show("Error refreshing orders: " & ex.Message)
         End Try
     End Sub
-    Private Sub checkoutbtn_Click(sender As Object, e As EventArgs) Handles checkoutbtn.Click
+    Private Async Sub checkoutbtn_Click(sender As Object, e As EventArgs) Handles checkoutbtn.Click
         Try
-            ' Check if the payment textbox is empty or contains a non-numeric value
             If String.IsNullOrWhiteSpace(paymenttxtbox.Text) Then
                 MessageBox.Show("Please enter a payment amount.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Exit Sub
@@ -247,37 +275,36 @@ Public Class CASHIER
 
             Dim paymentAmount As Decimal
 
-            ' Try parsing the payment amount
+
             If Not Decimal.TryParse(paymenttxtbox.Text, paymentAmount) Then
                 MessageBox.Show("Invalid payment amount. Please enter a valid number.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Exit Sub
             End If
 
-            ' Clean the lbltotal.Text (remove any non-numeric characters like commas, currency symbols, etc.)
+
             Dim totalSum As Decimal
             Dim cleanTotal As String = lbltotal.Text
-            cleanTotal = cleanTotal.Replace(",", "").Replace("$", "") ' Remove commas and dollar signs
+            cleanTotal = cleanTotal.Replace(",", "").Replace("₱", "") '
 
-            ' Try converting the cleaned total sum text to a Decimal
+
             If Not Decimal.TryParse(cleanTotal, totalSum) Then
                 MessageBox.Show("Invalid total sum format.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Exit Sub
             End If
 
-            ' Check if payment amount is less than total sum
+
             If paymentAmount < totalSum Then
                 MessageBox.Show("Payment amount is less than the total sum. Please enter a valid amount.", "Payment Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Exit Sub
             End If
 
-            ' Calculate the change
             Dim changeAmount As Decimal = paymentAmount - totalSum
 
-            ' Proceed with the checkout process if all conditions are met
+
             Dim totalProfit As Decimal = 0
             Dim Sales_total As Decimal = 0
 
-            ' Loop through the orders and calculate totals
+
             For Each row As DataGridViewRow In OrdersDataGridView.Rows
                 If Not row.IsNewRow AndAlso row.Cells("Price").Value IsNot Nothing AndAlso row.Cells("Quantity").Value IsNot Nothing Then
                     Dim price As Decimal = Convert.ToDecimal(row.Cells("Price").Value)
@@ -365,13 +392,18 @@ Public Class CASHIER
 
 
             MessageBox.Show("Checkout complete!" & vbCrLf &
-                "Sales Total: " & Sales_total.ToString("C2") & vbCrLf &
-                "Profit: " & totalProfit.ToString("C2") & vbCrLf &
-                "Payment: " & paymentAmount.ToString("C2") & vbCrLf &
-                "Change: " & changeAmount.ToString("C2"))
+                "Sales Total: " & Sales_total & vbCrLf &
+                "Profit: " & totalProfit & vbCrLf &
+                "Payment: " & paymentAmount & vbCrLf &
+                "Change: " & changeAmount)
+
+            RECEIPT.Show()
+            Await Task.Delay(2000)
+            resetcart()
         Catch ex As Exception
             MessageBox.Show("Error during checkout: " & ex.Message)
         Finally
+
             If con.State = ConnectionState.Open Then con.Close()
         End Try
     End Sub
@@ -397,7 +429,8 @@ Public Class CASHIER
                     totalSum += Convert.ToDecimal(row.Cells("Total_price").Value)
                 End If
             Next
-            lbltotal.Text = totalSum.ToString("C2")
+            lbltotal.Text = "₱" & totalSum
+
         Catch ex As Exception
             MsgBox("Error calculating total: " & ex.Message, vbCritical)
         End Try
@@ -428,6 +461,9 @@ Public Class CASHIER
         UpdateTotalSum(Me, EventArgs.Empty)
     End Sub
 
+
+
+
     Private Sub OrdersDataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles OrdersDataGridView.CellContentClick
         If e.RowIndex >= 0 Then
             Dim productName As String = OrdersDataGridView.Rows(e.RowIndex).Cells("Product_name").Value.ToString()
@@ -442,12 +478,8 @@ Public Class CASHIER
 
                 RestockItem(productName, 1)
                 UpdateItemQuantity(productName, newQty, newTotal)
-
-
-
                 Me.OrdersTableAdapter.Fill(Me.SHITSTEMDataSet.Orders)
             Else
-
                 DeleteItem(productName)
                 Me.OrdersTableAdapter.Fill(Me.SHITSTEMDataSet.Orders)
             End If
@@ -468,6 +500,8 @@ Public Class CASHIER
             If con.State = ConnectionState.Open Then con.Close()
         End Try
     End Sub
+
+
     Private Sub DeleteItem(productName As String)
         Try
             Opencon()
@@ -511,12 +545,75 @@ Public Class CASHIER
         End If
     End Sub
 
-    Private Async Sub Guna2Button2_Click_1(sender As Object, e As EventArgs) Handles Guna2Button2.Click
-        RECEIPT.Show()
 
-        Await Task.Delay(2000)
+    Private Sub TextBoxSearch_TextChanged(sender As Object, e As EventArgs) Handles TextBoxSearch.TextChanged
+        GenerateProductButtons(TextBoxSearch.Text)
+    End Sub
+    'FILTER BUTTON----------------------------------------------------
+    Private Sub FoodFilter_Click(sender As Object, e As EventArgs) Handles FoodFilter.Click
+        GenerateProductButtons("Food")
+    End Sub
+
+    Private Sub DrinksFilter_Click(sender As Object, e As EventArgs) Handles DrinksFilter.Click
+        GenerateProductButtons("Drinks")
+    End Sub
+
+    Private Sub Cancel_Click(sender As Object, e As EventArgs) Handles Cancel.Click
+        GenerateProductButtons("")
+    End Sub
+
+    Private Sub OthersFilter_Click(sender As Object, e As EventArgs) Handles OthersFilter.Click
+        GenerateProductButtons("Others")
+    End Sub
+    'FILTER BUTTON----------------------------------------------------
+
+    Private Sub CASHIER_Closed(sender As Object, e As EventArgs) Handles Me.Closed
+
+        Dim returns As New List(Of (itemNo As String, qty As Integer))()
+
+        Try
+            con.Open()
+
+            ' 1) Read orders into memory, then close the reader immediately
+            Dim rdr As SqlDataReader = Nothing
+            Using cmd As New SqlCommand("SELECT Item_no, Quantity FROM Orders", con)
+                rdr = cmd.ExecuteReader()
+                While rdr.Read()
+                    returns.Add((
+                  itemNo:=CInt(rdr("Item_no")).ToString("D3"),
+                        qty:=Convert.ToInt32(rdr("Quantity"))
+                    ))
+                End While
+                rdr.Close()
+            End Using
+
+            ' 2) Now safely do your updates
+            For Each r In returns
+                Using upd As New SqlCommand("UPDATE STOCKS SET Quantity = Quantity + @qty WHERE Item_no = @itemNo", con)
+                    upd.Parameters.Add("@qty", SqlDbType.Int).Value = r.qty
+                    upd.Parameters.Add("@itemNo", SqlDbType.VarChar).Value = r.itemNo
+
+                    Dim rowsAffected As Integer = upd.ExecuteNonQuery()
+                    If rowsAffected = 0 Then
+                        Debug.Print($"No matching Item_no found for {r.itemNo}")
+                    End If
+                End Using
+
+            Next
 
 
-        resetcart()
+            Using del As New SqlCommand("DELETE FROM Orders", con)
+                del.ExecuteNonQuery()
+            End Using
+            If returns.Count > 0 Then
+                MessageBox.Show($"{returns.Count} product quantopnities were returned to stock.", "Stock Restored")
+            End If
+
+
+        Catch ex As Exception
+            MessageBox.Show("Error returning stock: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            If con.State = ConnectionState.Open Then con.Close()
+        End Try
     End Sub
 End Class

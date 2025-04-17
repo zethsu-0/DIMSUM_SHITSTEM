@@ -38,13 +38,12 @@ Public Class PRODUCTS_TAB
     End Sub
 
     Private Sub Button5_Click_1(sender As Object, e As EventArgs) Handles Button5.Click
-
         Try
             If TextBox8.Text = "" Or TextBox7.Text = "" Or TextBox6.Text = "" Or TextBox5.Text = "" Or PictureBox2.Image Is Nothing Then
                 MessageBox.Show("Please Fill all the SHITS")
             Else
                 con.Open()
-                Item_no = CInt(TextBox8.Text).ToString("D3") ' Ensures "4" becomes "004", "11" becomes "011"
+                Item_no = CInt(TextBox8.Text).ToString("D3") ' "D3" Ensures "4" becomes "004", "11" becomes "011"
                 Product_name = TextBox7.Text
                 Quantity = TextBox6.Text
                 Price = Convert.ToDecimal(TextBox5.Text)
@@ -260,12 +259,14 @@ Public Class PRODUCTS_TAB
     Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
         ' Determine Product Group Code
         Select Case ComboBox1.Text
-            Case "Food"
+            Case "Siomai"
+                product_group = "FD"
+            Case "Siopao"
                 product_group = "FD"
             Case "Drinks"
                 product_group = "DR"
             Case Else
-                MessageBox.Show("Please select a valid product group.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                product_group = "Na"
                 Exit Sub
         End Select
         Barcodegenerator()
@@ -353,18 +354,17 @@ Public Class PRODUCTS_TAB
         If openFileDialog.ShowDialog() = DialogResult.OK Then
             Dim selectedFile As String = openFileDialog.FileName
 
-            ' ✅ Check file size (example: max 1MB)
+
             Dim fileInfo As New FileInfo(selectedFile)
             If fileInfo.Length > 1048576 Then ' 1MB = 1048576 bytes
                 MessageBox.Show("Image size must be less than 1MB.", "File Too Large", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Exit Sub
             End If
 
-            ' ✅ Load and resize image
             Dim originalImage As Image = Image.FromFile(selectedFile)
             Dim resizedImage As Image = ResizeImage(originalImage, 200, 200) ' Adjust size as needed
 
-            ' ✅ Set to PictureBox
+
             PictureBox2.Image = resizedImage
             PictureBox2.SizeMode = PictureBoxSizeMode.StretchImage
         End If

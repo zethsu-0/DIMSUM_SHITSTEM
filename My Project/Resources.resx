@@ -136,10 +136,13 @@
   <data name="refresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\refresh.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="dimsum-factory-logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dimsum-factory-logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="producticon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\producticon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="dimsum-factory-logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\dimsum-factory-logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="errorimage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\errorimage.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

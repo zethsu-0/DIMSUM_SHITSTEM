@@ -321,7 +321,7 @@ Partial Class LOGIN_PAGE
         Me.Controls.Add(Me.Button1)
         Me.Font = New System.Drawing.Font("Century Gothic", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.Icon = CType(resources.GetObject("₱this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(4, 2, 4, 2)
         Me.MaximizeBox = False
         Me.Name = "LOGIN_PAGE"
