@@ -43,7 +43,7 @@ Public Class EMPLOYEE_TAB
             userPanel.BorderStyle = BorderStyle.FixedSingle
             userPanel.Padding = New Padding(10)
 
-            ' Add user details
+
             Dim lblTitle As New Label()
             lblTitle.Text = $" {user_Role.ToUpper()}"
             lblTitle.Font = New Font("Arial", 12, FontStyle.Bold)
@@ -140,10 +140,10 @@ Public Class EMPLOYEE_TAB
                             picBox.Image = My.Resources.defaulticon
                         End If
 
-                        ' Add controls to panel
+
                         userPanel.Controls.AddRange({lblName, lblRole, lblUserId, editbtn, picBox})
 
-                        ' Add panel to FlowLayoutPanel
+
                         FlowLayoutPanel1.Controls.Add(userPanel)
                     End While
                 End Using
@@ -161,7 +161,7 @@ Public Class EMPLOYEE_TAB
             con.Open()
             Dim query As String = "SELECT * FROM login WHERE user_id = @targetUserId"
             Using cmd As New SqlCommand(query, con)
-                cmd.Parameters.AddWithValue("@targetUserId", targetUserId) ' Use the correct ID
+                cmd.Parameters.AddWithValue("@targetUserId", targetUserId)
 
                 Using reader As SqlDataReader = cmd.ExecuteReader()
                     If reader.Read() Then
