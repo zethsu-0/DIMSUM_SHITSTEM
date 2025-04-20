@@ -56,5 +56,7 @@ then execute
 5. tapos sa module na babaguhin
 
 
-[DATABASE BACKUP] (https://github.com/zethsu-0/DIMSUM_SHITSTEM/blob/master/SHITSTEM.bak)
+
 		con.ConnectionString = "Data Source=[name ng sever];Initial Catalog=[pangalan ng database nyo];Integrated Security=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True"
+
+[DATABASE BACKUP] (https://github.com/zethsu-0/DIMSUM_SHITSTEM/blob/master/SHITSTEM.bak)
