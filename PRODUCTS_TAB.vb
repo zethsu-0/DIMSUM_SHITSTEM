@@ -21,6 +21,7 @@ Public Class PRODUCTS_TAB
     Dim Product_name As String
     Dim Quantity As String
     Dim Price As Decimal
+    Dim Cost As Decimal
     Dim taxed_price As Decimal
     Dim product_group As String = ""
 
@@ -39,19 +40,20 @@ Public Class PRODUCTS_TAB
 
     Private Sub Button5_Click_1(sender As Object, e As EventArgs) Handles Button5.Click
         Try
-            If TextBox8.Text = "" Or TextBox7.Text = "" Or TextBox6.Text = "" Or TextBox5.Text = "" Or PictureBox2.Image Is Nothing Then
+            If TextBox8.Text = "" Or TextBox7.Text = "" Or TextBox6.Text = "" Or TextBox5.Text = "" Or TextBox3.Text = "" Or PictureBox2.Image Is Nothing Then
                 MessageBox.Show("Please Fill all the SHITS")
             Else
                 con.Open()
                 Item_no = CInt(TextBox8.Text).ToString("D3") ' "D3" Ensures "4" becomes "004", "11" becomes "011"
                 Product_name = TextBox7.Text
                 Quantity = TextBox6.Text
-                Price = Convert.ToDecimal(TextBox5.Text)
+                Price = TextBox5.Text
+                Cost = TextBox3.Text
                 product_group = ComboBox1.Text
-                taxed_price = Convert.ToDecimal(TextBox1.Text)
+                taxed_price = TextBox1.Text
 
 
-                ' Convert image to byte array
+
                 Dim Filesize As UInt32
                 Dim mstream As New System.IO.MemoryStream
                 PictureBox1.Image.Save(mstream, System.Drawing.Imaging.ImageFormat.Png)
@@ -67,14 +69,15 @@ Public Class PRODUCTS_TAB
                 mstream2.Close()
 
                 ' Insert into database
-                Dim insertQuery As String = "INSERT INTO STOCKS (Item_No, Product_name, product_group, Quantity, Price, taxed_price, Barcode, Product_image) 
-                             VALUES (@Item_no, @Product_name, @product_group, @Quantity, @Price, @taxed_price, @Barcode, @Product_image)"
+                Dim insertQuery As String = "INSERT INTO STOCKS (Item_No, Product_name, product_group, Quantity, Price,Cost, taxed_price, Barcode, Product_image) 
+                             VALUES (@Item_no, @Product_name, @product_group, @Quantity, @Price, @Cost, @taxed_price, @Barcode, @Product_image)"
                 Using insertCmd As New SqlCommand(insertQuery, con)
                     insertCmd.Parameters.AddWithValue("@Item_no", Item_no)
                     insertCmd.Parameters.AddWithValue("@Product_name", Product_name)
                     insertCmd.Parameters.AddWithValue("@product_group", product_group)
                     insertCmd.Parameters.AddWithValue("@Quantity", Quantity)
                     insertCmd.Parameters.AddWithValue("@Price", Price)
+                    insertCmd.Parameters.AddWithValue("@Cost", Cost)
                     insertCmd.Parameters.AddWithValue("@taxed_price", taxed_price)
                     insertCmd.Parameters.AddWithValue("@Barcode", arrimage)
                     insertCmd.Parameters.AddWithValue("@Product_image", arrimage2)
@@ -134,12 +137,13 @@ Public Class PRODUCTS_TAB
         TextBox6.Text = ""
         TextBox5.Text = ""
         TextBox2.Text = ""
+        TextBox3.Text = ""
         TextBox1.Text = ""
         ComboBox1.Text = ""
         RadioButton1.Checked = False
         RadioButton2.Checked = False
         PictureBox1.Image = Nothing
-        PictureBox2.Image = Nothing
+        PictureBox2.Image = My.Resources.errorimage
         Button5.Visible = False
         TextBox8.Enabled = True
         Button5.Visible = True
@@ -152,13 +156,14 @@ Public Class PRODUCTS_TAB
 
         If MessageBox.Show("Are you sure you want to update this product?", "Confirm Update", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
 
-            If TextBox8.Text = "" Or TextBox7.Text = "" Or TextBox6.Text = "" Or TextBox5.Text = "" Then
+            If TextBox8.Text = "" Or TextBox7.Text = "" Or TextBox6.Text = "" Or TextBox5.Text = "" Or TextBox3.Text = "" Then
                 MessageBox.Show("Please fill in all fields", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Else
                 Item_no = TextBox8.Text
                 Product_name = TextBox7.Text
                 Quantity = TextBox6.Text
-                Price = Convert.ToDecimal(TextBox5.Text)
+                Price = TextBox5.Text
+                Cost = TextBox3.Text
                 taxed_price = TextBox1.Text
                 product_group = ComboBox1.Text
 
@@ -176,13 +181,14 @@ Public Class PRODUCTS_TAB
                 Filesize2 = mstream2.Length
                 mstream2.Close()
 
-                Dim query As String = "UPDATE stocks SET Item_no=@Item_no,Product_name=@Product_name,product_group=@product_group,Quantity=@Quantity,Price=@Price, taxed_price=@taxed_price, barcode = @barcode,product_image=@product_image WHERE Item_no = @Item_no"
+                Dim query As String = "UPDATE stocks SET Item_no=@Item_no,Product_name=@Product_name,product_group=@product_group,Quantity=@Quantity,Price=@Price,Cost=@Cost, taxed_price=@taxed_price, barcode = @barcode,product_image=@product_image WHERE Item_no = @Item_no"
                 Using cmd As New SqlCommand(query, con)
                     cmd.Parameters.AddWithValue("@Item_no", Item_no)
                     cmd.Parameters.AddWithValue("@Product_name", Product_name)
                     cmd.Parameters.AddWithValue("@product_group", product_group)
                     cmd.Parameters.AddWithValue("@Quantity", Quantity)
                     cmd.Parameters.AddWithValue("@Price", Price)
+                    cmd.Parameters.AddWithValue("@Cost", Cost)
                     cmd.Parameters.AddWithValue("@taxed_price", taxed_price)
                     cmd.Parameters.AddWithValue("@barcode", arrimage)
                     cmd.Parameters.AddWithValue("@product_image", arrimage2)
@@ -195,8 +201,6 @@ Public Class PRODUCTS_TAB
                 End Using
             End If
         End If
-
-
         Button5.Visible = True
         TextBox7.ReadOnly = False
         TextBox8.ReadOnly = False
@@ -219,6 +223,7 @@ Public Class PRODUCTS_TAB
                             TextBox7.Text = dt.Rows(0)("Product_name").ToString()
                             TextBox6.Text = dt.Rows(0)("Quantity").ToString()
                             TextBox5.Text = dt.Rows(0)("Price").ToString()
+                            TextBox3.Text = dt.Rows(0)("Cost").ToString()
                             TextBox1.Text = dt.Rows(0)("taxed_price").ToString()
                             ComboBox1.Text = dt.Rows(0)("product_group").ToString()
                             Button5.Visible = False
@@ -234,17 +239,10 @@ Public Class PRODUCTS_TAB
                                     PictureBox2.SizeMode = PictureBoxSizeMode.StretchImage
                                 End Using
                             Else
-                                PictureBox2.Image = Nothing
+                                PictureBox2.Image = My.Resources.errorimage
                             End If
                         Else
-
-                            TextBox8.Text = ""
-                            TextBox7.Text = ""
-                            TextBox6.Text = ""
-                            TextBox5.Text = ""
-                            TextBox2.Text = ""
-                            RadioButton1.Checked = False
-                            RadioButton2.Checked = False
+                            clearform()
                         End If
                     End Using
                 End Using
@@ -288,9 +286,6 @@ Public Class PRODUCTS_TAB
 
     Private Sub TextBox7_TextChanged(sender As Object, e As EventArgs) Handles TextBox7.TextChanged
         barCodename = TextBox7.Text
-
-
-
         If String.IsNullOrEmpty(TextBox8.Text) Then
             con.Open()
             Dim cmd As New SqlCommand("
@@ -319,14 +314,10 @@ Public Class PRODUCTS_TAB
         Barcodegenerator()
     End Sub
 
-
-
     Private Sub RadioButton2_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton2.CheckedChanged
         If Decimal.TryParse(TextBox5.Text, Price) Then
             Dim taxed_price As Decimal = Price
             TextBox1.Text = taxed_price.ToString()
-
-
         End If
     End Sub
 
@@ -387,5 +378,14 @@ Public Class PRODUCTS_TAB
 
     Private Sub Label9_Click(sender As Object, e As EventArgs) Handles Label9.Click
         PictureBox2.Image = Nothing
+    End Sub
+
+    Private Sub Guna2TabControl1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles Guna2TabControl1.SelectedIndexChanged
+        Dim selectedIndex As Integer = Guna2TabControl1.SelectedIndex
+        Dim selectedTab As TabPage = Guna2TabControl1.SelectedTab
+
+        If selectedIndex = 1 Then
+            clearform()
+        End If
     End Sub
 End Class

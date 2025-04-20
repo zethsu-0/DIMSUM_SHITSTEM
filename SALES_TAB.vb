@@ -151,6 +151,7 @@ Public Class SALES_TAB
                                 WHERE CONVERT(date, Day) = CONVERT(date, GETDATE())"
 
         Using cmd As New SqlCommand(query, con)
+            If con IsNot Nothing AndAlso con.State = ConnectionState.Open Then con.Close()
             con.Open()
             Using reader As SqlDataReader = cmd.ExecuteReader()
                 If reader.Read() Then
@@ -175,32 +176,45 @@ Public Class SALES_TAB
 
     Private Sub SALES_TAB_ParentChanged(sender As Object, e As EventArgs) Handles Me.ParentChanged
         If Me.Visible Then
-            Dim dt As New DataTable()
-            Dim query As String = "SELECT * FROM STOCKS"
-            Using filtercmd As New SqlCommand(query, con)
-                Using da As New SqlDataAdapter(filtercmd)
-                    da.Fill(dt)
-                End Using
-            End Using
-
-            Dim outOfStockView As New DataView(dt)
-            outOfStockView.RowFilter = "Quantity = 0"
-            DataGridView1.DataSource = outOfStockView
-
-            ' Filter for low-stock (Quantity < 5 but > 0)
-            Dim lowStockView As New DataView(dt)
-            lowStockView.RowFilter = "Quantity <= 5 AND Quantity > 0"
-            STOCKSDataGridView.DataSource = lowStockView
-            Me.STOCKSTableAdapter.Fill(Me.SHITSTEMDataSet.STOCKS)
+            RefreshData()
         End If
+
     End Sub
 
     Private Sub Guna2CircleButton1_Click(sender As Object, e As EventArgs) Handles Guna2CircleButton1.Click
         dailytotalearn()
         LoadCharts()
+        RefreshData()
         Me.DailySalesTableAdapter.Fill(Me.SHITSTEMDataSet.DailySales)
         Me.MonthlySalesTableAdapter.Fill(Me.SHITSTEMDataSet.MonthlySales)
         Me.WeeklySalesTableAdapter.Fill(Me.SHITSTEMDataSet.WeeklySales)
+        Me.STOCKSTableAdapter.Fill(Me.SHITSTEMDataSet.STOCKS)
+    End Sub
+
+
+    Private Sub RESTOCKBTN_Click(sender As Object, e As EventArgs) Handles RESTOCKBTN.Click
+        RESTOCK_TAB.Show()
+    End Sub
+
+
+    Public Sub RefreshData()
+        ' Refresh data logic, like re-fetching and binding to DataGridViews
+        Dim dt As New DataTable()
+        Dim query As String = "SELECT * FROM STOCKS"
+        Using filtercmd As New SqlCommand(query, con)
+            Using da As New SqlDataAdapter(filtercmd)
+                da.Fill(dt)
+            End Using
+        End Using
+
+        Dim outOfStockView As New DataView(dt)
+        outOfStockView.RowFilter = "Quantity = 0"
+        DataGridView1.DataSource = outOfStockView
+
+        Dim lowStockView As New DataView(dt)
+        lowStockView.RowFilter = "Quantity <= 5 AND Quantity > 0"
+        STOCKSDataGridView.DataSource = lowStockView
+
         Me.STOCKSTableAdapter.Fill(Me.SHITSTEMDataSet.STOCKS)
     End Sub
 

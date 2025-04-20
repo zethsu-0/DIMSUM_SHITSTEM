@@ -48,6 +48,9 @@ Partial Class SALES_TAB
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Chart1 = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.salesTotallbl = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
         Me.profitlbl = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -68,6 +71,13 @@ Partial Class SALES_TAB
         Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.RESTOCKBTN = New Guna.UI2.WinForms.Guna2Button()
+        Me.Totalsalepanel = New System.Windows.Forms.Panel()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.Chart3 = New System.Windows.Forms.DataVisualization.Charting.Chart()
+        Me.Panel7 = New System.Windows.Forms.Panel()
+        Me.Chart4 = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.profitpanel = New System.Windows.Forms.Panel()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Guna2CircleButton1 = New Guna.UI2.WinForms.Guna2CircleButton()
@@ -79,15 +89,6 @@ Partial Class SALES_TAB
         Me.WeeklySalesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.STOCKSTableAdapter = New DIMSUM_SHITSTEM.SHITSTEMDataSetTableAdapters.STOCKSTableAdapter()
         Me.WeeklySalesTableAdapter1 = New DIMSUM_SHITSTEM.SHITSTEMDataSetTableAdapters.WeeklySalesTableAdapter()
-        Me.Totalsalepanel = New System.Windows.Forms.Panel()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.Panel6 = New System.Windows.Forms.Panel()
-        Me.Chart3 = New System.Windows.Forms.DataVisualization.Charting.Chart()
-        Me.Panel7 = New System.Windows.Forms.Panel()
-        Me.Chart4 = New System.Windows.Forms.DataVisualization.Charting.Chart()
-        Me.salesTotallbl = New System.Windows.Forms.Label()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.Label11 = New System.Windows.Forms.Label()
         Me.Panel5.SuspendLayout()
         CType(Me.Chart2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel3.SuspendLayout()
@@ -99,14 +100,14 @@ Partial Class SALES_TAB
         CType(Me.STOCKSBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.STOCKSDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
-        Me.profitpanel.SuspendLayout()
-        CType(Me.MonthlySalesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.WeeklySalesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Totalsalepanel.SuspendLayout()
         Me.Panel6.SuspendLayout()
         CType(Me.Chart3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel7.SuspendLayout()
         CType(Me.Chart4, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.profitpanel.SuspendLayout()
+        CType(Me.MonthlySalesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.WeeklySalesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Panel5
@@ -180,6 +181,41 @@ Partial Class SALES_TAB
         Me.Panel4.Size = New System.Drawing.Size(344, 239)
         Me.Panel4.TabIndex = 2
         '
+        'salesTotallbl
+        '
+        Me.salesTotallbl.AutoSize = True
+        Me.salesTotallbl.BackColor = System.Drawing.Color.Transparent
+        Me.salesTotallbl.Font = New System.Drawing.Font("Poppins", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.salesTotallbl.Location = New System.Drawing.Point(102, 143)
+        Me.salesTotallbl.Name = "salesTotallbl"
+        Me.salesTotallbl.Size = New System.Drawing.Size(87, 56)
+        Me.salesTotallbl.TabIndex = 8
+        Me.salesTotallbl.Text = "000"
+        Me.salesTotallbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.BackColor = System.Drawing.Color.Transparent
+        Me.Label10.Font = New System.Drawing.Font("Palatino Linotype", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Location = New System.Drawing.Point(61, 145)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(43, 44)
+        Me.Label10.TabIndex = 7
+        Me.Label10.Text = "₱"
+        Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Font = New System.Drawing.Font("Palatino Linotype", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Location = New System.Drawing.Point(17, 121)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(172, 22)
+        Me.Label11.TabIndex = 6
+        Me.Label11.Text = "TOTAL SALES TODAY"
+        Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'profitlbl
         '
         Me.profitlbl.AutoSize = True
@@ -242,7 +278,7 @@ Partial Class SALES_TAB
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(14, 575)
+        Me.Label5.Location = New System.Drawing.Point(14, 538)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(97, 13)
         Me.Label5.TabIndex = 4
@@ -251,7 +287,7 @@ Partial Class SALES_TAB
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(10, 397)
+        Me.Label4.Location = New System.Drawing.Point(10, 360)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(101, 13)
         Me.Label4.TabIndex = 3
@@ -286,7 +322,7 @@ Partial Class SALES_TAB
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle2
-        Me.DataGridView1.Location = New System.Drawing.Point(13, 413)
+        Me.DataGridView1.Location = New System.Drawing.Point(13, 376)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
@@ -368,7 +404,7 @@ Partial Class SALES_TAB
         DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.STOCKSDataGridView.DefaultCellStyle = DataGridViewCellStyle6
-        Me.STOCKSDataGridView.Location = New System.Drawing.Point(13, 597)
+        Me.STOCKSDataGridView.Location = New System.Drawing.Point(13, 560)
         Me.STOCKSDataGridView.Name = "STOCKSDataGridView"
         Me.STOCKSDataGridView.ReadOnly = True
         DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
@@ -417,6 +453,7 @@ Partial Class SALES_TAB
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Panel1.Controls.Add(Me.RESTOCKBTN)
         Me.Panel1.Controls.Add(Me.Totalsalepanel)
         Me.Panel1.Controls.Add(Me.profitpanel)
         Me.Panel1.Controls.Add(Me.Label5)
@@ -431,86 +468,19 @@ Partial Class SALES_TAB
         Me.Panel1.Size = New System.Drawing.Size(1354, 797)
         Me.Panel1.TabIndex = 8
         '
-        'profitpanel
+        'RESTOCKBTN
         '
-        Me.profitpanel.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.profitpanel.Controls.Add(Me.Label7)
-        Me.profitpanel.Controls.Add(Me.Panel3)
-        Me.profitpanel.Controls.Add(Me.Panel5)
-        Me.profitpanel.Location = New System.Drawing.Point(903, 3)
-        Me.profitpanel.Name = "profitpanel"
-        Me.profitpanel.Size = New System.Drawing.Size(435, 791)
-        Me.profitpanel.TabIndex = 8
-        Me.profitpanel.Visible = False
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Palatino Linotype", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(20, 14)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(66, 22)
-        Me.Label7.TabIndex = 12
-        Me.Label7.Text = "PROFIT"
-        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Guna2CircleButton1
-        '
-        Me.Guna2CircleButton1.DisabledState.BorderColor = System.Drawing.Color.DarkGray
-        Me.Guna2CircleButton1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
-        Me.Guna2CircleButton1.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
-        Me.Guna2CircleButton1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
-        Me.Guna2CircleButton1.FillColor = System.Drawing.Color.White
-        Me.Guna2CircleButton1.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.Guna2CircleButton1.ForeColor = System.Drawing.Color.White
-        Me.Guna2CircleButton1.Image = Global.DIMSUM_SHITSTEM.My.Resources.Resources.refresh
-        Me.Guna2CircleButton1.Location = New System.Drawing.Point(13, 13)
-        Me.Guna2CircleButton1.Name = "Guna2CircleButton1"
-        Me.Guna2CircleButton1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle
-        Me.Guna2CircleButton1.Size = New System.Drawing.Size(36, 36)
-        Me.Guna2CircleButton1.TabIndex = 7
-        '
-        'DailySalesTableAdapter
-        '
-        Me.DailySalesTableAdapter.ClearBeforeFill = True
-        '
-        'TableAdapterManager
-        '
-        Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
-        Me.TableAdapterManager.DailySalesTableAdapter = Me.DailySalesTableAdapter
-        Me.TableAdapterManager.loginTableAdapter = Nothing
-        Me.TableAdapterManager.MonthlySalesTableAdapter = Me.MonthlySalesTableAdapter
-        Me.TableAdapterManager.OrdersTableAdapter = Nothing
-        Me.TableAdapterManager.ProductGroupsTableAdapter = Nothing
-        Me.TableAdapterManager.STOCKSTableAdapter = Nothing
-        Me.TableAdapterManager.UpdateOrder = DIMSUM_SHITSTEM.SHITSTEMDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
-        Me.TableAdapterManager.WeeklySalesTableAdapter = Me.WeeklySalesTableAdapter
-        '
-        'MonthlySalesTableAdapter
-        '
-        Me.MonthlySalesTableAdapter.ClearBeforeFill = True
-        '
-        'WeeklySalesTableAdapter
-        '
-        Me.WeeklySalesTableAdapter.ClearBeforeFill = True
-        '
-        'MonthlySalesBindingSource
-        '
-        Me.MonthlySalesBindingSource.DataMember = "MonthlySales"
-        Me.MonthlySalesBindingSource.DataSource = Me.SHITSTEMDataSet
-        '
-        'WeeklySalesBindingSource
-        '
-        Me.WeeklySalesBindingSource.DataMember = "WeeklySales"
-        Me.WeeklySalesBindingSource.DataSource = Me.SHITSTEMDataSet
-        '
-        'STOCKSTableAdapter
-        '
-        Me.STOCKSTableAdapter.ClearBeforeFill = True
-        '
-        'WeeklySalesTableAdapter1
-        '
-        Me.WeeklySalesTableAdapter1.ClearBeforeFill = True
+        Me.RESTOCKBTN.DisabledState.BorderColor = System.Drawing.Color.DarkGray
+        Me.RESTOCKBTN.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
+        Me.RESTOCKBTN.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.RESTOCKBTN.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
+        Me.RESTOCKBTN.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.RESTOCKBTN.ForeColor = System.Drawing.Color.White
+        Me.RESTOCKBTN.Location = New System.Drawing.Point(301, 714)
+        Me.RESTOCKBTN.Name = "RESTOCKBTN"
+        Me.RESTOCKBTN.Size = New System.Drawing.Size(106, 31)
+        Me.RESTOCKBTN.TabIndex = 10
+        Me.RESTOCKBTN.Text = "RESTOCK"
         '
         'Totalsalepanel
         '
@@ -590,40 +560,89 @@ Partial Class SALES_TAB
         Title4.Text = "WEEKLY EARNINGS"
         Me.Chart4.Titles.Add(Title4)
         '
-        'salesTotallbl
+        'profitpanel
         '
-        Me.salesTotallbl.AutoSize = True
-        Me.salesTotallbl.BackColor = System.Drawing.Color.Transparent
-        Me.salesTotallbl.Font = New System.Drawing.Font("Poppins", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.salesTotallbl.Location = New System.Drawing.Point(102, 143)
-        Me.salesTotallbl.Name = "salesTotallbl"
-        Me.salesTotallbl.Size = New System.Drawing.Size(87, 56)
-        Me.salesTotallbl.TabIndex = 8
-        Me.salesTotallbl.Text = "000"
-        Me.salesTotallbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.profitpanel.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.profitpanel.Controls.Add(Me.Label7)
+        Me.profitpanel.Controls.Add(Me.Panel3)
+        Me.profitpanel.Controls.Add(Me.Panel5)
+        Me.profitpanel.Location = New System.Drawing.Point(903, 3)
+        Me.profitpanel.Name = "profitpanel"
+        Me.profitpanel.Size = New System.Drawing.Size(435, 791)
+        Me.profitpanel.TabIndex = 8
+        Me.profitpanel.Visible = False
         '
-        'Label10
+        'Label7
         '
-        Me.Label10.AutoSize = True
-        Me.Label10.BackColor = System.Drawing.Color.Transparent
-        Me.Label10.Font = New System.Drawing.Font("Palatino Linotype", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(61, 145)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(43, 44)
-        Me.Label10.TabIndex = 7
-        Me.Label10.Text = "₱"
-        Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Palatino Linotype", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(20, 14)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(66, 22)
+        Me.Label7.TabIndex = 12
+        Me.Label7.Text = "PROFIT"
+        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label11
+        'Guna2CircleButton1
         '
-        Me.Label11.AutoSize = True
-        Me.Label11.Font = New System.Drawing.Font("Palatino Linotype", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(17, 121)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(172, 22)
-        Me.Label11.TabIndex = 6
-        Me.Label11.Text = "TOTAL SALES TODAY"
-        Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Guna2CircleButton1.DisabledState.BorderColor = System.Drawing.Color.DarkGray
+        Me.Guna2CircleButton1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
+        Me.Guna2CircleButton1.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.Guna2CircleButton1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
+        Me.Guna2CircleButton1.FillColor = System.Drawing.Color.White
+        Me.Guna2CircleButton1.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.Guna2CircleButton1.ForeColor = System.Drawing.Color.White
+        Me.Guna2CircleButton1.Image = Global.DIMSUM_SHITSTEM.My.Resources.Resources.refresh
+        Me.Guna2CircleButton1.Location = New System.Drawing.Point(13, 13)
+        Me.Guna2CircleButton1.Name = "Guna2CircleButton1"
+        Me.Guna2CircleButton1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle
+        Me.Guna2CircleButton1.Size = New System.Drawing.Size(36, 36)
+        Me.Guna2CircleButton1.TabIndex = 7
+        '
+        'DailySalesTableAdapter
+        '
+        Me.DailySalesTableAdapter.ClearBeforeFill = True
+        '
+        'TableAdapterManager
+        '
+        Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
+        Me.TableAdapterManager.DailySalesTableAdapter = Me.DailySalesTableAdapter
+        Me.TableAdapterManager.DailySummaryTableAdapter = Nothing
+        Me.TableAdapterManager.loginTableAdapter = Nothing
+        Me.TableAdapterManager.MonthlySalesTableAdapter = Me.MonthlySalesTableAdapter
+        Me.TableAdapterManager.OrdersTableAdapter = Nothing
+        Me.TableAdapterManager.ProductGroupsTableAdapter = Nothing
+        Me.TableAdapterManager.STOCKSTableAdapter = Nothing
+        Me.TableAdapterManager.TransactionDetailsTableAdapter = Nothing
+        Me.TableAdapterManager.TransactionsTableAdapter = Nothing
+        Me.TableAdapterManager.UpdateOrder = DIMSUM_SHITSTEM.SHITSTEMDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
+        Me.TableAdapterManager.WeeklySalesTableAdapter = Me.WeeklySalesTableAdapter
+        '
+        'MonthlySalesTableAdapter
+        '
+        Me.MonthlySalesTableAdapter.ClearBeforeFill = True
+        '
+        'WeeklySalesTableAdapter
+        '
+        Me.WeeklySalesTableAdapter.ClearBeforeFill = True
+        '
+        'MonthlySalesBindingSource
+        '
+        Me.MonthlySalesBindingSource.DataMember = "MonthlySales"
+        Me.MonthlySalesBindingSource.DataSource = Me.SHITSTEMDataSet
+        '
+        'WeeklySalesBindingSource
+        '
+        Me.WeeklySalesBindingSource.DataMember = "WeeklySales"
+        Me.WeeklySalesBindingSource.DataSource = Me.SHITSTEMDataSet
+        '
+        'STOCKSTableAdapter
+        '
+        Me.STOCKSTableAdapter.ClearBeforeFill = True
+        '
+        'WeeklySalesTableAdapter1
+        '
+        Me.WeeklySalesTableAdapter1.ClearBeforeFill = True
         '
         'SALES_TAB
         '
@@ -647,16 +666,16 @@ Partial Class SALES_TAB
         CType(Me.STOCKSDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
-        Me.profitpanel.ResumeLayout(False)
-        Me.profitpanel.PerformLayout()
-        CType(Me.MonthlySalesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.WeeklySalesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Totalsalepanel.ResumeLayout(False)
         Me.Totalsalepanel.PerformLayout()
         Me.Panel6.ResumeLayout(False)
         CType(Me.Chart3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel7.ResumeLayout(False)
         CType(Me.Chart4, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.profitpanel.ResumeLayout(False)
+        Me.profitpanel.PerformLayout()
+        CType(Me.MonthlySalesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.WeeklySalesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -705,4 +724,5 @@ Partial Class SALES_TAB
     Friend WithEvents salesTotallbl As Label
     Friend WithEvents Label10 As Label
     Friend WithEvents Label11 As Label
+    Friend WithEvents RESTOCKBTN As Guna.UI2.WinForms.Guna2Button
 End Class

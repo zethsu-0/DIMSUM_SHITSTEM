@@ -6,7 +6,6 @@ Imports Microsoft.VisualBasic.ApplicationServices
 
 Public Class Form2
 
-
     Public Property user_role As String
     Public Property user_id As String
     Private lastOpenedForm As Form = Nothing
@@ -101,6 +100,7 @@ Public Class Form2
     Private Sub employeebtn_Click(sender As Object, e As EventArgs) Handles employeebtn.Click
         Dim tab As New EMPLOYEE_TAB()
         tab.user_Role = user_role
+        tab.User_id = user_id
 
         Me.SplitContainer1.Panel2.Controls.Clear()
         Me.SplitContainer1.Panel2.Controls.Add(tab)
@@ -116,6 +116,7 @@ Public Class Form2
         If sure = DialogResult.OK Then
             For Each frm As Form In Application.OpenForms.Cast(Of Form).ToList()
                 If Not frm Is LOGIN_PAGE Then
+                    If con.State = ConnectionState.Open Then con.Close()
                     frm.Close()
                 End If
             Next

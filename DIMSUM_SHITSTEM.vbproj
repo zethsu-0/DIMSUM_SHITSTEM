@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{7A692563-EB19-48D9-B01B-1610699A7DD6}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>DIMSUM_SHITSTEM.Form2</StartupObject>
+    <StartupObject>DIMSUM_SHITSTEM.LOGIN_PAGE</StartupObject>
     <RootNamespace>DIMSUM_SHITSTEM</RootNamespace>
     <AssemblyName>DIMSUM_SHITSTEM</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -164,6 +164,12 @@
       <DependentUpon>CrystalReport1.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="EditUserForm.Designer.vb">
+      <DependentUpon>EditUserForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EditUserForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form3.Designer.vb">
       <DependentUpon>Form3.vb</DependentUpon>
     </Compile>
@@ -219,6 +225,12 @@
     <Compile Include="RECEIPT.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="RESTOCK_TAB.Designer.vb">
+      <DependentUpon>RESTOCK_TAB.vb</DependentUpon>
+    </Compile>
+    <Compile Include="RESTOCK_TAB.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="SALES_TAB.Designer.vb">
       <DependentUpon>SALES_TAB.vb</DependentUpon>
     </Compile>
@@ -241,6 +253,12 @@
     <Compile Include="EMPLOYEE_TAB.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="testingtab.Designer.vb">
+      <DependentUpon>testingtab.vb</DependentUpon>
+    </Compile>
+    <Compile Include="testingtab.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Users.Designer.vb">
       <DependentUpon>Users.vb</DependentUpon>
     </Compile>
@@ -256,6 +274,9 @@
     <EmbeddedResource Include="CrystalReport1.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CrystalReport1.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditUserForm.resx">
+      <DependentUpon>EditUserForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form3.resx">
       <DependentUpon>Form3.vb</DependentUpon>
@@ -289,8 +310,14 @@
     <EmbeddedResource Include="RECEIPT.resx">
       <DependentUpon>RECEIPT.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="RESTOCK_TAB.resx">
+      <DependentUpon>RESTOCK_TAB.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SALES_TAB.resx">
       <DependentUpon>SALES_TAB.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="testingtab.resx">
+      <DependentUpon>testingtab.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Users.resx">
       <DependentUpon>Users.vb</DependentUpon>
@@ -334,6 +361,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\defaulticon.png" />
     <None Include="Resources\errorimage.jpg" />
     <None Include="Resources\dimsum-factory-logo.png" />
     <None Include="Resources\refresh.png" />

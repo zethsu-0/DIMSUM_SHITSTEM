@@ -32,11 +32,11 @@ Partial Class CASHIER
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.FlowLayoutPanel2 = New System.Windows.Forms.FlowLayoutPanel()
-        Me.FoodFilter = New Guna.UI2.WinForms.Guna2Button()
+        Me.Cancel = New Guna.UI2.WinForms.Guna2Button()
+        Me.SiomaiFilter = New Guna.UI2.WinForms.Guna2Button()
+        Me.SiopaoFilter = New Guna.UI2.WinForms.Guna2Button()
         Me.DrinksFilter = New Guna.UI2.WinForms.Guna2Button()
         Me.OthersFilter = New Guna.UI2.WinForms.Guna2Button()
-        Me.Cancel = New Guna.UI2.WinForms.Guna2Button()
-        Me.Guna2PictureBox1 = New Guna.UI2.WinForms.Guna2PictureBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Guna2Button5 = New Guna.UI2.WinForms.Guna2Button()
@@ -47,14 +47,13 @@ Partial Class CASHIER
         Me.lbltotal = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.OrdersDataGridView = New System.Windows.Forms.DataGridView()
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Item_no = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.OrdersBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.SHITSTEMDataSet = New DIMSUM_SHITSTEM.SHITSTEMDataSet()
         Me.checkoutbtn = New Guna.UI2.WinForms.Guna2Button()
-        Me.OrdersTableAdapter = New DIMSUM_SHITSTEM.SHITSTEMDataSetTableAdapters.OrdersTableAdapter()
-        Me.TableAdapterManager = New DIMSUM_SHITSTEM.SHITSTEMDataSetTableAdapters.TableAdapterManager()
         Me.orderlabel = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.Guna2ControlBox1 = New Guna.UI2.WinForms.Guna2ControlBox()
         Me.Guna2Panel1 = New Guna.UI2.WinForms.Guna2Panel()
@@ -64,9 +63,11 @@ Partial Class CASHIER
         Me.TextBoxSearch = New System.Windows.Forms.TextBox()
         Me.panel3 = New Guna.UI2.WinForms.Guna2Panel()
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
+        Me.OrdersTableAdapter = New DIMSUM_SHITSTEM.SHITSTEMDataSetTableAdapters.OrdersTableAdapter()
+        Me.TableAdapterManager = New DIMSUM_SHITSTEM.SHITSTEMDataSetTableAdapters.TableAdapterManager()
+        Me.Guna2PictureBox1 = New Guna.UI2.WinForms.Guna2PictureBox()
         Me.Panel2.SuspendLayout()
         Me.FlowLayoutPanel2.SuspendLayout()
-        CType(Me.Guna2PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         CType(Me.OrdersDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.OrdersBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -74,6 +75,7 @@ Partial Class CASHIER
         Me.Guna2Panel1.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.panel3.SuspendLayout()
+        CType(Me.Guna2PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Panel2
@@ -88,35 +90,80 @@ Partial Class CASHIER
         '
         'FlowLayoutPanel2
         '
-        Me.FlowLayoutPanel2.Controls.Add(Me.FoodFilter)
+        Me.FlowLayoutPanel2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.FlowLayoutPanel2.AutoScroll = True
+        Me.FlowLayoutPanel2.Controls.Add(Me.Cancel)
+        Me.FlowLayoutPanel2.Controls.Add(Me.SiomaiFilter)
+        Me.FlowLayoutPanel2.Controls.Add(Me.SiopaoFilter)
         Me.FlowLayoutPanel2.Controls.Add(Me.DrinksFilter)
         Me.FlowLayoutPanel2.Controls.Add(Me.OthersFilter)
-        Me.FlowLayoutPanel2.Controls.Add(Me.Cancel)
         Me.FlowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown
         Me.FlowLayoutPanel2.Location = New System.Drawing.Point(27, 182)
         Me.FlowLayoutPanel2.Name = "FlowLayoutPanel2"
-        Me.FlowLayoutPanel2.Size = New System.Drawing.Size(130, 527)
+        Me.FlowLayoutPanel2.Size = New System.Drawing.Size(141, 527)
         Me.FlowLayoutPanel2.TabIndex = 22
+        Me.FlowLayoutPanel2.WrapContents = False
         '
-        'FoodFilter
+        'Cancel
         '
-        Me.FoodFilter.Animated = True
-        Me.FoodFilter.BorderRadius = 15
-        Me.FoodFilter.BorderThickness = 2
-        Me.FoodFilter.DisabledState.BorderColor = System.Drawing.Color.DarkGray
-        Me.FoodFilter.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
-        Me.FoodFilter.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
-        Me.FoodFilter.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
-        Me.FoodFilter.FillColor = System.Drawing.Color.White
-        Me.FoodFilter.Font = New System.Drawing.Font("ITC Kabel", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.FoodFilter.ForeColor = System.Drawing.Color.Black
-        Me.FoodFilter.Location = New System.Drawing.Point(20, 20)
-        Me.FoodFilter.Margin = New System.Windows.Forms.Padding(20)
-        Me.FoodFilter.Name = "FoodFilter"
-        Me.FoodFilter.Size = New System.Drawing.Size(80, 80)
-        Me.FoodFilter.TabIndex = 19
-        Me.FoodFilter.Text = "Food"
-        Me.FoodFilter.TextOffset = New System.Drawing.Point(0, 25)
+        Me.Cancel.Animated = True
+        Me.Cancel.BorderRadius = 15
+        Me.Cancel.BorderThickness = 2
+        Me.Cancel.DisabledState.BorderColor = System.Drawing.Color.DarkGray
+        Me.Cancel.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
+        Me.Cancel.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.Cancel.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
+        Me.Cancel.FillColor = System.Drawing.Color.White
+        Me.Cancel.Font = New System.Drawing.Font("ITC Kabel", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Cancel.ForeColor = System.Drawing.Color.Black
+        Me.Cancel.Location = New System.Drawing.Point(20, 20)
+        Me.Cancel.Margin = New System.Windows.Forms.Padding(20)
+        Me.Cancel.Name = "Cancel"
+        Me.Cancel.Size = New System.Drawing.Size(80, 80)
+        Me.Cancel.TabIndex = 24
+        Me.Cancel.Text = "All"
+        Me.Cancel.TextOffset = New System.Drawing.Point(0, 25)
+        '
+        'SiomaiFilter
+        '
+        Me.SiomaiFilter.Animated = True
+        Me.SiomaiFilter.BorderRadius = 15
+        Me.SiomaiFilter.BorderThickness = 2
+        Me.SiomaiFilter.DisabledState.BorderColor = System.Drawing.Color.DarkGray
+        Me.SiomaiFilter.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
+        Me.SiomaiFilter.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.SiomaiFilter.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
+        Me.SiomaiFilter.FillColor = System.Drawing.Color.White
+        Me.SiomaiFilter.Font = New System.Drawing.Font("ITC Kabel", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.SiomaiFilter.ForeColor = System.Drawing.Color.Black
+        Me.SiomaiFilter.Location = New System.Drawing.Point(20, 140)
+        Me.SiomaiFilter.Margin = New System.Windows.Forms.Padding(20)
+        Me.SiomaiFilter.Name = "SiomaiFilter"
+        Me.SiomaiFilter.Size = New System.Drawing.Size(80, 80)
+        Me.SiomaiFilter.TabIndex = 19
+        Me.SiomaiFilter.Text = "Siomai"
+        Me.SiomaiFilter.TextOffset = New System.Drawing.Point(0, 25)
+        '
+        'SiopaoFilter
+        '
+        Me.SiopaoFilter.Animated = True
+        Me.SiopaoFilter.BorderRadius = 15
+        Me.SiopaoFilter.BorderThickness = 2
+        Me.SiopaoFilter.DisabledState.BorderColor = System.Drawing.Color.DarkGray
+        Me.SiopaoFilter.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
+        Me.SiopaoFilter.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.SiopaoFilter.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
+        Me.SiopaoFilter.FillColor = System.Drawing.Color.White
+        Me.SiopaoFilter.Font = New System.Drawing.Font("ITC Kabel", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.SiopaoFilter.ForeColor = System.Drawing.Color.Black
+        Me.SiopaoFilter.Location = New System.Drawing.Point(20, 260)
+        Me.SiopaoFilter.Margin = New System.Windows.Forms.Padding(20)
+        Me.SiopaoFilter.Name = "SiopaoFilter"
+        Me.SiopaoFilter.Size = New System.Drawing.Size(80, 80)
+        Me.SiopaoFilter.TabIndex = 25
+        Me.SiopaoFilter.Text = "Siopao"
+        Me.SiopaoFilter.TextOffset = New System.Drawing.Point(0, 25)
         '
         'DrinksFilter
         '
@@ -130,7 +177,7 @@ Partial Class CASHIER
         Me.DrinksFilter.FillColor = System.Drawing.Color.White
         Me.DrinksFilter.Font = New System.Drawing.Font("ITC Kabel", 11.25!, System.Drawing.FontStyle.Bold)
         Me.DrinksFilter.ForeColor = System.Drawing.Color.Black
-        Me.DrinksFilter.Location = New System.Drawing.Point(20, 140)
+        Me.DrinksFilter.Location = New System.Drawing.Point(20, 380)
         Me.DrinksFilter.Margin = New System.Windows.Forms.Padding(20)
         Me.DrinksFilter.Name = "DrinksFilter"
         Me.DrinksFilter.Size = New System.Drawing.Size(80, 80)
@@ -150,47 +197,13 @@ Partial Class CASHIER
         Me.OthersFilter.FillColor = System.Drawing.Color.White
         Me.OthersFilter.Font = New System.Drawing.Font("ITC Kabel", 11.25!, System.Drawing.FontStyle.Bold)
         Me.OthersFilter.ForeColor = System.Drawing.Color.Black
-        Me.OthersFilter.Location = New System.Drawing.Point(20, 260)
+        Me.OthersFilter.Location = New System.Drawing.Point(20, 500)
         Me.OthersFilter.Margin = New System.Windows.Forms.Padding(20)
         Me.OthersFilter.Name = "OthersFilter"
         Me.OthersFilter.Size = New System.Drawing.Size(80, 80)
         Me.OthersFilter.TabIndex = 23
         Me.OthersFilter.Text = "Others"
         Me.OthersFilter.TextOffset = New System.Drawing.Point(0, 25)
-        '
-        'Cancel
-        '
-        Me.Cancel.Animated = True
-        Me.Cancel.BorderRadius = 15
-        Me.Cancel.BorderThickness = 2
-        Me.Cancel.DisabledState.BorderColor = System.Drawing.Color.DarkGray
-        Me.Cancel.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
-        Me.Cancel.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
-        Me.Cancel.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
-        Me.Cancel.FillColor = System.Drawing.Color.White
-        Me.Cancel.Font = New System.Drawing.Font("OCR A Extended", 48.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Cancel.ForeColor = System.Drawing.Color.Black
-        Me.Cancel.Location = New System.Drawing.Point(20, 380)
-        Me.Cancel.Margin = New System.Windows.Forms.Padding(20)
-        Me.Cancel.Name = "Cancel"
-        Me.Cancel.Size = New System.Drawing.Size(80, 80)
-        Me.Cancel.TabIndex = 24
-        Me.Cancel.Text = "X"
-        Me.Cancel.TextOffset = New System.Drawing.Point(3, 0)
-        '
-        'Guna2PictureBox1
-        '
-        Me.Guna2PictureBox1.BackColor = System.Drawing.Color.Transparent
-        Me.Guna2PictureBox1.BorderRadius = 15
-        Me.Guna2PictureBox1.Image = Global.DIMSUM_SHITSTEM.My.Resources.Resources.icon
-        Me.Guna2PictureBox1.ImageRotate = 0!
-        Me.Guna2PictureBox1.Location = New System.Drawing.Point(27, 22)
-        Me.Guna2PictureBox1.Name = "Guna2PictureBox1"
-        Me.Guna2PictureBox1.Size = New System.Drawing.Size(130, 130)
-        Me.Guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.Guna2PictureBox1.TabIndex = 1
-        Me.Guna2PictureBox1.TabStop = False
-        Me.Guna2PictureBox1.UseTransparentBackground = True
         '
         'Label1
         '
@@ -229,7 +242,7 @@ Partial Class CASHIER
         Me.Guna2Button5.FillColor = System.Drawing.Color.White
         Me.Guna2Button5.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.Guna2Button5.ForeColor = System.Drawing.Color.Black
-        Me.Guna2Button5.Location = New System.Drawing.Point(12, 455)
+        Me.Guna2Button5.Location = New System.Drawing.Point(12, 445)
         Me.Guna2Button5.Name = "Guna2Button5"
         Me.Guna2Button5.Size = New System.Drawing.Size(89, 30)
         Me.Guna2Button5.TabIndex = 25
@@ -260,7 +273,7 @@ Partial Class CASHIER
         Me.Guna2Button2.HoverState.BorderColor = System.Drawing.Color.Transparent
         Me.Guna2Button2.HoverState.FillColor = System.Drawing.Color.DimGray
         Me.Guna2Button2.HoverState.ForeColor = System.Drawing.Color.White
-        Me.Guna2Button2.Location = New System.Drawing.Point(12, 551)
+        Me.Guna2Button2.Location = New System.Drawing.Point(20, 515)
         Me.Guna2Button2.Margin = New System.Windows.Forms.Padding(20)
         Me.Guna2Button2.Name = "Guna2Button2"
         Me.Guna2Button2.Size = New System.Drawing.Size(89, 44)
@@ -322,7 +335,7 @@ Partial Class CASHIER
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.OrdersDataGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.OrdersDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.OrdersDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4})
+        Me.OrdersDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.Item_no, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4})
         Me.OrdersDataGridView.DataSource = Me.OrdersBindingSource
         DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
@@ -358,6 +371,13 @@ Partial Class CASHIER
         Me.DataGridViewTextBoxColumn1.HeaderText = "Name"
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
         Me.DataGridViewTextBoxColumn1.ReadOnly = True
+        '
+        'Item_no
+        '
+        Me.Item_no.DataPropertyName = "Item_no"
+        Me.Item_no.HeaderText = "Item_no"
+        Me.Item_no.Name = "Item_no"
+        Me.Item_no.ReadOnly = True
         '
         'DataGridViewTextBoxColumn2
         '
@@ -429,23 +449,6 @@ Partial Class CASHIER
         Me.checkoutbtn.TabIndex = 17
         Me.checkoutbtn.Text = "check out"
         Me.checkoutbtn.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias
-        '
-        'OrdersTableAdapter
-        '
-        Me.OrdersTableAdapter.ClearBeforeFill = True
-        '
-        'TableAdapterManager
-        '
-        Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
-        Me.TableAdapterManager.DailySalesTableAdapter = Nothing
-        Me.TableAdapterManager.DailySummaryTableAdapter = Nothing
-        Me.TableAdapterManager.loginTableAdapter = Nothing
-        Me.TableAdapterManager.MonthlySalesTableAdapter = Nothing
-        Me.TableAdapterManager.OrdersTableAdapter = Me.OrdersTableAdapter
-        Me.TableAdapterManager.ProductGroupsTableAdapter = Nothing
-        Me.TableAdapterManager.STOCKSTableAdapter = Nothing
-        Me.TableAdapterManager.UpdateOrder = DIMSUM_SHITSTEM.SHITSTEMDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
-        Me.TableAdapterManager.WeeklySalesTableAdapter = Nothing
         '
         'orderlabel
         '
@@ -546,6 +549,39 @@ Partial Class CASHIER
         Me.FlowLayoutPanel1.Size = New System.Drawing.Size(671, 411)
         Me.FlowLayoutPanel1.TabIndex = 0
         '
+        'OrdersTableAdapter
+        '
+        Me.OrdersTableAdapter.ClearBeforeFill = True
+        '
+        'TableAdapterManager
+        '
+        Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
+        Me.TableAdapterManager.DailySalesTableAdapter = Nothing
+        Me.TableAdapterManager.DailySummaryTableAdapter = Nothing
+        Me.TableAdapterManager.loginTableAdapter = Nothing
+        Me.TableAdapterManager.MonthlySalesTableAdapter = Nothing
+        Me.TableAdapterManager.OrdersTableAdapter = Me.OrdersTableAdapter
+        Me.TableAdapterManager.ProductGroupsTableAdapter = Nothing
+        Me.TableAdapterManager.STOCKSTableAdapter = Nothing
+        Me.TableAdapterManager.TransactionDetailsTableAdapter = Nothing
+        Me.TableAdapterManager.TransactionsTableAdapter = Nothing
+        Me.TableAdapterManager.UpdateOrder = DIMSUM_SHITSTEM.SHITSTEMDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
+        Me.TableAdapterManager.WeeklySalesTableAdapter = Nothing
+        '
+        'Guna2PictureBox1
+        '
+        Me.Guna2PictureBox1.BackColor = System.Drawing.Color.Transparent
+        Me.Guna2PictureBox1.BorderRadius = 15
+        Me.Guna2PictureBox1.Image = Global.DIMSUM_SHITSTEM.My.Resources.Resources.icon
+        Me.Guna2PictureBox1.ImageRotate = 0!
+        Me.Guna2PictureBox1.Location = New System.Drawing.Point(27, 22)
+        Me.Guna2PictureBox1.Name = "Guna2PictureBox1"
+        Me.Guna2PictureBox1.Size = New System.Drawing.Size(130, 130)
+        Me.Guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.Guna2PictureBox1.TabIndex = 1
+        Me.Guna2PictureBox1.TabStop = False
+        Me.Guna2PictureBox1.UseTransparentBackground = True
+        '
         'CASHIER
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -561,7 +597,6 @@ Partial Class CASHIER
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.Panel2.ResumeLayout(False)
         Me.FlowLayoutPanel2.ResumeLayout(False)
-        CType(Me.Guna2PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         CType(Me.OrdersDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
@@ -572,6 +607,7 @@ Partial Class CASHIER
         Me.Panel4.ResumeLayout(False)
         Me.Panel4.PerformLayout()
         Me.panel3.ResumeLayout(False)
+        CType(Me.Guna2PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -585,7 +621,7 @@ Partial Class CASHIER
     Friend WithEvents OrdersTableAdapter As SHITSTEMDataSetTableAdapters.OrdersTableAdapter
     Friend WithEvents TableAdapterManager As SHITSTEMDataSetTableAdapters.TableAdapterManager
     Friend WithEvents OrdersDataGridView As DataGridView
-    Friend WithEvents FoodFilter As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents SiomaiFilter As Guna.UI2.WinForms.Guna2Button
     Friend WithEvents orderlabel As Guna.UI2.WinForms.Guna2HtmlLabel
     Friend WithEvents Guna2Panel1 As Guna.UI2.WinForms.Guna2Panel
     Friend WithEvents Guna2ControlBox1 As Guna.UI2.WinForms.Guna2ControlBox
@@ -593,10 +629,6 @@ Partial Class CASHIER
     Friend WithEvents Panel4 As Panel
     Friend WithEvents lbltotal As Guna.UI2.WinForms.Guna2HtmlLabel
     Friend WithEvents Guna2HtmlLabel1 As Guna.UI2.WinForms.Guna2HtmlLabel
-    Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn4 As DataGridViewTextBoxColumn
     Friend WithEvents changelbl As Label
     Friend WithEvents panel3 As Guna.UI2.WinForms.Guna2Panel
     Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
@@ -609,4 +641,10 @@ Partial Class CASHIER
     Friend WithEvents FlowLayoutPanel2 As FlowLayoutPanel
     Friend WithEvents OthersFilter As Guna.UI2.WinForms.Guna2Button
     Friend WithEvents Cancel As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+    Friend WithEvents Item_no As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn4 As DataGridViewTextBoxColumn
+    Friend WithEvents SiopaoFilter As Guna.UI2.WinForms.Guna2Button
 End Class
