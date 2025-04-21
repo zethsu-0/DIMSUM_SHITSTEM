@@ -89,6 +89,14 @@ Partial Class SALES_TAB
         Me.WeeklySalesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.STOCKSTableAdapter = New DIMSUM_SHITSTEM.SHITSTEMDataSetTableAdapters.STOCKSTableAdapter()
         Me.WeeklySalesTableAdapter1 = New DIMSUM_SHITSTEM.SHITSTEMDataSetTableAdapters.WeeklySalesTableAdapter()
+        Me.DailySummaryBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.DailySummaryTableAdapter = New DIMSUM_SHITSTEM.SHITSTEMDataSetTableAdapters.DailySummaryTableAdapter()
+        Me.DailySummaryDataGridView = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn13 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel5.SuspendLayout()
         CType(Me.Chart2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel3.SuspendLayout()
@@ -108,6 +116,8 @@ Partial Class SALES_TAB
         Me.profitpanel.SuspendLayout()
         CType(Me.MonthlySalesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.WeeklySalesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DailySummaryBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DailySummaryDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Panel5
@@ -115,9 +125,9 @@ Partial Class SALES_TAB
         Me.Panel5.Anchor = System.Windows.Forms.AnchorStyles.Right
         Me.Panel5.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.Panel5.Controls.Add(Me.Chart2)
-        Me.Panel5.Location = New System.Drawing.Point(0, 451)
+        Me.Panel5.Location = New System.Drawing.Point(3, 451)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(435, 337)
+        Me.Panel5.Size = New System.Drawing.Size(394, 337)
         Me.Panel5.TabIndex = 6
         '
         'Chart2
@@ -131,7 +141,7 @@ Partial Class SALES_TAB
         Series1.ChartArea = "ChartArea1"
         Series1.Name = "Series1"
         Me.Chart2.Series.Add(Series1)
-        Me.Chart2.Size = New System.Drawing.Size(435, 337)
+        Me.Chart2.Size = New System.Drawing.Size(394, 337)
         Me.Chart2.TabIndex = 1
         Me.Chart2.Text = "Chart4"
         Title1.Name = "Title1"
@@ -143,9 +153,9 @@ Partial Class SALES_TAB
         Me.Panel3.Anchor = System.Windows.Forms.AnchorStyles.Right
         Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.Panel3.Controls.Add(Me.Chart1)
-        Me.Panel3.Location = New System.Drawing.Point(3, 39)
+        Me.Panel3.Location = New System.Drawing.Point(6, 39)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(429, 373)
+        Me.Panel3.Size = New System.Drawing.Size(388, 373)
         Me.Panel3.TabIndex = 5
         '
         'Chart1
@@ -159,7 +169,7 @@ Partial Class SALES_TAB
         Series2.ChartArea = "ChartArea1"
         Series2.Name = "Series1"
         Me.Chart1.Series.Add(Series2)
-        Me.Chart1.Size = New System.Drawing.Size(429, 373)
+        Me.Chart1.Size = New System.Drawing.Size(388, 373)
         Me.Chart1.TabIndex = 1
         Me.Chart1.Text = "Chart1"
         Title2.Name = "Title1"
@@ -176,9 +186,9 @@ Partial Class SALES_TAB
         Me.Panel4.Controls.Add(Me.Label3)
         Me.Panel4.Controls.Add(Me.Label2)
         Me.Panel4.Controls.Add(Me.Label1)
-        Me.Panel4.Location = New System.Drawing.Point(33, 77)
+        Me.Panel4.Location = New System.Drawing.Point(17, 77)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(344, 239)
+        Me.Panel4.Size = New System.Drawing.Size(390, 239)
         Me.Panel4.TabIndex = 2
         '
         'salesTotallbl
@@ -452,7 +462,9 @@ Partial Class SALES_TAB
         '
         'Panel1
         '
+        Me.Panel1.AutoScroll = True
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.Panel1.Controls.Add(Me.DailySummaryDataGridView)
         Me.Panel1.Controls.Add(Me.RESTOCKBTN)
         Me.Panel1.Controls.Add(Me.Totalsalepanel)
         Me.Panel1.Controls.Add(Me.profitpanel)
@@ -465,7 +477,7 @@ Partial Class SALES_TAB
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1354, 797)
+        Me.Panel1.Size = New System.Drawing.Size(1358, 1204)
         Me.Panel1.TabIndex = 8
         '
         'RESTOCKBTN
@@ -488,9 +500,9 @@ Partial Class SALES_TAB
         Me.Totalsalepanel.Controls.Add(Me.Label8)
         Me.Totalsalepanel.Controls.Add(Me.Panel6)
         Me.Totalsalepanel.Controls.Add(Me.Panel7)
-        Me.Totalsalepanel.Location = New System.Drawing.Point(462, 3)
+        Me.Totalsalepanel.Location = New System.Drawing.Point(430, 3)
         Me.Totalsalepanel.Name = "Totalsalepanel"
-        Me.Totalsalepanel.Size = New System.Drawing.Size(435, 791)
+        Me.Totalsalepanel.Size = New System.Drawing.Size(397, 791)
         Me.Totalsalepanel.TabIndex = 9
         '
         'Label8
@@ -509,9 +521,9 @@ Partial Class SALES_TAB
         Me.Panel6.Anchor = System.Windows.Forms.AnchorStyles.Right
         Me.Panel6.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.Panel6.Controls.Add(Me.Chart3)
-        Me.Panel6.Location = New System.Drawing.Point(3, 39)
+        Me.Panel6.Location = New System.Drawing.Point(6, 39)
         Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(429, 373)
+        Me.Panel6.Size = New System.Drawing.Size(388, 373)
         Me.Panel6.TabIndex = 5
         '
         'Chart3
@@ -525,7 +537,7 @@ Partial Class SALES_TAB
         Series3.ChartArea = "ChartArea1"
         Series3.Name = "Series1"
         Me.Chart3.Series.Add(Series3)
-        Me.Chart3.Size = New System.Drawing.Size(429, 373)
+        Me.Chart3.Size = New System.Drawing.Size(388, 373)
         Me.Chart3.TabIndex = 1
         Me.Chart3.Text = "Chart3"
         Title3.Name = "Title1"
@@ -537,9 +549,9 @@ Partial Class SALES_TAB
         Me.Panel7.Anchor = System.Windows.Forms.AnchorStyles.Right
         Me.Panel7.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.Panel7.Controls.Add(Me.Chart4)
-        Me.Panel7.Location = New System.Drawing.Point(0, 451)
+        Me.Panel7.Location = New System.Drawing.Point(3, 451)
         Me.Panel7.Name = "Panel7"
-        Me.Panel7.Size = New System.Drawing.Size(435, 337)
+        Me.Panel7.Size = New System.Drawing.Size(394, 337)
         Me.Panel7.TabIndex = 6
         '
         'Chart4
@@ -553,7 +565,7 @@ Partial Class SALES_TAB
         Series4.ChartArea = "ChartArea1"
         Series4.Name = "Series1"
         Me.Chart4.Series.Add(Series4)
-        Me.Chart4.Size = New System.Drawing.Size(435, 337)
+        Me.Chart4.Size = New System.Drawing.Size(394, 337)
         Me.Chart4.TabIndex = 1
         Me.Chart4.Text = "Chart4"
         Title4.Name = "Title1"
@@ -566,9 +578,9 @@ Partial Class SALES_TAB
         Me.profitpanel.Controls.Add(Me.Label7)
         Me.profitpanel.Controls.Add(Me.Panel3)
         Me.profitpanel.Controls.Add(Me.Panel5)
-        Me.profitpanel.Location = New System.Drawing.Point(903, 3)
+        Me.profitpanel.Location = New System.Drawing.Point(871, 3)
         Me.profitpanel.Name = "profitpanel"
-        Me.profitpanel.Size = New System.Drawing.Size(435, 791)
+        Me.profitpanel.Size = New System.Drawing.Size(397, 791)
         Me.profitpanel.TabIndex = 8
         Me.profitpanel.Visible = False
         '
@@ -644,6 +656,66 @@ Partial Class SALES_TAB
         '
         Me.WeeklySalesTableAdapter1.ClearBeforeFill = True
         '
+        'DailySummaryBindingSource
+        '
+        Me.DailySummaryBindingSource.DataMember = "DailySummary"
+        Me.DailySummaryBindingSource.DataSource = Me.SHITSTEMDataSet
+        '
+        'DailySummaryTableAdapter
+        '
+        Me.DailySummaryTableAdapter.ClearBeforeFill = True
+        '
+        'DailySummaryDataGridView
+        '
+        Me.DailySummaryDataGridView.AllowUserToAddRows = False
+        Me.DailySummaryDataGridView.AllowUserToDeleteRows = False
+        Me.DailySummaryDataGridView.AutoGenerateColumns = False
+        Me.DailySummaryDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.DailySummaryDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DailySummaryDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6, Me.DataGridViewTextBoxColumn11, Me.DataGridViewTextBoxColumn12, Me.DataGridViewTextBoxColumn13})
+        Me.DailySummaryDataGridView.DataSource = Me.DailySummaryBindingSource
+        Me.DailySummaryDataGridView.Location = New System.Drawing.Point(433, 822)
+        Me.DailySummaryDataGridView.Name = "DailySummaryDataGridView"
+        Me.DailySummaryDataGridView.ReadOnly = True
+        Me.DailySummaryDataGridView.RowHeadersVisible = False
+        Me.DailySummaryDataGridView.Size = New System.Drawing.Size(394, 328)
+        Me.DailySummaryDataGridView.TabIndex = 10
+        '
+        'DataGridViewTextBoxColumn5
+        '
+        Me.DataGridViewTextBoxColumn5.DataPropertyName = "OrderID"
+        Me.DataGridViewTextBoxColumn5.HeaderText = "OrderID"
+        Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
+        Me.DataGridViewTextBoxColumn5.ReadOnly = True
+        '
+        'DataGridViewTextBoxColumn6
+        '
+        Me.DataGridViewTextBoxColumn6.DataPropertyName = "Product_Name"
+        Me.DataGridViewTextBoxColumn6.HeaderText = "Product_Name"
+        Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
+        Me.DataGridViewTextBoxColumn6.ReadOnly = True
+        '
+        'DataGridViewTextBoxColumn11
+        '
+        Me.DataGridViewTextBoxColumn11.DataPropertyName = "Quantity"
+        Me.DataGridViewTextBoxColumn11.HeaderText = "Quantity"
+        Me.DataGridViewTextBoxColumn11.Name = "DataGridViewTextBoxColumn11"
+        Me.DataGridViewTextBoxColumn11.ReadOnly = True
+        '
+        'DataGridViewTextBoxColumn12
+        '
+        Me.DataGridViewTextBoxColumn12.DataPropertyName = "OrderDate"
+        Me.DataGridViewTextBoxColumn12.HeaderText = "OrderDate"
+        Me.DataGridViewTextBoxColumn12.Name = "DataGridViewTextBoxColumn12"
+        Me.DataGridViewTextBoxColumn12.ReadOnly = True
+        '
+        'DataGridViewTextBoxColumn13
+        '
+        Me.DataGridViewTextBoxColumn13.DataPropertyName = "Revenue"
+        Me.DataGridViewTextBoxColumn13.HeaderText = "Revenue"
+        Me.DataGridViewTextBoxColumn13.Name = "DataGridViewTextBoxColumn13"
+        Me.DataGridViewTextBoxColumn13.ReadOnly = True
+        '
         'SALES_TAB
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -652,7 +724,7 @@ Partial Class SALES_TAB
         Me.AutoSize = True
         Me.Controls.Add(Me.Panel1)
         Me.Name = "SALES_TAB"
-        Me.Size = New System.Drawing.Size(1354, 797)
+        Me.Size = New System.Drawing.Size(1358, 1204)
         Me.Panel5.ResumeLayout(False)
         CType(Me.Chart2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel3.ResumeLayout(False)
@@ -676,6 +748,8 @@ Partial Class SALES_TAB
         Me.profitpanel.PerformLayout()
         CType(Me.MonthlySalesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.WeeklySalesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DailySummaryBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DailySummaryDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -725,4 +799,12 @@ Partial Class SALES_TAB
     Friend WithEvents Label10 As Label
     Friend WithEvents Label11 As Label
     Friend WithEvents RESTOCKBTN As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents DailySummaryDataGridView As DataGridView
+    Friend WithEvents DataGridViewTextBoxColumn5 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn6 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn11 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn12 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn13 As DataGridViewTextBoxColumn
+    Friend WithEvents DailySummaryBindingSource As BindingSource
+    Friend WithEvents DailySummaryTableAdapter As SHITSTEMDataSetTableAdapters.DailySummaryTableAdapter
 End Class

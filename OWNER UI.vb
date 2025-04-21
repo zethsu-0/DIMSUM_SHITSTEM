@@ -48,11 +48,11 @@ Public Class Form2
     End Sub
     Private Sub GetUserFullName()
         Try
+            If con.State = ConnectionState.Closed Then con.Open()
 
-            Dim query As String = "SELECT firstname, lastname FROM login WHERE user_id = @user_id"
+            Dim query As String = "SELECT firstname, lastname, Photo FROM login WHERE user_id = @user_id"
 
             Using command As New SqlCommand(query, con)
-
                 command.Parameters.Add("@user_id", SqlDbType.NVarChar).Value = user_id
 
                 Dim reader As SqlDataReader = command.ExecuteReader()
@@ -60,22 +60,32 @@ Public Class Form2
                 If reader.Read() Then
                     Dim firstName As String = reader("firstname").ToString()
                     Dim lastName As String = reader("lastname").ToString()
-
                     Label3.Text = firstName & " " & lastName
-                    con.Close()
+
+                    ' === Photo Handling ===
+                    If Not IsDBNull(reader("Photo")) Then
+                        Dim imgData() As Byte = CType(reader("Photo"), Byte())
+                        Using ms As New IO.MemoryStream(imgData)
+                            profilepic.Image = Image.FromStream(ms)
+                            profilepic.SizeMode = PictureBoxSizeMode.StretchImage
+                        End Using
+                    Else
+                        profilepic.Image = Nothing ' Or set a default image
+                    End If
                 Else
                     Label3.Text = "User not found"
-                    con.Close()
+                    profilepic.Image = Nothing
                 End If
 
                 reader.Close()
             End Using
         Catch ex As Exception
             MessageBox.Show("Error retrieving user data: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            con.Close()
+        Finally
+            If con.State = ConnectionState.Open Then con.Close()
         End Try
-
     End Sub
+
 
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick

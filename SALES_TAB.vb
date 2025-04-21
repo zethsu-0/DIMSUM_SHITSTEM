@@ -10,6 +10,7 @@ Public Class SALES_TAB
         Me.MonthlySalesTableAdapter.Fill(Me.SHITSTEMDataSet.MonthlySales)
         Me.WeeklySalesTableAdapter.Fill(Me.SHITSTEMDataSet.WeeklySales)
         Me.STOCKSTableAdapter.Fill(Me.SHITSTEMDataSet.STOCKS)
+        Me.DailySummaryTableAdapter.Fill(Me.SHITSTEMDataSet.DailySummary)
 
         If user_Role = "Owner" Then
             profitpanel.Visible = True
@@ -188,7 +189,9 @@ Public Class SALES_TAB
         Me.DailySalesTableAdapter.Fill(Me.SHITSTEMDataSet.DailySales)
         Me.MonthlySalesTableAdapter.Fill(Me.SHITSTEMDataSet.MonthlySales)
         Me.WeeklySalesTableAdapter.Fill(Me.SHITSTEMDataSet.WeeklySales)
+        Me.DailySummaryTableAdapter.Fill(Me.SHITSTEMDataSet.DailySummary)
         Me.STOCKSTableAdapter.Fill(Me.SHITSTEMDataSet.STOCKS)
+
     End Sub
 
 

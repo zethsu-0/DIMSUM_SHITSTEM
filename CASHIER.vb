@@ -3,9 +3,21 @@ Imports System.Data.SqlClient
 Imports System.Drawing.Text
 Imports System.Globalization
 Imports System.IO
+Imports System.Runtime.InteropServices
 Imports Guna.UI2.WinForms
-
 Public Class CASHIER
+
+    <DllImport("user32.dll", EntryPoint:="ReleaseCapture")>
+    Private Shared Sub ReleaseCapture()
+    End Sub
+
+    <DllImport("user32.dll", EntryPoint:="SendMessage")>
+    Private Shared Function SendMessage(hWnd As IntPtr, wMsg As Integer, wParam As Integer, lParam As Integer) As Integer
+    End Function
+
+    Private Const WM_NCLBUTTONDOWN As Integer = &HA1
+    Private Const HTCAPTION As Integer = &H2
+
     Public Property user_Role As String
 
     Private Sub CASHIER_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -14,11 +26,11 @@ Public Class CASHIER
         con.Close()
         ' --- Set up the Delete Button Column in the DataGridView ---
         Dim deleteButtonColumn As New DataGridViewButtonColumn()
-        deleteButtonColumn.Name = "DeleteButton" ' Give the column a name to identify it later
-        deleteButtonColumn.HeaderText = " "      ' No visible header text
-        deleteButtonColumn.Text = "−"             ' The minus symbol for the button text
-        deleteButtonColumn.Width = 25             ' Make the button narrow
-        deleteButtonColumn.UseColumnTextForButtonValue = True ' Display the Text property on the button
+        deleteButtonColumn.Name = "DeleteButton"
+        deleteButtonColumn.HeaderText = " "
+        deleteButtonColumn.Text = "−"
+        deleteButtonColumn.Width = 25
+        deleteButtonColumn.UseColumnTextForButtonValue = True
 
 
         If Not OrdersDataGridView.Columns.Contains("DeleteButton") Then
@@ -216,6 +228,7 @@ Public Class CASHIER
                         localProductName = reader("Product_name").ToString()
                         currentStock = Convert.ToInt32(reader("quantity"))
                         unitPrice = Convert.ToDecimal(reader("taxed_price"))
+
                     Else
                         MessageBox.Show("Item not found in stocks.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                         Return
@@ -235,7 +248,7 @@ Public Class CASHIER
         End If
 
         Try
-            Opencon() '
+            Opencon()
 
             Dim existingCartQuantity As Integer = 0
             Dim checkCartQuery As String = "SELECT Quantity FROM Orders WHERE Item_No = @Item_No"
@@ -269,9 +282,9 @@ Public Class CASHIER
                     insertCmd.Parameters.AddWithValue("@Item_No", itemNoToAdd)
                     insertCmd.Parameters.AddWithValue("@Product_name", localProductName)
                     insertCmd.Parameters.AddWithValue("@Quantity", quantityToAdd)
-                    insertCmd.Parameters.AddWithValue("@Price", sellingPrice) ' Store the calculated selling price
+                    insertCmd.Parameters.AddWithValue("@Price", sellingPrice)
                     insertCmd.Parameters.AddWithValue("@Total_price", newTotalPrice)
-                    insertCmd.Parameters.AddWithValue("@OrderDate", DateTime.Now.Date) ' Store Date only
+                    insertCmd.Parameters.AddWithValue("@OrderDate", DateTime.Now.Date)
                     insertCmd.ExecuteNonQuery()
                 End Using
             End If
@@ -343,9 +356,6 @@ Public Class CASHIER
 
         Dim salesTotalForReport As Decimal = 0
         Dim totalProfitForReport As Decimal = 0
-
-
-
 
         Try
             For Each row As DataGridViewRow In OrdersDataGridView.Rows
@@ -447,8 +457,6 @@ Public Class CASHIER
                 End If
             End Using
 
-
-
             ' 1. INSERT into DailySales
             Dim insertDailyQuery As String = "INSERT INTO DailySales (Day, Sales_total, Profit) VALUES (@Day, @Sales_total, @Profit)"
             Using cmdDaily As New SqlCommand(insertDailyQuery, con)
@@ -485,16 +493,7 @@ Public Class CASHIER
                 cmdMonthly.Parameters.AddWithValue("@Profit", totalProfitForReport)
                 cmdMonthly.ExecuteNonQuery()
             End Using
-            MessageBox.Show("Checkout complete!" & vbCrLf & vbCrLf &
-                $"Total Sale: ₱{salesTotalForReport:N2}" & vbCrLf &
-                $"Payment Received: ₱{paymentAmount:N2}" & vbCrLf &
-                $"Change Due: ₱{changeAmount:N2}",
-                "Transaction Successful", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-
-            ' --- Show Receipt (Assuming RECEIPT form exists and uses data appropriately) ---
-            ' You might need to pass data (like items, totals, payment, change) to the RECEIPT form.
-            ' --- Calculate total quantity of items in cart ---
 
             Dim totalItemCount As Integer = 0
 
@@ -504,11 +503,10 @@ Public Class CASHIER
                 End If
             Next
 
-            ' --- Insert summarized transaction into Transactions table ---
             Dim transactionId As Integer
-            Dim insertTransactionQuery As String = "INSERT INTO Transactions (TransactionDate, TotalAmount, PaymentAmount, ChangeGiven, Total_Item) 
-                                        OUTPUT INSERTED.TransactionID 
-                                        VALUES (@TransactionDate, @TotalAmount, @PaymentAmount, @ChangeGiven, @Total_Item)"
+            Dim insertTransactionQuery As String = "INSERT INTO Transactions (TransactionDate, TotalAmount, PaymentAmount, ChangeGiven, Total_Item, Profit) 
+                                      OUTPUT INSERTED.TransactionID 
+                                      VALUES (@TransactionDate, @TotalAmount, @PaymentAmount, @ChangeGiven, @Total_Item, @Profit)"
 
             Using transactionCmd As New SqlCommand(insertTransactionQuery, con)
                 transactionCmd.Parameters.AddWithValue("@TransactionDate", DateTime.Now)
@@ -516,19 +514,47 @@ Public Class CASHIER
                 transactionCmd.Parameters.AddWithValue("@PaymentAmount", paymentAmount)
                 transactionCmd.Parameters.AddWithValue("@ChangeGiven", changeAmount)
                 transactionCmd.Parameters.AddWithValue("@Total_Item", totalItemCount)
+                transactionCmd.Parameters.AddWithValue("@Profit", totalProfitForReport)
 
                 If con.State = ConnectionState.Closed Then con.Open()
                 transactionId = Convert.ToInt32(transactionCmd.ExecuteScalar())
             End Using
 
-            RECEIPT.Show()
+
+            ' STEP 1: Clear the DailySummary table
+            Dim clearSummaryQuery As String = "DELETE FROM DailySummary"
+            Using clearCmd As New SqlCommand(clearSummaryQuery, con)
+                clearCmd.ExecuteNonQuery()
+            End Using
+
+            ' STEP 2: Insert new grouped summary using actual TransactionDate
+            Dim insertSummaryQuery As String = "
+    INSERT INTO DailySummary (Product_name, Quantity, OrderDate, Revenue)
+    SELECT 
+        s.Product_name,
+        SUM(o.Quantity) AS TotalQuantity,
+        t.TransactionDate,
+        SUM(o.Quantity * o.Price) AS TotalRevenue
+    FROM Orders o
+    INNER JOIN STOCKS s ON o.Item_No = s.Item_No
+    CROSS JOIN (SELECT TransactionDate FROM Transactions WHERE TransactionID = @TransactionID) t
+    GROUP BY s.Product_name, t.TransactionDate"
 
 
-            ' --- Wait briefly before resetting ---
-            ' Reduced delay slightly
-            Await Task.Delay(1500)
 
-            paymenttxtbox.Clear()
+            Using insertCmd As New SqlCommand(insertSummaryQuery, con)
+                insertCmd.Parameters.AddWithValue("@TransactionID", transactionId)
+                insertCmd.ExecuteNonQuery()
+            End Using
+
+
+            Dim receiptForm As New RECEIPT()
+            receiptForm.LoadReport(paymentAmount, changeAmount)
+            receiptForm.ShowDialog()
+
+
+
+
             lbltotal.Text = "₱0.00"
         Catch ex As Exception
             MessageBox.Show($"Error during checkout process: {ex.Message}", "Checkout Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -538,22 +564,27 @@ Public Class CASHIER
                 con.Close()
 
             End If
+            MessageBox.Show("Checkout complete!" & vbCrLf & vbCrLf &
+    $"Total Sale: ₱{salesTotalForReport:N2}" & vbCrLf &
+    $"Payment Received: ₱{paymentAmount:N2}" & vbCrLf &
+    $"Change Due: ₱{changeAmount:N2}",
+    "Transaction Successful", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
             resetcart()
+            paymenttxtbox.Clear()
         End Try
     End Sub
 
-    ' --- Clears the Orders Table in the Database and Refreshes the Grid ---
+
     Public Sub resetcart()
         Try
             con.Open()
-            Dim delquery As String = "DELETE FROM Orders" ' Deletes ALL rows from Orders
+            Dim delquery As String = "DELETE FROM Orders"
             Using cmd As New SqlCommand(delquery, con)
                 cmd.ExecuteNonQuery()
             End Using
 
-            ' Refresh the local dataset after clearing the database table
             Me.OrdersTableAdapter.Fill(Me.SHITSTEMDataSet.Orders)
-            ' The grid (if bound) and total label should update automatically via events.
 
         Catch ex As Exception
             MessageBox.Show($"Error resetting cart: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -634,7 +665,16 @@ Public Class CASHIER
     Handles OrdersDataGridView.CellContentClick
         If e.RowIndex >= 0 AndAlso e.ColumnIndex = OrdersDataGridView.Columns("DeleteButton").Index Then
             Dim rawItemNo As String = OrdersDataGridView.Rows(e.RowIndex).Cells("Item_No").Value.ToString()
-            Dim paddedItemNo As String = CInt(rawItemNo).ToString("D3")
+            Dim paddedItemNo As String = ""
+            Dim itemNoInt As Integer
+
+            If Integer.TryParse(rawItemNo, itemNoInt) Then
+                paddedItemNo = itemNoInt.ToString("D3")
+            Else
+                MessageBox.Show("Invalid Item_No format.")
+                Return
+            End If
+
 
             Dim currentQty As Integer = Convert.ToInt32(OrdersDataGridView.Rows(e.RowIndex).Cells("Quantity").Value)
 
@@ -672,10 +712,18 @@ Public Class CASHIER
         End Try
     End Sub
 
-    ' --- Deletes an Item from the Orders Table and Restocks It ---
+
     Private Sub DeleteItemFromCart(ByVal rawItemNo As String)
         Dim quantityToReturn As Integer = 0
-        Dim paddedItemNo As String = CInt(rawItemNo).ToString("D3")
+        Dim itemNoInt As Integer
+        Dim paddedItemNo As String = ""
+
+        If Integer.TryParse(rawItemNo, itemNoInt) Then
+            paddedItemNo = itemNoInt.ToString("D3")
+        Else
+            MessageBox.Show("Invalid Item_No format.")
+            Return
+        End If
 
         Try
             Opencon()
@@ -724,6 +772,8 @@ Public Class CASHIER
         If user_Role = "Employee" Then
             LOGIN_PAGE.Show()
         End If
+
+        ReturnAllCartItemsAndClearOrders()
     End Sub
     Private Sub TextBoxSearch_TextChanged(sender As Object, e As EventArgs) Handles TextBoxSearch.TextChanged
         GenerateProductButtons(searchTerm:=TextBoxSearch.Text)
@@ -739,7 +789,7 @@ Public Class CASHIER
         HandleCategoryFilter(OthersFilter, "Others") ' Show only "Others" group
     End Sub
     Private Sub SiopaoFilter_Click(sender As Object, e As EventArgs) Handles SiopaoFilter.Click
-        HandleCategoryFilter(OthersFilter, "Siopao")
+        HandleCategoryFilter(SiopaoFilter, "Siopao")
     End Sub
     Private Sub Cancel_Click(sender As Object, e As EventArgs) Handles Cancel.Click
         HandleCategoryFilter(Cancel, Nothing)
@@ -754,8 +804,7 @@ Public Class CASHIER
             GenerateProductButtons(groupFilter)
         End If
     End Sub
-
-    Private Sub CASHIER_Closed(sender As Object, e As EventArgs) Handles Me.Closed
+    Private Sub ReturnAllCartItemsAndClearOrders()
 
         Dim itemsToReturn As New List(Of (itemNo As String, qty As Integer))()
 
@@ -810,9 +859,17 @@ Public Class CASHIER
         End Try
     End Sub
 
+
     Private Sub discount_choice_SelectedIndexChanged(sender As Object, e As EventArgs) Handles discount_choice.SelectedIndexChanged
         If discount_choice.Text = "PWD/SENIOR" Then
 
+        End If
+    End Sub
+
+    Private Sub Guna2Panel1_MouseDown(sender As Object, e As MouseEventArgs) Handles Guna2Panel1.MouseDown
+        If e.Button = MouseButtons.Left Then
+            ReleaseCapture()
+            SendMessage(Me.Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0)
         End If
     End Sub
 End Class

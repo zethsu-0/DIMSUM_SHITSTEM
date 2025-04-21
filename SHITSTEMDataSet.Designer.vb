@@ -1618,8 +1618,6 @@ Partial Public Class SHITSTEMDataSet
         
         Private columnDay As Global.System.Data.DataColumn
         
-        Private columnTransactionDate As Global.System.Data.DataColumn
-        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Public Sub New()
@@ -1680,14 +1678,6 @@ Partial Public Class SHITSTEMDataSet
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public ReadOnly Property TransactionDateColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnTransactionDate
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -1724,9 +1714,9 @@ Partial Public Class SHITSTEMDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Overloads Function AddDailySalesRow(ByVal Sales_total As Decimal, ByVal Profit As Decimal, ByVal Day As Date, ByVal TransactionDate As Date) As DailySalesRow
+        Public Overloads Function AddDailySalesRow(ByVal Sales_total As Decimal, ByVal Profit As Decimal, ByVal Day As Date) As DailySalesRow
             Dim rowDailySalesRow As DailySalesRow = CType(Me.NewRow,DailySalesRow)
-            Dim columnValuesArray() As Object = New Object() {Sales_total, Profit, Day, TransactionDate}
+            Dim columnValuesArray() As Object = New Object() {Sales_total, Profit, Day}
             rowDailySalesRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowDailySalesRow)
             Return rowDailySalesRow
@@ -1752,7 +1742,6 @@ Partial Public Class SHITSTEMDataSet
             Me.columnSales_total = MyBase.Columns("Sales_total")
             Me.columnProfit = MyBase.Columns("Profit")
             Me.columnDay = MyBase.Columns("Day")
-            Me.columnTransactionDate = MyBase.Columns("TransactionDate")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1764,8 +1753,6 @@ Partial Public Class SHITSTEMDataSet
             MyBase.Columns.Add(Me.columnProfit)
             Me.columnDay = New Global.System.Data.DataColumn("Day", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnDay)
-            Me.columnTransactionDate = New Global.System.Data.DataColumn("TransactionDate", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnTransactionDate)
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1909,8 +1896,6 @@ Partial Public Class SHITSTEMDataSet
         
         Private columnProfit As Global.System.Data.DataColumn
         
-        Private columnTransactionDate As Global.System.Data.DataColumn
-        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Public Sub New()
@@ -1971,14 +1956,6 @@ Partial Public Class SHITSTEMDataSet
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public ReadOnly Property TransactionDateColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnTransactionDate
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -2015,9 +1992,9 @@ Partial Public Class SHITSTEMDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Overloads Function AddMonthlySalesRow(ByVal Month As String, ByVal Sales_total As String, ByVal Profit As Decimal, ByVal TransactionDate As Date) As MonthlySalesRow
+        Public Overloads Function AddMonthlySalesRow(ByVal Month As String, ByVal Sales_total As String, ByVal Profit As Decimal) As MonthlySalesRow
             Dim rowMonthlySalesRow As MonthlySalesRow = CType(Me.NewRow,MonthlySalesRow)
-            Dim columnValuesArray() As Object = New Object() {Month, Sales_total, Profit, TransactionDate}
+            Dim columnValuesArray() As Object = New Object() {Month, Sales_total, Profit}
             rowMonthlySalesRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowMonthlySalesRow)
             Return rowMonthlySalesRow
@@ -2043,7 +2020,6 @@ Partial Public Class SHITSTEMDataSet
             Me.columnMonth = MyBase.Columns("Month")
             Me.columnSales_total = MyBase.Columns("Sales_total")
             Me.columnProfit = MyBase.Columns("Profit")
-            Me.columnTransactionDate = MyBase.Columns("TransactionDate")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -2055,8 +2031,6 @@ Partial Public Class SHITSTEMDataSet
             MyBase.Columns.Add(Me.columnSales_total)
             Me.columnProfit = New Global.System.Data.DataColumn("Profit", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnProfit)
-            Me.columnTransactionDate = New Global.System.Data.DataColumn("TransactionDate", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnTransactionDate)
             Me.columnMonth.MaxLength = 2147483647
             Me.columnSales_total.MaxLength = 2147483647
         End Sub
@@ -2202,8 +2176,6 @@ Partial Public Class SHITSTEMDataSet
         
         Private columnProfit As Global.System.Data.DataColumn
         
-        Private columnTransactionDate As Global.System.Data.DataColumn
-        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Public Sub New()
@@ -2264,14 +2236,6 @@ Partial Public Class SHITSTEMDataSet
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public ReadOnly Property TransactionDateColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnTransactionDate
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -2308,9 +2272,9 @@ Partial Public Class SHITSTEMDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Overloads Function AddWeeklySalesRow(ByVal Sales_total As Decimal, ByVal Day As String, ByVal Profit As Decimal, ByVal TransactionDate As Date) As WeeklySalesRow
+        Public Overloads Function AddWeeklySalesRow(ByVal Sales_total As Decimal, ByVal Day As String, ByVal Profit As Decimal) As WeeklySalesRow
             Dim rowWeeklySalesRow As WeeklySalesRow = CType(Me.NewRow,WeeklySalesRow)
-            Dim columnValuesArray() As Object = New Object() {Sales_total, Day, Profit, TransactionDate}
+            Dim columnValuesArray() As Object = New Object() {Sales_total, Day, Profit}
             rowWeeklySalesRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowWeeklySalesRow)
             Return rowWeeklySalesRow
@@ -2336,7 +2300,6 @@ Partial Public Class SHITSTEMDataSet
             Me.columnSales_total = MyBase.Columns("Sales_total")
             Me.columnDay = MyBase.Columns("Day")
             Me.columnProfit = MyBase.Columns("Profit")
-            Me.columnTransactionDate = MyBase.Columns("TransactionDate")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -2348,8 +2311,6 @@ Partial Public Class SHITSTEMDataSet
             MyBase.Columns.Add(Me.columnDay)
             Me.columnProfit = New Global.System.Data.DataColumn("Profit", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnProfit)
-            Me.columnTransactionDate = New Global.System.Data.DataColumn("TransactionDate", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnTransactionDate)
             Me.columnDay.MaxLength = 50
         End Sub
         
@@ -3512,6 +3473,8 @@ Partial Public Class SHITSTEMDataSet
         
         Private columnTotal_Item As Global.System.Data.DataColumn
         
+        Private columnProfit As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Public Sub New()
@@ -3596,6 +3559,14 @@ Partial Public Class SHITSTEMDataSet
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property ProfitColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnProfit
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -3632,9 +3603,9 @@ Partial Public Class SHITSTEMDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Overloads Function AddTransactionsRow(ByVal TransactionDate As Date, ByVal TotalAmount As Decimal, ByVal PaymentAmount As Decimal, ByVal ChangeGiven As Decimal, ByVal Total_Item As Integer) As TransactionsRow
+        Public Overloads Function AddTransactionsRow(ByVal TransactionDate As Date, ByVal TotalAmount As Decimal, ByVal PaymentAmount As Decimal, ByVal ChangeGiven As Decimal, ByVal Total_Item As Integer, ByVal Profit As Decimal) As TransactionsRow
             Dim rowTransactionsRow As TransactionsRow = CType(Me.NewRow,TransactionsRow)
-            Dim columnValuesArray() As Object = New Object() {Nothing, TransactionDate, TotalAmount, PaymentAmount, ChangeGiven, Total_Item}
+            Dim columnValuesArray() As Object = New Object() {Nothing, TransactionDate, TotalAmount, PaymentAmount, ChangeGiven, Total_Item, Profit}
             rowTransactionsRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowTransactionsRow)
             Return rowTransactionsRow
@@ -3669,6 +3640,7 @@ Partial Public Class SHITSTEMDataSet
             Me.columnPaymentAmount = MyBase.Columns("PaymentAmount")
             Me.columnChangeGiven = MyBase.Columns("ChangeGiven")
             Me.columnTotal_Item = MyBase.Columns("Total_Item")
+            Me.columnProfit = MyBase.Columns("Profit")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -3686,6 +3658,8 @@ Partial Public Class SHITSTEMDataSet
             MyBase.Columns.Add(Me.columnChangeGiven)
             Me.columnTotal_Item = New Global.System.Data.DataColumn("Total_Item", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnTotal_Item)
+            Me.columnProfit = New Global.System.Data.DataColumn("Profit", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnProfit)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnTransactionID}, true))
             Me.columnTransactionID.AutoIncrement = true
             Me.columnTransactionID.AutoIncrementSeed = -1
@@ -3697,6 +3671,7 @@ Partial Public Class SHITSTEMDataSet
             Me.columnTotalAmount.AllowDBNull = false
             Me.columnPaymentAmount.AllowDBNull = false
             Me.columnChangeGiven.AllowDBNull = false
+            Me.columnProfit.AllowDBNull = false
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -4289,21 +4264,6 @@ Partial Public Class SHITSTEMDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Property TransactionDate() As Date
-            Get
-                Try 
-                    Return CType(Me(Me.tableDailySales.TransactionDateColumn),Date)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'TransactionDate' in table 'DailySales' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableDailySales.TransactionDateColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Public Function IsSales_totalNull() As Boolean
             Return Me.IsNull(Me.tableDailySales.Sales_totalColumn)
         End Function
@@ -4336,18 +4296,6 @@ Partial Public Class SHITSTEMDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Public Sub SetDayNull()
             Me(Me.tableDailySales.DayColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Function IsTransactionDateNull() As Boolean
-            Return Me.IsNull(Me.tableDailySales.TransactionDateColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Sub SetTransactionDateNull()
-            Me(Me.tableDailySales.TransactionDateColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
@@ -4413,21 +4361,6 @@ Partial Public Class SHITSTEMDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Property TransactionDate() As Date
-            Get
-                Try 
-                    Return CType(Me(Me.tableMonthlySales.TransactionDateColumn),Date)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'TransactionDate' in table 'MonthlySales' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableMonthlySales.TransactionDateColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Public Function IsMonthNull() As Boolean
             Return Me.IsNull(Me.tableMonthlySales.MonthColumn)
         End Function
@@ -4460,18 +4393,6 @@ Partial Public Class SHITSTEMDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Public Sub SetProfitNull()
             Me(Me.tableMonthlySales.ProfitColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Function IsTransactionDateNull() As Boolean
-            Return Me.IsNull(Me.tableMonthlySales.TransactionDateColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Sub SetTransactionDateNull()
-            Me(Me.tableMonthlySales.TransactionDateColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
@@ -4537,21 +4458,6 @@ Partial Public Class SHITSTEMDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Property TransactionDate() As Date
-            Get
-                Try 
-                    Return CType(Me(Me.tableWeeklySales.TransactionDateColumn),Date)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'TransactionDate' in table 'WeeklySales' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableWeeklySales.TransactionDateColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Public Function IsSales_totalNull() As Boolean
             Return Me.IsNull(Me.tableWeeklySales.Sales_totalColumn)
         End Function
@@ -4584,18 +4490,6 @@ Partial Public Class SHITSTEMDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Public Sub SetProfitNull()
             Me(Me.tableWeeklySales.ProfitColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Function IsTransactionDateNull() As Boolean
-            Return Me.IsNull(Me.tableWeeklySales.TransactionDateColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Sub SetTransactionDateNull()
-            Me(Me.tableWeeklySales.TransactionDateColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
@@ -5210,6 +5104,17 @@ Partial Public Class SHITSTEMDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property Profit() As Decimal
+            Get
+                Return CType(Me(Me.tableTransactions.ProfitColumn),Decimal)
+            End Get
+            Set
+                Me(Me.tableTransactions.ProfitColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Public Function IsTotal_ItemNull() As Boolean
             Return Me.IsNull(Me.tableTransactions.Total_ItemColumn)
         End Function
@@ -5760,8 +5665,8 @@ Namespace SHITSTEMDataSetTableAdapters
             Me._adapter.InsertCommand.CommandText = "INSERT INTO [STOCKS] ([item_no], [product_name], [barcode], [price], [product_gro"& _ 
                 "up], [quantity], [taxed_price], [Product_image], [Cost]) VALUES (@item_no, @prod"& _ 
                 "uct_name, @barcode, @price, @product_group, @quantity, @taxed_price, @Product_im"& _ 
-                "age, @Cost);"&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT item_no, product_name, barcode, price, product_group, quanti"& _ 
-                "ty, taxed_price, Product_image, Cost FROM STOCKS WHERE (item_no = @item_no)"
+                "age, @Cost);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT item_no, product_name, barcode, price, product_group, quant"& _ 
+                "ity, taxed_price, Product_image, Cost FROM STOCKS WHERE (item_no = @item_no)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@item_no", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "item_no", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@product_name", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "product_name", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -5784,9 +5689,9 @@ Namespace SHITSTEMDataSetTableAdapters
                 "nal_product_group)) AND ((@IsNull_quantity = 1 AND [quantity] IS NULL) OR ([quan"& _ 
                 "tity] = @Original_quantity)) AND ((@IsNull_taxed_price = 1 AND [taxed_price] IS "& _ 
                 "NULL) OR ([taxed_price] = @Original_taxed_price)) AND ((@IsNull_Cost = 1 AND [Co"& _ 
-                "st] IS NULL) OR ([Cost] = @Original_Cost)));"&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT item_no, product_name, barco"& _ 
-                "de, price, product_group, quantity, taxed_price, Product_image, Cost FROM STOCKS"& _ 
-                " WHERE (item_no = @item_no)"
+                "st] IS NULL) OR ([Cost] = @Original_Cost)));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT item_no, product_name, barc"& _ 
+                "ode, price, product_group, quantity, taxed_price, Product_image, Cost FROM STOCK"& _ 
+                "S WHERE (item_no = @item_no)"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@item_no", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "item_no", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@product_name", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "product_name", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -6800,15 +6705,15 @@ Namespace SHITSTEMDataSetTableAdapters
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_ProductGroups", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ProductGroups", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[ProductGroups] ([ProductGroups]) VALUES (@ProductGroups);"&Global.Microsoft.VisualBasic.ChrW(10)&"SELE"& _ 
-                "CT ProductGroups FROM ProductGroups WHERE (ProductGroups = @ProductGroups)"
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[ProductGroups] ([ProductGroups]) VALUES (@ProductGroups);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SEL"& _ 
+                "ECT ProductGroups FROM ProductGroups WHERE (ProductGroups = @ProductGroups)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ProductGroups", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ProductGroups", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
             Me._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[ProductGroups] SET [ProductGroups] = @ProductGroups WHERE (([Produc"& _ 
-                "tGroups] = @Original_ProductGroups));"&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT ProductGroups FROM ProductGroups WH"& _ 
-                "ERE (ProductGroups = @ProductGroups)"
+                "tGroups] = @Original_ProductGroups));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT ProductGroups FROM ProductGroups W"& _ 
+                "HERE (ProductGroups = @ProductGroups)"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ProductGroups", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ProductGroups", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_ProductGroups", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ProductGroups", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
@@ -7102,7 +7007,6 @@ Namespace SHITSTEMDataSetTableAdapters
             tableMapping.ColumnMappings.Add("Sales_total", "Sales_total")
             tableMapping.ColumnMappings.Add("Profit", "Profit")
             tableMapping.ColumnMappings.Add("Day", "Day")
-            tableMapping.ColumnMappings.Add("TransactionDate", "TransactionDate")
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.DeleteCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.DeleteCommand.Connection = Me.Connection
@@ -7120,21 +7024,20 @@ Namespace SHITSTEMDataSetTableAdapters
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Profit", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 10, 2, "Profit", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO [DailySales] ([Sales_total], [Day], [Profit], [TransactionDate]) VALU"& _ 
-                "ES (@Sales_total, @Day, @Profit, @TransactionDate)"
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO [DailySales] ([Sales_total], [Day], [Profit]) VALUES (@Sales_total, @"& _ 
+                "Day, @Profit)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Sales_total", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 10, 2, "Sales_total", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Day", Global.System.Data.SqlDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Day", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Profit", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 10, 2, "Profit", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TransactionDate", Global.System.Data.SqlDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TransactionDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
             Me._adapter.UpdateCommand.CommandText = "UPDATE [DailySales] SET [Sales_total] = @Sales_total, [Day] = @Day, [Profit] = @P"& _ 
                 "rofit WHERE (((@IsNull_Sales_total = 1 AND [Sales_total] IS NULL) OR ([Sales_tot"& _ 
                 "al] = @Original_Sales_total)) AND ((@IsNull_Day = 1 AND [Day] IS NULL) OR ([Day]"& _ 
                 " = @Original_Day)) AND ([ID] = @Original_ID) AND ((@IsNull_Profit = 1 AND [Profi"& _ 
-                "t] IS NULL) OR ([Profit] = @Original_Profit)));"&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Sales_total, Day, ID, Pro"& _ 
-                "fit FROM DailySales WHERE (ID = @ID)"
+                "t] IS NULL) OR ([Profit] = @Original_Profit)));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Sales_total, Day, ID, Pr"& _ 
+                "ofit FROM DailySales WHERE (ID = @ID)"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Sales_total", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 10, 2, "Sales_total", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Day", Global.System.Data.SqlDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Day", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -7162,7 +7065,7 @@ Namespace SHITSTEMDataSetTableAdapters
             Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(0) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT Sales_total, Day, Profit, TransactionDate FROM DailySales"
+            Me._commandCollection(0).CommandText = "SELECT Sales_total, Day, Profit FROM DailySales"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
@@ -7264,7 +7167,7 @@ Namespace SHITSTEMDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert(ByVal Sales_total As Global.System.Nullable(Of Decimal), ByVal Day As Global.System.Nullable(Of Date), ByVal Profit As Global.System.Nullable(Of Decimal), ByVal TransactionDate As Global.System.Nullable(Of Date)) As Integer
+        Public Overloads Overridable Function Insert(ByVal Sales_total As Global.System.Nullable(Of Decimal), ByVal Day As Global.System.Nullable(Of Date), ByVal Profit As Global.System.Nullable(Of Decimal)) As Integer
             If (Sales_total.HasValue = true) Then
                 Me.Adapter.InsertCommand.Parameters(0).Value = CType(Sales_total.Value,Decimal)
             Else
@@ -7279,11 +7182,6 @@ Namespace SHITSTEMDataSetTableAdapters
                 Me.Adapter.InsertCommand.Parameters(2).Value = CType(Profit.Value,Decimal)
             Else
                 Me.Adapter.InsertCommand.Parameters(2).Value = Global.System.DBNull.Value
-            End If
-            If (TransactionDate.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(3).Value = CType(TransactionDate.Value,Date)
-            Else
-                Me.Adapter.InsertCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -7489,17 +7387,15 @@ Namespace SHITSTEMDataSetTableAdapters
             tableMapping.ColumnMappings.Add("Month", "Month")
             tableMapping.ColumnMappings.Add("Sales_total", "Sales_total")
             tableMapping.ColumnMappings.Add("Profit", "Profit")
-            tableMapping.ColumnMappings.Add("TransactionDate", "TransactionDate")
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO [MonthlySales] ([Month], [Sales_total], [Profit], [TransactionDate]) "& _ 
-                "VALUES (@Month, @Sales_total, @Profit, @TransactionDate)"
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO [MonthlySales] ([Month], [Sales_total], [Profit]) VALUES (@Month, @Sa"& _ 
+                "les_total, @Profit)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Month", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Month", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Sales_total", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 10, 2, "Sales_total", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Profit", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 10, 2, "Profit", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TransactionDate", Global.System.Data.SqlDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TransactionDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -7515,7 +7411,7 @@ Namespace SHITSTEMDataSetTableAdapters
             Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(0) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT Month, Sales_total, Profit, TransactionDate FROM MonthlySales"
+            Me._commandCollection(0).CommandText = "SELECT Month, Sales_total, Profit FROM MonthlySales"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
@@ -7575,7 +7471,7 @@ Namespace SHITSTEMDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert(ByVal Month As String, ByVal Sales_total As Global.System.Nullable(Of Decimal), ByVal Profit As Global.System.Nullable(Of Decimal), ByVal TransactionDate As Global.System.Nullable(Of Date)) As Integer
+        Public Overloads Overridable Function Insert(ByVal Month As String, ByVal Sales_total As Global.System.Nullable(Of Decimal), ByVal Profit As Global.System.Nullable(Of Decimal)) As Integer
             If (Month Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(0).Value = Global.System.DBNull.Value
             Else
@@ -7590,11 +7486,6 @@ Namespace SHITSTEMDataSetTableAdapters
                 Me.Adapter.InsertCommand.Parameters(2).Value = CType(Profit.Value,Decimal)
             Else
                 Me.Adapter.InsertCommand.Parameters(2).Value = Global.System.DBNull.Value
-            End If
-            If (TransactionDate.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(3).Value = CType(TransactionDate.Value,Date)
-            Else
-                Me.Adapter.InsertCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -7742,17 +7633,15 @@ Namespace SHITSTEMDataSetTableAdapters
             tableMapping.ColumnMappings.Add("Sales_total", "Sales_total")
             tableMapping.ColumnMappings.Add("Day", "Day")
             tableMapping.ColumnMappings.Add("Profit", "Profit")
-            tableMapping.ColumnMappings.Add("TransactionDate", "TransactionDate")
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO [WeeklySales] ([Sales_total], [Day], [Profit], [TransactionDate]) VAL"& _ 
-                "UES (@Sales_total, @Day, @Profit, @TransactionDate)"
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO [WeeklySales] ([Sales_total], [Day], [Profit]) VALUES (@Sales_total, "& _ 
+                "@Day, @Profit)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Sales_total", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 10, 2, "Sales_total", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Day", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Day", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Profit", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 10, 2, "Profit", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TransactionDate", Global.System.Data.SqlDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TransactionDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -7768,7 +7657,7 @@ Namespace SHITSTEMDataSetTableAdapters
             Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(0) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT Sales_total, Day, Profit, TransactionDate FROM WeeklySales"
+            Me._commandCollection(0).CommandText = "SELECT Sales_total, Day, Profit FROM WeeklySales"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
@@ -7828,7 +7717,7 @@ Namespace SHITSTEMDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert(ByVal Sales_total As Global.System.Nullable(Of Decimal), ByVal Day As String, ByVal Profit As Global.System.Nullable(Of Decimal), ByVal TransactionDate As Global.System.Nullable(Of Date)) As Integer
+        Public Overloads Overridable Function Insert(ByVal Sales_total As Global.System.Nullable(Of Decimal), ByVal Day As String, ByVal Profit As Global.System.Nullable(Of Decimal)) As Integer
             If (Sales_total.HasValue = true) Then
                 Me.Adapter.InsertCommand.Parameters(0).Value = CType(Sales_total.Value,Decimal)
             Else
@@ -7843,11 +7732,6 @@ Namespace SHITSTEMDataSetTableAdapters
                 Me.Adapter.InsertCommand.Parameters(2).Value = CType(Profit.Value,Decimal)
             Else
                 Me.Adapter.InsertCommand.Parameters(2).Value = Global.System.DBNull.Value
-            End If
-            If (TransactionDate.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(3).Value = CType(TransactionDate.Value,Date)
-            Else
-                Me.Adapter.InsertCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -8523,8 +8407,8 @@ Namespace SHITSTEMDataSetTableAdapters
                 "Null_Product_Name = 1 AND [Product_Name] IS NULL) OR ([Product_Name] = @Original"& _ 
                 "_Product_Name)) AND ((@IsNull_Quantity = 1 AND [Quantity] IS NULL) OR ([Quantity"& _ 
                 "] = @Original_Quantity)) AND ((@IsNull_OrderDate = 1 AND [OrderDate] IS NULL) OR"& _ 
-                " ([OrderDate] = @Original_OrderDate)));"&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT OrderID, Product_Name, Quantity, "& _ 
-                "OrderDate FROM DailySummary WHERE (OrderID = @OrderID)"
+                " ([OrderDate] = @Original_OrderDate)));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT OrderID, Product_Name, Quantity,"& _ 
+                " OrderDate FROM DailySummary WHERE (OrderID = @OrderID)"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Product_Name", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Product_Name", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Quantity", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Quantity", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -8921,9 +8805,9 @@ Namespace SHITSTEMDataSetTableAdapters
             Me._adapter.InsertCommand.Connection = Me.Connection
             Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[TransactionDetails] ([TransactionID], [Item_no], [Product_name"& _ 
                 "], [Quantity], [Price], [Total]) VALUES (@TransactionID, @Item_no, @Product_name"& _ 
-                ", @Quantity, @Price, @Total);"&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT TransactionDetailID, TransactionID, Item_no"& _ 
-                ", Product_name, Quantity, Price, Total FROM TransactionDetails WHERE (Transactio"& _ 
-                "nDetailID = SCOPE_IDENTITY())"
+                ", @Quantity, @Price, @Total);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT TransactionDetailID, TransactionID, Item_n"& _ 
+                "o, Product_name, Quantity, Price, Total FROM TransactionDetails WHERE (Transacti"& _ 
+                "onDetailID = SCOPE_IDENTITY())"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TransactionID", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TransactionID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Item_no", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Item_no", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -8942,9 +8826,9 @@ Namespace SHITSTEMDataSetTableAdapters
                 "duct_name] IS NULL) OR ([Product_name] = @Original_Product_name)) AND ((@IsNull_"& _ 
                 "Quantity = 1 AND [Quantity] IS NULL) OR ([Quantity] = @Original_Quantity)) AND ("& _ 
                 "(@IsNull_Price = 1 AND [Price] IS NULL) OR ([Price] = @Original_Price)) AND ((@I"& _ 
-                "sNull_Total = 1 AND [Total] IS NULL) OR ([Total] = @Original_Total)));"&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Tr"& _ 
-                "ansactionDetailID, TransactionID, Item_no, Product_name, Quantity, Price, Total "& _ 
-                "FROM TransactionDetails WHERE (TransactionDetailID = @TransactionDetailID)"
+                "sNull_Total = 1 AND [Total] IS NULL) OR ([Total] = @Original_Total)));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT T"& _ 
+                "ransactionDetailID, TransactionID, Item_no, Product_name, Quantity, Price, Total"& _ 
+                " FROM TransactionDetails WHERE (TransactionDetailID = @TransactionDetailID)"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TransactionID", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TransactionID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Item_no", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Item_no", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -9387,59 +9271,65 @@ Namespace SHITSTEMDataSetTableAdapters
             tableMapping.ColumnMappings.Add("PaymentAmount", "PaymentAmount")
             tableMapping.ColumnMappings.Add("ChangeGiven", "ChangeGiven")
             tableMapping.ColumnMappings.Add("Total_Item", "Total_Item")
+            tableMapping.ColumnMappings.Add("Profit", "Profit")
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.DeleteCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.DeleteCommand.Connection = Me.Connection
             Me._adapter.DeleteCommand.CommandText = "DELETE FROM [Transactions] WHERE (([TransactionID] = @Original_TransactionID) AND"& _ 
                 " ([TransactionDate] = @Original_TransactionDate) AND ([TotalAmount] = @Original_"& _ 
                 "TotalAmount) AND ([PaymentAmount] = @Original_PaymentAmount) AND ([ChangeGiven] "& _ 
-                "= @Original_ChangeGiven) AND ((@IsNull_Total_Item = 1 AND [Total_Item] IS NULL) "& _ 
-                "OR ([Total_Item] = @Original_Total_Item)))"
+                "= @Original_ChangeGiven) AND ((@IsNull_Total_item = 1 AND [Total_item] IS NULL) "& _ 
+                "OR ([Total_item] = @Original_Total_item)) AND ([Profit] = @Original_Profit))"
             Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_TransactionID", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TransactionID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_TransactionDate", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TransactionDate", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_TotalAmount", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "TotalAmount", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_PaymentAmount", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "PaymentAmount", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_ChangeGiven", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "ChangeGiven", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_Total_Item", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Total_Item", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Total_Item", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Total_Item", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_Total_item", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Total_item", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Total_item", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Total_item", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Profit", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "Profit", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
             Me._adapter.InsertCommand.CommandText = "INSERT INTO [Transactions] ([TransactionDate], [TotalAmount], [PaymentAmount], [C"& _ 
-                "hangeGiven], [Total_Item]) VALUES (@TransactionDate, @TotalAmount, @PaymentAmoun"& _ 
-                "t, @ChangeGiven, @Total_Item);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT TransactionID, TransactionDate, TotalAmou"& _ 
-                "nt, PaymentAmount, ChangeGiven, Total_Item FROM Transactions WHERE (TransactionI"& _ 
-                "D = SCOPE_IDENTITY())"
+                "hangeGiven], [Total_item], [Profit]) VALUES (@TransactionDate, @TotalAmount, @Pa"& _ 
+                "ymentAmount, @ChangeGiven, @Total_item, @Profit);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT TransactionID, Transac"& _ 
+                "tionDate, TotalAmount, PaymentAmount, ChangeGiven, Total_item, Profit FROM Trans"& _ 
+                "actions WHERE (TransactionID = SCOPE_IDENTITY())"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TransactionDate", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TransactionDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalAmount", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "TotalAmount", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PaymentAmount", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "PaymentAmount", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ChangeGiven", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "ChangeGiven", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Total_Item", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Total_Item", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Total_item", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Total_item", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Profit", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "Profit", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
             Me._adapter.UpdateCommand.CommandText = "UPDATE [Transactions] SET [TransactionDate] = @TransactionDate, [TotalAmount] = @"& _ 
                 "TotalAmount, [PaymentAmount] = @PaymentAmount, [ChangeGiven] = @ChangeGiven, [To"& _ 
-                "tal_Item] = @Total_Item WHERE (([TransactionID] = @Original_TransactionID) AND ("& _ 
-                "[TransactionDate] = @Original_TransactionDate) AND ([TotalAmount] = @Original_To"& _ 
-                "talAmount) AND ([PaymentAmount] = @Original_PaymentAmount) AND ([ChangeGiven] = "& _ 
-                "@Original_ChangeGiven) AND ((@IsNull_Total_Item = 1 AND [Total_Item] IS NULL) OR"& _ 
-                " ([Total_Item] = @Original_Total_Item)));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT TransactionID, TransactionDate"& _ 
-                ", TotalAmount, PaymentAmount, ChangeGiven, Total_Item FROM Transactions WHERE (T"& _ 
-                "ransactionID = @TransactionID)"
+                "tal_item] = @Total_item, [Profit] = @Profit WHERE (([TransactionID] = @Original_"& _ 
+                "TransactionID) AND ([TransactionDate] = @Original_TransactionDate) AND ([TotalAm"& _ 
+                "ount] = @Original_TotalAmount) AND ([PaymentAmount] = @Original_PaymentAmount) A"& _ 
+                "ND ([ChangeGiven] = @Original_ChangeGiven) AND ((@IsNull_Total_item = 1 AND [Tot"& _ 
+                "al_item] IS NULL) OR ([Total_item] = @Original_Total_item)) AND ([Profit] = @Ori"& _ 
+                "ginal_Profit));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT TransactionID, TransactionDate, TotalAmount, PaymentAmou"& _ 
+                "nt, ChangeGiven, Total_item, Profit FROM Transactions WHERE (TransactionID = @Tr"& _ 
+                "ansactionID)"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TransactionDate", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TransactionDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalAmount", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "TotalAmount", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PaymentAmount", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "PaymentAmount", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ChangeGiven", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "ChangeGiven", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Total_Item", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Total_Item", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Total_item", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Total_item", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Profit", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "Profit", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_TransactionID", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TransactionID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_TransactionDate", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TransactionDate", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_TotalAmount", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "TotalAmount", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_PaymentAmount", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "PaymentAmount", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_ChangeGiven", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "ChangeGiven", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_Total_Item", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Total_Item", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Total_Item", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Total_Item", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_Total_item", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Total_item", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Total_item", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Total_item", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Profit", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "Profit", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TransactionID", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "TransactionID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
         End Sub
         
@@ -9457,7 +9347,7 @@ Namespace SHITSTEMDataSetTableAdapters
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
             Me._commandCollection(0).CommandText = "SELECT TransactionID, TransactionDate, TotalAmount, PaymentAmount, ChangeGiven, T"& _ 
-                "otal_Item FROM Transactions"
+                "otal_item, Profit FROM Transactions"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
@@ -9517,19 +9407,20 @@ Namespace SHITSTEMDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
-        Public Overloads Overridable Function Delete(ByVal Original_TransactionID As Integer, ByVal Original_TransactionDate As Date, ByVal Original_TotalAmount As Decimal, ByVal Original_PaymentAmount As Decimal, ByVal Original_ChangeGiven As Decimal, ByVal Original_Total_Item As Global.System.Nullable(Of Integer)) As Integer
+        Public Overloads Overridable Function Delete(ByVal Original_TransactionID As Integer, ByVal Original_TransactionDate As Date, ByVal Original_TotalAmount As Decimal, ByVal Original_PaymentAmount As Decimal, ByVal Original_ChangeGiven As Decimal, ByVal Original_Total_item As Global.System.Nullable(Of Integer), ByVal Original_Profit As Decimal) As Integer
             Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_TransactionID,Integer)
             Me.Adapter.DeleteCommand.Parameters(1).Value = CType(Original_TransactionDate,Date)
             Me.Adapter.DeleteCommand.Parameters(2).Value = CType(Original_TotalAmount,Decimal)
             Me.Adapter.DeleteCommand.Parameters(3).Value = CType(Original_PaymentAmount,Decimal)
             Me.Adapter.DeleteCommand.Parameters(4).Value = CType(Original_ChangeGiven,Decimal)
-            If (Original_Total_Item.HasValue = true) Then
+            If (Original_Total_item.HasValue = true) Then
                 Me.Adapter.DeleteCommand.Parameters(5).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(6).Value = CType(Original_Total_Item.Value,Integer)
+                Me.Adapter.DeleteCommand.Parameters(6).Value = CType(Original_Total_item.Value,Integer)
             Else
                 Me.Adapter.DeleteCommand.Parameters(5).Value = CType(1,Object)
                 Me.Adapter.DeleteCommand.Parameters(6).Value = Global.System.DBNull.Value
             End If
+            Me.Adapter.DeleteCommand.Parameters(7).Value = CType(Original_Profit,Decimal)
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
             If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -9549,16 +9440,17 @@ Namespace SHITSTEMDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert(ByVal TransactionDate As Date, ByVal TotalAmount As Decimal, ByVal PaymentAmount As Decimal, ByVal ChangeGiven As Decimal, ByVal Total_Item As Global.System.Nullable(Of Integer)) As Integer
+        Public Overloads Overridable Function Insert(ByVal TransactionDate As Date, ByVal TotalAmount As Decimal, ByVal PaymentAmount As Decimal, ByVal ChangeGiven As Decimal, ByVal Total_item As Global.System.Nullable(Of Integer), ByVal Profit As Decimal) As Integer
             Me.Adapter.InsertCommand.Parameters(0).Value = CType(TransactionDate,Date)
             Me.Adapter.InsertCommand.Parameters(1).Value = CType(TotalAmount,Decimal)
             Me.Adapter.InsertCommand.Parameters(2).Value = CType(PaymentAmount,Decimal)
             Me.Adapter.InsertCommand.Parameters(3).Value = CType(ChangeGiven,Decimal)
-            If (Total_Item.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(4).Value = CType(Total_Item.Value,Integer)
+            If (Total_item.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(4).Value = CType(Total_item.Value,Integer)
             Else
                 Me.Adapter.InsertCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
+            Me.Adapter.InsertCommand.Parameters(5).Value = CType(Profit,Decimal)
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -9578,29 +9470,31 @@ Namespace SHITSTEMDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
-        Public Overloads Overridable Function Update(ByVal TransactionDate As Date, ByVal TotalAmount As Decimal, ByVal PaymentAmount As Decimal, ByVal ChangeGiven As Decimal, ByVal Total_Item As Global.System.Nullable(Of Integer), ByVal Original_TransactionID As Integer, ByVal Original_TransactionDate As Date, ByVal Original_TotalAmount As Decimal, ByVal Original_PaymentAmount As Decimal, ByVal Original_ChangeGiven As Decimal, ByVal Original_Total_Item As Global.System.Nullable(Of Integer), ByVal TransactionID As Integer) As Integer
+        Public Overloads Overridable Function Update(ByVal TransactionDate As Date, ByVal TotalAmount As Decimal, ByVal PaymentAmount As Decimal, ByVal ChangeGiven As Decimal, ByVal Total_item As Global.System.Nullable(Of Integer), ByVal Profit As Decimal, ByVal Original_TransactionID As Integer, ByVal Original_TransactionDate As Date, ByVal Original_TotalAmount As Decimal, ByVal Original_PaymentAmount As Decimal, ByVal Original_ChangeGiven As Decimal, ByVal Original_Total_item As Global.System.Nullable(Of Integer), ByVal Original_Profit As Decimal, ByVal TransactionID As Integer) As Integer
             Me.Adapter.UpdateCommand.Parameters(0).Value = CType(TransactionDate,Date)
             Me.Adapter.UpdateCommand.Parameters(1).Value = CType(TotalAmount,Decimal)
             Me.Adapter.UpdateCommand.Parameters(2).Value = CType(PaymentAmount,Decimal)
             Me.Adapter.UpdateCommand.Parameters(3).Value = CType(ChangeGiven,Decimal)
-            If (Total_Item.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(4).Value = CType(Total_Item.Value,Integer)
+            If (Total_item.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(4).Value = CType(Total_item.Value,Integer)
             Else
                 Me.Adapter.UpdateCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            Me.Adapter.UpdateCommand.Parameters(5).Value = CType(Original_TransactionID,Integer)
-            Me.Adapter.UpdateCommand.Parameters(6).Value = CType(Original_TransactionDate,Date)
-            Me.Adapter.UpdateCommand.Parameters(7).Value = CType(Original_TotalAmount,Decimal)
-            Me.Adapter.UpdateCommand.Parameters(8).Value = CType(Original_PaymentAmount,Decimal)
-            Me.Adapter.UpdateCommand.Parameters(9).Value = CType(Original_ChangeGiven,Decimal)
-            If (Original_Total_Item.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(11).Value = CType(Original_Total_Item.Value,Integer)
+            Me.Adapter.UpdateCommand.Parameters(5).Value = CType(Profit,Decimal)
+            Me.Adapter.UpdateCommand.Parameters(6).Value = CType(Original_TransactionID,Integer)
+            Me.Adapter.UpdateCommand.Parameters(7).Value = CType(Original_TransactionDate,Date)
+            Me.Adapter.UpdateCommand.Parameters(8).Value = CType(Original_TotalAmount,Decimal)
+            Me.Adapter.UpdateCommand.Parameters(9).Value = CType(Original_PaymentAmount,Decimal)
+            Me.Adapter.UpdateCommand.Parameters(10).Value = CType(Original_ChangeGiven,Decimal)
+            If (Original_Total_item.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(11).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(12).Value = CType(Original_Total_item.Value,Integer)
             Else
-                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(11).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(11).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(12).Value = Global.System.DBNull.Value
             End If
-            Me.Adapter.UpdateCommand.Parameters(12).Value = CType(TransactionID,Integer)
+            Me.Adapter.UpdateCommand.Parameters(13).Value = CType(Original_Profit,Decimal)
+            Me.Adapter.UpdateCommand.Parameters(14).Value = CType(TransactionID,Integer)
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
             If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -9620,8 +9514,8 @@ Namespace SHITSTEMDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
-        Public Overloads Overridable Function Update(ByVal TransactionDate As Date, ByVal TotalAmount As Decimal, ByVal PaymentAmount As Decimal, ByVal ChangeGiven As Decimal, ByVal Total_Item As Global.System.Nullable(Of Integer), ByVal Original_TransactionID As Integer, ByVal Original_TransactionDate As Date, ByVal Original_TotalAmount As Decimal, ByVal Original_PaymentAmount As Decimal, ByVal Original_ChangeGiven As Decimal, ByVal Original_Total_Item As Global.System.Nullable(Of Integer)) As Integer
-            Return Me.Update(TransactionDate, TotalAmount, PaymentAmount, ChangeGiven, Total_Item, Original_TransactionID, Original_TransactionDate, Original_TotalAmount, Original_PaymentAmount, Original_ChangeGiven, Original_Total_Item, Original_TransactionID)
+        Public Overloads Overridable Function Update(ByVal TransactionDate As Date, ByVal TotalAmount As Decimal, ByVal PaymentAmount As Decimal, ByVal ChangeGiven As Decimal, ByVal Total_item As Global.System.Nullable(Of Integer), ByVal Profit As Decimal, ByVal Original_TransactionID As Integer, ByVal Original_TransactionDate As Date, ByVal Original_TotalAmount As Decimal, ByVal Original_PaymentAmount As Decimal, ByVal Original_ChangeGiven As Decimal, ByVal Original_Total_item As Global.System.Nullable(Of Integer), ByVal Original_Profit As Decimal) As Integer
+            Return Me.Update(TransactionDate, TotalAmount, PaymentAmount, ChangeGiven, Total_item, Profit, Original_TransactionID, Original_TransactionDate, Original_TotalAmount, Original_PaymentAmount, Original_ChangeGiven, Original_Total_item, Original_Profit, Original_TransactionID)
         End Function
     End Class
     
