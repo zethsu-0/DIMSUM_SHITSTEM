@@ -860,16 +860,89 @@ Public Class CASHIER
     End Sub
 
 
-    Private Sub discount_choice_SelectedIndexChanged(sender As Object, e As EventArgs) Handles discount_choice.SelectedIndexChanged
-        If discount_choice.Text = "PWD/SENIOR" Then
-
-        End If
-    End Sub
-
     Private Sub Guna2Panel1_MouseDown(sender As Object, e As MouseEventArgs) Handles Guna2Panel1.MouseDown
         If e.Button = MouseButtons.Left Then
             ReleaseCapture()
             SendMessage(Me.Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0)
         End If
     End Sub
+    Dim highestproductname As String = ""
+    Dim highestproductprice As Decimal = 0D
+    Private Sub discount_choice_SelectedIndexChanged(sender As Object, e As EventArgs) Handles discount_choice.SelectedIndexChanged
+        Discount()
+    End Sub
+    Public Sub Discount()
+        Dim query As String = "SELECT TOP 1 Item_No, Product_name FROM Orders ORDER BY Price DESC"
+        Try
+            Opencon()
+            Dim itemNo As String = ""
+            Dim discountRate As Decimal = 0
+
+            ' Step 1: Get highest-priced product (by current Orders table)
+            Using cmd As New SqlCommand(query, con)
+                Using reader As SqlDataReader = cmd.ExecuteReader()
+                    If reader.Read() Then
+                        itemNo = reader("Item_No").ToString()
+                        highestproductname = reader("Product_name").ToString()
+                    End If
+                End Using
+            End Using
+
+            ' Step 2: Always get original price from STOCKS (not from Orders)
+            Dim originalPrice As Decimal = 0
+            Dim getPriceQuery As String = "SELECT taxed_price FROM STOCKS WHERE Item_No = @Item_No"
+
+            ' Optional: convert to integer if needed
+            Dim itemNoInt As Integer
+            If Integer.TryParse(itemNo, itemNoInt) Then
+                Using priceCmd As New SqlCommand(getPriceQuery, con)
+                    priceCmd.Parameters.AddWithValue("@Item_No", itemNoInt)
+                    Dim result = priceCmd.ExecuteScalar()
+                    If result IsNot Nothing AndAlso Not IsDBNull(result) Then
+                        originalPrice = Convert.ToDecimal(result)
+                    Else
+                        MessageBox.Show("Failed to find original price in STOCKS for Item_No: " & itemNo)
+                        Return
+                    End If
+                End Using
+            Else
+                MessageBox.Show("Invalid Item_No format: " & itemNo)
+                Return
+            End If
+
+            ' Step 3: Get selected discount
+            Select Case discount_choice.Text
+                Case "PWD/SENIOR"
+                    discountRate = 0.2D
+                Case "10%"
+                    discountRate = 0.1D
+                Case "15%"
+                    discountRate = 0.15D
+                Case Else
+                    discountRate = 0
+            End Select
+
+            ' Step 4: Apply discount freshly from original price
+            Dim discountedPrice As Decimal = originalPrice * (1 - discountRate)
+
+            ' Step 5: Update the Orders table with fresh discount
+            Dim updateQuery As String = "UPDATE Orders SET Price = @Price, Total_price = Quantity * @Price WHERE Item_No = @Item_No"
+            Using updateCmd As New SqlCommand(updateQuery, con)
+                updateCmd.Parameters.AddWithValue("@Price", discountedPrice)
+                updateCmd.Parameters.AddWithValue("@Item_No", itemNo)
+                updateCmd.ExecuteNonQuery()
+            End Using
+
+            Me.OrdersTableAdapter.Fill(Me.SHITSTEMDataSet.Orders)
+            UpdateTotalSum(Me, EventArgs.Empty)
+
+        Catch ex As Exception
+            MessageBox.Show("Error applying discount: " & ex.Message)
+        Finally
+            If con.State = ConnectionState.Open Then con.Close()
+        End Try
+    End Sub
+
+
+
 End Class

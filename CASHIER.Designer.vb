@@ -43,7 +43,6 @@ Partial Class CASHIER
         Me.Guna2HtmlLabel3 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.discount_choice = New Guna.UI2.WinForms.Guna2ComboBox()
         Me.paymenttxtbox = New System.Windows.Forms.TextBox()
-        Me.Guna2Button2 = New Guna.UI2.WinForms.Guna2Button()
         Me.Guna2HtmlLabel1 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.lbltotal = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.OrdersDataGridView = New System.Windows.Forms.DataGridView()
@@ -118,7 +117,7 @@ Partial Class CASHIER
         Me.Cancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Cancel.ForeColor = System.Drawing.Color.Black
         Me.Cancel.Location = New System.Drawing.Point(20, 20)
-        Me.Cancel.Margin = New System.Windows.Forms.Padding(20, 20, 20, 20)
+        Me.Cancel.Margin = New System.Windows.Forms.Padding(20)
         Me.Cancel.Name = "Cancel"
         Me.Cancel.Size = New System.Drawing.Size(80, 80)
         Me.Cancel.TabIndex = 24
@@ -138,7 +137,7 @@ Partial Class CASHIER
         Me.SiomaiFilter.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold)
         Me.SiomaiFilter.ForeColor = System.Drawing.Color.Black
         Me.SiomaiFilter.Location = New System.Drawing.Point(20, 140)
-        Me.SiomaiFilter.Margin = New System.Windows.Forms.Padding(20, 20, 20, 20)
+        Me.SiomaiFilter.Margin = New System.Windows.Forms.Padding(20)
         Me.SiomaiFilter.Name = "SiomaiFilter"
         Me.SiomaiFilter.Size = New System.Drawing.Size(80, 80)
         Me.SiomaiFilter.TabIndex = 19
@@ -158,7 +157,7 @@ Partial Class CASHIER
         Me.SiopaoFilter.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold)
         Me.SiopaoFilter.ForeColor = System.Drawing.Color.Black
         Me.SiopaoFilter.Location = New System.Drawing.Point(20, 260)
-        Me.SiopaoFilter.Margin = New System.Windows.Forms.Padding(20, 20, 20, 20)
+        Me.SiopaoFilter.Margin = New System.Windows.Forms.Padding(20)
         Me.SiopaoFilter.Name = "SiopaoFilter"
         Me.SiopaoFilter.Size = New System.Drawing.Size(80, 80)
         Me.SiopaoFilter.TabIndex = 25
@@ -178,7 +177,7 @@ Partial Class CASHIER
         Me.DrinksFilter.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold)
         Me.DrinksFilter.ForeColor = System.Drawing.Color.Black
         Me.DrinksFilter.Location = New System.Drawing.Point(20, 380)
-        Me.DrinksFilter.Margin = New System.Windows.Forms.Padding(20, 20, 20, 20)
+        Me.DrinksFilter.Margin = New System.Windows.Forms.Padding(20)
         Me.DrinksFilter.Name = "DrinksFilter"
         Me.DrinksFilter.Size = New System.Drawing.Size(80, 80)
         Me.DrinksFilter.TabIndex = 20
@@ -198,7 +197,7 @@ Partial Class CASHIER
         Me.OthersFilter.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold)
         Me.OthersFilter.ForeColor = System.Drawing.Color.Black
         Me.OthersFilter.Location = New System.Drawing.Point(20, 500)
-        Me.OthersFilter.Margin = New System.Windows.Forms.Padding(20, 20, 20, 20)
+        Me.OthersFilter.Margin = New System.Windows.Forms.Padding(20)
         Me.OthersFilter.Name = "OthersFilter"
         Me.OthersFilter.Size = New System.Drawing.Size(80, 80)
         Me.OthersFilter.TabIndex = 23
@@ -235,7 +234,6 @@ Partial Class CASHIER
         Me.Panel1.Controls.Add(Me.Guna2HtmlLabel3)
         Me.Panel1.Controls.Add(Me.discount_choice)
         Me.Panel1.Controls.Add(Me.paymenttxtbox)
-        Me.Panel1.Controls.Add(Me.Guna2Button2)
         Me.Panel1.Controls.Add(Me.Guna2HtmlLabel1)
         Me.Panel1.Controls.Add(Me.lbltotal)
         Me.Panel1.Controls.Add(Me.OrdersDataGridView)
@@ -251,7 +249,7 @@ Partial Class CASHIER
         '
         Me.Guna2HtmlLabel3.BackColor = System.Drawing.Color.Transparent
         Me.Guna2HtmlLabel3.Location = New System.Drawing.Point(20, 436)
-        Me.Guna2HtmlLabel3.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Guna2HtmlLabel3.Margin = New System.Windows.Forms.Padding(2)
         Me.Guna2HtmlLabel3.Name = "Guna2HtmlLabel3"
         Me.Guna2HtmlLabel3.Size = New System.Drawing.Size(96, 15)
         Me.Guna2HtmlLabel3.TabIndex = 27
@@ -267,9 +265,9 @@ Partial Class CASHIER
         Me.discount_choice.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.discount_choice.ForeColor = System.Drawing.Color.FromArgb(CType(CType(68, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(112, Byte), Integer))
         Me.discount_choice.ItemHeight = 30
-        Me.discount_choice.Items.AddRange(New Object() {"PWD/SENIOR", "20%", "10%"})
+        Me.discount_choice.Items.AddRange(New Object() {"NONE", "PWD/SENIOR", "20%", "10%"})
         Me.discount_choice.Location = New System.Drawing.Point(12, 455)
-        Me.discount_choice.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.discount_choice.Margin = New System.Windows.Forms.Padding(2)
         Me.discount_choice.Name = "discount_choice"
         Me.discount_choice.Size = New System.Drawing.Size(106, 36)
         Me.discount_choice.TabIndex = 26
@@ -281,31 +279,6 @@ Partial Class CASHIER
         Me.paymenttxtbox.Name = "paymenttxtbox"
         Me.paymenttxtbox.Size = New System.Drawing.Size(111, 29)
         Me.paymenttxtbox.TabIndex = 24
-        '
-        'Guna2Button2
-        '
-        Me.Guna2Button2.Animated = True
-        Me.Guna2Button2.BackColor = System.Drawing.Color.Transparent
-        Me.Guna2Button2.BorderRadius = 15
-        Me.Guna2Button2.BorderThickness = 2
-        Me.Guna2Button2.CustomBorderThickness = New System.Windows.Forms.Padding(2)
-        Me.Guna2Button2.DisabledState.BorderColor = System.Drawing.Color.DarkGray
-        Me.Guna2Button2.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
-        Me.Guna2Button2.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
-        Me.Guna2Button2.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
-        Me.Guna2Button2.FillColor = System.Drawing.Color.White
-        Me.Guna2Button2.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.Guna2Button2.ForeColor = System.Drawing.Color.Black
-        Me.Guna2Button2.HoverState.BorderColor = System.Drawing.Color.Transparent
-        Me.Guna2Button2.HoverState.FillColor = System.Drawing.Color.DimGray
-        Me.Guna2Button2.HoverState.ForeColor = System.Drawing.Color.White
-        Me.Guna2Button2.Location = New System.Drawing.Point(20, 535)
-        Me.Guna2Button2.Margin = New System.Windows.Forms.Padding(20, 20, 20, 20)
-        Me.Guna2Button2.Name = "Guna2Button2"
-        Me.Guna2Button2.Size = New System.Drawing.Size(89, 44)
-        Me.Guna2Button2.TabIndex = 23
-        Me.Guna2Button2.Text = "receipt"
-        Me.Guna2Button2.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias
         '
         'Guna2HtmlLabel1
         '
@@ -466,7 +439,7 @@ Partial Class CASHIER
         Me.checkoutbtn.HoverState.FillColor = System.Drawing.Color.DimGray
         Me.checkoutbtn.HoverState.ForeColor = System.Drawing.Color.White
         Me.checkoutbtn.Location = New System.Drawing.Point(96, 611)
-        Me.checkoutbtn.Margin = New System.Windows.Forms.Padding(20, 20, 20, 20)
+        Me.checkoutbtn.Margin = New System.Windows.Forms.Padding(20)
         Me.checkoutbtn.Name = "checkoutbtn"
         Me.checkoutbtn.Size = New System.Drawing.Size(153, 51)
         Me.checkoutbtn.TabIndex = 17
@@ -640,7 +613,6 @@ Partial Class CASHIER
     Friend WithEvents Guna2HtmlLabel1 As Guna.UI2.WinForms.Guna2HtmlLabel
     Friend WithEvents panel3 As Guna.UI2.WinForms.Guna2Panel
     Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
-    Friend WithEvents Guna2Button2 As Guna.UI2.WinForms.Guna2Button
     Friend WithEvents paymenttxtbox As TextBox
     Friend WithEvents Guna2HtmlLabel2 As Guna.UI2.WinForms.Guna2HtmlLabel
     Friend WithEvents TextBoxSearch As TextBox
