@@ -387,5 +387,8 @@ Public Class PRODUCTS_TAB
         If selectedIndex = 1 Then
             clearform()
         End If
+        If selectedIndex = 0 Then
+            Me.STOCKSTableAdapter.Fill(Me.SHITSTEMDataSet.STOCKS)
+        End If
     End Sub
 End Class

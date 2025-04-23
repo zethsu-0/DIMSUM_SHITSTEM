@@ -23,7 +23,6 @@ Partial Class Form2
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form2))
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -39,7 +38,7 @@ Partial Class Form2
         Me.logoutbtn = New Guna.UI2.WinForms.Guna2Button()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Guna2CirclePictureBox1 = New Guna.UI2.WinForms.Guna2CirclePictureBox()
+        Me.profilepic = New Guna.UI2.WinForms.Guna2CirclePictureBox()
         Me.salesbtn = New Guna.UI2.WinForms.Guna2Button()
         Me.cashierbtn = New Guna.UI2.WinForms.Guna2Button()
         Me.employeebtn = New Guna.UI2.WinForms.Guna2Button()
@@ -54,7 +53,7 @@ Partial Class Form2
         Me.SplitContainer1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
-        CType(Me.Guna2CirclePictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.profilepic, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label2
@@ -217,7 +216,7 @@ Partial Class Form2
         'Panel1
         '
         Me.Panel1.Controls.Add(Me.Label2)
-        Me.Panel1.Controls.Add(Me.Guna2CirclePictureBox1)
+        Me.Panel1.Controls.Add(Me.profilepic)
         Me.Panel1.Controls.Add(Me.Label3)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(3, 3)
@@ -225,15 +224,15 @@ Partial Class Form2
         Me.Panel1.Size = New System.Drawing.Size(144, 80)
         Me.Panel1.TabIndex = 0
         '
-        'Guna2CirclePictureBox1
+        'profilepic
         '
-        Me.Guna2CirclePictureBox1.ImageRotate = 0!
-        Me.Guna2CirclePictureBox1.Location = New System.Drawing.Point(6, 27)
-        Me.Guna2CirclePictureBox1.Name = "Guna2CirclePictureBox1"
-        Me.Guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle
-        Me.Guna2CirclePictureBox1.Size = New System.Drawing.Size(51, 50)
-        Me.Guna2CirclePictureBox1.TabIndex = 1
-        Me.Guna2CirclePictureBox1.TabStop = False
+        Me.profilepic.ImageRotate = 0!
+        Me.profilepic.Location = New System.Drawing.Point(6, 27)
+        Me.profilepic.Name = "profilepic"
+        Me.profilepic.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle
+        Me.profilepic.Size = New System.Drawing.Size(51, 50)
+        Me.profilepic.TabIndex = 1
+        Me.profilepic.TabStop = False
         '
         'salesbtn
         '
@@ -348,7 +347,6 @@ Partial Class Form2
         Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.Panel4)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.Icon = CType(resources.GetObject("₱this.Icon"), System.Drawing.Icon)
         Me.MinimizeBox = False
         Me.Name = "Form2"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -365,7 +363,7 @@ Partial Class Form2
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
-        CType(Me.Guna2CirclePictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.profilepic, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -388,6 +386,6 @@ Partial Class Form2
     Friend WithEvents salesbtn As Guna.UI2.WinForms.Guna2Button
     Friend WithEvents productbtn As Guna.UI2.WinForms.Guna2Button
     Friend WithEvents Panel1 As Panel
-    Friend WithEvents Guna2CirclePictureBox1 As Guna.UI2.WinForms.Guna2CirclePictureBox
+    Friend WithEvents profilepic As Guna.UI2.WinForms.Guna2CirclePictureBox
     Friend WithEvents Guna2HtmlLabel1 As Guna.UI2.WinForms.Guna2HtmlLabel
 End Class

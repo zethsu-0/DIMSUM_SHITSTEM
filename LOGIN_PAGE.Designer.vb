@@ -68,7 +68,7 @@ Partial Class LOGIN_PAGE
         Me.Label1.Location = New System.Drawing.Point(240, 143)
         Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(89, 29)
+        Me.Label1.Size = New System.Drawing.Size(110, 36)
         Me.Label1.TabIndex = 7
         Me.Label1.Text = "Crew"
         Me.Label1.Visible = False
@@ -81,7 +81,7 @@ Partial Class LOGIN_PAGE
         Me.Label2.Location = New System.Drawing.Point(211, 143)
         Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(147, 29)
+        Me.Label2.Size = New System.Drawing.Size(183, 36)
         Me.Label2.TabIndex = 8
         Me.Label2.Text = "Manager"
         Me.Label2.Visible = False
@@ -94,7 +94,7 @@ Partial Class LOGIN_PAGE
         Me.Label3.Location = New System.Drawing.Point(228, 143)
         Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(113, 29)
+        Me.Label3.Size = New System.Drawing.Size(139, 36)
         Me.Label3.TabIndex = 9
         Me.Label3.Text = "Owner"
         Me.Label3.Visible = False
@@ -161,6 +161,7 @@ Partial Class LOGIN_PAGE
         Me.TextBox1.ForeColor = System.Drawing.Color.Black
         Me.TextBox1.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.TextBox1.Location = New System.Drawing.Point(152, 295)
+        Me.TextBox1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.PlaceholderText = "Enter your ID"
         Me.TextBox1.SelectedText = ""
@@ -190,20 +191,20 @@ Partial Class LOGIN_PAGE
         'Guna2HtmlLabel2
         '
         Me.Guna2HtmlLabel2.BackColor = System.Drawing.Color.Transparent
-        Me.Guna2HtmlLabel2.Font = New System.Drawing.Font("ITC Kabel", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2HtmlLabel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2HtmlLabel2.Location = New System.Drawing.Point(3, 0)
         Me.Guna2HtmlLabel2.Name = "Guna2HtmlLabel2"
-        Me.Guna2HtmlLabel2.Size = New System.Drawing.Size(103, 34)
+        Me.Guna2HtmlLabel2.Size = New System.Drawing.Size(148, 41)
         Me.Guna2HtmlLabel2.TabIndex = 1
         Me.Guna2HtmlLabel2.Text = "DIMSUM"
         '
         'Guna2HtmlLabel1
         '
         Me.Guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent
-        Me.Guna2HtmlLabel1.Font = New System.Drawing.Font("ITC Kabel", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Guna2HtmlLabel1.Location = New System.Drawing.Point(112, 1)
+        Me.Guna2HtmlLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2HtmlLabel1.Location = New System.Drawing.Point(174, 0)
         Me.Guna2HtmlLabel1.Name = "Guna2HtmlLabel1"
-        Me.Guna2HtmlLabel1.Size = New System.Drawing.Size(81, 34)
+        Me.Guna2HtmlLabel1.Size = New System.Drawing.Size(114, 41)
         Me.Guna2HtmlLabel1.TabIndex = 0
         Me.Guna2HtmlLabel1.Text = "LOGIN"
         '
@@ -255,7 +256,7 @@ Partial Class LOGIN_PAGE
         Me.Guna2CheckBox1.CheckedState.FillColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.Guna2CheckBox1.Location = New System.Drawing.Point(157, 375)
         Me.Guna2CheckBox1.Name = "Guna2CheckBox1"
-        Me.Guna2CheckBox1.Size = New System.Drawing.Size(109, 19)
+        Me.Guna2CheckBox1.Size = New System.Drawing.Size(131, 21)
         Me.Guna2CheckBox1.TabIndex = 18
         Me.Guna2CheckBox1.Text = "Show Password"
         Me.Guna2CheckBox1.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(125, Byte), Integer), CType(CType(137, Byte), Integer), CType(CType(149, Byte), Integer))
@@ -277,6 +278,7 @@ Partial Class LOGIN_PAGE
         Me.TextBox2.ForeColor = System.Drawing.Color.Black
         Me.TextBox2.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.TextBox2.Location = New System.Drawing.Point(152, 348)
+        Me.TextBox2.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.TextBox2.PlaceholderForeColor = System.Drawing.Color.Silver
@@ -298,7 +300,7 @@ Partial Class LOGIN_PAGE
         'LOGIN_PAGE
         '
         Me.AcceptButton = Me.Button1
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 17.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(518, 663)

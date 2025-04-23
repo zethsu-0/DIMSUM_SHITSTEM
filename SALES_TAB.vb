@@ -1,6 +1,7 @@
 ﻿Imports System.Data.SqlClient
 Imports System.Reflection
 Imports System.Windows.Forms.DataVisualization.Charting
+Imports SixLabors.ImageSharp.PixelFormats
 
 Public Class SALES_TAB
 
@@ -10,13 +11,8 @@ Public Class SALES_TAB
         Me.MonthlySalesTableAdapter.Fill(Me.SHITSTEMDataSet.MonthlySales)
         Me.WeeklySalesTableAdapter.Fill(Me.SHITSTEMDataSet.WeeklySales)
         Me.STOCKSTableAdapter.Fill(Me.SHITSTEMDataSet.STOCKS)
-
-        If user_Role = "Owner" Then
-            profitpanel.Visible = True
-            Label1.Visible = True
-            Label3.Visible = True
-            profitlbl.Visible = True
-        End If
+        Me.DailySummaryTableAdapter.Fill(Me.SHITSTEMDataSet.DailySummary)
+        Me.TransactionsTableAdapter.Fill(Me.SHITSTEMDataSet.Transactions)
         Dim dt As New DataTable()
         Dim query As String = "SELECT * FROM STOCKS"
         Using filtercmd As New SqlCommand(query, con)
@@ -38,52 +34,55 @@ Public Class SALES_TAB
 
 
 
-        Label2.Text = DateTime.Now.ToString("dddd, MMMM dd, yyyy")
+        salesTotallbl.Text = DateTime.Now.ToString("dddd, MMMM dd, yyyy")
         dailytotalearn()
         LoadCharts()
     End Sub
     Private Sub LoadCharts()
-        ' === MonthlySales: Profit to Chart1, Sales_Total to Chart3 ===
+        ' === Chart1: Monthly Profit & Sales ===
         Opencon()
         Dim cmd As New SqlCommand("SELECT Month, Profit, Sales_Total FROM MonthlySales", con)
         Dim reader As SqlDataReader
 
         Chart1.Series.Clear()
-        Chart3.Series.Clear()
+        Chart1.Legends.Clear()
 
-        Dim profitSeries As New Series("Monthly Profit")
-        Dim salesSeries As New Series("Monthly Sales")
+        Dim monthlyProfitSeries As New Series("Monthly Profit")
+        Dim monthlySalesSeries As New Series("Monthly Sales")
 
-        profitSeries.ChartType = SeriesChartType.Column
-        salesSeries.ChartType = SeriesChartType.Column
-
-        profitSeries.IsValueShownAsLabel = True
-        salesSeries.IsValueShownAsLabel = True
+        ' Style
+        monthlyProfitSeries.ChartType = SeriesChartType.Column
+        monthlySalesSeries.ChartType = SeriesChartType.Column
+        monthlyProfitSeries.Color = Color.Black
+        monthlySalesSeries.Color = Color.Yellow
+        monthlyProfitSeries.IsValueShownAsLabel = True
+        monthlySalesSeries.IsValueShownAsLabel = True
+        monthlyProfitSeries("PointWidth") = "0.5"
+        monthlySalesSeries("PointWidth") = "0.5"
 
         Try
             reader = cmd.ExecuteReader()
-            Dim index As Integer = 0
-
             While reader.Read()
                 Dim month = reader("Month").ToString()
-                Dim profit = Convert.ToDecimal(reader("Profit"))
-                Dim sales = Convert.ToDecimal(reader("Sales_Total"))
+                Dim profit = If(IsDBNull(reader("Profit")), 0D, Convert.ToDecimal(reader("Profit"))) ' Handle Null profit
+                Dim sales = If(IsDBNull(reader("Sales_Total")), 0D, Convert.ToDecimal(reader("Sales_Total"))) ' Handle Null sales
 
-                ' Profit to Chart1
-                Dim profitPoint As New DataPoint()
-                profitPoint.SetValueXY(month, profit)
-                profitSeries.Points.Add(profitPoint)
+                If user_Role <> "Manager" Then
+                    monthlyProfitSeries.Points.AddXY(month, profit)
+                End If
 
-                ' Sales_Total to Chart3
-                Dim salesPoint As New DataPoint()
-                salesPoint.SetValueXY(month, sales)
-                salesSeries.Points.Add(salesPoint)
-
-                index += 1
+                monthlySalesSeries.Points.AddXY(month, sales)
             End While
 
-            Chart1.Series.Add(profitSeries)
-            Chart3.Series.Add(salesSeries)
+            Chart1.Series.Add(monthlyProfitSeries)
+            Chart1.Series.Add(monthlySalesSeries)
+
+            Chart1.Legends.Add("Legend1")
+            Chart1.Legends(0).Docking = Docking.Top
+            Chart1.Legends(0).Font = New Font("Arial", 9, FontStyle.Bold)
+
+            Chart1.ChartAreas(0).AxisX.IsMarginVisible = True
+            Chart1.ChartAreas(0).AxisX.Interval = 1
 
         Catch ex As Exception
             MessageBox.Show("Error loading MonthlySales: " & ex.Message)
@@ -91,47 +90,55 @@ Public Class SALES_TAB
             con.Close()
         End Try
 
-        ' === WeeklySales: Profit to Chart2, Sales_Total to Chart4 ===
+        ' === Chart2: Weekly Profit & Sales ===
         Opencon()
         Dim cmd2 As New SqlCommand("SELECT Day, Profit, Sales_Total FROM WeeklySales", con)
         Dim reader2 As SqlDataReader
 
         Chart2.Series.Clear()
-        Chart4.Series.Clear()
+        Chart2.Legends.Clear()
 
-        Dim profitSeries2 As New Series("Weekly Profit")
-        Dim salesSeries2 As New Series("Weekly Sales")
+        Dim weeklyProfitSeries As New Series("Weekly Profit")
+        Dim weeklySalesSeries As New Series("Weekly Sales")
 
-        profitSeries2.ChartType = SeriesChartType.Column
-        salesSeries2.ChartType = SeriesChartType.Column
-
-        profitSeries2.IsValueShownAsLabel = True
-        salesSeries2.IsValueShownAsLabel = True
+        weeklyProfitSeries.ChartType = SeriesChartType.Column
+        weeklySalesSeries.ChartType = SeriesChartType.Column
+        weeklyProfitSeries.Color = Color.Black
+        weeklySalesSeries.Color = Color.Yellow
+        weeklyProfitSeries.IsValueShownAsLabel = True
+        weeklySalesSeries.IsValueShownAsLabel = True
 
         Try
             reader2 = cmd2.ExecuteReader()
-            Dim index As Integer = 0
-
             While reader2.Read()
                 Dim day = reader2("Day").ToString()
-                Dim profit = Convert.ToDecimal(reader2("Profit"))
-                Dim sales = Convert.ToDecimal(reader2("Sales_Total"))
+                Dim profit = If(IsDBNull(reader2("Profit")), 0D, Convert.ToDecimal(reader2("Profit"))) ' Handle Null profit
+                Dim sales = If(IsDBNull(reader2("Sales_Total")), 0D, Convert.ToDecimal(reader2("Sales_Total"))) ' Handle Null sales
 
-                ' Profit to Chart2
-                Dim profitPoint As New DataPoint()
-                profitPoint.SetValueXY(day, profit)
-                profitSeries2.Points.Add(profitPoint)
+                ' Check if day is Null or empty
+                If String.IsNullOrEmpty(day) Then
+                    day = "Unknown"  ' Or set to any default value like "N/A"
+                End If
 
-                ' Sales to Chart4
-                Dim salesPoint As New DataPoint()
-                salesPoint.SetValueXY(day, sales)
-                salesSeries2.Points.Add(salesPoint)
-
-                index += 1
+                ' Add profit and sales data points
+                If user_Role <> "Manager" Then
+                    weeklyProfitSeries.Points.AddXY(day, profit)
+                End If
+                weeklySalesSeries.Points.AddXY(day, sales)
             End While
 
-            Chart2.Series.Add(profitSeries2)
-            Chart4.Series.Add(salesSeries2)
+            Chart2.Series.Add(weeklyProfitSeries)
+            Chart2.Series.Add(weeklySalesSeries)
+
+            Chart2.Legends.Add("Legend2")
+            Chart2.Legends(0).Docking = Docking.Top
+            Chart2.Legends(0).Font = New Font("Arial", 9, FontStyle.Bold)
+            Chart2.ChartAreas(0).Area3DStyle.Enable3D = False
+            weeklyProfitSeries.BorderWidth = 1
+            weeklySalesSeries.BorderWidth = 1
+
+            weeklyProfitSeries("PointWidth") = "0.4"
+            weeklySalesSeries("PointWidth") = "0.4"
 
         Catch ex As Exception
             MessageBox.Show("Error loading WeeklySales: " & ex.Message)
@@ -139,6 +146,13 @@ Public Class SALES_TAB
             con.Close()
         End Try
     End Sub
+
+
+
+
+
+
+
 
 
 
@@ -157,21 +171,18 @@ Public Class SALES_TAB
                 If reader.Read() Then
                     If Not IsDBNull(reader("TotalProfit")) Then
                         dailyProfit = Convert.ToDecimal(reader("TotalProfit"))
-                        profitlbl.Text = "Profit: " & dailyProfit.ToString("C2")
+                        profitlbl.Text = dailyProfit.ToString()
                     End If
 
                     If Not IsDBNull(reader("TotalSales")) Then
                         dailySales_total = Convert.ToDecimal(reader("TotalSales"))
-                        salesTotallbl.Text = "Sales: " & dailySales_total.ToString("C2")
+                        salesTotallbl.Text = dailySales_total.ToString()
                     End If
                 End If
             End Using
             con.Close()
         End Using
 
-        ' Update labels
-
-        ' Make sure this label exists
     End Sub
 
     Private Sub SALES_TAB_ParentChanged(sender As Object, e As EventArgs) Handles Me.ParentChanged
@@ -188,7 +199,10 @@ Public Class SALES_TAB
         Me.DailySalesTableAdapter.Fill(Me.SHITSTEMDataSet.DailySales)
         Me.MonthlySalesTableAdapter.Fill(Me.SHITSTEMDataSet.MonthlySales)
         Me.WeeklySalesTableAdapter.Fill(Me.SHITSTEMDataSet.WeeklySales)
+        Me.DailySummaryTableAdapter.Fill(Me.SHITSTEMDataSet.DailySummary)
         Me.STOCKSTableAdapter.Fill(Me.SHITSTEMDataSet.STOCKS)
+        Me.TransactionsTableAdapter.Fill(Me.SHITSTEMDataSet.Transactions)
+
     End Sub
 
 
@@ -218,4 +232,7 @@ Public Class SALES_TAB
         Me.STOCKSTableAdapter.Fill(Me.SHITSTEMDataSet.STOCKS)
     End Sub
 
+    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
+
+    End Sub
 End Class

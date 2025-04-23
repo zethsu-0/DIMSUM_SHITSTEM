@@ -50,7 +50,6 @@ Public Class PRODUCTS
 
     Private Sub Button5_Click_1(sender As Object, e As EventArgs) Handles Button5.Click
 
-
         Try
             If TextBox8.Text = "" Or TextBox7.Text = "" Or TextBox6.Text = "" Or TextBox5.Text = "" Then
                 MessageBox.Show("Please Fill all the SHITS")
@@ -110,7 +109,6 @@ Public Class PRODUCTS
     End Sub
 
     Private Sub Button3_Click_1(sender As Object, e As EventArgs) Handles Button3.Click
-
         If MessageBox.Show("Are you sure you want to delete this record?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
             Dim Item_no As String = TextBox8.Text
             Dim Product_name As String = TextBox7.Text
@@ -145,7 +143,6 @@ Public Class PRODUCTS
     Private Sub Label7_Click(sender As Object, e As EventArgs)
         MessageBox.Show("To Edit or Delete a Product, Just select in the Grid", "Edit Stocks")
     End Sub
-
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         STOCKSDataGridView.ClearSelection()
         TextBox7.Text = ""

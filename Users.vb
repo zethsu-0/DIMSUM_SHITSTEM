@@ -1,6 +1,8 @@
 ﻿Imports System.Data.SqlClient
-Imports System.Windows.Controls
+Imports System.IO
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement
+Imports Microsoft.VisualBasic.ApplicationServices
+Imports TheArtOfDevHtmlRenderer.Adapters
 
 Public Class Users
 
@@ -25,29 +27,45 @@ Public Class Users
                     MessageBox.Show("Please Fill all the SHITS")
                 Else
 
-                    role = "Owner"
-                    user_id = TextBox1.Text
-                    firstname = TextBox2.Text
-                    lastname = TextBox3.Text
-                    age = TextBox4.Text
-                    address = TextBox5.Text
-                    Phone_no = TextBox6.Text
-                    password = TextBox7.Text
-                    Dim insertQuery As String = "INSERT INTO login (firstname, lastname, age, address, Phone_no, password,role, user_id) VALUES (@firstname, @lastname, @age, @address,@Phone_no,@password,@role,@user_id)"
-                    Using insertCmd As New SqlCommand(insertQuery, con)
-                        insertCmd.Parameters.AddWithValue("@user_id", user_id)
-                        insertCmd.Parameters.AddWithValue("@firstname", firstname)
-                        insertCmd.Parameters.AddWithValue("@lastname", lastname)
-                        insertCmd.Parameters.AddWithValue("@role", role)
-                        insertCmd.Parameters.AddWithValue("@age", age)
-                        insertCmd.Parameters.AddWithValue("@address", address)
-                        insertCmd.Parameters.AddWithValue("@Phone_no", Phone_no)
-                        insertCmd.Parameters.AddWithValue("@password", password)
 
-                        insertCmd.ExecuteNonQuery()
-                        con.Close()
-                    End Using
-                    MsgBox("Your username: " & user_id & vbCrLf & "Your Password: " & password)
+                    If IsNewUser Then
+                        Dim arrimage() As Byte = Nothing
+
+                        If Not picProfile.Image Is My.Resources.defaulticon Then
+                            Dim mstream As New MemoryStream()
+                            picProfile.Image.Save(mstream, System.Drawing.Imaging.ImageFormat.Png)
+                            arrimage = mstream.ToArray()
+                            mstream.Close()
+                        Else
+                            picProfile.Image = My.Resources.defaulticon
+                        End If
+
+
+                        ' INSERT logic
+
+                        Dim insertQuery As String = "INSERT INTO login (user_id,Photo, firstname, lastname, age, address, Phone_no, role, password) 
+                                 VALUES (@userId, @Photo,@firstname, @lastname, @age, @address, @phone, @role, @password)"
+                        Using cmd As New SqlCommand(insertQuery, con)
+                            cmd.Parameters.AddWithValue("@userId", txtUserId.Text)
+                            cmd.Parameters.AddWithValue("@firstname", txtFirstName.Text)
+                            cmd.Parameters.AddWithValue("@lastname", txtLastName.Text)
+                            cmd.Parameters.AddWithValue("@age", txtAge.Text)
+                            cmd.Parameters.AddWithValue("@address", txtAddress.Text)
+                            cmd.Parameters.AddWithValue("@phone", txtPhone.Text)
+                            cmd.Parameters.AddWithValue("@role", cboRole.Text)
+                            cmd.Parameters.AddWithValue("@password", txtpassword.Text)
+                            If arrimage IsNot Nothing Then
+                                cmd.Parameters.Add("@Photo", SqlDbType.VarBinary).Value = arrimage
+                            Else
+                                cmd.Parameters.Add("@Photo", SqlDbType.VarBinary).Value = DBNull.Value
+                            End If
+
+                            cmd.ExecuteNonQuery()
+                            con.Close()
+                            Me.Close()
+                        End Using
+                        MessageBox.Show("New user added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        MsgBox("Your username: " & user_id & vbCrLf & "Your Password: " & password)
                     reset()
                 End If
             Catch ex As Exception
@@ -72,4 +90,45 @@ Public Class Users
         reset()
         Me.Close()
     End Sub
+
+    Private Sub Guna2Button1_Click(sender As Object, e As EventArgs) Handles Guna2Button1.Click
+        Dim openFileDialog As New OpenFileDialog()
+
+        With openFileDialog
+            .Title = "Select an Image"
+            .Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp"
+            .Multiselect = False
+        End With
+
+        If openFileDialog.ShowDialog() = DialogResult.OK Then
+            Dim selectedFile As String = openFileDialog.FileName
+
+
+            Dim fileInfo As New FileInfo(selectedFile)
+
+
+            Dim originalImage As Image = Image.FromFile(selectedFile)
+            Dim resizedImage As Image = ResizeImage(originalImage, 200, 200) ' Adjust size as needed
+
+
+            picProfile.Image = resizedImage
+            picProfile.SizeMode = PictureBoxSizeMode.StretchImage
+        End If
+    End Sub
+
+    Private Function ResizeImage(img As Image, maxWidth As Integer, maxHeight As Integer) As Image
+        Dim ratioX As Double = maxWidth / img.Width
+        Dim ratioY As Double = maxHeight / img.Height
+        Dim ratio As Double = Math.Min(ratioX, ratioY)
+
+        Dim newWidth As Integer = CInt(img.Width * ratio)
+        Dim newHeight As Integer = CInt(img.Height * ratio)
+
+        Dim newImage As New Bitmap(newWidth, newHeight)
+        Using g As Graphics = Graphics.FromImage(newImage)
+            g.DrawImage(img, 0, 0, newWidth, newHeight)
+        End Using
+
+        Return newImage
+    End Function
 End Class

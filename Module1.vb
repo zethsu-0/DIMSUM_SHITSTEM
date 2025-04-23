@@ -5,7 +5,7 @@ Module Module1
     Public cmd As New SqlCommand
 
     Sub Opencon()
-        con.ConnectionString = "Data Source=KUPAL\SQLEXPRESS;Initial Catalog=SHITSTEM;Integrated Security=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True"
+        con.ConnectionString = "Data Source=RAV3N\SQLEXPRESS;Initial Catalog=SHITSTEM;Integrated Security=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True"
         con.Open()
     End Sub
 

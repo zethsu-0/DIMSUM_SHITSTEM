@@ -76,7 +76,7 @@ Public Class LOGIN_PAGE
                         End If
 
                     Case "Owner"
-                        MsgBox("ooooooo")
+                        MsgBox("Welcome")
 
                         Dim user_Role As String = userRole
                         Dim user_id As String = TextBox1.Text
@@ -175,7 +175,7 @@ Public Class LOGIN_PAGE
     End Sub
 
     Private Sub Button6_Click_1(sender As Object, e As EventArgs) Handles Button6.Click
-        Dim users As New Users()
+        Dim users As New EditUserForm()
         users.ShowDialog()
 
         ifownerexists()

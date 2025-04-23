@@ -52,7 +52,6 @@ Partial Class RECEIPT
         Me.ResumeLayout(False)
 
     End Sub
-
-    Friend WithEvents CrystalReportViewer1 As CrystalDecisions.Windows.Forms.CrystalReportViewer
     Friend WithEvents CrystalReport11 As CrystalReport1
+    Friend WithEvents CrystalReportViewer1 As CrystalDecisions.Windows.Forms.CrystalReportViewer
 End Class

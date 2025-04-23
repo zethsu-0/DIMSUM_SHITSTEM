@@ -15,81 +15,87 @@ Public Class EditUserForm
     Public Property currentRole As String
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        If IsNewUser Then
-            Dim arrimage() As Byte = Nothing
+        If txtUserId.Text = "" Or txtFirstName.Text = "" Or txtLastName.Text = "" Or txtPhone.Text = "" Or txtAddress.Text = "" Or txtAge.Text = "" Or cboRole.Text = "" Or txtpassword.Text = "" Then
 
-
-            If Not picProfile.Image Is My.Resources.defaulticon Then
-                Dim mstream As New MemoryStream()
-                picProfile.Image.Save(mstream, System.Drawing.Imaging.ImageFormat.Png)
-                arrimage = mstream.ToArray()
-                mstream.Close()
-            Else
-
-            End If
-            ' INSERT logic
-
-            Dim insertQuery As String = "INSERT INTO login (user_id,Photo, firstname, lastname, age, address, Phone_no, role, password) 
-                                 VALUES (@userId, @Photo,@firstname, @lastname, @age, @address, @phone, @role, @password)"
-            Using cmd As New SqlCommand(insertQuery, con)
-                cmd.Parameters.AddWithValue("@userId", txtUserId.Text)
-                cmd.Parameters.AddWithValue("@firstname", txtFirstName.Text)
-                cmd.Parameters.AddWithValue("@lastname", txtLastName.Text)
-                cmd.Parameters.AddWithValue("@age", txtAge.Text)
-                cmd.Parameters.AddWithValue("@address", txtAddress.Text)
-                cmd.Parameters.AddWithValue("@phone", txtPhone.Text)
-                cmd.Parameters.AddWithValue("@role", cboRole.Text)
-                cmd.Parameters.AddWithValue("@password", txtpassword.Text)
-                If arrimage IsNot Nothing Then
-                    cmd.Parameters.Add("@Photo", SqlDbType.VarBinary).Value = arrimage
-                Else
-                    cmd.Parameters.Add("@Photo", SqlDbType.VarBinary).Value = DBNull.Value
-                End If
-
-                cmd.ExecuteNonQuery()
-                con.Close()
-                Me.Close()
-            End Using
-            MessageBox.Show("New user added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
         Else
 
-            If user_Role = "Owner" Then
-                cboRole.Text = "Owner"
-                cboRole.Visible = False
-            End If
-            If user_Role = "Manager" Then
-                cboRole.Visible = False
-            End If
-            Dim Filesize As UInt32
-            Dim mstream As New System.IO.MemoryStream
-            picProfile.Image.Save(mstream, System.Drawing.Imaging.ImageFormat.Png)
-            Dim arrimage() As Byte = mstream.GetBuffer()
-            Filesize = mstream.Length
-            mstream.Close()
 
-            Dim updateQuery As String = "UPDATE login SET Photo=@Photo,firstname=@firstname, lastname=@lastname, age=@age, address=@address, Phone_no=@phone, role=@role,password=@password WHERE user_id=@userId"
-            Using cmd As New SqlCommand(updateQuery, con)
-                cmd.Parameters.AddWithValue("@userId", txtUserId.Text)
-                cmd.Parameters.AddWithValue("@firstname", txtFirstName.Text)
-                cmd.Parameters.AddWithValue("@lastname", txtLastName.Text)
-                cmd.Parameters.AddWithValue("@age", txtAge.Text)
-                cmd.Parameters.AddWithValue("@address", txtAddress.Text)
-                cmd.Parameters.AddWithValue("@phone", txtPhone.Text)
-                cmd.Parameters.AddWithValue("@role", cboRole.Text)
-                cmd.Parameters.AddWithValue("@password", txtpassword.Text)
-                If arrimage IsNot Nothing Then
-                    cmd.Parameters.Add("@Photo", SqlDbType.VarBinary).Value = arrimage
-                Else
-                    cmd.Parameters.Add("@Photo", SqlDbType.VarBinary).Value = DBNull.Value
+            If IsNewUser Then
+                Dim arrimage() As Byte = Nothing
+
+                If Not picProfile.Image Is My.Resources.defaulticon Then
+                        Dim mstream As New MemoryStream()
+                        picProfile.Image.Save(mstream, System.Drawing.Imaging.ImageFormat.Png)
+                        arrimage = mstream.ToArray()
+                        mstream.Close()
+                    Else
+                    picProfile.Image = My.Resources.defaulticon
                 End If
 
-                cmd.ExecuteNonQuery()
-                con.Close()
-                Me.Close()
-            End Using
-            MessageBox.Show("User updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        End If
 
+                ' INSERT logic
+
+                Dim insertQuery As String = "INSERT INTO login (user_id,Photo, firstname, lastname, age, address, Phone_no, role, password) 
+                                 VALUES (@userId, @Photo,@firstname, @lastname, @age, @address, @phone, @role, @password)"
+                Using cmd As New SqlCommand(insertQuery, con)
+                    cmd.Parameters.AddWithValue("@userId", txtUserId.Text)
+                    cmd.Parameters.AddWithValue("@firstname", txtFirstName.Text)
+                    cmd.Parameters.AddWithValue("@lastname", txtLastName.Text)
+                    cmd.Parameters.AddWithValue("@age", txtAge.Text)
+                    cmd.Parameters.AddWithValue("@address", txtAddress.Text)
+                    cmd.Parameters.AddWithValue("@phone", txtPhone.Text)
+                    cmd.Parameters.AddWithValue("@role", cboRole.Text)
+                    cmd.Parameters.AddWithValue("@password", txtpassword.Text)
+                    If arrimage IsNot Nothing Then
+                        cmd.Parameters.Add("@Photo", SqlDbType.VarBinary).Value = arrimage
+                    Else
+                        cmd.Parameters.Add("@Photo", SqlDbType.VarBinary).Value = DBNull.Value
+                    End If
+
+                    cmd.ExecuteNonQuery()
+                    con.Close()
+                    Me.Close()
+                End Using
+                MessageBox.Show("New user added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Else
+
+                If user_Role = "Owner" Then
+                    cboRole.Text = "Owner"
+                    cboRole.Visible = False
+                End If
+                If user_Role = "Manager" Then
+                    cboRole.Visible = False
+                End If
+                Dim Filesize As UInt32
+                Dim mstream As New System.IO.MemoryStream
+                picProfile.Image.Save(mstream, System.Drawing.Imaging.ImageFormat.Png)
+                Dim arrimage() As Byte = mstream.GetBuffer()
+                Filesize = mstream.Length
+                mstream.Close()
+
+                Dim updateQuery As String = "UPDATE login SET Photo=@Photo,firstname=@firstname, lastname=@lastname, age=@age, address=@address, Phone_no=@phone, role=@role,password=@password WHERE user_id=@userId"
+                Using cmd As New SqlCommand(updateQuery, con)
+                    cmd.Parameters.AddWithValue("@userId", txtUserId.Text)
+                    cmd.Parameters.AddWithValue("@firstname", txtFirstName.Text)
+                    cmd.Parameters.AddWithValue("@lastname", txtLastName.Text)
+                    cmd.Parameters.AddWithValue("@age", txtAge.Text)
+                    cmd.Parameters.AddWithValue("@address", txtAddress.Text)
+                    cmd.Parameters.AddWithValue("@phone", txtPhone.Text)
+                    cmd.Parameters.AddWithValue("@role", cboRole.Text)
+                    cmd.Parameters.AddWithValue("@password", txtpassword.Text)
+                    If arrimage IsNot Nothing Then
+                        cmd.Parameters.Add("@Photo", SqlDbType.VarBinary).Value = arrimage
+                    Else
+                        cmd.Parameters.Add("@Photo", SqlDbType.VarBinary).Value = DBNull.Value
+                    End If
+
+                    cmd.ExecuteNonQuery()
+                    con.Close()
+                    Me.Close()
+                End Using
+                MessageBox.Show("User updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+        End If
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles BtnCancel.Click
@@ -197,4 +203,6 @@ Public Class EditUserForm
             End Try
         End If
     End Sub
+
+
 End Class
