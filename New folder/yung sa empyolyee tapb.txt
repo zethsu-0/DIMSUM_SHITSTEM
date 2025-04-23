@@ -1,0 +1,146 @@
+Private Sub LoadLoggedInUserIntoPanel1()
+    Panel1.Controls.Clear()
+    Dim userPhoto As Image = Nothing
+    Try
+        con.Open()
+        Dim query As String = "SELECT Photo FROM login WHERE user_id = @userId"
+        Using cmd As New SqlCommand(query, con)
+            cmd.Parameters.AddWithValue("@userId", User_id)
+            Dim result = cmd.ExecuteScalar()
+            If result IsNot Nothing AndAlso Not IsDBNull(result) Then
+                Dim imgBytes() As Byte = DirectCast(result, Byte())
+                Using ms As New MemoryStream(imgBytes)
+                    userPhoto = Image.FromStream(ms)
+                End Using
+            End If
+        End Using
+    Catch ex As Exception
+        MessageBox.Show("Error loading user photo: " & ex.Message)
+    Finally
+        If con.State = ConnectionState.Open Then con.Close()
+    End Try
+
+    If user_Role = "Owner" OrElse user_Role = "Manager" Then
+        Dim userPanel As New Panel()
+        userPanel.Width = 250
+        userPanel.Height = 180
+        userPanel.BackColor = If(user_Role = "Owner", Color.LightGoldenrodYellow, Color.LightBlue)
+        userPanel.BorderStyle = BorderStyle.FixedSingle
+        userPanel.Padding = New Padding(5, 10, 5, 10)
+
+
+        Dim lblTitle As New Label()
+        lblTitle.Text = $" {user_Role.ToUpper()}"
+        lblTitle.Font = New Font("Microsoft Sans Serif", 14, FontStyle.Bold)
+        lblTitle.Location = New Point(10, 10)
+        lblTitle.AutoSize = True
+
+        Dim lblUserId As New Label()
+        lblUserId.Text = $"ID: {User_id}"
+        lblUserId.Location = New Point(10, 40)
+        lblUserId.AutoSize = True
+        lblUserId.Font = New Font("Microsoft Sans Serif", 10, FontStyle.Bold)
+
+        Dim editbtn As New Guna2Button()
+        editbtn.Text = "Edit"
+        editbtn.Size = New Size(60, 20)
+        editbtn.Location = New Point(100, 190)
+        editbtn.Tag = Me.User_id
+        AddHandler editbtn.Click, AddressOf EditUser_Click
+        userPanel.Controls.Add(editbtn)
+
+        Dim picBox As New PictureBox()
+        picBox.Size = New Size(80, 80)
+        picBox.Location = New Point(60, 70)
+        picBox.SizeMode = PictureBoxSizeMode.StretchImage
+        picBox.Image = If(userPhoto IsNot Nothing, userPhoto, My.Resources.defaulticon)
+
+
+        userPanel.Controls.AddRange({lblTitle, lblUserId, editbtn, picBox})
+
+        Panel1.Controls.Add(userPanel)
+    End If
+End Sub
+Private Sub LoadOtherUsersIntoFlowLayoutPanel()
+    FlowLayoutPanel1.Controls.Clear()
+
+    Try
+        con.Open()
+        Dim query As String = "
+        SELECT user_id, firstname, lastname, role, age, address, phone_no, photo
+          FROM login
+         WHERE user_id <> @currentUserId
+           AND (
+                (@currentRole = 'Owner')
+             OR (@currentRole = 'Manager' AND role = 'Employee')
+           )"
+
+        Using cmd As New SqlCommand(query, con)
+            cmd.Parameters.AddWithValue("@currentUserId", User_id)
+            cmd.Parameters.AddWithValue("@currentRole", user_Role)
+
+            Using reader As SqlDataReader = cmd.ExecuteReader()
+                While reader.Read()
+                    ' Create panel for each user
+                    Dim userPanel As New Panel()
+                    userPanel.Tag = reader("user_id").ToString()
+                    userPanel.Width = 220
+                    userPanel.Height = 250
+                    userPanel.BackColor = Color.White
+                    userPanel.BorderStyle = BorderStyle.FixedSingle
+                    userPanel.Margin = New Padding(5, 10, 5, 10)
+
+                    ' Add user details
+                    Dim lblName As New Label()
+                    lblName.Text = $"{reader("firstname")} {reader("lastname")}"
+                    lblName.Font = New Font("Microsoft Sans Serif", 11, FontStyle.Bold)
+                    lblName.Location = New Point(10, 10)
+                    lblName.AutoSize = True
+                    lblName.Margin = New Padding(2, 4, 2, 4)
+
+                    Dim lblRole As New Label()
+                    lblRole.Text = $"Role: {reader("role")}"
+                    lblRole.Location = New Point(10, 40)
+                    lblRole.AutoSize = True
+                    lblRole.Font = New Font("Microsoft Sans Serif", 9)
+
+                    Dim lblUserId As New Label()
+                    lblUserId.Text = $"ID: {reader("user_id")}"
+                    lblUserId.Location = New Point(10, 70)
+                    lblUserId.BackColor = Color.Transparent
+                    lblUserId.Font = New Font("Microsoft Sans Serif", 9)
+
+                    Dim editbtn As New Guna2Button()
+                    editbtn.Text = "Edit"
+                    editbtn.Size = New Size(60, 20)
+                    editbtn.Location = New Point(100, 190)
+                    editbtn.Tag = reader("user_id").ToString()
+                    AddHandler editbtn.Click, AddressOf EditUser_Click
+
+                    Dim picBox As New PictureBox()
+                    picBox.Size = New Size(80, 80)
+                    picBox.Location = New Point(60, 90)
+                    picBox.SizeMode = PictureBoxSizeMode.StretchImage
+
+                    If Not IsDBNull(reader("Photo")) Then
+                        Dim bytes As Byte() = DirectCast(reader("Photo"), Byte())
+                        Using ms As New MemoryStream(bytes)
+                            picBox.Image = Image.FromStream(ms)
+                        End Using
+                    Else
+                        picBox.Image = My.Resources.defaulticon
+                    End If
+
+
+                    userPanel.Controls.AddRange({lblName, lblRole, lblUserId, editbtn, picBox})
+
+
+                    FlowLayoutPanel1.Controls.Add(userPanel)
+                End While
+            End Using
+        End Using
+        con.Close()
+    Catch ex As Exception
+        MessageBox.Show($"Error loading users: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+    End Try
+End Sub
