@@ -34,7 +34,7 @@ Public Class SALES_TAB
 
 
 
-        salesTotallbl.Text = DateTime.Now.ToString("dddd, MMMM dd, yyyy")
+        salesTotallbl.Text = "0.00"
         dailytotalearn()
         LoadCharts()
     End Sub
@@ -232,7 +232,5 @@ Public Class SALES_TAB
         Me.STOCKSTableAdapter.Fill(Me.SHITSTEMDataSet.STOCKS)
     End Sub
 
-    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
 
-    End Sub
 End Class

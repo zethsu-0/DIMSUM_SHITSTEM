@@ -23,7 +23,7 @@ Partial Class PRODUCTS_TAB
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PRODUCTS_TAB))
         Me.STOCKSDataGridView = New System.Windows.Forms.DataGridView()
         Me.Product_image = New System.Windows.Forms.DataGridViewImageColumn()
@@ -42,7 +42,6 @@ Partial Class PRODUCTS_TAB
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Button6 = New System.Windows.Forms.Button()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -70,15 +69,16 @@ Partial Class PRODUCTS_TAB
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Guna2Button1 = New Guna.UI2.WinForms.Guna2Button()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         CType(Me.STOCKSDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.STOCKSBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SHITSTEMDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Guna2TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'STOCKSDataGridView
@@ -86,70 +86,81 @@ Partial Class PRODUCTS_TAB
         Me.STOCKSDataGridView.AutoGenerateColumns = False
         Me.STOCKSDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.STOCKSDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
+        Me.STOCKSDataGridView.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.STOCKSDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.STOCKSDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Product_image, Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6, Me.DataGridViewImageColumn1})
         Me.STOCKSDataGridView.DataSource = Me.STOCKSBindingSource
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.STOCKSDataGridView.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("ITC Kabel", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.STOCKSDataGridView.DefaultCellStyle = DataGridViewCellStyle2
         Me.STOCKSDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.STOCKSDataGridView.Location = New System.Drawing.Point(3, 3)
+        Me.STOCKSDataGridView.Location = New System.Drawing.Point(4, 4)
+        Me.STOCKSDataGridView.Margin = New System.Windows.Forms.Padding(4)
         Me.STOCKSDataGridView.Name = "STOCKSDataGridView"
         Me.STOCKSDataGridView.RowHeadersVisible = False
-        Me.STOCKSDataGridView.Size = New System.Drawing.Size(1052, 546)
+        Me.STOCKSDataGridView.RowHeadersWidth = 51
+        Me.STOCKSDataGridView.Size = New System.Drawing.Size(1405, 696)
         Me.STOCKSDataGridView.TabIndex = 0
         '
         'Product_image
         '
         Me.Product_image.DataPropertyName = "Product_image"
         Me.Product_image.HeaderText = "Product_image"
+        Me.Product_image.MinimumWidth = 6
         Me.Product_image.Name = "Product_image"
         '
         'DataGridViewTextBoxColumn1
         '
         Me.DataGridViewTextBoxColumn1.DataPropertyName = "item_no"
         Me.DataGridViewTextBoxColumn1.HeaderText = "item_no"
+        Me.DataGridViewTextBoxColumn1.MinimumWidth = 6
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
         '
         'DataGridViewTextBoxColumn2
         '
         Me.DataGridViewTextBoxColumn2.DataPropertyName = "product_name"
         Me.DataGridViewTextBoxColumn2.HeaderText = "product_name"
+        Me.DataGridViewTextBoxColumn2.MinimumWidth = 6
         Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
         '
         'DataGridViewTextBoxColumn3
         '
         Me.DataGridViewTextBoxColumn3.DataPropertyName = "product_group"
         Me.DataGridViewTextBoxColumn3.HeaderText = "product_group"
+        Me.DataGridViewTextBoxColumn3.MinimumWidth = 6
         Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
         '
         'DataGridViewTextBoxColumn4
         '
         Me.DataGridViewTextBoxColumn4.DataPropertyName = "Quantity"
         Me.DataGridViewTextBoxColumn4.HeaderText = "Quantity"
+        Me.DataGridViewTextBoxColumn4.MinimumWidth = 6
         Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
         '
         'DataGridViewTextBoxColumn5
         '
         Me.DataGridViewTextBoxColumn5.DataPropertyName = "price"
         Me.DataGridViewTextBoxColumn5.HeaderText = "price"
+        Me.DataGridViewTextBoxColumn5.MinimumWidth = 6
         Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
         '
         'DataGridViewTextBoxColumn6
         '
         Me.DataGridViewTextBoxColumn6.DataPropertyName = "taxed_price"
         Me.DataGridViewTextBoxColumn6.HeaderText = "taxed_price"
+        Me.DataGridViewTextBoxColumn6.MinimumWidth = 6
         Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
         '
         'DataGridViewImageColumn1
         '
         Me.DataGridViewImageColumn1.DataPropertyName = "barcode"
         Me.DataGridViewImageColumn1.HeaderText = "barcode"
+        Me.DataGridViewImageColumn1.MinimumWidth = 6
         Me.DataGridViewImageColumn1.Name = "DataGridViewImageColumn1"
         '
         'STOCKSBindingSource
@@ -164,11 +175,14 @@ Partial Class PRODUCTS_TAB
         '
         'GroupBox1
         '
+        Me.GroupBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.GroupBox1.Controls.Add(Me.RadioButton2)
         Me.GroupBox1.Controls.Add(Me.RadioButton1)
-        Me.GroupBox1.Location = New System.Drawing.Point(20, 311)
+        Me.GroupBox1.Location = New System.Drawing.Point(27, 383)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(203, 84)
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4)
+        Me.GroupBox1.Size = New System.Drawing.Size(271, 103)
         Me.GroupBox1.TabIndex = 90
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Tax percent"
@@ -176,9 +190,10 @@ Partial Class PRODUCTS_TAB
         'RadioButton2
         '
         Me.RadioButton2.AutoSize = True
-        Me.RadioButton2.Location = New System.Drawing.Point(6, 30)
+        Me.RadioButton2.Location = New System.Drawing.Point(8, 37)
+        Me.RadioButton2.Margin = New System.Windows.Forms.Padding(4)
         Me.RadioButton2.Name = "RadioButton2"
-        Me.RadioButton2.Size = New System.Drawing.Size(49, 17)
+        Me.RadioButton2.Size = New System.Drawing.Size(57, 20)
         Me.RadioButton2.TabIndex = 67
         Me.RadioButton2.TabStop = True
         Me.RadioButton2.Text = "none"
@@ -187,9 +202,10 @@ Partial Class PRODUCTS_TAB
         'RadioButton1
         '
         Me.RadioButton1.AutoSize = True
-        Me.RadioButton1.Location = New System.Drawing.Point(124, 30)
+        Me.RadioButton1.Location = New System.Drawing.Point(165, 37)
+        Me.RadioButton1.Margin = New System.Windows.Forms.Padding(4)
         Me.RadioButton1.Name = "RadioButton1"
-        Me.RadioButton1.Size = New System.Drawing.Size(45, 17)
+        Me.RadioButton1.Size = New System.Drawing.Size(53, 20)
         Me.RadioButton1.TabIndex = 66
         Me.RadioButton1.TabStop = True
         Me.RadioButton1.Text = "12%"
@@ -199,46 +215,44 @@ Partial Class PRODUCTS_TAB
         '
         Me.ComboBox1.FormattingEnabled = True
         Me.ComboBox1.Items.AddRange(New Object() {"Siomai", "Siopao", "Drinks", "Others"})
-        Me.ComboBox1.Location = New System.Drawing.Point(253, 57)
+        Me.ComboBox1.Location = New System.Drawing.Point(337, 70)
+        Me.ComboBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(152, 21)
+        Me.ComboBox1.Size = New System.Drawing.Size(201, 24)
         Me.ComboBox1.TabIndex = 89
         '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(248, 29)
+        Me.Label8.Font = New System.Drawing.Font("ITC Kabel", 16.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(331, 36)
+        Me.Label8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(157, 25)
+        Me.Label8.Size = New System.Drawing.Size(205, 34)
         Me.Label8.TabIndex = 88
         Me.Label8.Text = "Product Group:"
         '
         'Button6
         '
         Me.Button6.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button6.Location = New System.Drawing.Point(935, 8)
+        Me.Button6.BackColor = System.Drawing.Color.FromArgb(CType(CType(251, Byte), Integer), CType(CType(160, Byte), Integer), CType(CType(2, Byte), Integer))
+        Me.Button6.Font = New System.Drawing.Font("ITC Kabel", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button6.Location = New System.Drawing.Point(1247, 10)
+        Me.Button6.Margin = New System.Windows.Forms.Padding(4)
         Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(113, 31)
+        Me.Button6.Size = New System.Drawing.Size(151, 38)
         Me.Button6.TabIndex = 87
         Me.Button6.Text = "Search"
-        Me.Button6.UseVisualStyleBackColor = True
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.Location = New System.Drawing.Point(450, 174)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(254, 106)
-        Me.PictureBox1.TabIndex = 86
-        Me.PictureBox1.TabStop = False
+        Me.Button6.UseVisualStyleBackColor = False
         '
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(445, 146)
+        Me.Label7.Font = New System.Drawing.Font("ITC Kabel", 16.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(600, 178)
+        Me.Label7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(108, 25)
+        Me.Label7.Size = New System.Drawing.Size(134, 34)
         Me.Label7.TabIndex = 85
         Me.Label7.Text = "Bar Code:"
         '
@@ -247,19 +261,21 @@ Partial Class PRODUCTS_TAB
         Me.TextBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TextBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TextBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.TextBox2.Location = New System.Drawing.Point(692, 11)
+        Me.TextBox2.Location = New System.Drawing.Point(923, 14)
+        Me.TextBox2.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(229, 26)
+        Me.TextBox2.Size = New System.Drawing.Size(305, 30)
         Me.TextBox2.TabIndex = 84
         '
         'Label6
         '
         Me.Label6.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(521, 12)
+        Me.Label6.Font = New System.Drawing.Font("ITC Kabel", 16.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(715, 14)
+        Me.Label6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(160, 25)
+        Me.Label6.Size = New System.Drawing.Size(200, 34)
         Me.Label6.TabIndex = 83
         Me.Label6.Text = "Search Product"
         '
@@ -268,88 +284,105 @@ Partial Class PRODUCTS_TAB
         Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TextBox1.Enabled = False
         Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.TextBox1.Location = New System.Drawing.Point(253, 265)
+        Me.TextBox1.Location = New System.Drawing.Point(337, 326)
+        Me.TextBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(101, 26)
+        Me.TextBox1.Size = New System.Drawing.Size(134, 30)
         Me.TextBox1.TabIndex = 82
         '
         'Label5
         '
         Me.Label5.AutoSize = True
         Me.Label5.Enabled = False
-        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(248, 231)
+        Me.Label5.Font = New System.Drawing.Font("ITC Kabel", 16.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(340, 284)
+        Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(68, 25)
+        Me.Label5.Size = New System.Drawing.Size(88, 34)
         Me.Label5.TabIndex = 81
         Me.Label5.Text = "w/ tax"
         '
         'Button4
         '
         Me.Button4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button4.Location = New System.Drawing.Point(939, 177)
+        Me.Button4.BackColor = System.Drawing.Color.FromArgb(CType(CType(251, Byte), Integer), CType(CType(160, Byte), Integer), CType(CType(2, Byte), Integer))
+        Me.Button4.Font = New System.Drawing.Font("ITC Kabel", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button4.Location = New System.Drawing.Point(1247, 200)
+        Me.Button4.Margin = New System.Windows.Forms.Padding(4)
         Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(113, 31)
+        Me.Button4.Size = New System.Drawing.Size(151, 38)
         Me.Button4.TabIndex = 80
         Me.Button4.Text = "Save"
-        Me.Button4.UseVisualStyleBackColor = True
+        Me.Button4.UseVisualStyleBackColor = False
         '
         'Button1
         '
         Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button1.Location = New System.Drawing.Point(939, 247)
+        Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(251, Byte), Integer), CType(CType(160, Byte), Integer), CType(CType(2, Byte), Integer))
+        Me.Button1.Font = New System.Drawing.Font("ITC Kabel", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.Location = New System.Drawing.Point(1247, 265)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(4)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(113, 31)
+        Me.Button1.Size = New System.Drawing.Size(151, 38)
         Me.Button1.TabIndex = 79
         Me.Button1.Text = "Clear"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.Button1.UseVisualStyleBackColor = False
         '
         'TextBox5
         '
         Me.TextBox5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TextBox5.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.TextBox5.Location = New System.Drawing.Point(15, 265)
+        Me.TextBox5.Location = New System.Drawing.Point(20, 326)
+        Me.TextBox5.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(229, 26)
+        Me.TextBox5.Size = New System.Drawing.Size(305, 30)
         Me.TextBox5.TabIndex = 77
         '
         'Button3
         '
         Me.Button3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button3.Location = New System.Drawing.Point(939, 112)
+        Me.Button3.BackColor = System.Drawing.Color.FromArgb(CType(CType(251, Byte), Integer), CType(CType(160, Byte), Integer), CType(CType(2, Byte), Integer))
+        Me.Button3.Font = New System.Drawing.Font("ITC Kabel", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button3.Location = New System.Drawing.Point(1247, 136)
+        Me.Button3.Margin = New System.Windows.Forms.Padding(4)
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(113, 31)
+        Me.Button3.Size = New System.Drawing.Size(151, 38)
         Me.Button3.TabIndex = 76
         Me.Button3.Text = "Delete"
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.Button3.UseVisualStyleBackColor = False
         '
         'Button5
         '
         Me.Button5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button5.Location = New System.Drawing.Point(939, 58)
+        Me.Button5.BackColor = System.Drawing.Color.FromArgb(CType(CType(251, Byte), Integer), CType(CType(160, Byte), Integer), CType(CType(2, Byte), Integer))
+        Me.Button5.Font = New System.Drawing.Font("ITC Kabel", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button5.Location = New System.Drawing.Point(1247, 69)
+        Me.Button5.Margin = New System.Windows.Forms.Padding(4)
         Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(113, 31)
+        Me.Button5.Size = New System.Drawing.Size(151, 38)
         Me.Button5.TabIndex = 78
         Me.Button5.Text = "Add"
-        Me.Button5.UseVisualStyleBackColor = True
+        Me.Button5.UseVisualStyleBackColor = False
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(15, 94)
+        Me.Label3.Font = New System.Drawing.Font("ITC Kabel", 16.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(20, 116)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(98, 25)
+        Me.Label3.Size = New System.Drawing.Size(129, 34)
         Me.Label3.TabIndex = 71
         Me.Label3.Text = "Quantity:"
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(450, 78)
+        Me.Label1.Font = New System.Drawing.Font("ITC Kabel", 16.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(600, 96)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(91, 25)
+        Me.Label1.Size = New System.Drawing.Size(123, 34)
         Me.Label1.TabIndex = 69
         Me.Label1.Text = "Item No."
         '
@@ -357,46 +390,51 @@ Partial Class PRODUCTS_TAB
         '
         Me.TextBox7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TextBox7.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.TextBox7.Location = New System.Drawing.Point(15, 58)
+        Me.TextBox7.Location = New System.Drawing.Point(20, 71)
+        Me.TextBox7.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox7.Name = "TextBox7"
-        Me.TextBox7.Size = New System.Drawing.Size(229, 26)
+        Me.TextBox7.Size = New System.Drawing.Size(305, 30)
         Me.TextBox7.TabIndex = 74
         '
         'TextBox6
         '
         Me.TextBox6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TextBox6.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.TextBox6.Location = New System.Drawing.Point(15, 128)
+        Me.TextBox6.Location = New System.Drawing.Point(20, 158)
+        Me.TextBox6.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(229, 26)
+        Me.TextBox6.Size = New System.Drawing.Size(305, 30)
         Me.TextBox6.TabIndex = 75
         '
         'TextBox8
         '
         Me.TextBox8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TextBox8.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.TextBox8.Location = New System.Drawing.Point(450, 112)
+        Me.TextBox8.Location = New System.Drawing.Point(600, 138)
+        Me.TextBox8.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox8.Name = "TextBox8"
-        Me.TextBox8.Size = New System.Drawing.Size(229, 26)
+        Me.TextBox8.Size = New System.Drawing.Size(305, 30)
         Me.TextBox8.TabIndex = 73
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(10, 22)
+        Me.Label2.Font = New System.Drawing.Font("ITC Kabel", 16.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(13, 27)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(154, 25)
+        Me.Label2.Size = New System.Drawing.Size(198, 34)
         Me.Label2.TabIndex = 70
         Me.Label2.Text = "Product Name:"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(15, 231)
+        Me.Label4.Font = New System.Drawing.Font("ITC Kabel", 16.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(20, 284)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(67, 25)
+        Me.Label4.Size = New System.Drawing.Size(82, 34)
         Me.Label4.TabIndex = 72
         Me.Label4.Text = "Price:"
         '
@@ -424,44 +462,48 @@ Partial Class PRODUCTS_TAB
         Me.Guna2TabControl1.Controls.Add(Me.TabPage1)
         Me.Guna2TabControl1.Controls.Add(Me.TabPage2)
         Me.Guna2TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Guna2TabControl1.Font = New System.Drawing.Font("ITC Kabel", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2TabControl1.ItemSize = New System.Drawing.Size(180, 100)
         Me.Guna2TabControl1.Location = New System.Drawing.Point(0, 0)
+        Me.Guna2TabControl1.Margin = New System.Windows.Forms.Padding(4)
         Me.Guna2TabControl1.Name = "Guna2TabControl1"
         Me.Guna2TabControl1.SelectedIndex = 0
-        Me.Guna2TabControl1.Size = New System.Drawing.Size(1066, 660)
+        Me.Guna2TabControl1.Size = New System.Drawing.Size(1421, 812)
         Me.Guna2TabControl1.TabButtonHoverState.BorderColor = System.Drawing.Color.Empty
-        Me.Guna2TabControl1.TabButtonHoverState.FillColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(52, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.Guna2TabControl1.TabButtonHoverState.Font = New System.Drawing.Font("Segoe UI Semibold", 10.0!)
-        Me.Guna2TabControl1.TabButtonHoverState.ForeColor = System.Drawing.Color.White
-        Me.Guna2TabControl1.TabButtonHoverState.InnerColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(52, Byte), Integer), CType(CType(70, Byte), Integer))
+        Me.Guna2TabControl1.TabButtonHoverState.FillColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.Guna2TabControl1.TabButtonHoverState.Font = New System.Drawing.Font("ITC Kabel", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2TabControl1.TabButtonHoverState.ForeColor = System.Drawing.Color.Black
+        Me.Guna2TabControl1.TabButtonHoverState.InnerColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.Guna2TabControl1.TabButtonIdleState.BorderColor = System.Drawing.Color.Empty
-        Me.Guna2TabControl1.TabButtonIdleState.FillColor = System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(42, Byte), Integer), CType(CType(57, Byte), Integer))
-        Me.Guna2TabControl1.TabButtonIdleState.Font = New System.Drawing.Font("Segoe UI Semibold", 10.0!)
-        Me.Guna2TabControl1.TabButtonIdleState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(156, Byte), Integer), CType(CType(160, Byte), Integer), CType(CType(167, Byte), Integer))
-        Me.Guna2TabControl1.TabButtonIdleState.InnerColor = System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(42, Byte), Integer), CType(CType(57, Byte), Integer))
+        Me.Guna2TabControl1.TabButtonIdleState.FillColor = System.Drawing.Color.FromArgb(CType(CType(253, Byte), Integer), CType(CType(246, Byte), Integer), CType(CType(227, Byte), Integer))
+        Me.Guna2TabControl1.TabButtonIdleState.Font = New System.Drawing.Font("ITC Kabel", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2TabControl1.TabButtonIdleState.ForeColor = System.Drawing.Color.Black
+        Me.Guna2TabControl1.TabButtonIdleState.InnerColor = System.Drawing.Color.FromArgb(CType(CType(253, Byte), Integer), CType(CType(246, Byte), Integer), CType(CType(227, Byte), Integer))
         Me.Guna2TabControl1.TabButtonSelectedState.BorderColor = System.Drawing.Color.Empty
-        Me.Guna2TabControl1.TabButtonSelectedState.FillColor = System.Drawing.Color.FromArgb(CType(CType(29, Byte), Integer), CType(CType(37, Byte), Integer), CType(CType(49, Byte), Integer))
-        Me.Guna2TabControl1.TabButtonSelectedState.Font = New System.Drawing.Font("Segoe UI Semibold", 10.0!)
-        Me.Guna2TabControl1.TabButtonSelectedState.ForeColor = System.Drawing.Color.White
-        Me.Guna2TabControl1.TabButtonSelectedState.InnerColor = System.Drawing.Color.FromArgb(CType(CType(76, Byte), Integer), CType(CType(132, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.Guna2TabControl1.TabButtonSelectedState.FillColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.Guna2TabControl1.TabButtonSelectedState.Font = New System.Drawing.Font("ITC Kabel", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2TabControl1.TabButtonSelectedState.ForeColor = System.Drawing.Color.Black
+        Me.Guna2TabControl1.TabButtonSelectedState.InnerColor = System.Drawing.Color.Red
         Me.Guna2TabControl1.TabButtonSize = New System.Drawing.Size(180, 100)
         Me.Guna2TabControl1.TabIndex = 1
-        Me.Guna2TabControl1.TabMenuBackColor = System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(42, Byte), Integer), CType(CType(57, Byte), Integer))
+        Me.Guna2TabControl1.TabMenuBackColor = System.Drawing.Color.FromArgb(CType(CType(253, Byte), Integer), CType(CType(246, Byte), Integer), CType(CType(227, Byte), Integer))
         Me.Guna2TabControl1.TabMenuOrientation = Guna.UI2.WinForms.TabMenuOrientation.HorizontalTop
         '
         'TabPage1
         '
         Me.TabPage1.Controls.Add(Me.STOCKSDataGridView)
         Me.TabPage1.Location = New System.Drawing.Point(4, 104)
+        Me.TabPage1.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(1058, 552)
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(4)
+        Me.TabPage1.Size = New System.Drawing.Size(1413, 704)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "PRODUCTS"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
         'TabPage2
         '
+        Me.TabPage2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TabPage2.Controls.Add(Me.TextBox3)
         Me.TabPage2.Controls.Add(Me.Label10)
         Me.TabPage2.Controls.Add(Me.Label9)
@@ -490,38 +532,41 @@ Partial Class PRODUCTS_TAB
         Me.TabPage2.Controls.Add(Me.TextBox8)
         Me.TabPage2.Controls.Add(Me.Label1)
         Me.TabPage2.Location = New System.Drawing.Point(4, 104)
+        Me.TabPage2.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(1058, 552)
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(4)
+        Me.TabPage2.Size = New System.Drawing.Size(1413, 704)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "MANAGE PRODUCTS"
-        Me.TabPage2.UseVisualStyleBackColor = True
         '
         'TextBox3
         '
         Me.TextBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TextBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.TextBox3.Location = New System.Drawing.Point(15, 202)
+        Me.TextBox3.Location = New System.Drawing.Point(20, 249)
+        Me.TextBox3.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(229, 26)
+        Me.TextBox3.Size = New System.Drawing.Size(305, 30)
         Me.TextBox3.TabIndex = 96
         '
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(15, 168)
+        Me.Label10.Font = New System.Drawing.Font("ITC Kabel", 16.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Location = New System.Drawing.Point(20, 207)
+        Me.Label10.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(62, 25)
+        Me.Label10.Size = New System.Drawing.Size(77, 34)
         Me.Label10.TabIndex = 95
         Me.Label10.Text = "Cost:"
         '
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(572, 444)
+        Me.Label9.Location = New System.Drawing.Point(763, 546)
+        Me.Label9.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(30, 13)
+        Me.Label9.Size = New System.Drawing.Size(34, 16)
         Me.Label9.TabIndex = 94
         Me.Label9.Text = "clear"
         '
@@ -531,43 +576,56 @@ Partial Class PRODUCTS_TAB
         Me.Guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
         Me.Guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
         Me.Guna2Button1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
-        Me.Guna2Button1.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.Guna2Button1.Font = New System.Drawing.Font("ITC Kabel", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2Button1.ForeColor = System.Drawing.Color.White
-        Me.Guna2Button1.Location = New System.Drawing.Point(450, 470)
+        Me.Guna2Button1.Location = New System.Drawing.Point(600, 578)
+        Me.Guna2Button1.Margin = New System.Windows.Forms.Padding(4)
         Me.Guna2Button1.Name = "Guna2Button1"
-        Me.Guna2Button1.Size = New System.Drawing.Size(152, 39)
+        Me.Guna2Button1.Size = New System.Drawing.Size(203, 48)
         Me.Guna2Button1.TabIndex = 93
         Me.Guna2Button1.Text = "add an image"
         '
         'PictureBox2
         '
-        Me.PictureBox2.BackColor = System.Drawing.Color.Gray
+        Me.PictureBox2.BackColor = System.Drawing.Color.Transparent
         Me.PictureBox2.ErrorImage = CType(resources.GetObject("PictureBox2.ErrorImage"), System.Drawing.Image)
-        Me.PictureBox2.Image = Global.DIMSUM_SHITSTEM.My.Resources.Resources.errorimage
-        Me.PictureBox2.Location = New System.Drawing.Point(450, 311)
+        Me.PictureBox2.Image = Global.DIMSUM_SHITSTEM.My.Resources.Resources.errorimageTR
+        Me.PictureBox2.Location = New System.Drawing.Point(600, 383)
+        Me.PictureBox2.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(152, 116)
+        Me.PictureBox2.Size = New System.Drawing.Size(203, 143)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PictureBox2.TabIndex = 92
         Me.PictureBox2.TabStop = False
         '
+        'PictureBox1
+        '
+        Me.PictureBox1.Location = New System.Drawing.Point(600, 214)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(339, 130)
+        Me.PictureBox1.TabIndex = 86
+        Me.PictureBox1.TabStop = False
+        '
         'PRODUCTS_TAB
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.Guna2TabControl1)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "PRODUCTS_TAB"
-        Me.Size = New System.Drawing.Size(1066, 660)
+        Me.Size = New System.Drawing.Size(1421, 812)
         CType(Me.STOCKSDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.STOCKSBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SHITSTEMDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Guna2TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage2.ResumeLayout(False)
         Me.TabPage2.PerformLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

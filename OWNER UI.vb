@@ -130,8 +130,12 @@ Public Class Form2
                     frm.Close()
                 End If
             Next
+            LOGIN_PAGE.ResetLoginPage()
             LOGIN_PAGE.Show()
         End If
     End Sub
 
+    Private Sub Guna2ControlBox1_Click(sender As Object, e As EventArgs) Handles Guna2ControlBox1.Click
+        LOGIN_PAGE.ResetLoginPage()
+    End Sub
 End Class

@@ -407,7 +407,9 @@ Public Class CASHIER
             Dim today As Date = Date.Today
             Dim calendar = CultureInfo.CurrentCulture.Calendar
 
-            ' --- DAILY SALES RESET ---
+            ' === DAILY SALES RESET ===
+            Dim resetDaily As Boolean = False
+
             Dim dailyQueryreset As String = "SELECT TOP 1 [Day] FROM Dailysales ORDER BY [Day] DESC"
             Using dailyCmd As New SqlCommand(dailyQueryreset, con)
                 Dim lastDailyDateObj = dailyCmd.ExecuteScalar()
@@ -415,63 +417,64 @@ Public Class CASHIER
                     Dim lastDailyDate As Date
                     If Date.TryParse(lastDailyDateObj.ToString(), lastDailyDate) Then
                         If lastDailyDate.Date <> today Then
-                            Dim resetDailyQuery As String = "DELETE FROM Dailysales"
-                            Using resetCmd As New SqlCommand(resetDailyQuery, con)
-                                resetCmd.ExecuteNonQuery()
-                            End Using
+                            resetDaily = True
                         End If
                     End If
+                Else
+                    ' No records exist at all
+                    resetDaily = False ' (optional — you could keep it False since it's empty)
                 End If
             End Using
 
-            ' --- WEEKLY SALES RESET ---
-            Dim weeklyQueryreset As String = "SELECT TOP 1 [Day] FROM Weeklysales ORDER BY [Day] DESC"
-            Using weeklyCmd As New SqlCommand(weeklyQueryreset, con)
-                Dim lastWeeklyDayObj = weeklyCmd.ExecuteScalar()
-                If lastWeeklyDayObj IsNot Nothing Then
-                    Dim lastWeeklyDay As String = lastWeeklyDayObj.ToString()
-                    Dim currentDayOfWeek1 As String = today.DayOfWeek.ToString()
-                    If Not lastWeeklyDay.Equals(currentDayOfWeek1, StringComparison.OrdinalIgnoreCase) Then
-                        Dim resetWeeklyQuery As String = "DELETE FROM Weeklysales"
-                        Using resetCmd As New SqlCommand(resetWeeklyQuery, con)
-                            resetCmd.ExecuteNonQuery()
-                        End Using
-                    End If
-                End If
-            End Using
+            If resetDaily Then
+                Dim resetQuery As String = "DELETE FROM Dailysales"
+                Using resetCmd As New SqlCommand(resetQuery, con)
+                    resetCmd.ExecuteNonQuery()
+                End Using
+            End If
 
-            ' --- MONTHLY SALES RESET ---
-            Dim monthlyQueryreset As String = "SELECT TOP 1 [Month] FROM Monthlysales ORDER BY [Month] DESC"
-            Using monthlyCmd As New SqlCommand(monthlyQueryreset, con)
-                Dim lastMonthlyMonthObj = monthlyCmd.ExecuteScalar()
-                If lastMonthlyMonthObj IsNot Nothing Then
-                    Dim lastMonthlyMonth As String = lastMonthlyMonthObj.ToString()
-                    Dim currentMonth1 As String = today.ToString("MMMM")
-                    If Not lastMonthlyMonth.Equals(currentMonth1, StringComparison.OrdinalIgnoreCase) Then
-                        Dim resetMonthlyQuery As String = "DELETE FROM Monthlysales"
-                        Using resetCmd As New SqlCommand(resetMonthlyQuery, con)
-                            resetCmd.ExecuteNonQuery()
-                        End Using
-                    End If
-                End If
-            End Using
-
-            ' 1. INSERT into DailySales
-            Dim insertDailyQuery As String = "INSERT INTO DailySales (Day, Sales_total, Profit) VALUES (@Day, @Sales_total, @Profit)"
+            ' === INSERT for TODAY ===
+            Dim insertDailyQuery As String = "INSERT INTO Dailysales (Day, Sales_total, Profit) VALUES (@Day, @Sales_total, @Profit)"
             Using cmdDaily As New SqlCommand(insertDailyQuery, con)
-                cmdDaily.Parameters.AddWithValue("@Day", DateTime.Now.Date)
+                cmdDaily.Parameters.AddWithValue("@Day", today)
                 cmdDaily.Parameters.AddWithValue("@Sales_total", salesTotalForReport)
                 cmdDaily.Parameters.AddWithValue("@Profit", totalProfitForReport)
                 cmdDaily.ExecuteNonQuery()
             End Using
 
-            ' 2. Update or Insert into WeeklySales
+
+            ' --- WEEKLY SALES RESET ---
+            Dim currentDay As String = DateTime.Today.DayOfWeek.ToString()
+            Dim resetWeek As Boolean = False
+
+            Dim weeklyCheckQuery As String = "SELECT COUNT(*) FROM WeeklySales"
+            Using checkCmd As New SqlCommand(weeklyCheckQuery, con)
+                Dim count = Convert.ToInt32(checkCmd.ExecuteScalar())
+                If count >= 7 Then
+                    ' If all 7 weekdays have been filled, reset weekly sales
+                    resetWeek = True
+                End If
+            End Using
+
+            If resetWeek Then
+                Dim resetWeeklyQuery As String = "DELETE FROM WeeklySales"
+                Using resetCmd As New SqlCommand(resetWeeklyQuery, con)
+                    resetCmd.ExecuteNonQuery()
+                End Using
+            End If
+
             Dim currentDayOfWeek As String = DateTime.Today.DayOfWeek.ToString()
+
             Dim weeklyQuery As String = "
-                IF EXISTS (SELECT 1 FROM WeeklySales WHERE Day = @dayParam)
-                    UPDATE WeeklySales SET Sales_total = Sales_total + @Sales_total, Profit = Profit + @Profit WHERE Day = @dayParam
-                ELSE
-                    INSERT INTO WeeklySales (Day, Sales_total, Profit) VALUES (@dayParam, @Sales_total, @Profit)"
+    IF EXISTS (SELECT 1 FROM WeeklySales WHERE Day = @dayParam)
+        UPDATE WeeklySales 
+        SET Sales_total = Sales_total + @Sales_total, 
+            Profit = Profit + @Profit 
+        WHERE Day = @dayParam
+    ELSE
+        INSERT INTO WeeklySales (Day, Sales_total, Profit) 
+        VALUES (@dayParam, @Sales_total, @Profit)"
+
             Using cmdWeekly As New SqlCommand(weeklyQuery, con)
                 cmdWeekly.Parameters.AddWithValue("@dayParam", currentDayOfWeek)
                 cmdWeekly.Parameters.AddWithValue("@Sales_total", salesTotalForReport)
@@ -479,19 +482,50 @@ Public Class CASHIER
                 cmdWeekly.ExecuteNonQuery()
             End Using
 
-            ' 3. Update or Insert into MonthlySales
-            Dim currentMonth As String = DateTime.Now.ToString("MMMM") ' Full month name like "April"
-            Dim monthlyQuery As String = "
-                IF EXISTS (SELECT 1 FROM MonthlySales WHERE Month = @monthParam)
-                    UPDATE MonthlySales SET Sales_total = Sales_total + @Sales_total, Profit = Profit + @Profit WHERE Month = @monthParam
-                ELSE
-                    INSERT INTO MonthlySales (Month, Sales_total, Profit) VALUES (@monthParam, @Sales_total, @Profit)"
-            Using cmdMonthly As New SqlCommand(monthlyQuery, con)
-                cmdMonthly.Parameters.AddWithValue("@monthParam", currentMonth)
+            ' === MONTHLY SALES RESET ===
+            Dim today1 As Date = Date.Today
+            Dim currentMonthName As String = today1.ToString("MMMM") ' e.g., "April"
+            Dim resetMonthly As Boolean = False
+
+            Dim monthlyQueryreset As String = "SELECT TOP 1 [Month] FROM Monthlysales ORDER BY [Month] DESC"
+            Using monthlyCmd As New SqlCommand(monthlyQueryreset, con)
+                Dim lastMonthlyMonthObj = monthlyCmd.ExecuteScalar()
+                If lastMonthlyMonthObj IsNot Nothing Then
+                    Dim lastMonthlyMonth As String = lastMonthlyMonthObj.ToString()
+                    If Not lastMonthlyMonth.Equals(currentMonthName, StringComparison.OrdinalIgnoreCase) Then
+                        resetMonthly = True
+                    End If
+                End If
+            End Using
+
+            If resetMonthly Then
+                Dim resetMonthlyQuery As String = "DELETE FROM Monthlysales"
+                Using resetCmd As New SqlCommand(resetMonthlyQuery, con)
+                    resetCmd.ExecuteNonQuery()
+                End Using
+            End If
+
+            ' === INSERT or UPDATE for the current month ===
+            Dim monthlyUpsertQuery As String = "
+    IF EXISTS (SELECT 1 FROM MonthlySales WHERE Month = @Month)
+        UPDATE MonthlySales
+        SET Sales_total = Sales_total + @Sales_total,
+            Profit = Profit + @Profit
+        WHERE Month = @Month
+    ELSE
+        INSERT INTO MonthlySales (Month, Sales_total, Profit)
+        VALUES (@Month, @Sales_total, @Profit)"
+
+            Using cmdMonthly As New SqlCommand(monthlyUpsertQuery, con)
+                cmdMonthly.Parameters.AddWithValue("@Month", currentMonthName)
                 cmdMonthly.Parameters.AddWithValue("@Sales_total", salesTotalForReport)
                 cmdMonthly.Parameters.AddWithValue("@Profit", totalProfitForReport)
                 cmdMonthly.ExecuteNonQuery()
             End Using
+
+
+
+
 
 
             Dim totalItemCount As Integer = 0
@@ -607,12 +641,17 @@ Public Class CASHIER
                 End If
             Next
             lbltotal.Text = totalSum.ToString("C", CultureInfo.GetCultureInfo("en-PH")) ' Format as Philippine Peso
-
+            If totalSum = 0 Then
+                Guna2Button1.Visible = False
+            Else
+                Guna2Button1.Visible = True
+            End If
         Catch ex As FormatException
             MessageBox.Show($"Error formatting total: {ex.Message}. Check data in Total_price column.", "Formatting Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         Catch ex As Exception
             MessageBox.Show($"Error calculating total: {ex.Message}", "Calculation Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
+
     End Sub
 
 
@@ -865,92 +904,92 @@ Public Class CASHIER
     Dim highestproductprice As Decimal = 0D
 
     Public Sub Discount()
-    Dim discountRate As Decimal = 0
+        Dim discountRate As Decimal = 0
 
-    ' 1. Determine the selected discount
-    Select Case discount_choice.Text
-        Case "PWD/SENIOR"
-            discountRate = 0.2D
-        Case "10%"
-            discountRate = 0.1D
-        Case "15%"
-            discountRate = 0.15D
-        Case Else
-            discountRate = 0
-    End Select
+        ' 1. Determine the selected discount
+        Select Case discount_choice.Text
+            Case "PWD/SENIOR"
+                discountRate = 0.2D
+            Case "10%"
+                discountRate = 0.1D
+            Case "15%"
+                discountRate = 0.15D
+            Case Else
+                discountRate = 0
+        End Select
 
-    Try
-        Opencon()
+        Try
+            Opencon()
 
-        ' 2. Reset ALL item prices in Orders using their original taxed_price from STOCKS
-        Dim resetQuery As String = "
+            ' 2. Reset ALL item prices in Orders using their original taxed_price from STOCKS
+            Dim resetQuery As String = "
             UPDATE O
             SET O.Price = S.taxed_price,
                 O.Total_price = O.Quantity * S.taxed_price
             FROM Orders O
             JOIN STOCKS S ON O.Item_No = S.Item_No"
-        Using resetCmd As New SqlCommand(resetQuery, con)
-            resetCmd.ExecuteNonQuery()
-        End Using
-
-        ' 3. Get the highest-priced product again (after reset)
-        Dim query As String = "SELECT TOP 1 Item_No FROM Orders ORDER BY Price DESC"
-        Dim itemNo As String = ""
-
-        Using cmd As New SqlCommand(query, con)
-            Using reader As SqlDataReader = cmd.ExecuteReader()
-                If reader.Read() Then
-                    itemNo = reader("Item_No").ToString()
-                End If
+            Using resetCmd As New SqlCommand(resetQuery, con)
+                resetCmd.ExecuteNonQuery()
             End Using
-        End Using
 
-        If itemNo = "" Then Exit Sub
+            ' 3. Get the highest-priced product again (after reset)
+            Dim query As String = "SELECT TOP 1 Item_No FROM Orders ORDER BY Price DESC"
+            Dim itemNo As String = ""
 
-        ' 4. Get original price from STOCKS
-        Dim originalPrice As Decimal = 0
-        Dim getPriceQuery As String = "SELECT taxed_price FROM STOCKS WHERE Item_No = @Item_No"
-        Dim itemNoInt As Integer
-        If Integer.TryParse(itemNo, itemNoInt) Then
-            Using priceCmd As New SqlCommand(getPriceQuery, con)
-                priceCmd.Parameters.AddWithValue("@Item_No", itemNoInt)
-                Dim result = priceCmd.ExecuteScalar()
-                If result IsNot Nothing AndAlso Not IsDBNull(result) Then
-                    originalPrice = Convert.ToDecimal(result)
-                Else
-                    MessageBox.Show("Failed to find original price in STOCKS for Item_No: " & itemNo)
-                    Return
-                End If
+            Using cmd As New SqlCommand(query, con)
+                Using reader As SqlDataReader = cmd.ExecuteReader()
+                    If reader.Read() Then
+                        itemNo = reader("Item_No").ToString()
+                    End If
+                End Using
             End Using
-        Else
-            MessageBox.Show("Invalid Item_No format: " & itemNo)
-            Return
-        End If
 
-        ' 5. Apply discount only to that item
-        Dim discountedPrice As Decimal = originalPrice * (1 - discountRate)
+            If itemNo = "" Then Exit Sub
 
-        Dim updateQuery As String = "
+            ' 4. Get original price from STOCKS
+            Dim originalPrice As Decimal = 0
+            Dim getPriceQuery As String = "SELECT taxed_price FROM STOCKS WHERE Item_No = @Item_No"
+            Dim itemNoInt As Integer
+            If Integer.TryParse(itemNo, itemNoInt) Then
+                Using priceCmd As New SqlCommand(getPriceQuery, con)
+                    priceCmd.Parameters.AddWithValue("@Item_No", itemNoInt)
+                    Dim result = priceCmd.ExecuteScalar()
+                    If result IsNot Nothing AndAlso Not IsDBNull(result) Then
+                        originalPrice = Convert.ToDecimal(result)
+                    Else
+                        MessageBox.Show("Failed to find original price in STOCKS for Item_No: " & itemNo)
+                        Return
+                    End If
+                End Using
+            Else
+                MessageBox.Show("Invalid Item_No format: " & itemNo)
+                Return
+            End If
+
+            ' 5. Apply discount only to that item
+            Dim discountedPrice As Decimal = originalPrice * (1 - discountRate)
+
+            Dim updateQuery As String = "
             UPDATE Orders
             SET Price = @Price,
                 Total_price = Quantity * @Price
             WHERE Item_No = @Item_No"
-        Using updateCmd As New SqlCommand(updateQuery, con)
-            updateCmd.Parameters.AddWithValue("@Price", discountedPrice)
-            updateCmd.Parameters.AddWithValue("@Item_No", itemNo)
-            updateCmd.ExecuteNonQuery()
-        End Using
+            Using updateCmd As New SqlCommand(updateQuery, con)
+                updateCmd.Parameters.AddWithValue("@Price", discountedPrice)
+                updateCmd.Parameters.AddWithValue("@Item_No", itemNo)
+                updateCmd.ExecuteNonQuery()
+            End Using
 
-        ' 6. Refresh UI
-        Me.OrdersTableAdapter.Fill(Me.SHITSTEMDataSet.Orders)
-        UpdateTotalSum(Me, EventArgs.Empty)
+            ' 6. Refresh UI
+            Me.OrdersTableAdapter.Fill(Me.SHITSTEMDataSet.Orders)
+            UpdateTotalSum(Me, EventArgs.Empty)
 
-    Catch ex As Exception
-        MessageBox.Show("Error applying discount: " & ex.Message)
-    Finally
-        If con.State = ConnectionState.Open Then con.Close()
-    End Try
-End Sub
+        Catch ex As Exception
+            MessageBox.Show("Error applying discount: " & ex.Message)
+        Finally
+            If con.State = ConnectionState.Open Then con.Close()
+        End Try
+    End Sub
 
 
     Private Sub paymenttxtbox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles paymenttxtbox.KeyPress
@@ -965,5 +1004,14 @@ End Sub
             resetcart()
 
         End If
+    End Sub
+
+    Private Sub lbltotal_Click(sender As Object, e As EventArgs) Handles lbltotal.Click
+
+    End Sub
+
+    Private Sub Guna2ControlBox1_Click(sender As Object, e As EventArgs) Handles Guna2ControlBox1.Click
+        LOGIN_PAGE.ResetLoginPage()
+
     End Sub
 End Class

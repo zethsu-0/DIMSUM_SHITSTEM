@@ -391,4 +391,6 @@ Public Class PRODUCTS_TAB
             Me.STOCKSTableAdapter.Fill(Me.SHITSTEMDataSet.STOCKS)
         End If
     End Sub
+
+
 End Class

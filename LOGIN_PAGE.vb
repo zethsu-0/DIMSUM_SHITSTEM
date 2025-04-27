@@ -2,6 +2,8 @@
 Imports System.Windows.Interop
 Imports Guna.UI2.WinForms
 
+
+
 Public Class LOGIN_PAGE
     Dim count As Integer = 0
     Dim roleSelect As String = ""
@@ -10,6 +12,11 @@ Public Class LOGIN_PAGE
         Opencon()
         con.Close()
         ifownerexists()
+        PictureBox1.Visible = True
+        PictureBox2.Visible = False
+        manager_ico.Visible = False
+        owner_ico.Visible = False
+        crew_ico.Visible = False
     End Sub
 
     Private Sub ifownerexists()
@@ -76,8 +83,6 @@ Public Class LOGIN_PAGE
                         End If
 
                     Case "Owner"
-                        MsgBox("Welcome")
-
                         Dim user_Role As String = userRole
                         Dim user_id As String = TextBox1.Text
 
@@ -111,6 +116,11 @@ Public Class LOGIN_PAGE
         Button5.Visible = True
         Label1.Visible = True
         roleSelect = "Employee"
+        PictureBox1.Visible = False
+        PictureBox2.Visible = True
+        manager_ico.Visible = False
+        owner_ico.Visible = False
+        crew_ico.Visible = True
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
@@ -121,6 +131,11 @@ Public Class LOGIN_PAGE
         Button5.Visible = True
         Label2.Visible = True
         roleSelect = "Manager"
+        PictureBox1.Visible = False
+        PictureBox2.Visible = True
+        manager_ico.Visible = True
+        owner_ico.Visible = False
+        crew_ico.Visible = False
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
@@ -134,6 +149,11 @@ Public Class LOGIN_PAGE
             Button5.Visible = True
             Label3.Visible = True
             roleSelect = "Owner"
+            PictureBox1.Visible = False
+            PictureBox2.Visible = True
+            manager_ico.Visible = False
+            owner_ico.Visible = True
+            crew_ico.Visible = False
         End If
 
 
@@ -146,6 +166,11 @@ Public Class LOGIN_PAGE
         Button1.Visible = False
         Button5.Visible = False
         showRolefields()
+        PictureBox1.Visible = True
+        PictureBox2.Visible = False
+        manager_ico.Visible = False
+        owner_ico.Visible = False
+        crew_ico.Visible = False
     End Sub
     Public Sub Showloginfields()
         TextBox1.Visible = True
@@ -175,7 +200,7 @@ Public Class LOGIN_PAGE
     End Sub
 
     Private Sub Button6_Click_1(sender As Object, e As EventArgs) Handles Button6.Click
-        Dim users As New EditUserForm()
+        Dim users As New Users()
         users.ShowDialog()
 
         ifownerexists()
@@ -234,5 +259,28 @@ Public Class LOGIN_PAGE
 
     Private Sub Panel1_DoubleClick(sender As Object, e As EventArgs) Handles Panel1.DoubleClick
         Me.WindowState = FormWindowState.Minimized
+    End Sub
+
+    Public Sub ResetLoginPage()
+        PictureBox1.Visible = True
+        PictureBox2.Visible = False
+        manager_ico.Visible = False
+        owner_ico.Visible = False
+        crew_ico.Visible = False
+        TextBox1.Text = ""
+        TextBox2.Text = ""
+        TextBox1.Visible = False
+        TextBox2.Visible = False
+        Button1.Visible = False
+        Button5.Visible = False
+        Label1.Visible = False
+        Label2.Visible = False
+        Label3.Visible = False
+        Button2.Visible = True
+        Button3.Visible = True
+        Button4.Visible = True
+        Guna2CheckBox1.Checked = False
+        Guna2CheckBox1.Visible = False
+        roleSelect = ""
     End Sub
 End Class

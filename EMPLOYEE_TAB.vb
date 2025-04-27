@@ -65,7 +65,7 @@ Public Class EMPLOYEE_TAB
 
             Dim picBox As New PictureBox()
             picBox.Size = New Size(80, 80)
-            picBox.Location = New Point(60, 70)
+            picBox.Location = New Point(70, 70)
             picBox.SizeMode = PictureBoxSizeMode.StretchImage
             picBox.Image = If(userPhoto IsNot Nothing, userPhoto, My.Resources.defaulticon)
 
@@ -128,7 +128,7 @@ Public Class EMPLOYEE_TAB
 
                         Dim picBox As New PictureBox()
                         picBox.Size = New Size(80, 80)
-                        picBox.Location = New Point(60, 70)
+                        picBox.Location = New Point(70, 80)
                         picBox.SizeMode = PictureBoxSizeMode.StretchImage
 
                         If Not IsDBNull(reader("Photo")) Then
@@ -210,5 +210,9 @@ Public Class EMPLOYEE_TAB
 
         LoadLoggedInUserIntoPanel1()
         LoadOtherUsersIntoFlowLayoutPanel()
+    End Sub
+
+    Private Sub FlowLayoutPanel1_Paint(sender As Object, e As PaintEventArgs) Handles FlowLayoutPanel1.Paint
+
     End Sub
 End Class

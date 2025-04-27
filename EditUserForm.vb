@@ -204,5 +204,60 @@ Public Class EditUserForm
         End If
     End Sub
 
+    Private Sub txtPhone_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPhone.KeyPress
+        If Not Char.IsControl(e.KeyChar) AndAlso Not Char.IsDigit(e.KeyChar) Then
+            e.Handled = True ' Block non-digit input
+        End If
+    End Sub
+
+    Private Sub txtAge_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtAge.KeyPress
+        If Not Char.IsControl(e.KeyChar) AndAlso Not Char.IsDigit(e.KeyChar) Then
+            e.Handled = True ' Block non-digit input
+        End If
+    End Sub
+
+    Private Sub txtFirstName_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtFirstName.KeyPress
+        If Not Char.IsControl(e.KeyChar) AndAlso
+       Not Char.IsLetter(e.KeyChar) AndAlso
+       e.KeyChar <> "."c AndAlso
+       e.KeyChar <> "-"c Then
+            e.Handled = True ' Block anything except letter, dot, hyphen
+        End If
+
+        ' Prevent dot or hyphen as first character
+        If (e.KeyChar = "."c OrElse e.KeyChar = "-"c) AndAlso txtFirstName.SelectionStart = 0 Then
+            e.Handled = True
+        End If
+    End Sub
+
+
+
+    Private Sub txtLastName_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtLastName.KeyPress
+        If Not Char.IsControl(e.KeyChar) AndAlso
+           Not Char.IsLetter(e.KeyChar) AndAlso
+           e.KeyChar <> "."c AndAlso
+           e.KeyChar <> "-"c Then
+            e.Handled = True
+        End If
+
+        If (e.KeyChar = "."c OrElse e.KeyChar = "-"c) AndAlso txtLastName.SelectionStart = 0 Then
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub txtAge_Leave(sender As Object, e As EventArgs) Handles txtAge.Leave
+        Dim age As Integer
+        If Integer.TryParse(txtAge.Text, age) Then
+            If age < 16 Then
+                MessageBox.Show("Age must be 16 or older.", "Invalid Age", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                txtAge.Clear()
+                txtAge.Focus()
+            End If
+        ElseIf txtAge.Text <> "" Then
+            MessageBox.Show("Please enter a valid numeric age.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtAge.Clear()
+            txtAge.Focus()
+        End If
+    End Sub
 
 End Class
