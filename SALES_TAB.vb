@@ -193,16 +193,7 @@ Public Class SALES_TAB
     End Sub
 
     Private Sub Guna2CircleButton1_Click(sender As Object, e As EventArgs) Handles Guna2CircleButton1.Click
-        dailytotalearn()
-        LoadCharts()
         RefreshData()
-        Me.DailySalesTableAdapter.Fill(Me.SHITSTEMDataSet.DailySales)
-        Me.MonthlySalesTableAdapter.Fill(Me.SHITSTEMDataSet.MonthlySales)
-        Me.WeeklySalesTableAdapter.Fill(Me.SHITSTEMDataSet.WeeklySales)
-        Me.DailySummaryTableAdapter.Fill(Me.SHITSTEMDataSet.DailySummary)
-        Me.STOCKSTableAdapter.Fill(Me.SHITSTEMDataSet.STOCKS)
-        Me.TransactionsTableAdapter.Fill(Me.SHITSTEMDataSet.Transactions)
-
     End Sub
 
 
@@ -230,7 +221,16 @@ Public Class SALES_TAB
         STOCKSDataGridView.DataSource = lowStockView
 
         Me.STOCKSTableAdapter.Fill(Me.SHITSTEMDataSet.STOCKS)
+        Me.DailySalesTableAdapter.Fill(Me.SHITSTEMDataSet.DailySales)
+        Me.MonthlySalesTableAdapter.Fill(Me.SHITSTEMDataSet.MonthlySales)
+        Me.WeeklySalesTableAdapter.Fill(Me.SHITSTEMDataSet.WeeklySales)
+        Me.DailySummaryTableAdapter.Fill(Me.SHITSTEMDataSet.DailySummary)
+        Me.TransactionsTableAdapter.Fill(Me.SHITSTEMDataSet.Transactions)
+        dailytotalearn()
+        LoadCharts()
     End Sub
 
-
+    Private Sub Guna2Button1_Click(sender As Object, e As EventArgs) Handles Guna2Button1.Click
+        salesreport.Show()
+    End Sub
 End Class

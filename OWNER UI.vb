@@ -118,7 +118,12 @@ Public Class Form2
     End Sub
 
     Private Sub cashierbtn_Click(sender As Object, e As EventArgs) Handles cashierbtn.Click
+        Dim CASHIER As New CASHIER()
+        AddHandler CASHIER.FormClosed, AddressOf CASHIER_Closed
         CASHIER.Show()
+    End Sub
+    Private Sub CASHIER_Closed(sender As Object, e As FormClosedEventArgs)
+        SALES_TAB.RefreshData()
     End Sub
 
     Private Sub logoutbtn_Click(sender As Object, e As EventArgs) Handles logoutbtn.Click
