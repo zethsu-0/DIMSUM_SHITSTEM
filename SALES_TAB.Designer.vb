@@ -31,12 +31,14 @@ Partial Class SALES_TAB
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
         Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Dim Title1 As System.Windows.Forms.DataVisualization.Charting.Title = New System.Windows.Forms.DataVisualization.Charting.Title()
         Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
         Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Dim Title2 As System.Windows.Forms.DataVisualization.Charting.Title = New System.Windows.Forms.DataVisualization.Charting.Title()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.DailySalesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.SHITSTEMDataSet = New DIMSUM_SHITSTEM.SHITSTEMDataSet()
         Me.STOCKSBindingSource = New System.Windows.Forms.BindingSource(Me.components)
@@ -64,20 +66,24 @@ Partial Class SALES_TAB
         Me.Label5 = New System.Windows.Forms.Label()
         Me.RESTOCKBTN = New Guna.UI2.WinForms.Guna2Button()
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
-        Me.todayprofitpanel = New System.Windows.Forms.Panel()
+        Me.todayprofitpanel = New Guna.UI2.WinForms.Guna2ShadowPanel()
         Me.profitlbl = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.totalsalestodaypanel = New Guna.UI2.WinForms.Guna2Panel()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Guna2ShadowPanel1 = New Guna.UI2.WinForms.Guna2ShadowPanel()
         Me.salesTotallbl = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.Guna2ShadowPanel3 = New Guna.UI2.WinForms.Guna2ShadowPanel()
         Me.DailySummaryDataGridView = New System.Windows.Forms.DataGridView()
         Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn13 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TransactionsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Guna2ShadowPanel4 = New Guna.UI2.WinForms.Guna2ShadowPanel()
         Me.FlowLayoutPanel2 = New System.Windows.Forms.FlowLayoutPanel()
         Me.Chart1 = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.Chart2 = New System.Windows.Forms.DataVisualization.Charting.Chart()
@@ -88,14 +94,17 @@ Partial Class SALES_TAB
         Me.DataGridViewTextBoxColumn22 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn23 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn24 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Discount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn25 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TransactionsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Guna2Separator1 = New Guna.UI2.WinForms.Guna2Separator()
+        Me.Guna2ShadowPanel2 = New Guna.UI2.WinForms.Guna2ShadowPanel()
+        Me.Guna2Button2 = New Guna.UI2.WinForms.Guna2Button()
+        Me.Guna2Button1 = New Guna.UI2.WinForms.Guna2Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Guna2CircleButton1 = New Guna.UI2.WinForms.Guna2CircleButton()
         Me.TransactionsTableAdapter = New DIMSUM_SHITSTEM.SHITSTEMDataSetTableAdapters.TransactionsTableAdapter()
-        Me.Guna2Button1 = New Guna.UI2.WinForms.Guna2Button()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.DailySalesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SHITSTEMDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.STOCKSBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -106,14 +115,17 @@ Partial Class SALES_TAB
         CType(Me.STOCKSDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FlowLayoutPanel1.SuspendLayout()
         Me.todayprofitpanel.SuspendLayout()
-        Me.totalsalestodaypanel.SuspendLayout()
+        Me.Guna2ShadowPanel1.SuspendLayout()
+        Me.Guna2ShadowPanel3.SuspendLayout()
         CType(Me.DailySummaryDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TransactionsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel1.SuspendLayout()
+        Me.Guna2ShadowPanel4.SuspendLayout()
         Me.FlowLayoutPanel2.SuspendLayout()
         CType(Me.Chart1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Chart2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TransactionsDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TransactionsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel1.SuspendLayout()
+        Me.Guna2ShadowPanel2.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -194,8 +206,10 @@ Partial Class SALES_TAB
         Me.DataGridView1.AllowUserToResizeRows = False
         Me.DataGridView1.AutoGenerateColumns = False
         Me.DataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.DataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.DataGridView1.BackgroundColor = System.Drawing.Color.White
+        Me.DataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.DataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
+        Me.DataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
         DataGridViewCellStyle1.Font = New System.Drawing.Font("ITC Kabel", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -215,7 +229,7 @@ Partial Class SALES_TAB
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle2
-        Me.DataGridView1.Location = New System.Drawing.Point(814, 313)
+        Me.DataGridView1.Location = New System.Drawing.Point(6, 38)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
@@ -272,7 +286,7 @@ Partial Class SALES_TAB
         Me.Label4.AutoSize = True
         Me.Label4.BackColor = System.Drawing.Color.Transparent
         Me.Label4.Font = New System.Drawing.Font("ITC Kabel", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(811, 284)
+        Me.Label4.Location = New System.Drawing.Point(3, 9)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(121, 18)
         Me.Label4.TabIndex = 3
@@ -287,6 +301,7 @@ Partial Class SALES_TAB
         Me.STOCKSDataGridView.AutoGenerateColumns = False
         Me.STOCKSDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.STOCKSDataGridView.BackgroundColor = System.Drawing.Color.White
+        Me.STOCKSDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.STOCKSDataGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
         DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
@@ -308,7 +323,7 @@ Partial Class SALES_TAB
         DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.STOCKSDataGridView.DefaultCellStyle = DataGridViewCellStyle6
-        Me.STOCKSDataGridView.Location = New System.Drawing.Point(814, 505)
+        Me.STOCKSDataGridView.Location = New System.Drawing.Point(6, 224)
         Me.STOCKSDataGridView.Name = "STOCKSDataGridView"
         Me.STOCKSDataGridView.ReadOnly = True
         DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
@@ -365,7 +380,7 @@ Partial Class SALES_TAB
         Me.Label5.BackColor = System.Drawing.Color.Transparent
         Me.Label5.Font = New System.Drawing.Font("ITC Kabel", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.Color.Black
-        Me.Label5.Location = New System.Drawing.Point(811, 476)
+        Me.Label5.Location = New System.Drawing.Point(3, 195)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(119, 18)
         Me.Label5.TabIndex = 4
@@ -380,7 +395,7 @@ Partial Class SALES_TAB
         Me.RESTOCKBTN.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
         Me.RESTOCKBTN.Font = New System.Drawing.Font("ITC Kabel", 9.0!)
         Me.RESTOCKBTN.ForeColor = System.Drawing.Color.White
-        Me.RESTOCKBTN.Location = New System.Drawing.Point(814, 659)
+        Me.RESTOCKBTN.Location = New System.Drawing.Point(800, 751)
         Me.RESTOCKBTN.Name = "RESTOCKBTN"
         Me.RESTOCKBTN.Size = New System.Drawing.Size(115, 25)
         Me.RESTOCKBTN.TabIndex = 10
@@ -390,24 +405,25 @@ Partial Class SALES_TAB
         '
         Me.FlowLayoutPanel1.BackColor = System.Drawing.Color.Transparent
         Me.FlowLayoutPanel1.Controls.Add(Me.todayprofitpanel)
-        Me.FlowLayoutPanel1.Controls.Add(Me.totalsalestodaypanel)
-        Me.FlowLayoutPanel1.Controls.Add(Me.DailySummaryDataGridView)
-        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(14, 80)
+        Me.FlowLayoutPanel1.Controls.Add(Me.Guna2ShadowPanel1)
+        Me.FlowLayoutPanel1.Controls.Add(Me.Guna2ShadowPanel3)
+        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(33, 79)
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(971, 172)
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(929, 172)
         Me.FlowLayoutPanel1.TabIndex = 0
         '
         'todayprofitpanel
         '
-        Me.todayprofitpanel.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.todayprofitpanel.BackColor = System.Drawing.Color.Transparent
         Me.todayprofitpanel.Controls.Add(Me.profitlbl)
-        Me.todayprofitpanel.Controls.Add(Me.Label1)
         Me.todayprofitpanel.Controls.Add(Me.Label9)
-        Me.todayprofitpanel.Location = New System.Drawing.Point(20, 3)
-        Me.todayprofitpanel.Margin = New System.Windows.Forms.Padding(20, 3, 20, 3)
+        Me.todayprofitpanel.Controls.Add(Me.Label1)
+        Me.todayprofitpanel.FillColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.todayprofitpanel.Location = New System.Drawing.Point(3, 3)
         Me.todayprofitpanel.Name = "todayprofitpanel"
-        Me.todayprofitpanel.Size = New System.Drawing.Size(225, 156)
-        Me.todayprofitpanel.TabIndex = 6
+        Me.todayprofitpanel.ShadowColor = System.Drawing.Color.Gray
+        Me.todayprofitpanel.Size = New System.Drawing.Size(200, 167)
+        Me.todayprofitpanel.TabIndex = 19
         '
         'profitlbl
         '
@@ -415,12 +431,24 @@ Partial Class SALES_TAB
         Me.profitlbl.BackColor = System.Drawing.Color.Transparent
         Me.profitlbl.Font = New System.Drawing.Font("ITC Kabel", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.profitlbl.ForeColor = System.Drawing.Color.FromArgb(CType(CType(252, Byte), Integer), CType(CType(211, Byte), Integer), CType(CType(77, Byte), Integer))
-        Me.profitlbl.Location = New System.Drawing.Point(62, 55)
+        Me.profitlbl.Location = New System.Drawing.Point(56, 64)
         Me.profitlbl.Name = "profitlbl"
         Me.profitlbl.Size = New System.Drawing.Size(80, 38)
         Me.profitlbl.TabIndex = 8
         Me.profitlbl.Text = "0.00"
-        Me.profitlbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.profitlbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Font = New System.Drawing.Font("ITC Kabel", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.ForeColor = System.Drawing.Color.FromArgb(CType(CType(252, Byte), Integer), CType(CType(211, Byte), Integer), CType(CType(77, Byte), Integer))
+        Me.Label9.Location = New System.Drawing.Point(40, 120)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(112, 19)
+        Me.Label9.TabIndex = 6
+        Me.Label9.Text = "PROFIT TODAY"
+        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label1
         '
@@ -428,37 +456,25 @@ Partial Class SALES_TAB
         Me.Label1.BackColor = System.Drawing.Color.Transparent
         Me.Label1.Font = New System.Drawing.Font("ITC Kabel", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(252, Byte), Integer), CType(CType(211, Byte), Integer), CType(CType(77, Byte), Integer))
-        Me.Label1.Location = New System.Drawing.Point(84, 16)
+        Me.Label1.Location = New System.Drawing.Point(77, 25)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(39, 38)
         Me.Label1.TabIndex = 7
         Me.Label1.Text = "₱"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label9
+        'Guna2ShadowPanel1
         '
-        Me.Label9.AutoSize = True
-        Me.Label9.Font = New System.Drawing.Font("ITC Kabel", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.ForeColor = System.Drawing.Color.FromArgb(CType(CType(252, Byte), Integer), CType(CType(211, Byte), Integer), CType(CType(77, Byte), Integer))
-        Me.Label9.Location = New System.Drawing.Point(51, 111)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(112, 19)
-        Me.Label9.TabIndex = 6
-        Me.Label9.Text = "PROFIT TODAY"
-        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'totalsalestodaypanel
-        '
-        Me.totalsalestodaypanel.BorderColor = System.Drawing.Color.Black
-        Me.totalsalestodaypanel.BorderRadius = 15
-        Me.totalsalestodaypanel.BorderThickness = 2
-        Me.totalsalestodaypanel.Controls.Add(Me.salesTotallbl)
-        Me.totalsalestodaypanel.Controls.Add(Me.Label10)
-        Me.totalsalestodaypanel.Controls.Add(Me.Label3)
-        Me.totalsalestodaypanel.Location = New System.Drawing.Point(268, 3)
-        Me.totalsalestodaypanel.Name = "totalsalestodaypanel"
-        Me.totalsalestodaypanel.Size = New System.Drawing.Size(223, 146)
-        Me.totalsalestodaypanel.TabIndex = 15
+        Me.Guna2ShadowPanel1.BackColor = System.Drawing.Color.Transparent
+        Me.Guna2ShadowPanel1.Controls.Add(Me.salesTotallbl)
+        Me.Guna2ShadowPanel1.Controls.Add(Me.Label10)
+        Me.Guna2ShadowPanel1.Controls.Add(Me.Label3)
+        Me.Guna2ShadowPanel1.FillColor = System.Drawing.Color.White
+        Me.Guna2ShadowPanel1.Location = New System.Drawing.Point(209, 3)
+        Me.Guna2ShadowPanel1.Name = "Guna2ShadowPanel1"
+        Me.Guna2ShadowPanel1.ShadowColor = System.Drawing.Color.Gray
+        Me.Guna2ShadowPanel1.Size = New System.Drawing.Size(200, 167)
+        Me.Guna2ShadowPanel1.TabIndex = 19
         '
         'salesTotallbl
         '
@@ -466,19 +482,19 @@ Partial Class SALES_TAB
         Me.salesTotallbl.BackColor = System.Drawing.Color.Transparent
         Me.salesTotallbl.Font = New System.Drawing.Font("ITC Kabel", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.salesTotallbl.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.salesTotallbl.Location = New System.Drawing.Point(70, 56)
+        Me.salesTotallbl.Location = New System.Drawing.Point(65, 57)
         Me.salesTotallbl.Name = "salesTotallbl"
         Me.salesTotallbl.Size = New System.Drawing.Size(71, 38)
         Me.salesTotallbl.TabIndex = 11
         Me.salesTotallbl.Text = "000"
-        Me.salesTotallbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.salesTotallbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label10
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("ITC Kabel", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label10.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.Label10.Location = New System.Drawing.Point(40, 112)
+        Me.Label10.Location = New System.Drawing.Point(22, 113)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(157, 19)
         Me.Label10.TabIndex = 9
@@ -491,12 +507,23 @@ Partial Class SALES_TAB
         Me.Label3.BackColor = System.Drawing.Color.Transparent
         Me.Label3.Font = New System.Drawing.Font("ITC Kabel", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.Label3.Location = New System.Drawing.Point(98, 17)
+        Me.Label3.Location = New System.Drawing.Point(81, 18)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(39, 38)
         Me.Label3.TabIndex = 10
         Me.Label3.Text = "₱"
         Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Guna2ShadowPanel3
+        '
+        Me.Guna2ShadowPanel3.BackColor = System.Drawing.Color.Transparent
+        Me.Guna2ShadowPanel3.Controls.Add(Me.DailySummaryDataGridView)
+        Me.Guna2ShadowPanel3.FillColor = System.Drawing.Color.White
+        Me.Guna2ShadowPanel3.Location = New System.Drawing.Point(415, 3)
+        Me.Guna2ShadowPanel3.Name = "Guna2ShadowPanel3"
+        Me.Guna2ShadowPanel3.ShadowColor = System.Drawing.Color.Gray
+        Me.Guna2ShadowPanel3.Size = New System.Drawing.Size(489, 167)
+        Me.Guna2ShadowPanel3.TabIndex = 19
         '
         'DailySummaryDataGridView
         '
@@ -505,16 +532,20 @@ Partial Class SALES_TAB
         Me.DailySummaryDataGridView.AutoGenerateColumns = False
         Me.DailySummaryDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DailySummaryDataGridView.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.DailySummaryDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.DailySummaryDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DailySummaryDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6, Me.DataGridViewTextBoxColumn11, Me.DataGridViewTextBoxColumn12, Me.DataGridViewTextBoxColumn13})
         Me.DailySummaryDataGridView.DataSource = Me.DailySummaryBindingSource
-        Me.DailySummaryDataGridView.Location = New System.Drawing.Point(514, 3)
+        Me.DailySummaryDataGridView.Location = New System.Drawing.Point(6, 5)
         Me.DailySummaryDataGridView.Margin = New System.Windows.Forms.Padding(20, 3, 20, 3)
         Me.DailySummaryDataGridView.Name = "DailySummaryDataGridView"
         Me.DailySummaryDataGridView.ReadOnly = True
         Me.DailySummaryDataGridView.RowHeadersVisible = False
         Me.DailySummaryDataGridView.RowHeadersWidth = 51
-        Me.DailySummaryDataGridView.Size = New System.Drawing.Size(391, 156)
+        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.White
+        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.Black
+        Me.DailySummaryDataGridView.RowsDefaultCellStyle = DataGridViewCellStyle9
+        Me.DailySummaryDataGridView.Size = New System.Drawing.Size(477, 155)
         Me.DailySummaryDataGridView.TabIndex = 10
         '
         'DataGridViewTextBoxColumn5
@@ -557,18 +588,58 @@ Partial Class SALES_TAB
         Me.DataGridViewTextBoxColumn13.Name = "DataGridViewTextBoxColumn13"
         Me.DataGridViewTextBoxColumn13.ReadOnly = True
         '
+        'TransactionsBindingSource
+        '
+        Me.TransactionsBindingSource.DataMember = "Transactions"
+        Me.TransactionsBindingSource.DataSource = Me.SHITSTEMDataSet
+        '
+        'Panel1
+        '
+        Me.Panel1.AutoScroll = True
+        Me.Panel1.BackColor = System.Drawing.Color.Transparent
+        Me.Panel1.Controls.Add(Me.Guna2ShadowPanel4)
+        Me.Panel1.Controls.Add(Me.Guna2Separator1)
+        Me.Panel1.Controls.Add(Me.FlowLayoutPanel1)
+        Me.Panel1.Controls.Add(Me.Guna2ShadowPanel2)
+        Me.Panel1.Controls.Add(Me.Guna2Button2)
+        Me.Panel1.Controls.Add(Me.Guna2Button1)
+        Me.Panel1.Controls.Add(Me.RESTOCKBTN)
+        Me.Panel1.Controls.Add(Me.Label2)
+        Me.Panel1.Controls.Add(Me.PictureBox1)
+        Me.Panel1.Controls.Add(Me.Guna2CircleButton1)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel1.Font = New System.Drawing.Font("ITC Kabel", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Panel1.Location = New System.Drawing.Point(0, 0)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(1358, 1336)
+        Me.Panel1.TabIndex = 8
+        '
+        'Guna2ShadowPanel4
+        '
+        Me.Guna2ShadowPanel4.BackColor = System.Drawing.Color.Transparent
+        Me.Guna2ShadowPanel4.Controls.Add(Me.FlowLayoutPanel2)
+        Me.Guna2ShadowPanel4.FillColor = System.Drawing.Color.White
+        Me.Guna2ShadowPanel4.Location = New System.Drawing.Point(38, 268)
+        Me.Guna2ShadowPanel4.Name = "Guna2ShadowPanel4"
+        Me.Guna2ShadowPanel4.ShadowColor = System.Drawing.Color.Black
+        Me.Guna2ShadowPanel4.Size = New System.Drawing.Size(756, 747)
+        Me.Guna2ShadowPanel4.TabIndex = 21
+        '
         'FlowLayoutPanel2
         '
+        Me.FlowLayoutPanel2.BackColor = System.Drawing.Color.Transparent
         Me.FlowLayoutPanel2.Controls.Add(Me.Chart1)
         Me.FlowLayoutPanel2.Controls.Add(Me.Chart2)
         Me.FlowLayoutPanel2.Controls.Add(Me.TransactionsDataGridView)
-        Me.FlowLayoutPanel2.Location = New System.Drawing.Point(21, 280)
+        Me.FlowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.FlowLayoutPanel2.Location = New System.Drawing.Point(0, 0)
         Me.FlowLayoutPanel2.Name = "FlowLayoutPanel2"
-        Me.FlowLayoutPanel2.Size = New System.Drawing.Size(773, 780)
+        Me.FlowLayoutPanel2.Size = New System.Drawing.Size(756, 747)
         Me.FlowLayoutPanel2.TabIndex = 11
         '
         'Chart1
         '
+        Me.Chart1.BorderlineColor = System.Drawing.Color.Wheat
         ChartArea1.Name = "ChartArea1"
         Me.Chart1.ChartAreas.Add(ChartArea1)
         Me.Chart1.Location = New System.Drawing.Point(3, 3)
@@ -604,14 +675,23 @@ Partial Class SALES_TAB
         '
         'TransactionsDataGridView
         '
+        Me.TransactionsDataGridView.AllowUserToAddRows = False
+        Me.TransactionsDataGridView.AllowUserToDeleteRows = False
         Me.TransactionsDataGridView.AutoGenerateColumns = False
+        Me.TransactionsDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.TransactionsDataGridView.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.TransactionsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.TransactionsDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn19, Me.DataGridViewTextBoxColumn20, Me.DataGridViewTextBoxColumn21, Me.DataGridViewTextBoxColumn22, Me.DataGridViewTextBoxColumn23, Me.DataGridViewTextBoxColumn24, Me.DataGridViewTextBoxColumn25})
+        Me.TransactionsDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn19, Me.DataGridViewTextBoxColumn20, Me.DataGridViewTextBoxColumn21, Me.DataGridViewTextBoxColumn22, Me.DataGridViewTextBoxColumn23, Me.DataGridViewTextBoxColumn24, Me.Discount, Me.DataGridViewTextBoxColumn25})
         Me.TransactionsDataGridView.DataSource = Me.TransactionsBindingSource
         Me.TransactionsDataGridView.Location = New System.Drawing.Point(3, 519)
         Me.TransactionsDataGridView.Name = "TransactionsDataGridView"
+        Me.TransactionsDataGridView.ReadOnly = True
+        Me.TransactionsDataGridView.RowHeadersVisible = False
         Me.TransactionsDataGridView.RowHeadersWidth = 51
+        DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.White
+        DataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.Black
+        Me.TransactionsDataGridView.RowsDefaultCellStyle = DataGridViewCellStyle10
         Me.TransactionsDataGridView.Size = New System.Drawing.Size(747, 220)
         Me.TransactionsDataGridView.TabIndex = 9
         '
@@ -622,7 +702,6 @@ Partial Class SALES_TAB
         Me.DataGridViewTextBoxColumn19.MinimumWidth = 6
         Me.DataGridViewTextBoxColumn19.Name = "DataGridViewTextBoxColumn19"
         Me.DataGridViewTextBoxColumn19.ReadOnly = True
-        Me.DataGridViewTextBoxColumn19.Width = 125
         '
         'DataGridViewTextBoxColumn20
         '
@@ -630,7 +709,7 @@ Partial Class SALES_TAB
         Me.DataGridViewTextBoxColumn20.HeaderText = "TransactionDate"
         Me.DataGridViewTextBoxColumn20.MinimumWidth = 6
         Me.DataGridViewTextBoxColumn20.Name = "DataGridViewTextBoxColumn20"
-        Me.DataGridViewTextBoxColumn20.Width = 125
+        Me.DataGridViewTextBoxColumn20.ReadOnly = True
         '
         'DataGridViewTextBoxColumn21
         '
@@ -638,7 +717,7 @@ Partial Class SALES_TAB
         Me.DataGridViewTextBoxColumn21.HeaderText = "TotalAmount"
         Me.DataGridViewTextBoxColumn21.MinimumWidth = 6
         Me.DataGridViewTextBoxColumn21.Name = "DataGridViewTextBoxColumn21"
-        Me.DataGridViewTextBoxColumn21.Width = 125
+        Me.DataGridViewTextBoxColumn21.ReadOnly = True
         '
         'DataGridViewTextBoxColumn22
         '
@@ -646,7 +725,7 @@ Partial Class SALES_TAB
         Me.DataGridViewTextBoxColumn22.HeaderText = "PaymentAmount"
         Me.DataGridViewTextBoxColumn22.MinimumWidth = 6
         Me.DataGridViewTextBoxColumn22.Name = "DataGridViewTextBoxColumn22"
-        Me.DataGridViewTextBoxColumn22.Width = 125
+        Me.DataGridViewTextBoxColumn22.ReadOnly = True
         '
         'DataGridViewTextBoxColumn23
         '
@@ -654,7 +733,7 @@ Partial Class SALES_TAB
         Me.DataGridViewTextBoxColumn23.HeaderText = "ChangeGiven"
         Me.DataGridViewTextBoxColumn23.MinimumWidth = 6
         Me.DataGridViewTextBoxColumn23.Name = "DataGridViewTextBoxColumn23"
-        Me.DataGridViewTextBoxColumn23.Width = 125
+        Me.DataGridViewTextBoxColumn23.ReadOnly = True
         '
         'DataGridViewTextBoxColumn24
         '
@@ -662,7 +741,14 @@ Partial Class SALES_TAB
         Me.DataGridViewTextBoxColumn24.HeaderText = "Total_Item"
         Me.DataGridViewTextBoxColumn24.MinimumWidth = 6
         Me.DataGridViewTextBoxColumn24.Name = "DataGridViewTextBoxColumn24"
-        Me.DataGridViewTextBoxColumn24.Width = 125
+        Me.DataGridViewTextBoxColumn24.ReadOnly = True
+        '
+        'Discount
+        '
+        Me.Discount.DataPropertyName = "Discount"
+        Me.Discount.HeaderText = "Discount"
+        Me.Discount.Name = "Discount"
+        Me.Discount.ReadOnly = True
         '
         'DataGridViewTextBoxColumn25
         '
@@ -670,34 +756,57 @@ Partial Class SALES_TAB
         Me.DataGridViewTextBoxColumn25.HeaderText = "Profit"
         Me.DataGridViewTextBoxColumn25.MinimumWidth = 6
         Me.DataGridViewTextBoxColumn25.Name = "DataGridViewTextBoxColumn25"
-        Me.DataGridViewTextBoxColumn25.Width = 125
+        Me.DataGridViewTextBoxColumn25.ReadOnly = True
         '
-        'TransactionsBindingSource
+        'Guna2Separator1
         '
-        Me.TransactionsBindingSource.DataMember = "Transactions"
-        Me.TransactionsBindingSource.DataSource = Me.SHITSTEMDataSet
+        Me.Guna2Separator1.Location = New System.Drawing.Point(565, 1271)
+        Me.Guna2Separator1.Name = "Guna2Separator1"
+        Me.Guna2Separator1.Size = New System.Drawing.Size(485, 10)
+        Me.Guna2Separator1.TabIndex = 20
         '
-        'Panel1
+        'Guna2ShadowPanel2
         '
-        Me.Panel1.AutoScroll = True
-        Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(253, Byte), Integer), CType(CType(246, Byte), Integer), CType(CType(227, Byte), Integer))
-        Me.Panel1.Controls.Add(Me.Guna2Button1)
-        Me.Panel1.Controls.Add(Me.Label2)
-        Me.Panel1.Controls.Add(Me.PictureBox1)
-        Me.Panel1.Controls.Add(Me.FlowLayoutPanel2)
-        Me.Panel1.Controls.Add(Me.FlowLayoutPanel1)
-        Me.Panel1.Controls.Add(Me.RESTOCKBTN)
-        Me.Panel1.Controls.Add(Me.Label5)
-        Me.Panel1.Controls.Add(Me.Guna2CircleButton1)
-        Me.Panel1.Controls.Add(Me.STOCKSDataGridView)
-        Me.Panel1.Controls.Add(Me.Label4)
-        Me.Panel1.Controls.Add(Me.DataGridView1)
-        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel1.Font = New System.Drawing.Font("ITC Kabel", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Panel1.Location = New System.Drawing.Point(0, 0)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1358, 1336)
-        Me.Panel1.TabIndex = 8
+        Me.Guna2ShadowPanel2.BackColor = System.Drawing.Color.Transparent
+        Me.Guna2ShadowPanel2.Controls.Add(Me.Label4)
+        Me.Guna2ShadowPanel2.Controls.Add(Me.DataGridView1)
+        Me.Guna2ShadowPanel2.Controls.Add(Me.STOCKSDataGridView)
+        Me.Guna2ShadowPanel2.Controls.Add(Me.Label5)
+        Me.Guna2ShadowPanel2.FillColor = System.Drawing.Color.White
+        Me.Guna2ShadowPanel2.Location = New System.Drawing.Point(800, 283)
+        Me.Guna2ShadowPanel2.Name = "Guna2ShadowPanel2"
+        Me.Guna2ShadowPanel2.ShadowColor = System.Drawing.Color.Gray
+        Me.Guna2ShadowPanel2.Size = New System.Drawing.Size(299, 393)
+        Me.Guna2ShadowPanel2.TabIndex = 18
+        '
+        'Guna2Button2
+        '
+        Me.Guna2Button2.DisabledState.BorderColor = System.Drawing.Color.DarkGray
+        Me.Guna2Button2.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
+        Me.Guna2Button2.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.Guna2Button2.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
+        Me.Guna2Button2.FillColor = System.Drawing.Color.Red
+        Me.Guna2Button2.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.Guna2Button2.ForeColor = System.Drawing.Color.White
+        Me.Guna2Button2.Location = New System.Drawing.Point(651, 1165)
+        Me.Guna2Button2.Name = "Guna2Button2"
+        Me.Guna2Button2.Size = New System.Drawing.Size(143, 37)
+        Me.Guna2Button2.TabIndex = 16
+        Me.Guna2Button2.Text = "RESET REPORTS"
+        '
+        'Guna2Button1
+        '
+        Me.Guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray
+        Me.Guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
+        Me.Guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.Guna2Button1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
+        Me.Guna2Button1.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.Guna2Button1.ForeColor = System.Drawing.Color.White
+        Me.Guna2Button1.Location = New System.Drawing.Point(651, 1066)
+        Me.Guna2Button1.Name = "Guna2Button1"
+        Me.Guna2Button1.Size = New System.Drawing.Size(143, 37)
+        Me.Guna2Button1.TabIndex = 15
+        Me.Guna2Button1.Text = "PRINT REPORT"
         '
         'Label2
         '
@@ -732,35 +841,28 @@ Partial Class SALES_TAB
         Me.Guna2CircleButton1.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.Guna2CircleButton1.ForeColor = System.Drawing.Color.White
         Me.Guna2CircleButton1.Image = Global.DIMSUM_SHITSTEM.My.Resources.Resources.refresh
-        Me.Guna2CircleButton1.Location = New System.Drawing.Point(326, 24)
+        Me.Guna2CircleButton1.Location = New System.Drawing.Point(1014, 5)
         Me.Guna2CircleButton1.Name = "Guna2CircleButton1"
         Me.Guna2CircleButton1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle
         Me.Guna2CircleButton1.Size = New System.Drawing.Size(36, 36)
         Me.Guna2CircleButton1.TabIndex = 7
+        Me.ToolTip1.SetToolTip(Me.Guna2CircleButton1, "Refresh the Datas")
         '
         'TransactionsTableAdapter
         '
         Me.TransactionsTableAdapter.ClearBeforeFill = True
         '
-        'Guna2Button1
+        'ToolTip1
         '
-        Me.Guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray
-        Me.Guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
-        Me.Guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
-        Me.Guna2Button1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
-        Me.Guna2Button1.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.Guna2Button1.ForeColor = System.Drawing.Color.White
-        Me.Guna2Button1.Location = New System.Drawing.Point(651, 1066)
-        Me.Guna2Button1.Name = "Guna2Button1"
-        Me.Guna2Button1.Size = New System.Drawing.Size(143, 37)
-        Me.Guna2Button1.TabIndex = 15
-        Me.Guna2Button1.Text = "PRINT REPORT"
+        Me.ToolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
+        Me.ToolTip1.ToolTipTitle = "Refresh"
         '
         'SALES_TAB
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
+        Me.BackColor = System.Drawing.SystemColors.Control
         Me.Controls.Add(Me.Panel1)
         Me.Name = "SALES_TAB"
         Me.Size = New System.Drawing.Size(1358, 1336)
@@ -775,16 +877,20 @@ Partial Class SALES_TAB
         Me.FlowLayoutPanel1.ResumeLayout(False)
         Me.todayprofitpanel.ResumeLayout(False)
         Me.todayprofitpanel.PerformLayout()
-        Me.totalsalestodaypanel.ResumeLayout(False)
-        Me.totalsalestodaypanel.PerformLayout()
+        Me.Guna2ShadowPanel1.ResumeLayout(False)
+        Me.Guna2ShadowPanel1.PerformLayout()
+        Me.Guna2ShadowPanel3.ResumeLayout(False)
         CType(Me.DailySummaryDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TransactionsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
+        Me.Guna2ShadowPanel4.ResumeLayout(False)
         Me.FlowLayoutPanel2.ResumeLayout(False)
         CType(Me.Chart1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Chart2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TransactionsDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TransactionsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Panel1.ResumeLayout(False)
-        Me.Panel1.PerformLayout()
+        Me.Guna2ShadowPanel2.ResumeLayout(False)
+        Me.Guna2ShadowPanel2.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -817,7 +923,6 @@ Partial Class SALES_TAB
     Friend WithEvents Label5 As Label
     Friend WithEvents RESTOCKBTN As Guna.UI2.WinForms.Guna2Button
     Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
-    Friend WithEvents todayprofitpanel As Panel
     Friend WithEvents profitlbl As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents Label9 As Label
@@ -830,10 +935,22 @@ Partial Class SALES_TAB
     Friend WithEvents DataGridViewTextBoxColumn11 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn12 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn13 As DataGridViewTextBoxColumn
+    Friend WithEvents Panel1 As Panel
+    Friend WithEvents TransactionsBindingSource As BindingSource
+    Friend WithEvents TransactionsTableAdapter As SHITSTEMDataSetTableAdapters.TransactionsTableAdapter
+    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Guna2Button1 As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents Guna2Button2 As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents Guna2ShadowPanel2 As Guna.UI2.WinForms.Guna2ShadowPanel
+    Friend WithEvents todayprofitpanel As Guna.UI2.WinForms.Guna2ShadowPanel
+    Friend WithEvents Guna2ShadowPanel1 As Guna.UI2.WinForms.Guna2ShadowPanel
+    Friend WithEvents Guna2ShadowPanel3 As Guna.UI2.WinForms.Guna2ShadowPanel
+    Friend WithEvents Guna2Separator1 As Guna.UI2.WinForms.Guna2Separator
     Friend WithEvents FlowLayoutPanel2 As FlowLayoutPanel
     Friend WithEvents Chart1 As DataVisualization.Charting.Chart
     Friend WithEvents Chart2 As DataVisualization.Charting.Chart
-    Friend WithEvents Panel1 As Panel
     Friend WithEvents TransactionsDataGridView As DataGridView
     Friend WithEvents DataGridViewTextBoxColumn19 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn20 As DataGridViewTextBoxColumn
@@ -841,11 +958,7 @@ Partial Class SALES_TAB
     Friend WithEvents DataGridViewTextBoxColumn22 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn23 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn24 As DataGridViewTextBoxColumn
+    Friend WithEvents Discount As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn25 As DataGridViewTextBoxColumn
-    Friend WithEvents TransactionsBindingSource As BindingSource
-    Friend WithEvents TransactionsTableAdapter As SHITSTEMDataSetTableAdapters.TransactionsTableAdapter
-    Friend WithEvents PictureBox1 As PictureBox
-    Friend WithEvents Label2 As Label
-    Friend WithEvents totalsalestodaypanel As Guna.UI2.WinForms.Guna2Panel
-    Friend WithEvents Guna2Button1 As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents Guna2ShadowPanel4 As Guna.UI2.WinForms.Guna2ShadowPanel
 End Class

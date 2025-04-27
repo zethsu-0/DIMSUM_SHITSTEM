@@ -24,6 +24,10 @@ Partial Class RESTOCK_TAB
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Guna2BorderlessForm1 = New Guna.UI2.WinForms.Guna2BorderlessForm(Me.components)
         Me.Guna2ControlBox1 = New Guna.UI2.WinForms.Guna2ControlBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
@@ -32,12 +36,11 @@ Partial Class RESTOCK_TAB
         Me.STOCKSTableAdapter = New DIMSUM_SHITSTEM.SHITSTEMDataSetTableAdapters.STOCKSTableAdapter()
         Me.TableAdapterManager = New DIMSUM_SHITSTEM.SHITSTEMDataSetTableAdapters.TableAdapterManager()
         Me.STOCKSDataGridView = New System.Windows.Forms.DataGridView()
+        Me.RESTOCKBTN = New Guna.UI2.WinForms.Guna2Button()
         Me.item_no = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.product_name = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Quantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.restock = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.RESTOCKBTN = New Guna.UI2.WinForms.Guna2Button()
-        Me.Guna2Button1 = New Guna.UI2.WinForms.Guna2Button()
         Me.Panel1.SuspendLayout()
         CType(Me.SHITSTEMDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.STOCKSBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -55,20 +58,19 @@ Partial Class RESTOCK_TAB
         Me.Guna2ControlBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Guna2ControlBox1.FillColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.Guna2ControlBox1.IconColor = System.Drawing.Color.White
-        Me.Guna2ControlBox1.Location = New System.Drawing.Point(475, 4)
-        Me.Guna2ControlBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Guna2ControlBox1.Location = New System.Drawing.Point(92, 1)
         Me.Guna2ControlBox1.Name = "Guna2ControlBox1"
-        Me.Guna2ControlBox1.Size = New System.Drawing.Size(60, 36)
+        Me.Guna2ControlBox1.Size = New System.Drawing.Size(45, 29)
         Me.Guna2ControlBox1.TabIndex = 0
         '
         'Panel1
         '
+        Me.Panel1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel1.BackColor = System.Drawing.Color.Transparent
         Me.Panel1.Controls.Add(Me.Guna2ControlBox1)
-        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel1.Location = New System.Drawing.Point(0, 0)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel1.Location = New System.Drawing.Point(266, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(539, 43)
+        Me.Panel1.Size = New System.Drawing.Size(138, 35)
         Me.Panel1.TabIndex = 1
         '
         'SHITSTEMDataSet
@@ -110,21 +112,42 @@ Partial Class RESTOCK_TAB
         Me.STOCKSDataGridView.BackgroundColor = System.Drawing.Color.White
         Me.STOCKSDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.STOCKSDataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("ITC Kabel", 9.749999!, System.Drawing.FontStyle.Bold)
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.STOCKSDataGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.STOCKSDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.STOCKSDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.item_no, Me.product_name, Me.Quantity, Me.restock})
         Me.STOCKSDataGridView.DataSource = Me.STOCKSBindingSource
-        Me.STOCKSDataGridView.Location = New System.Drawing.Point(0, 43)
-        Me.STOCKSDataGridView.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.STOCKSDataGridView.Location = New System.Drawing.Point(0, 35)
         Me.STOCKSDataGridView.Name = "STOCKSDataGridView"
         Me.STOCKSDataGridView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
         Me.STOCKSDataGridView.RowHeadersVisible = False
         Me.STOCKSDataGridView.RowHeadersWidth = 51
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Silver
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black
-        Me.STOCKSDataGridView.RowsDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.Silver
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black
+        Me.STOCKSDataGridView.RowsDefaultCellStyle = DataGridViewCellStyle5
         Me.STOCKSDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.STOCKSDataGridView.Size = New System.Drawing.Size(533, 364)
+        Me.STOCKSDataGridView.Size = New System.Drawing.Size(400, 296)
         Me.STOCKSDataGridView.TabIndex = 2
+        '
+        'RESTOCKBTN
+        '
+        Me.RESTOCKBTN.DisabledState.BorderColor = System.Drawing.Color.DarkGray
+        Me.RESTOCKBTN.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
+        Me.RESTOCKBTN.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.RESTOCKBTN.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
+        Me.RESTOCKBTN.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.RESTOCKBTN.ForeColor = System.Drawing.Color.White
+        Me.RESTOCKBTN.Location = New System.Drawing.Point(266, 356)
+        Me.RESTOCKBTN.Name = "RESTOCKBTN"
+        Me.RESTOCKBTN.Size = New System.Drawing.Size(126, 23)
+        Me.RESTOCKBTN.TabIndex = 3
+        Me.RESTOCKBTN.Text = "RESTOCK"
         '
         'item_no
         '
@@ -139,8 +162,10 @@ Partial Class RESTOCK_TAB
         '
         Me.product_name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.product_name.DataPropertyName = "product_name"
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("ITC Kabel", 9.749999!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.product_name.DefaultCellStyle = DataGridViewCellStyle2
         Me.product_name.FillWeight = 66.06859!
-        Me.product_name.HeaderText = "product_name"
+        Me.product_name.HeaderText = "PRODUCT NAME"
         Me.product_name.MinimumWidth = 6
         Me.product_name.Name = "product_name"
         '
@@ -148,62 +173,35 @@ Partial Class RESTOCK_TAB
         '
         Me.Quantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
         Me.Quantity.DataPropertyName = "Quantity"
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("ITC Kabel", 9.749999!, System.Drawing.FontStyle.Bold)
+        Me.Quantity.DefaultCellStyle = DataGridViewCellStyle3
         Me.Quantity.FillWeight = 28.93514!
-        Me.Quantity.HeaderText = "Quantity"
+        Me.Quantity.HeaderText = "QUANTITY"
         Me.Quantity.MinimumWidth = 6
         Me.Quantity.Name = "Quantity"
-        Me.Quantity.Width = 84
+        Me.Quantity.Width = 92
         '
         'restock
         '
         Me.restock.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("ITC Kabel", 9.749999!, System.Drawing.FontStyle.Bold)
+        Me.restock.DefaultCellStyle = DataGridViewCellStyle4
         Me.restock.FillWeight = 120.0!
-        Me.restock.HeaderText = "Add"
+        Me.restock.HeaderText = "ADD"
         Me.restock.MinimumWidth = 6
         Me.restock.Name = "restock"
-        Me.restock.Width = 61
-        '
-        'RESTOCKBTN
-        '
-        Me.RESTOCKBTN.DisabledState.BorderColor = System.Drawing.Color.DarkGray
-        Me.RESTOCKBTN.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
-        Me.RESTOCKBTN.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
-        Me.RESTOCKBTN.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
-        Me.RESTOCKBTN.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.RESTOCKBTN.ForeColor = System.Drawing.Color.White
-        Me.RESTOCKBTN.Location = New System.Drawing.Point(233, 634)
-        Me.RESTOCKBTN.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.RESTOCKBTN.Name = "RESTOCKBTN"
-        Me.RESTOCKBTN.Size = New System.Drawing.Size(112, 44)
-        Me.RESTOCKBTN.TabIndex = 3
-        Me.RESTOCKBTN.Text = "RESTOCK"
-        '
-        'Guna2Button1
-        '
-        Me.Guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray
-        Me.Guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
-        Me.Guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
-        Me.Guna2Button1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
-        Me.Guna2Button1.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.Guna2Button1.ForeColor = System.Drawing.Color.White
-        Me.Guna2Button1.Location = New System.Drawing.Point(421, 592)
-        Me.Guna2Button1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.Guna2Button1.Name = "Guna2Button1"
-        Me.Guna2Button1.Size = New System.Drawing.Size(112, 44)
-        Me.Guna2Button1.TabIndex = 4
-        Me.Guna2Button1.Text = "RESTOCK"
+        Me.restock.ToolTipText = "Add an ammount"
+        Me.restock.Width = 59
         '
         'RESTOCK_TAB
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(539, 740)
-        Me.Controls.Add(Me.Guna2Button1)
+        Me.ClientSize = New System.Drawing.Size(404, 406)
         Me.Controls.Add(Me.RESTOCKBTN)
         Me.Controls.Add(Me.STOCKSDataGridView)
         Me.Controls.Add(Me.Panel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "RESTOCK_TAB"
         Me.Text = "RESTOCK_TAB"
         Me.Panel1.ResumeLayout(False)
@@ -227,5 +225,4 @@ Partial Class RESTOCK_TAB
     Friend WithEvents product_name As DataGridViewTextBoxColumn
     Friend WithEvents Quantity As DataGridViewTextBoxColumn
     Friend WithEvents restock As DataGridViewTextBoxColumn
-    Friend WithEvents Guna2Button1 As Guna.UI2.WinForms.Guna2Button
 End Class

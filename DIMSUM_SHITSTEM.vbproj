@@ -231,6 +231,18 @@
     <Compile Include="RESTOCK_TAB.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="salesreport.Designer.vb">
+      <DependentUpon>salesreport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="salesreport.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SALESREPORTDOC.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SALESREPORTDOC.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="SALES_TAB.Designer.vb">
       <DependentUpon>SALES_TAB.vb</DependentUpon>
     </Compile>
@@ -313,6 +325,13 @@
     <EmbeddedResource Include="RESTOCK_TAB.resx">
       <DependentUpon>RESTOCK_TAB.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="salesreport.resx">
+      <DependentUpon>salesreport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SALESREPORTDOC.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SALESREPORTDOC.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="SALES_TAB.resx">
       <DependentUpon>SALES_TAB.vb</DependentUpon>
     </EmbeddedResource>
@@ -361,6 +380,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\products01.png" />
+    <None Include="Resources\employees.png" />
+    <None Include="Resources\cashier-machine.png" />
+    <None Include="Resources\cashier-machine %281%29.png" />
+    <None Include="Resources\bar-chart %281%29.png" />
+    <None Include="Resources\employees %281%29.png" />
     <None Include="Resources\errorimageTR.png" />
     <None Include="Resources\Logo_transparent.png" />
     <None Include="Resources\maangs2.png" />

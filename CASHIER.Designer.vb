@@ -86,9 +86,8 @@ Partial Class CASHIER
         Me.Panel2.Controls.Add(Me.Guna2PictureBox1)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel2.Location = New System.Drawing.Point(0, 0)
-        Me.Panel2.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(253, 908)
+        Me.Panel2.Size = New System.Drawing.Size(190, 738)
         Me.Panel2.TabIndex = 1
         '
         'FlowLayoutPanel2
@@ -101,10 +100,9 @@ Partial Class CASHIER
         Me.FlowLayoutPanel2.Controls.Add(Me.SiopaoFilter)
         Me.FlowLayoutPanel2.Controls.Add(Me.DrinksFilter)
         Me.FlowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown
-        Me.FlowLayoutPanel2.Location = New System.Drawing.Point(36, 224)
-        Me.FlowLayoutPanel2.Margin = New System.Windows.Forms.Padding(4)
+        Me.FlowLayoutPanel2.Location = New System.Drawing.Point(27, 182)
         Me.FlowLayoutPanel2.Name = "FlowLayoutPanel2"
-        Me.FlowLayoutPanel2.Size = New System.Drawing.Size(188, 649)
+        Me.FlowLayoutPanel2.Size = New System.Drawing.Size(141, 527)
         Me.FlowLayoutPanel2.TabIndex = 22
         Me.FlowLayoutPanel2.WrapContents = False
         '
@@ -120,10 +118,10 @@ Partial Class CASHIER
         Me.Cancel.FillColor = System.Drawing.Color.White
         Me.Cancel.Font = New System.Drawing.Font("ITC Kabel", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Cancel.ForeColor = System.Drawing.Color.Black
-        Me.Cancel.Location = New System.Drawing.Point(27, 25)
-        Me.Cancel.Margin = New System.Windows.Forms.Padding(27, 25, 27, 25)
+        Me.Cancel.Location = New System.Drawing.Point(20, 20)
+        Me.Cancel.Margin = New System.Windows.Forms.Padding(20, 20, 20, 20)
         Me.Cancel.Name = "Cancel"
-        Me.Cancel.Size = New System.Drawing.Size(107, 98)
+        Me.Cancel.Size = New System.Drawing.Size(80, 80)
         Me.Cancel.TabIndex = 24
         Me.Cancel.Text = "All"
         Me.Cancel.TextOffset = New System.Drawing.Point(0, 25)
@@ -140,10 +138,10 @@ Partial Class CASHIER
         Me.SiomaiFilter.FillColor = System.Drawing.Color.White
         Me.SiomaiFilter.Font = New System.Drawing.Font("ITC Kabel", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SiomaiFilter.ForeColor = System.Drawing.Color.Black
-        Me.SiomaiFilter.Location = New System.Drawing.Point(27, 173)
-        Me.SiomaiFilter.Margin = New System.Windows.Forms.Padding(27, 25, 27, 25)
+        Me.SiomaiFilter.Location = New System.Drawing.Point(20, 140)
+        Me.SiomaiFilter.Margin = New System.Windows.Forms.Padding(20, 20, 20, 20)
         Me.SiomaiFilter.Name = "SiomaiFilter"
-        Me.SiomaiFilter.Size = New System.Drawing.Size(107, 98)
+        Me.SiomaiFilter.Size = New System.Drawing.Size(80, 80)
         Me.SiomaiFilter.TabIndex = 19
         Me.SiomaiFilter.Text = "Siomai"
         Me.SiomaiFilter.TextOffset = New System.Drawing.Point(0, 25)
@@ -160,10 +158,10 @@ Partial Class CASHIER
         Me.SiopaoFilter.FillColor = System.Drawing.Color.White
         Me.SiopaoFilter.Font = New System.Drawing.Font("ITC Kabel", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SiopaoFilter.ForeColor = System.Drawing.Color.Black
-        Me.SiopaoFilter.Location = New System.Drawing.Point(27, 321)
-        Me.SiopaoFilter.Margin = New System.Windows.Forms.Padding(27, 25, 27, 25)
+        Me.SiopaoFilter.Location = New System.Drawing.Point(20, 260)
+        Me.SiopaoFilter.Margin = New System.Windows.Forms.Padding(20, 20, 20, 20)
         Me.SiopaoFilter.Name = "SiopaoFilter"
-        Me.SiopaoFilter.Size = New System.Drawing.Size(107, 98)
+        Me.SiopaoFilter.Size = New System.Drawing.Size(80, 80)
         Me.SiopaoFilter.TabIndex = 25
         Me.SiopaoFilter.Text = "Siopao"
         Me.SiopaoFilter.TextOffset = New System.Drawing.Point(0, 25)
@@ -180,10 +178,10 @@ Partial Class CASHIER
         Me.DrinksFilter.FillColor = System.Drawing.Color.White
         Me.DrinksFilter.Font = New System.Drawing.Font("ITC Kabel", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DrinksFilter.ForeColor = System.Drawing.Color.Black
-        Me.DrinksFilter.Location = New System.Drawing.Point(27, 469)
-        Me.DrinksFilter.Margin = New System.Windows.Forms.Padding(27, 25, 27, 25)
+        Me.DrinksFilter.Location = New System.Drawing.Point(20, 380)
+        Me.DrinksFilter.Margin = New System.Windows.Forms.Padding(20, 20, 20, 20)
         Me.DrinksFilter.Name = "DrinksFilter"
-        Me.DrinksFilter.Size = New System.Drawing.Size(107, 98)
+        Me.DrinksFilter.Size = New System.Drawing.Size(80, 80)
         Me.DrinksFilter.TabIndex = 20
         Me.DrinksFilter.Text = "Drinks"
         Me.DrinksFilter.TextOffset = New System.Drawing.Point(0, 25)
@@ -194,10 +192,9 @@ Partial Class CASHIER
         Me.Guna2PictureBox1.BorderRadius = 15
         Me.Guna2PictureBox1.Image = Global.DIMSUM_SHITSTEM.My.Resources.Resources.icon
         Me.Guna2PictureBox1.ImageRotate = 0!
-        Me.Guna2PictureBox1.Location = New System.Drawing.Point(36, 27)
-        Me.Guna2PictureBox1.Margin = New System.Windows.Forms.Padding(4)
+        Me.Guna2PictureBox1.Location = New System.Drawing.Point(27, 22)
         Me.Guna2PictureBox1.Name = "Guna2PictureBox1"
-        Me.Guna2PictureBox1.Size = New System.Drawing.Size(173, 160)
+        Me.Guna2PictureBox1.Size = New System.Drawing.Size(130, 130)
         Me.Guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.Guna2PictureBox1.TabIndex = 1
         Me.Guna2PictureBox1.TabStop = False
@@ -207,10 +204,9 @@ Partial Class CASHIER
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("ITC Kabel", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(27, 32)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label1.Location = New System.Drawing.Point(20, 26)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(127, 40)
+        Me.Label1.Size = New System.Drawing.Size(105, 32)
         Me.Label1.TabIndex = 7
         Me.Label1.Text = "Orders:"
         '
@@ -227,19 +223,19 @@ Partial Class CASHIER
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Controls.Add(Me.checkoutbtn)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Right
-        Me.Panel1.Location = New System.Drawing.Point(944, 0)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(4)
+        Me.Panel1.Location = New System.Drawing.Point(708, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(471, 850)
+        Me.Panel1.Size = New System.Drawing.Size(353, 691)
         Me.Panel1.TabIndex = 8
         '
         'Label5
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("ITC Kabel", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(268, 528)
+        Me.Label5.Location = New System.Drawing.Point(201, 429)
+        Me.Label5.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(68, 22)
+        Me.Label5.Size = New System.Drawing.Size(54, 18)
         Me.Label5.TabIndex = 30
         Me.Label5.Text = "TOTAL:"
         '
@@ -247,9 +243,10 @@ Partial Class CASHIER
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("ITC Kabel", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(12, 536)
+        Me.Label4.Location = New System.Drawing.Point(23, 431)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(153, 22)
+        Me.Label4.Size = New System.Drawing.Size(123, 18)
         Me.Label4.TabIndex = 29
         Me.Label4.Text = "Discount Options"
         '
@@ -263,9 +260,10 @@ Partial Class CASHIER
         Me.Guna2Button1.FillColor = System.Drawing.Color.Red
         Me.Guna2Button1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.Guna2Button1.ForeColor = System.Drawing.Color.White
-        Me.Guna2Button1.Location = New System.Drawing.Point(272, 785)
+        Me.Guna2Button1.Location = New System.Drawing.Point(204, 638)
+        Me.Guna2Button1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Guna2Button1.Name = "Guna2Button1"
-        Me.Guna2Button1.Size = New System.Drawing.Size(183, 30)
+        Me.Guna2Button1.Size = New System.Drawing.Size(137, 24)
         Me.Guna2Button1.TabIndex = 28
         Me.Guna2Button1.Text = "Cancel Order"
         '
@@ -282,30 +280,28 @@ Partial Class CASHIER
         Me.discount_choice.ForeColor = System.Drawing.Color.FromArgb(CType(CType(68, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(112, Byte), Integer))
         Me.discount_choice.ItemHeight = 30
         Me.discount_choice.Items.AddRange(New Object() {"NONE", "PWD/SENIOR", "20%", "10%"})
-        Me.discount_choice.Location = New System.Drawing.Point(17, 571)
-        Me.discount_choice.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.discount_choice.Location = New System.Drawing.Point(13, 464)
+        Me.discount_choice.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.discount_choice.Name = "discount_choice"
-        Me.discount_choice.Size = New System.Drawing.Size(140, 36)
+        Me.discount_choice.Size = New System.Drawing.Size(134, 36)
         Me.discount_choice.TabIndex = 26
         '
         'paymenttxtbox
         '
         Me.paymenttxtbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.paymenttxtbox.Location = New System.Drawing.Point(267, 560)
-        Me.paymenttxtbox.Margin = New System.Windows.Forms.Padding(4)
-        Me.paymenttxtbox.MaxLength = 5
+        Me.paymenttxtbox.Location = New System.Drawing.Point(200, 455)
+        Me.paymenttxtbox.MaxLength = 10
         Me.paymenttxtbox.Name = "paymenttxtbox"
-        Me.paymenttxtbox.Size = New System.Drawing.Size(147, 34)
+        Me.paymenttxtbox.Size = New System.Drawing.Size(111, 29)
         Me.paymenttxtbox.TabIndex = 24
         '
         'lbltotal
         '
         Me.lbltotal.BackColor = System.Drawing.Color.Transparent
         Me.lbltotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbltotal.Location = New System.Drawing.Point(356, 528)
-        Me.lbltotal.Margin = New System.Windows.Forms.Padding(4)
+        Me.lbltotal.Location = New System.Drawing.Point(267, 429)
         Me.lbltotal.Name = "lbltotal"
-        Me.lbltotal.Size = New System.Drawing.Size(36, 26)
+        Me.lbltotal.Size = New System.Drawing.Size(30, 20)
         Me.lbltotal.TabIndex = 19
         Me.lbltotal.Text = "000"
         Me.lbltotal.TextAlignment = System.Drawing.ContentAlignment.MiddleRight
@@ -341,8 +337,7 @@ Partial Class CASHIER
         DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.OrdersDataGridView.DefaultCellStyle = DataGridViewCellStyle6
-        Me.OrdersDataGridView.Location = New System.Drawing.Point(16, 76)
-        Me.OrdersDataGridView.Margin = New System.Windows.Forms.Padding(4)
+        Me.OrdersDataGridView.Location = New System.Drawing.Point(12, 62)
         Me.OrdersDataGridView.Name = "OrdersDataGridView"
         Me.OrdersDataGridView.ReadOnly = True
         Me.OrdersDataGridView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
@@ -356,7 +351,7 @@ Partial Class CASHIER
         Me.OrdersDataGridView.RowHeadersDefaultCellStyle = DataGridViewCellStyle7
         Me.OrdersDataGridView.RowHeadersVisible = False
         Me.OrdersDataGridView.RowHeadersWidth = 51
-        Me.OrdersDataGridView.Size = New System.Drawing.Size(439, 444)
+        Me.OrdersDataGridView.Size = New System.Drawing.Size(329, 361)
         Me.OrdersDataGridView.TabIndex = 9
         '
         'DataGridViewTextBoxColumn1
@@ -447,10 +442,10 @@ Partial Class CASHIER
         Me.checkoutbtn.HoverState.BorderColor = System.Drawing.Color.Transparent
         Me.checkoutbtn.HoverState.FillColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.checkoutbtn.HoverState.ForeColor = System.Drawing.Color.White
-        Me.checkoutbtn.Location = New System.Drawing.Point(132, 690)
-        Me.checkoutbtn.Margin = New System.Windows.Forms.Padding(27, 25, 27, 25)
+        Me.checkoutbtn.Location = New System.Drawing.Point(99, 561)
+        Me.checkoutbtn.Margin = New System.Windows.Forms.Padding(20, 20, 20, 20)
         Me.checkoutbtn.Name = "checkoutbtn"
-        Me.checkoutbtn.Size = New System.Drawing.Size(204, 63)
+        Me.checkoutbtn.Size = New System.Drawing.Size(153, 51)
         Me.checkoutbtn.TabIndex = 17
         Me.checkoutbtn.Text = "check out"
         Me.checkoutbtn.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias
@@ -462,10 +457,9 @@ Partial Class CASHIER
         Me.Guna2ControlBox1.FillColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.Guna2ControlBox1.HoverState.FillColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.Guna2ControlBox1.IconColor = System.Drawing.Color.Black
-        Me.Guna2ControlBox1.Location = New System.Drawing.Point(1362, 4)
-        Me.Guna2ControlBox1.Margin = New System.Windows.Forms.Padding(4)
+        Me.Guna2ControlBox1.Location = New System.Drawing.Point(1021, 0)
         Me.Guna2ControlBox1.Name = "Guna2ControlBox1"
-        Me.Guna2ControlBox1.Size = New System.Drawing.Size(53, 49)
+        Me.Guna2ControlBox1.Size = New System.Drawing.Size(40, 40)
         Me.Guna2ControlBox1.TabIndex = 11
         '
         'Guna2Panel1
@@ -475,19 +469,19 @@ Partial Class CASHIER
         Me.Guna2Panel1.Controls.Add(Me.Guna2ControlBox2)
         Me.Guna2Panel1.Controls.Add(Me.Guna2ControlBox1)
         Me.Guna2Panel1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Guna2Panel1.Location = New System.Drawing.Point(253, 0)
-        Me.Guna2Panel1.Margin = New System.Windows.Forms.Padding(4)
+        Me.Guna2Panel1.Location = New System.Drawing.Point(190, 0)
         Me.Guna2Panel1.Name = "Guna2Panel1"
-        Me.Guna2Panel1.Size = New System.Drawing.Size(1415, 58)
+        Me.Guna2Panel1.Size = New System.Drawing.Size(1061, 47)
         Me.Guna2Panel1.TabIndex = 12
         '
         'Label3
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("ITC Kabel", 22.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(12, 4)
+        Me.Label3.Location = New System.Drawing.Point(9, 3)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(118, 44)
+        Me.Label3.Size = New System.Drawing.Size(95, 36)
         Me.Label3.TabIndex = 27
         Me.Label3.Text = "MENU"
         '
@@ -499,10 +493,9 @@ Partial Class CASHIER
         Me.Guna2ControlBox2.FillColor = System.Drawing.Color.FromArgb(CType(CType(253, Byte), Integer), CType(CType(246, Byte), Integer), CType(CType(227, Byte), Integer))
         Me.Guna2ControlBox2.HoverState.FillColor = System.Drawing.Color.Silver
         Me.Guna2ControlBox2.IconColor = System.Drawing.Color.Black
-        Me.Guna2ControlBox2.Location = New System.Drawing.Point(1307, 4)
-        Me.Guna2ControlBox2.Margin = New System.Windows.Forms.Padding(4)
+        Me.Guna2ControlBox2.Location = New System.Drawing.Point(981, 1)
         Me.Guna2ControlBox2.Name = "Guna2ControlBox2"
-        Me.Guna2ControlBox2.Size = New System.Drawing.Size(53, 49)
+        Me.Guna2ControlBox2.Size = New System.Drawing.Size(40, 40)
         Me.Guna2ControlBox2.TabIndex = 12
         '
         'Panel4
@@ -514,28 +507,29 @@ Partial Class CASHIER
         Me.Panel4.Controls.Add(Me.panel3)
         Me.Panel4.Controls.Add(Me.Panel1)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel4.Location = New System.Drawing.Point(253, 58)
-        Me.Panel4.Margin = New System.Windows.Forms.Padding(4)
+        Me.Panel4.Location = New System.Drawing.Point(190, 47)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(1415, 850)
+        Me.Panel4.Size = New System.Drawing.Size(1061, 691)
         Me.Panel4.TabIndex = 13
         '
         'FlowLayoutPanel3
         '
         Me.FlowLayoutPanel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.FlowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.FlowLayoutPanel3.Location = New System.Drawing.Point(0, 690)
+        Me.FlowLayoutPanel3.Location = New System.Drawing.Point(0, 561)
+        Me.FlowLayoutPanel3.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.FlowLayoutPanel3.Name = "FlowLayoutPanel3"
-        Me.FlowLayoutPanel3.Size = New System.Drawing.Size(944, 160)
+        Me.FlowLayoutPanel3.Size = New System.Drawing.Size(708, 130)
         Me.FlowLayoutPanel3.TabIndex = 27
         '
         'Label2
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("ITC Kabel", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(13, 9)
+        Me.Label2.Location = New System.Drawing.Point(10, 7)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(131, 40)
+        Me.Label2.Size = New System.Drawing.Size(107, 32)
         Me.Label2.TabIndex = 26
         Me.Label2.Text = "SEARCH"
         '
@@ -543,10 +537,9 @@ Partial Class CASHIER
         '
         Me.TextBoxSearch.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.TextBoxSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBoxSearch.Location = New System.Drawing.Point(210, 15)
-        Me.TextBoxSearch.Margin = New System.Windows.Forms.Padding(4)
+        Me.TextBoxSearch.Location = New System.Drawing.Point(158, 12)
         Me.TextBoxSearch.Name = "TextBoxSearch"
-        Me.TextBoxSearch.Size = New System.Drawing.Size(359, 34)
+        Me.TextBoxSearch.Size = New System.Drawing.Size(270, 29)
         Me.TextBoxSearch.TabIndex = 25
         '
         'panel3
@@ -556,10 +549,9 @@ Partial Class CASHIER
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.panel3.BackColor = System.Drawing.Color.SeaShell
         Me.panel3.Controls.Add(Me.FlowLayoutPanel1)
-        Me.panel3.Location = New System.Drawing.Point(20, 139)
-        Me.panel3.Margin = New System.Windows.Forms.Padding(4)
+        Me.panel3.Location = New System.Drawing.Point(15, 113)
         Me.panel3.Name = "panel3"
-        Me.panel3.Size = New System.Drawing.Size(895, 527)
+        Me.panel3.Size = New System.Drawing.Size(671, 428)
         Me.panel3.TabIndex = 11
         '
         'FlowLayoutPanel1
@@ -568,9 +560,8 @@ Partial Class CASHIER
         Me.FlowLayoutPanel1.BackColor = System.Drawing.Color.White
         Me.FlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.FlowLayoutPanel1.Location = New System.Drawing.Point(0, 0)
-        Me.FlowLayoutPanel1.Margin = New System.Windows.Forms.Padding(4)
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(895, 527)
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(671, 428)
         Me.FlowLayoutPanel1.TabIndex = 0
         '
         'OrdersTableAdapter
@@ -594,15 +585,14 @@ Partial Class CASHIER
         '
         'CASHIER
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1668, 908)
+        Me.ClientSize = New System.Drawing.Size(1251, 738)
         Me.Controls.Add(Me.Panel4)
         Me.Controls.Add(Me.Guna2Panel1)
         Me.Controls.Add(Me.Panel2)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "CASHIER"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "CASHIER"

@@ -58,6 +58,8 @@ Public Class CASHIER
         countingproducts()
         GenerateProductButtons()
 
+
+        discount_choice.Text = "NONE"
     End Sub
 
 
@@ -525,9 +527,6 @@ Public Class CASHIER
 
 
 
-
-
-
             Dim totalItemCount As Integer = 0
 
             For Each row As DataGridViewRow In OrdersDataGridView.Rows
@@ -537,9 +536,12 @@ Public Class CASHIER
             Next
 
             Dim transactionId As Integer
-            Dim insertTransactionQuery As String = "INSERT INTO Transactions (TransactionDate, TotalAmount, PaymentAmount, ChangeGiven, Total_Item, Profit) 
-                                      OUTPUT INSERTED.TransactionID 
-                                      VALUES (@TransactionDate, @TotalAmount, @PaymentAmount, @ChangeGiven, @Total_Item, @Profit)"
+            Dim insertTransactionQuery As String = "
+INSERT INTO Transactions (TransactionDate, TotalAmount, PaymentAmount, ChangeGiven, Total_Item, Profit, Discount) 
+OUTPUT INSERTED.TransactionID 
+VALUES (@TransactionDate, @TotalAmount, @PaymentAmount, @ChangeGiven, @Total_Item, @Profit, @Discount)"
+
+
 
             Using transactionCmd As New SqlCommand(insertTransactionQuery, con)
                 transactionCmd.Parameters.AddWithValue("@TransactionDate", DateTime.Now)
@@ -548,6 +550,9 @@ Public Class CASHIER
                 transactionCmd.Parameters.AddWithValue("@ChangeGiven", changeAmount)
                 transactionCmd.Parameters.AddWithValue("@Total_Item", totalItemCount)
                 transactionCmd.Parameters.AddWithValue("@Profit", totalProfitForReport)
+
+                Dim discountText As String = discount_choice.Text
+                transactionCmd.Parameters.AddWithValue("@Discount", discountText)
 
                 If con.State = ConnectionState.Closed Then con.Open()
                 transactionId = Convert.ToInt32(transactionCmd.ExecuteScalar())
@@ -629,6 +634,7 @@ Public Class CASHIER
 
         UpdateTotalSum(Me, EventArgs.Empty)
         OrdersDataGridView.ClearSelection()
+        discount_choice.Text = "NONE"
     End Sub
 
     Private Sub UpdateTotalSum(sender As Object, e As EventArgs)
@@ -993,7 +999,23 @@ Public Class CASHIER
 
 
     Private Sub paymenttxtbox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles paymenttxtbox.KeyPress
-        If Not Char.IsControl(e.KeyChar) AndAlso Not Char.IsDigit(e.KeyChar) Then
+        OnlyAllowDecimalInput(sender, e)
+    End Sub
+    Public Sub OnlyAllowDecimalInput(sender As Object, e As KeyPressEventArgs)
+        Dim tb As TextBox = CType(sender, TextBox)
+
+        ' Allow digits, backspace, and one dot (.)
+        If Not Char.IsControl(e.KeyChar) AndAlso Not Char.IsDigit(e.KeyChar) AndAlso e.KeyChar <> "."c Then
+            e.Handled = True ' Block anything else
+        End If
+
+        ' Only allow one dot
+        If e.KeyChar = "."c AndAlso tb.Text.Contains(".") Then
+            e.Handled = True
+        End If
+
+        ' Prevent starting with a dot (.)
+        If tb.SelectionStart = 0 AndAlso e.KeyChar = "."c Then
             e.Handled = True
         End If
     End Sub
@@ -1006,9 +1028,6 @@ Public Class CASHIER
         End If
     End Sub
 
-    Private Sub lbltotal_Click(sender As Object, e As EventArgs) Handles lbltotal.Click
-
-    End Sub
 
     Private Sub Guna2ControlBox1_Click(sender As Object, e As EventArgs) Handles Guna2ControlBox1.Click
         LOGIN_PAGE.ResetLoginPage()
