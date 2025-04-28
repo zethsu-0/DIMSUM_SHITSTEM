@@ -742,6 +742,7 @@ VALUES (@TransactionDate, @TotalAmount, @PaymentAmount, @ChangeGiven, @Total_Ite
 
 
             Dim receiptForm As New RECEIPT()
+            receiptForm.user_id = Me.user_id
             receiptForm.LoadReport(paymentAmount, changeAmount)
             receiptForm.ShowDialog()
 
