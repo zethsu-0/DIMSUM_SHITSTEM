@@ -154,6 +154,65 @@ Public Class SALES_TAB
         Finally
             con.Close()
         End Try
+
+
+        Opencon()
+        Dim cmd3 As New SqlCommand("SELECT Year, Profit, Sales_Total FROM YearlySales", con)
+        Dim reader3 As SqlDataReader
+
+        Chart3.Series.Clear()
+        Chart3.Legends.Clear()
+
+        Dim yearlyProfitSeries As New Series("Yearly Profit")
+        Dim yearlySalesSeries As New Series("Yearly Sales")
+
+        yearlyProfitSeries.ChartType = SeriesChartType.Column
+        yearlySalesSeries.ChartType = SeriesChartType.Column
+        yearlyProfitSeries.Color = Color.Black
+        yearlySalesSeries.Color = Color.Yellow
+        yearlyProfitSeries.IsValueShownAsLabel = True
+        yearlySalesSeries.IsValueShownAsLabel = True
+
+        Try
+            reader3 = cmd3.ExecuteReader()
+            While reader3.Read()
+                Dim month = reader3("Year").ToString()
+                Dim profit = If(IsDBNull(reader3("Profit")), 0D, Convert.ToDecimal(reader3("Profit"))) ' Handle Null profit
+                Dim sales = If(IsDBNull(reader3("Sales_Total")), 0D, Convert.ToDecimal(reader3("Sales_Total"))) ' Handle Null sales
+
+                If String.IsNullOrEmpty(month) Then
+                    month = "Unknown"
+                End If
+
+                If user_Role <> "Manager" Then
+                    yearlyProfitSeries.Points.AddXY(month, profit)
+                End If
+                yearlySalesSeries.Points.AddXY(month, sales)
+            End While
+
+            Chart3.Series.Add(yearlyProfitSeries)
+            Chart3.Series.Add(yearlySalesSeries)
+
+            Chart3.Legends.Add("Legend3")
+            Chart3.Legends(0).Docking = Docking.Top
+            Chart3.Legends(0).Font = New Font("Arial", 9, FontStyle.Bold)
+            Chart3.ChartAreas(0).Area3DStyle.Enable3D = False
+            Chart3.ChartAreas(0).AxisX.MajorGrid.Enabled = False
+
+            yearlyProfitSeries.BorderWidth = 1
+            yearlySalesSeries.BorderWidth = 1
+
+            yearlyProfitSeries("PointWidth") = "0.2"
+            yearlySalesSeries("PointWidth") = "0.2"
+            With Chart3.ChartAreas(0).AxisY.MajorGrid
+                .LineColor = Color.LightGray
+                .LineDashStyle = ChartDashStyle.Dot
+            End With
+        Catch ex As Exception
+            MessageBox.Show("Error loading YearlySales: " & ex.Message)
+        Finally
+            con.Close()
+        End Try
     End Sub
     Public Sub dailytotalearn()
         Dim dailyProfit As Decimal = 0
@@ -242,10 +301,14 @@ Public Class SALES_TAB
         resetdatas()
     End Sub
     Private Sub resetdatas()
+
+        profitlbl.Text = "0.00"
+        salesTotallbl.Text = "0.00"
         Dim deleteQuery As String = "
     DELETE FROM DailySales;
     DELETE FROM WeeklySales;
     DELETE FROM MonthlySales;
+    DELETE FROM Yearlysales;
     DELETE FROM DailySummary;
     DELETE FROM Transactions;"
 

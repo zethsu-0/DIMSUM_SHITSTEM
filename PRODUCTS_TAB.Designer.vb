@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class PRODUCTS_TAB
     Inherits System.Windows.Forms.UserControl
 
     'UserControl overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,33 +20,16 @@ Partial Class PRODUCTS_TAB
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PRODUCTS_TAB))
-        Me.STOCKSDataGridView = New System.Windows.Forms.DataGridView()
-        Me.Product_image = New System.Windows.Forms.DataGridViewImageColumn()
-        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewImageColumn1 = New System.Windows.Forms.DataGridViewImageColumn()
-        Me.STOCKSBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.SHITSTEMDataSet = New DIMSUM_SHITSTEM.SHITSTEMDataSet()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.RadioButton2 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.TextBox5 = New System.Windows.Forms.TextBox()
@@ -59,157 +42,43 @@ Partial Class PRODUCTS_TAB
         Me.TextBox8 = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.STOCKSTableAdapter = New DIMSUM_SHITSTEM.SHITSTEMDataSetTableAdapters.STOCKSTableAdapter()
-        Me.TableAdapterManager = New DIMSUM_SHITSTEM.SHITSTEMDataSetTableAdapters.TableAdapterManager()
         Me.Guna2TabControl1 = New Guna.UI2.WinForms.Guna2TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.STOCKSDataGridView = New System.Windows.Forms.DataGridView()
+        Me.STOCKSBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.SHITSTEMDataSet = New DIMSUM_SHITSTEM.SHITSTEMDataSet()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
         Me.TextBox3 = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Guna2Button1 = New Guna.UI2.WinForms.Guna2Button()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.STOCKSTableAdapter = New DIMSUM_SHITSTEM.SHITSTEMDataSetTableAdapters.STOCKSTableAdapter()
+        Me.TableAdapterManager = New DIMSUM_SHITSTEM.SHITSTEMDataSetTableAdapters.TableAdapterManager()
+        Me.DataGridViewImageColumn2 = New System.Windows.Forms.DataGridViewImageColumn()
+        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewImageColumn1 = New System.Windows.Forms.DataGridViewImageColumn()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Guna2TabControl1.SuspendLayout()
+        Me.TabPage1.SuspendLayout()
         CType(Me.STOCKSDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.STOCKSBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SHITSTEMDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox1.SuspendLayout()
-        Me.Guna2TabControl1.SuspendLayout()
-        Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'STOCKSDataGridView
-        '
-        Me.STOCKSDataGridView.AutoGenerateColumns = False
-        Me.STOCKSDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.STOCKSDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
-        Me.STOCKSDataGridView.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.STOCKSDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.STOCKSDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Product_image, Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6, Me.DataGridViewImageColumn1})
-        Me.STOCKSDataGridView.DataSource = Me.STOCKSBindingSource
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("ITC Kabel", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.STOCKSDataGridView.DefaultCellStyle = DataGridViewCellStyle2
-        Me.STOCKSDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.STOCKSDataGridView.Location = New System.Drawing.Point(4, 4)
-        Me.STOCKSDataGridView.Margin = New System.Windows.Forms.Padding(4)
-        Me.STOCKSDataGridView.Name = "STOCKSDataGridView"
-        Me.STOCKSDataGridView.RowHeadersVisible = False
-        Me.STOCKSDataGridView.RowHeadersWidth = 51
-        Me.STOCKSDataGridView.Size = New System.Drawing.Size(1405, 696)
-        Me.STOCKSDataGridView.TabIndex = 0
-        '
-        'Product_image
-        '
-        Me.Product_image.DataPropertyName = "Product_image"
-        Me.Product_image.HeaderText = "Product_image"
-        Me.Product_image.MinimumWidth = 6
-        Me.Product_image.Name = "Product_image"
-        '
-        'DataGridViewTextBoxColumn1
-        '
-        Me.DataGridViewTextBoxColumn1.DataPropertyName = "item_no"
-        Me.DataGridViewTextBoxColumn1.HeaderText = "item_no"
-        Me.DataGridViewTextBoxColumn1.MinimumWidth = 6
-        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
-        '
-        'DataGridViewTextBoxColumn2
-        '
-        Me.DataGridViewTextBoxColumn2.DataPropertyName = "product_name"
-        Me.DataGridViewTextBoxColumn2.HeaderText = "product_name"
-        Me.DataGridViewTextBoxColumn2.MinimumWidth = 6
-        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
-        '
-        'DataGridViewTextBoxColumn3
-        '
-        Me.DataGridViewTextBoxColumn3.DataPropertyName = "product_group"
-        Me.DataGridViewTextBoxColumn3.HeaderText = "product_group"
-        Me.DataGridViewTextBoxColumn3.MinimumWidth = 6
-        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
-        '
-        'DataGridViewTextBoxColumn4
-        '
-        Me.DataGridViewTextBoxColumn4.DataPropertyName = "Quantity"
-        Me.DataGridViewTextBoxColumn4.HeaderText = "Quantity"
-        Me.DataGridViewTextBoxColumn4.MinimumWidth = 6
-        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
-        '
-        'DataGridViewTextBoxColumn5
-        '
-        Me.DataGridViewTextBoxColumn5.DataPropertyName = "price"
-        Me.DataGridViewTextBoxColumn5.HeaderText = "price"
-        Me.DataGridViewTextBoxColumn5.MinimumWidth = 6
-        Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
-        '
-        'DataGridViewTextBoxColumn6
-        '
-        Me.DataGridViewTextBoxColumn6.DataPropertyName = "taxed_price"
-        Me.DataGridViewTextBoxColumn6.HeaderText = "taxed_price"
-        Me.DataGridViewTextBoxColumn6.MinimumWidth = 6
-        Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
-        '
-        'DataGridViewImageColumn1
-        '
-        Me.DataGridViewImageColumn1.DataPropertyName = "barcode"
-        Me.DataGridViewImageColumn1.HeaderText = "barcode"
-        Me.DataGridViewImageColumn1.MinimumWidth = 6
-        Me.DataGridViewImageColumn1.Name = "DataGridViewImageColumn1"
-        '
-        'STOCKSBindingSource
-        '
-        Me.STOCKSBindingSource.DataMember = "STOCKS"
-        Me.STOCKSBindingSource.DataSource = Me.SHITSTEMDataSet
-        '
-        'SHITSTEMDataSet
-        '
-        Me.SHITSTEMDataSet.DataSetName = "SHITSTEMDataSet"
-        Me.SHITSTEMDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'GroupBox1
-        '
-        Me.GroupBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.GroupBox1.Controls.Add(Me.RadioButton2)
-        Me.GroupBox1.Controls.Add(Me.RadioButton1)
-        Me.GroupBox1.Location = New System.Drawing.Point(27, 383)
-        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4)
-        Me.GroupBox1.Size = New System.Drawing.Size(271, 103)
-        Me.GroupBox1.TabIndex = 90
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Tax percent"
-        '
-        'RadioButton2
-        '
-        Me.RadioButton2.AutoSize = True
-        Me.RadioButton2.Location = New System.Drawing.Point(8, 37)
-        Me.RadioButton2.Margin = New System.Windows.Forms.Padding(4)
-        Me.RadioButton2.Name = "RadioButton2"
-        Me.RadioButton2.Size = New System.Drawing.Size(57, 20)
-        Me.RadioButton2.TabIndex = 67
-        Me.RadioButton2.TabStop = True
-        Me.RadioButton2.Text = "none"
-        Me.RadioButton2.UseVisualStyleBackColor = True
-        '
-        'RadioButton1
-        '
-        Me.RadioButton1.AutoSize = True
-        Me.RadioButton1.Location = New System.Drawing.Point(165, 37)
-        Me.RadioButton1.Margin = New System.Windows.Forms.Padding(4)
-        Me.RadioButton1.Name = "RadioButton1"
-        Me.RadioButton1.Size = New System.Drawing.Size(53, 20)
-        Me.RadioButton1.TabIndex = 66
-        Me.RadioButton1.TabStop = True
-        Me.RadioButton1.Text = "12%"
-        Me.RadioButton1.UseVisualStyleBackColor = True
         '
         'ComboBox1
         '
@@ -278,29 +147,6 @@ Partial Class PRODUCTS_TAB
         Me.Label6.Size = New System.Drawing.Size(200, 34)
         Me.Label6.TabIndex = 83
         Me.Label6.Text = "Search Product"
-        '
-        'TextBox1
-        '
-        Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TextBox1.Enabled = False
-        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.TextBox1.Location = New System.Drawing.Point(337, 326)
-        Me.TextBox1.Margin = New System.Windows.Forms.Padding(4)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(134, 30)
-        Me.TextBox1.TabIndex = 82
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Enabled = False
-        Me.Label5.Font = New System.Drawing.Font("ITC Kabel", 16.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(340, 284)
-        Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(88, 34)
-        Me.Label5.TabIndex = 81
-        Me.Label5.Text = "w/ tax"
         '
         'Button4
         '
@@ -413,6 +259,7 @@ Partial Class PRODUCTS_TAB
         Me.TextBox8.Location = New System.Drawing.Point(600, 138)
         Me.TextBox8.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox8.Name = "TextBox8"
+        Me.TextBox8.ReadOnly = True
         Me.TextBox8.Size = New System.Drawing.Size(305, 30)
         Me.TextBox8.TabIndex = 73
         '
@@ -437,25 +284,6 @@ Partial Class PRODUCTS_TAB
         Me.Label4.Size = New System.Drawing.Size(82, 34)
         Me.Label4.TabIndex = 72
         Me.Label4.Text = "Price:"
-        '
-        'STOCKSTableAdapter
-        '
-        Me.STOCKSTableAdapter.ClearBeforeFill = True
-        '
-        'TableAdapterManager
-        '
-        Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
-        Me.TableAdapterManager.DailySalesTableAdapter = Nothing
-        Me.TableAdapterManager.DailySummaryTableAdapter = Nothing
-        Me.TableAdapterManager.loginTableAdapter = Nothing
-        Me.TableAdapterManager.MonthlySalesTableAdapter = Nothing
-        Me.TableAdapterManager.OrdersTableAdapter = Nothing
-        Me.TableAdapterManager.ProductGroupsTableAdapter = Nothing
-        Me.TableAdapterManager.STOCKSTableAdapter = Me.STOCKSTableAdapter
-        Me.TableAdapterManager.TransactionDetailsTableAdapter = Nothing
-        Me.TableAdapterManager.TransactionsTableAdapter = Nothing
-        Me.TableAdapterManager.UpdateOrder = DIMSUM_SHITSTEM.SHITSTEMDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
-        Me.TableAdapterManager.WeeklySalesTableAdapter = Nothing
         '
         'Guna2TabControl1
         '
@@ -492,6 +320,7 @@ Partial Class PRODUCTS_TAB
         'TabPage1
         '
         Me.TabPage1.Controls.Add(Me.STOCKSDataGridView)
+        Me.TabPage1.Controls.Add(Me.Panel2)
         Me.TabPage1.Location = New System.Drawing.Point(4, 104)
         Me.TabPage1.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage1.Name = "TabPage1"
@@ -501,9 +330,63 @@ Partial Class PRODUCTS_TAB
         Me.TabPage1.Text = "PRODUCTS"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
+        'Label5
+        '
+        Me.Label5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("ITC Kabel", 16.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(49, 4)
+        Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(200, 34)
+        Me.Label5.TabIndex = 85
+        Me.Label5.Text = "Search Product"
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.TextBox1.Location = New System.Drawing.Point(257, 4)
+        Me.TextBox1.Margin = New System.Windows.Forms.Padding(4)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(305, 30)
+        Me.TextBox1.TabIndex = 86
+        '
+        'STOCKSDataGridView
+        '
+        Me.STOCKSDataGridView.AllowUserToAddRows = False
+        Me.STOCKSDataGridView.AllowUserToDeleteRows = False
+        Me.STOCKSDataGridView.AutoGenerateColumns = False
+        Me.STOCKSDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.STOCKSDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells
+        Me.STOCKSDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.STOCKSDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewImageColumn2, Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn7, Me.DataGridViewTextBoxColumn8, Me.DataGridViewImageColumn1})
+        Me.STOCKSDataGridView.DataSource = Me.STOCKSBindingSource
+        Me.STOCKSDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.STOCKSDataGridView.Location = New System.Drawing.Point(4, 51)
+        Me.STOCKSDataGridView.Name = "STOCKSDataGridView"
+        Me.STOCKSDataGridView.ReadOnly = True
+        Me.STOCKSDataGridView.RowHeadersVisible = False
+        Me.STOCKSDataGridView.RowHeadersWidth = 51
+        Me.STOCKSDataGridView.RowTemplate.Height = 24
+        Me.STOCKSDataGridView.Size = New System.Drawing.Size(1405, 649)
+        Me.STOCKSDataGridView.TabIndex = 0
+        '
+        'STOCKSBindingSource
+        '
+        Me.STOCKSBindingSource.DataMember = "STOCKS"
+        Me.STOCKSBindingSource.DataSource = Me.SHITSTEMDataSet
+        '
+        'SHITSTEMDataSet
+        '
+        Me.SHITSTEMDataSet.DataSetName = "SHITSTEMDataSet"
+        Me.SHITSTEMDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
         'TabPage2
         '
         Me.TabPage2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TabPage2.Controls.Add(Me.DateTimePicker1)
         Me.TabPage2.Controls.Add(Me.TextBox3)
         Me.TabPage2.Controls.Add(Me.Label10)
         Me.TabPage2.Controls.Add(Me.Label9)
@@ -511,10 +394,7 @@ Partial Class PRODUCTS_TAB
         Me.TabPage2.Controls.Add(Me.PictureBox2)
         Me.TabPage2.Controls.Add(Me.ComboBox1)
         Me.TabPage2.Controls.Add(Me.Label8)
-        Me.TabPage2.Controls.Add(Me.GroupBox1)
-        Me.TabPage2.Controls.Add(Me.TextBox1)
         Me.TabPage2.Controls.Add(Me.Button6)
-        Me.TabPage2.Controls.Add(Me.Label5)
         Me.TabPage2.Controls.Add(Me.Label6)
         Me.TabPage2.Controls.Add(Me.TextBox2)
         Me.TabPage2.Controls.Add(Me.PictureBox1)
@@ -538,6 +418,13 @@ Partial Class PRODUCTS_TAB
         Me.TabPage2.Size = New System.Drawing.Size(1413, 704)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "MANAGE PRODUCTS"
+        '
+        'DateTimePicker1
+        '
+        Me.DateTimePicker1.Location = New System.Drawing.Point(26, 503)
+        Me.DateTimePicker1.Name = "DateTimePicker1"
+        Me.DateTimePicker1.Size = New System.Drawing.Size(248, 23)
+        Me.DateTimePicker1.TabIndex = 97
         '
         'TextBox3
         '
@@ -607,6 +494,108 @@ Partial Class PRODUCTS_TAB
         Me.PictureBox1.TabIndex = 86
         Me.PictureBox1.TabStop = False
         '
+        'STOCKSTableAdapter
+        '
+        Me.STOCKSTableAdapter.ClearBeforeFill = True
+        '
+        'TableAdapterManager
+        '
+        Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
+        Me.TableAdapterManager.DailySalesTableAdapter = Nothing
+        Me.TableAdapterManager.DailySummaryTableAdapter = Nothing
+        Me.TableAdapterManager.loginTableAdapter = Nothing
+        Me.TableAdapterManager.MonthlySalesTableAdapter = Nothing
+        Me.TableAdapterManager.OrdersTableAdapter = Nothing
+        Me.TableAdapterManager.ProductGroupsTableAdapter = Nothing
+        Me.TableAdapterManager.STOCKSTableAdapter = Me.STOCKSTableAdapter
+        Me.TableAdapterManager.TransactionDetailsTableAdapter = Nothing
+        Me.TableAdapterManager.TransactionsTableAdapter = Nothing
+        Me.TableAdapterManager.UpdateOrder = DIMSUM_SHITSTEM.SHITSTEMDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
+        Me.TableAdapterManager.WeeklySalesTableAdapter = Nothing
+        Me.TableAdapterManager.YearlySalesTableAdapter = Nothing
+        '
+        'DataGridViewImageColumn2
+        '
+        Me.DataGridViewImageColumn2.DataPropertyName = "Product_image"
+        Me.DataGridViewImageColumn2.HeaderText = "Product_image"
+        Me.DataGridViewImageColumn2.MinimumWidth = 6
+        Me.DataGridViewImageColumn2.Name = "DataGridViewImageColumn2"
+        Me.DataGridViewImageColumn2.ReadOnly = True
+        '
+        'DataGridViewTextBoxColumn1
+        '
+        Me.DataGridViewTextBoxColumn1.DataPropertyName = "item_no"
+        Me.DataGridViewTextBoxColumn1.HeaderText = "item_no"
+        Me.DataGridViewTextBoxColumn1.MinimumWidth = 6
+        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+        Me.DataGridViewTextBoxColumn1.ReadOnly = True
+        '
+        'DataGridViewTextBoxColumn2
+        '
+        Me.DataGridViewTextBoxColumn2.DataPropertyName = "product_name"
+        Me.DataGridViewTextBoxColumn2.HeaderText = "product_name"
+        Me.DataGridViewTextBoxColumn2.MinimumWidth = 6
+        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+        Me.DataGridViewTextBoxColumn2.ReadOnly = True
+        '
+        'DataGridViewTextBoxColumn3
+        '
+        Me.DataGridViewTextBoxColumn3.DataPropertyName = "product_group"
+        Me.DataGridViewTextBoxColumn3.HeaderText = "product_group"
+        Me.DataGridViewTextBoxColumn3.MinimumWidth = 6
+        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
+        Me.DataGridViewTextBoxColumn3.ReadOnly = True
+        '
+        'DataGridViewTextBoxColumn4
+        '
+        Me.DataGridViewTextBoxColumn4.DataPropertyName = "Quantity"
+        Me.DataGridViewTextBoxColumn4.HeaderText = "Quantity"
+        Me.DataGridViewTextBoxColumn4.MinimumWidth = 6
+        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
+        Me.DataGridViewTextBoxColumn4.ReadOnly = True
+        '
+        'DataGridViewTextBoxColumn5
+        '
+        Me.DataGridViewTextBoxColumn5.DataPropertyName = "price"
+        Me.DataGridViewTextBoxColumn5.HeaderText = "price"
+        Me.DataGridViewTextBoxColumn5.MinimumWidth = 6
+        Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
+        Me.DataGridViewTextBoxColumn5.ReadOnly = True
+        '
+        'DataGridViewTextBoxColumn7
+        '
+        Me.DataGridViewTextBoxColumn7.DataPropertyName = "Cost"
+        Me.DataGridViewTextBoxColumn7.HeaderText = "Cost"
+        Me.DataGridViewTextBoxColumn7.MinimumWidth = 6
+        Me.DataGridViewTextBoxColumn7.Name = "DataGridViewTextBoxColumn7"
+        Me.DataGridViewTextBoxColumn7.ReadOnly = True
+        '
+        'DataGridViewTextBoxColumn8
+        '
+        Me.DataGridViewTextBoxColumn8.DataPropertyName = "ExpDate"
+        Me.DataGridViewTextBoxColumn8.HeaderText = "ExpDate"
+        Me.DataGridViewTextBoxColumn8.MinimumWidth = 6
+        Me.DataGridViewTextBoxColumn8.Name = "DataGridViewTextBoxColumn8"
+        Me.DataGridViewTextBoxColumn8.ReadOnly = True
+        '
+        'DataGridViewImageColumn1
+        '
+        Me.DataGridViewImageColumn1.DataPropertyName = "barcode"
+        Me.DataGridViewImageColumn1.HeaderText = "barcode"
+        Me.DataGridViewImageColumn1.MinimumWidth = 6
+        Me.DataGridViewImageColumn1.Name = "DataGridViewImageColumn1"
+        Me.DataGridViewImageColumn1.ReadOnly = True
+        '
+        'Panel2
+        '
+        Me.Panel2.Controls.Add(Me.TextBox1)
+        Me.Panel2.Controls.Add(Me.Label5)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel2.Location = New System.Drawing.Point(4, 4)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(1405, 47)
+        Me.Panel2.TabIndex = 88
+        '
         'PRODUCTS_TAB
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -615,17 +604,17 @@ Partial Class PRODUCTS_TAB
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "PRODUCTS_TAB"
         Me.Size = New System.Drawing.Size(1421, 812)
+        Me.Guna2TabControl1.ResumeLayout(False)
+        Me.TabPage1.ResumeLayout(False)
         CType(Me.STOCKSDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.STOCKSBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SHITSTEMDataSet, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
-        Me.Guna2TabControl1.ResumeLayout(False)
-        Me.TabPage1.ResumeLayout(False)
         Me.TabPage2.ResumeLayout(False)
         Me.TabPage2.PerformLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -633,10 +622,6 @@ Partial Class PRODUCTS_TAB
     Friend WithEvents STOCKSBindingSource As BindingSource
     Friend WithEvents STOCKSTableAdapter As SHITSTEMDataSetTableAdapters.STOCKSTableAdapter
     Friend WithEvents TableAdapterManager As SHITSTEMDataSetTableAdapters.TableAdapterManager
-    Friend WithEvents STOCKSDataGridView As DataGridView
-    Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents RadioButton2 As RadioButton
-    Friend WithEvents RadioButton1 As RadioButton
     Friend WithEvents ComboBox1 As ComboBox
     Friend WithEvents Label8 As Label
     Friend WithEvents Button6 As Button
@@ -644,8 +629,6 @@ Partial Class PRODUCTS_TAB
     Friend WithEvents Label7 As Label
     Friend WithEvents TextBox2 As TextBox
     Friend WithEvents Label6 As Label
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents Label5 As Label
     Friend WithEvents Button4 As Button
     Friend WithEvents Button1 As Button
     Friend WithEvents TextBox5 As TextBox
@@ -666,12 +649,18 @@ Partial Class PRODUCTS_TAB
     Friend WithEvents Label9 As Label
     Friend WithEvents TextBox3 As TextBox
     Friend WithEvents Label10 As Label
-    Friend WithEvents Product_image As DataGridViewImageColumn
+    Friend WithEvents DateTimePicker1 As DateTimePicker
+    Friend WithEvents STOCKSDataGridView As DataGridView
+    Friend WithEvents Label5 As Label
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents DataGridViewImageColumn2 As DataGridViewImageColumn
     Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn4 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn5 As DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn6 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn7 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn8 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewImageColumn1 As DataGridViewImageColumn
+    Friend WithEvents Panel2 As Panel
 End Class
