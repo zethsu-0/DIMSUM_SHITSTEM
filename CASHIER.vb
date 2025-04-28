@@ -12,6 +12,10 @@ Public Class CASHIER
     Public Property user_Role As String
     Public Property user_id As String
 
+    Private singleClickTimer As New Timer()
+    Private clickedButtonForSingleClick As Guna2Button
+    Private clickCancelled As Boolean = False
+
     Private Sub CASHIER_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If con IsNot Nothing AndAlso con.State = ConnectionState.Open Then con.Close()
         Opencon()
@@ -58,6 +62,8 @@ Public Class CASHIER
         AddHandler OrdersDataGridView.RowsRemoved, AddressOf UpdateTotalSum
         AddHandler OrdersDataGridView.RowsAdded, AddressOf UpdateTotalSum
 
+        AddHandler singleClickTimer.Tick, AddressOf SingleClickTimer_Tick
+        singleClickTimer.Interval = SystemInformation.DoubleClickTime
 
         ResetRevenueIfNewDay()
         countingproducts()
@@ -67,66 +73,66 @@ Public Class CASHIER
     End Sub
 
     Private Sub ResetRevenueIfNewDay()
-        ' Try
-        Opencon()
-        Dim todayDate As Date = Date.Today
+        Try
+            Opencon()
+            Dim todayDate As Date = Date.Today
 
-        Dim selectQuery As String = "
+            Dim selectQuery As String = "
             SELECT user_id, revenue, dateofremittance, firstname, lastname
             FROM login
             WHERE role IN ('Owner','Manager','Employee')
         "
-        Dim usersToReset As New List(Of (userId As String, revenue As Decimal, firstName As String, lastName As String))
+            Dim usersToReset As New List(Of (userId As String, revenue As Decimal, firstName As String, lastName As String))
 
-        Using cmd As New SqlCommand(selectQuery, con)
-            Using reader As SqlDataReader = cmd.ExecuteReader()
-                While reader.Read()
-                    Dim userId = reader("user_id").ToString()
-                    Dim revenueAmt = If(reader.IsDBNull(reader.GetOrdinal("revenue")), 0D, Convert.ToDecimal(reader("revenue")))
-                    Dim lastResetVal = reader("dateofremittance")
-                    Dim lastReset As Date? = If(lastResetVal Is DBNull.Value, CType(Nothing, Date?), CType(lastResetVal, Date))
-                    If (Not lastReset.HasValue OrElse lastReset.Value.Date <> todayDate) AndAlso revenueAmt > 0 Then
-                        usersToReset.Add((userId, revenueAmt, reader("firstname").ToString(), reader("lastname").ToString()))
-                    End If
-                End While
+            Using cmd As New SqlCommand(selectQuery, con)
+                Using reader As SqlDataReader = cmd.ExecuteReader()
+                    While reader.Read()
+                        Dim userId = reader("user_id").ToString()
+                        Dim revenueAmt = If(reader.IsDBNull(reader.GetOrdinal("revenue")), 0D, Convert.ToDecimal(reader("revenue")))
+                        Dim lastResetVal = reader("dateofremittance")
+                        Dim lastReset As Date? = If(lastResetVal Is DBNull.Value, CType(Nothing, Date?), CType(lastResetVal, Date))
+                        If (Not lastReset.HasValue OrElse lastReset.Value.Date <> todayDate) AndAlso revenueAmt > 0 Then
+                            usersToReset.Add((userId, revenueAmt, reader("firstname").ToString(), reader("lastname").ToString()))
+                        End If
+                    End While
+                End Using
             End Using
-        End Using
 
-        ' 2) Now reader is closed, do inserts & updates
-        For Each u In usersToReset
-            ' Insert into remittancehistory
-            Using insertCmd As New SqlCommand("
+            ' 2) Now reader is closed, do inserts & updates
+            For Each u In usersToReset
+                ' Insert into remittancehistory
+                Using insertCmd As New SqlCommand("
                 INSERT INTO remittancehistory
                   (User_id, revenue, date, firstname, lastname)
                 VALUES
                   (@User_id, @revenue, @date, @firstname, @lastname)
             ", con)
-                insertCmd.Parameters.AddWithValue("@User_id", u.userId)
-                insertCmd.Parameters.AddWithValue("@revenue", u.revenue)
-                insertCmd.Parameters.AddWithValue("@date", todayDate)
-                insertCmd.Parameters.AddWithValue("@firstname", u.firstName)
-                insertCmd.Parameters.AddWithValue("@lastname", u.lastName)
-                insertCmd.ExecuteNonQuery()
-            End Using
+                    insertCmd.Parameters.AddWithValue("@User_id", u.userId)
+                    insertCmd.Parameters.AddWithValue("@revenue", u.revenue)
+                    insertCmd.Parameters.AddWithValue("@date", todayDate)
+                    insertCmd.Parameters.AddWithValue("@firstname", u.firstName)
+                    insertCmd.Parameters.AddWithValue("@lastname", u.lastName)
+                    insertCmd.ExecuteNonQuery()
+                End Using
 
-            ' Reset login.revenue & update dateofremittance
-            Using resetCmd As New SqlCommand("
+                ' Reset login.revenue & update dateofremittance
+                Using resetCmd As New SqlCommand("
                 UPDATE login
                 SET revenue = 0,
                     dateofremittance = @today
                 WHERE user_id = @userID
             ", con)
-                resetCmd.Parameters.AddWithValue("@today", todayDate)
-                resetCmd.Parameters.AddWithValue("@userID", u.userId)
-                resetCmd.ExecuteNonQuery()
-            End Using
-        Next
+                    resetCmd.Parameters.AddWithValue("@today", todayDate)
+                    resetCmd.Parameters.AddWithValue("@userID", u.userId)
+                    resetCmd.ExecuteNonQuery()
+                End Using
+            Next
 
-        ' Catch ex As Exception
-        'MessageBox.Show("Error resetting employee revenues: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        'Finally
-        If con.State = ConnectionState.Open Then con.Close()
-        ' End Try
+        Catch ex As Exception
+            MessageBox.Show("Error resetting employee revenues: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            If con.State = ConnectionState.Open Then con.Close()
+        End Try
     End Sub
 
 
@@ -157,7 +163,7 @@ Public Class CASHIER
         FlowLayoutPanel1.Controls.Clear()
 
         If String.IsNullOrWhiteSpace(groupFilter) Then
-            FlowLayoutPanel3.Controls.Clear() ' Only clear Others if we're reloading everything
+            FlowLayoutPanel3.Controls.Clear()
         End If
 
         Dim query As String = "SELECT Item_no, Product_name, Product_image,Price, product_group FROM STOCKS WHERE 1=1"
@@ -217,6 +223,7 @@ Public Class CASHIER
                         End If
 
                         AddHandler btn.Click, AddressOf DynamicButton_Click
+                        AddHandler btn.DoubleClick, AddressOf DynamicButton_DoubleClick
 
                         If productGroup = "Others" Then
                             If String.IsNullOrWhiteSpace(groupFilter) Then
@@ -244,41 +251,68 @@ Public Class CASHIER
 
 
     Private Sub DynamicButton_Click(sender As Object, e As EventArgs)
+        clickedButtonForSingleClick = DirectCast(sender, Guna2Button)
+        clickCancelled = False
+        singleClickTimer.Start()
+    End Sub
+    Private Sub SingleClickTimer_Tick(sender As Object, e As EventArgs)
+        singleClickTimer.Stop()
+
+        If Not clickCancelled Then
+            ' Perform the single-click action
+            If clickedButtonForSingleClick IsNot Nothing AndAlso clickedButtonForSingleClick.Tag IsNot Nothing Then
+                Dim specificItemNo As String = DirectCast(clickedButtonForSingleClick.Tag, String)
+                Dim productGroup As String = ""
+                Dim quantityToAdd As Integer = 1
+
+                Dim queryGroup As String = "SELECT product_group FROM STOCKS WHERE Item_no = @itemNoParam"
+                Try
+                    Opencon()
+                    Using cmdGroup As New SqlCommand(queryGroup, con)
+                        cmdGroup.Parameters.AddWithValue("@itemNoParam", specificItemNo)
+                        Dim result = cmdGroup.ExecuteScalar()
+                        If result IsNot Nothing AndAlso Not IsDBNull(result) Then
+                            productGroup = result.ToString()
+                        End If
+                    End Using
+                Catch ex As Exception
+                    MessageBox.Show($"Error getting product group: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Finally
+                    If con IsNot Nothing AndAlso con.State = ConnectionState.Open Then con.Close()
+                End Try
+
+                If productGroup.Equals("Siomai", StringComparison.OrdinalIgnoreCase) Then
+                    quantityToAdd = 4
+                Else
+                    quantityToAdd = 1
+                End If
+
+                Me.AddProductToCart(specificItemNo, quantityToAdd)
+            End If
+        End If
+    End Sub
+
+
+    Private Sub DynamicButton_DoubleClick(sender As Object, e As EventArgs)
+        clickCancelled = True
+        singleClickTimer.Stop()
 
         Dim clickedButton As Guna2Button = DirectCast(sender, Guna2Button)
 
         If clickedButton.Tag IsNot Nothing AndAlso TypeOf clickedButton.Tag Is String Then
             Dim specificItemNo As String = DirectCast(clickedButton.Tag, String)
-            Dim productGroup As String = ""
-            Dim quantityToAdd As Integer = 1
 
-            Dim queryGroup As String = "SELECT product_group FROM STOCKS WHERE Item_no = @itemNoParam"
-            Try
-                Opencon()
-                Using cmdGroup As New SqlCommand(queryGroup, con)
-                    cmdGroup.Parameters.AddWithValue("@itemNoParam", specificItemNo)
-                    Dim result = cmdGroup.ExecuteScalar()
-                    If result IsNot Nothing AndAlso Not IsDBNull(result) Then
-                        productGroup = result.ToString()
+            Using customForm As New custommultiplier()
+                If customForm.ShowDialog() = DialogResult.OK Then
+                    Dim quantityToAdd As Integer = customForm.CustomQuantity
+
+                    If quantityToAdd > 0 Then
+                        Me.AddProductToCart(specificItemNo, quantityToAdd)
+                    Else
+                        MessageBox.Show("Please enter a quantity greater than zero.")
                     End If
-                End Using
-            Catch ex As Exception
-                MessageBox.Show($"Error getting product group: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-
-            Finally
-                If con IsNot Nothing AndAlso con.State = ConnectionState.Open Then con.Close()
-            End Try
-
-
-            If productGroup.Equals("Siomai", StringComparison.OrdinalIgnoreCase) Then
-                quantityToAdd = 4
-            Else
-                quantityToAdd = 1
-            End If
-
-
-            Me.AddProductToCart(specificItemNo, quantityToAdd)
-
+                End If
+            End Using
         Else
             MessageBox.Show("Error: Button is missing associated product data (Item No).", "Button Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
