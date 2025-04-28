@@ -502,8 +502,6 @@ Public Class CASHIER
                 End If
             End Using
 
-
-
             ' === INSERT or UPDATE for the current month ===
             Dim monthlyUpsertQuery As String = "
     IF EXISTS (SELECT 1 FROM MonthlySales WHERE Month = @Month)
@@ -566,6 +564,10 @@ Public Class CASHIER
             Finally
                 If con.State = ConnectionState.Open Then con.Close()
             End Try
+
+
+
+
 
 
 
@@ -1088,11 +1090,5 @@ JOIN STOCKS S ON O.Item_No = S.Item_No
             lbltotal.Text = "₱0.00"
 
         End If
-    End Sub
-
-
-    Private Sub Guna2ControlBox1_Click(sender As Object, e As EventArgs) Handles Guna2ControlBox1.Click
-        LOGIN_PAGE.ResetLoginPage()
-
     End Sub
 End Class
