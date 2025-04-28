@@ -23,25 +23,25 @@ Partial Class SALES_TAB
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle31 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle32 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle33 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle34 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle35 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle36 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle37 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle38 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle39 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim ChartArea10 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Series10 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim Title10 As System.Windows.Forms.DataVisualization.Charting.Title = New System.Windows.Forms.DataVisualization.Charting.Title()
-        Dim ChartArea11 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Series11 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim Title11 As System.Windows.Forms.DataVisualization.Charting.Title = New System.Windows.Forms.DataVisualization.Charting.Title()
-        Dim DataGridViewCellStyle40 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim ChartArea12 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Series12 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim Title12 As System.Windows.Forms.DataVisualization.Charting.Title = New System.Windows.Forms.DataVisualization.Charting.Title()
+        Dim DataGridViewCellStyle41 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle42 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle43 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle44 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle45 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle46 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle47 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle48 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle49 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim ChartArea13 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Series13 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Title13 As System.Windows.Forms.DataVisualization.Charting.Title = New System.Windows.Forms.DataVisualization.Charting.Title()
+        Dim ChartArea14 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Series14 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Title14 As System.Windows.Forms.DataVisualization.Charting.Title = New System.Windows.Forms.DataVisualization.Charting.Title()
+        Dim DataGridViewCellStyle50 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim ChartArea15 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Series15 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Title15 As System.Windows.Forms.DataVisualization.Charting.Title = New System.Windows.Forms.DataVisualization.Charting.Title()
         Me.DailySalesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.SHITSTEMDataSet = New DIMSUM_SHITSTEM.SHITSTEMDataSet()
         Me.STOCKSBindingSource = New System.Windows.Forms.BindingSource(Me.components)
@@ -216,41 +216,41 @@ Partial Class SALES_TAB
         Me.DataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.DataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
         Me.DataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle31.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle31.Font = New System.Drawing.Font("ITC Kabel", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle31.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle31.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle31.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle31.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle31
+        DataGridViewCellStyle41.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle41.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle41.Font = New System.Drawing.Font("ITC Kabel", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle41.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle41.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle41.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle41.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle41
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn7, Me.DataGridViewTextBoxColumn8, Me.DataGridViewTextBoxColumn9, Me.DataGridViewTextBoxColumn10})
         Me.DataGridView1.DataSource = Me.STOCKSBindingSource
-        DataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle32.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle32.Font = New System.Drawing.Font("ITC Kabel", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle32.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle32.SelectionBackColor = System.Drawing.Color.White
-        DataGridViewCellStyle32.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle32.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle32
+        DataGridViewCellStyle42.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle42.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle42.Font = New System.Drawing.Font("ITC Kabel", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle42.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle42.SelectionBackColor = System.Drawing.Color.White
+        DataGridViewCellStyle42.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle42.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle42
         Me.DataGridView1.Location = New System.Drawing.Point(8, 47)
         Me.DataGridView1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
-        DataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle33.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle33.Font = New System.Drawing.Font("ITC Kabel", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle33.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle33.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle33.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle33.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle33
+        DataGridViewCellStyle43.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle43.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle43.Font = New System.Drawing.Font("ITC Kabel", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle43.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle43.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle43.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle43.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle43
         Me.DataGridView1.RowHeadersVisible = False
         Me.DataGridView1.RowHeadersWidth = 51
-        DataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridView1.RowsDefaultCellStyle = DataGridViewCellStyle34
+        DataGridViewCellStyle44.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridView1.RowsDefaultCellStyle = DataGridViewCellStyle44
         Me.DataGridView1.RowTemplate.Height = 30
         Me.DataGridView1.Size = New System.Drawing.Size(376, 169)
         Me.DataGridView1.TabIndex = 2
@@ -311,42 +311,42 @@ Partial Class SALES_TAB
         Me.STOCKSDataGridView.BackgroundColor = System.Drawing.Color.White
         Me.STOCKSDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.STOCKSDataGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
-        DataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle35.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle35.Font = New System.Drawing.Font("ITC Kabel", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle35.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle35.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle35.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle35.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.STOCKSDataGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle35
+        DataGridViewCellStyle45.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle45.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle45.Font = New System.Drawing.Font("ITC Kabel", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle45.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle45.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle45.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle45.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.STOCKSDataGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle45
         Me.STOCKSDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.STOCKSDataGridView.ColumnHeadersVisible = False
         Me.STOCKSDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4})
         Me.STOCKSDataGridView.DataSource = Me.STOCKSBindingSource
-        DataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle36.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle36.Font = New System.Drawing.Font("ITC Kabel", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle36.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle36.SelectionBackColor = System.Drawing.Color.White
-        DataGridViewCellStyle36.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle36.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.STOCKSDataGridView.DefaultCellStyle = DataGridViewCellStyle36
+        DataGridViewCellStyle46.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle46.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle46.Font = New System.Drawing.Font("ITC Kabel", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle46.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle46.SelectionBackColor = System.Drawing.Color.White
+        DataGridViewCellStyle46.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle46.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.STOCKSDataGridView.DefaultCellStyle = DataGridViewCellStyle46
         Me.STOCKSDataGridView.Location = New System.Drawing.Point(8, 276)
         Me.STOCKSDataGridView.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.STOCKSDataGridView.Name = "STOCKSDataGridView"
         Me.STOCKSDataGridView.ReadOnly = True
-        DataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle37.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle37.Font = New System.Drawing.Font("ITC Kabel", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle37.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle37.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle37.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle37.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.STOCKSDataGridView.RowHeadersDefaultCellStyle = DataGridViewCellStyle37
+        DataGridViewCellStyle47.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle47.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle47.Font = New System.Drawing.Font("ITC Kabel", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle47.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle47.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle47.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle47.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.STOCKSDataGridView.RowHeadersDefaultCellStyle = DataGridViewCellStyle47
         Me.STOCKSDataGridView.RowHeadersVisible = False
         Me.STOCKSDataGridView.RowHeadersWidth = 51
-        DataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.STOCKSDataGridView.RowsDefaultCellStyle = DataGridViewCellStyle38
+        DataGridViewCellStyle48.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.STOCKSDataGridView.RowsDefaultCellStyle = DataGridViewCellStyle48
         Me.STOCKSDataGridView.RowTemplate.Height = 30
         Me.STOCKSDataGridView.Size = New System.Drawing.Size(376, 182)
         Me.STOCKSDataGridView.TabIndex = 1
@@ -421,7 +421,7 @@ Partial Class SALES_TAB
         Me.FlowLayoutPanel1.Location = New System.Drawing.Point(44, 97)
         Me.FlowLayoutPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(1239, 212)
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(1308, 212)
         Me.FlowLayoutPanel1.TabIndex = 0
         '
         'todayprofitpanel
@@ -563,9 +563,9 @@ Partial Class SALES_TAB
         Me.DailySummaryDataGridView.ReadOnly = True
         Me.DailySummaryDataGridView.RowHeadersVisible = False
         Me.DailySummaryDataGridView.RowHeadersWidth = 51
-        DataGridViewCellStyle39.SelectionBackColor = System.Drawing.Color.White
-        DataGridViewCellStyle39.SelectionForeColor = System.Drawing.Color.Black
-        Me.DailySummaryDataGridView.RowsDefaultCellStyle = DataGridViewCellStyle39
+        DataGridViewCellStyle49.SelectionBackColor = System.Drawing.Color.White
+        DataGridViewCellStyle49.SelectionForeColor = System.Drawing.Color.Black
+        Me.DailySummaryDataGridView.RowsDefaultCellStyle = DataGridViewCellStyle49
         Me.DailySummaryDataGridView.Size = New System.Drawing.Size(636, 191)
         Me.DailySummaryDataGridView.TabIndex = 10
         '
@@ -665,40 +665,40 @@ Partial Class SALES_TAB
         'Chart1
         '
         Me.Chart1.BorderlineColor = System.Drawing.Color.Wheat
-        ChartArea10.Name = "ChartArea1"
-        Me.Chart1.ChartAreas.Add(ChartArea10)
+        ChartArea13.Name = "ChartArea1"
+        Me.Chart1.ChartAreas.Add(ChartArea13)
         Me.Chart1.Location = New System.Drawing.Point(4, 4)
         Me.Chart1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Chart1.Name = "Chart1"
         Me.Chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Fire
-        Series10.ChartArea = "ChartArea1"
-        Series10.Legend = "Legend1"
-        Series10.Name = "Series1"
-        Me.Chart1.Series.Add(Series10)
+        Series13.ChartArea = "ChartArea1"
+        Series13.Legend = "Legend1"
+        Series13.Name = "Series1"
+        Me.Chart1.Series.Add(Series13)
         Me.Chart1.Size = New System.Drawing.Size(996, 310)
         Me.Chart1.TabIndex = 1
         Me.Chart1.Text = "Chart1"
-        Title10.Name = "Title1"
-        Title10.Text = "MONTLY EARNINGS"
-        Me.Chart1.Titles.Add(Title10)
+        Title13.Name = "Title1"
+        Title13.Text = "MONTLY EARNINGS"
+        Me.Chart1.Titles.Add(Title13)
         '
         'Chart2
         '
-        ChartArea11.Name = "ChartArea1"
-        Me.Chart2.ChartAreas.Add(ChartArea11)
+        ChartArea14.Name = "ChartArea1"
+        Me.Chart2.ChartAreas.Add(ChartArea14)
         Me.Chart2.Location = New System.Drawing.Point(4, 322)
         Me.Chart2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Chart2.Name = "Chart2"
         Me.Chart2.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SemiTransparent
-        Series11.ChartArea = "ChartArea1"
-        Series11.Name = "Series1"
-        Me.Chart2.Series.Add(Series11)
+        Series14.ChartArea = "ChartArea1"
+        Series14.Name = "Series1"
+        Me.Chart2.Series.Add(Series14)
         Me.Chart2.Size = New System.Drawing.Size(996, 310)
         Me.Chart2.TabIndex = 1
         Me.Chart2.Text = "Chart4"
-        Title11.Name = "Title1"
-        Title11.Text = "WEEKLY EARNINGS"
-        Me.Chart2.Titles.Add(Title11)
+        Title14.Name = "Title1"
+        Title14.Text = "WEEKLY EARNINGS"
+        Me.Chart2.Titles.Add(Title14)
         '
         'TransactionsDataGridView
         '
@@ -716,10 +716,10 @@ Partial Class SALES_TAB
         Me.TransactionsDataGridView.ReadOnly = True
         Me.TransactionsDataGridView.RowHeadersVisible = False
         Me.TransactionsDataGridView.RowHeadersWidth = 51
-        DataGridViewCellStyle40.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle40.SelectionBackColor = System.Drawing.Color.White
-        DataGridViewCellStyle40.SelectionForeColor = System.Drawing.Color.Black
-        Me.TransactionsDataGridView.RowsDefaultCellStyle = DataGridViewCellStyle40
+        DataGridViewCellStyle50.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle50.SelectionBackColor = System.Drawing.Color.White
+        DataGridViewCellStyle50.SelectionForeColor = System.Drawing.Color.Black
+        Me.TransactionsDataGridView.RowsDefaultCellStyle = DataGridViewCellStyle50
         Me.TransactionsDataGridView.Size = New System.Drawing.Size(996, 271)
         Me.TransactionsDataGridView.TabIndex = 9
         '
@@ -892,21 +892,21 @@ Partial Class SALES_TAB
         '
         'Chart3
         '
-        ChartArea12.Name = "ChartArea1"
-        Me.Chart3.ChartAreas.Add(ChartArea12)
+        ChartArea15.Name = "ChartArea1"
+        Me.Chart3.ChartAreas.Add(ChartArea15)
         Me.Chart3.Location = New System.Drawing.Point(4, 640)
         Me.Chart3.Margin = New System.Windows.Forms.Padding(4)
         Me.Chart3.Name = "Chart3"
         Me.Chart3.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SemiTransparent
-        Series12.ChartArea = "ChartArea1"
-        Series12.Name = "Series1"
-        Me.Chart3.Series.Add(Series12)
+        Series15.ChartArea = "ChartArea1"
+        Series15.Name = "Series1"
+        Me.Chart3.Series.Add(Series15)
         Me.Chart3.Size = New System.Drawing.Size(996, 310)
         Me.Chart3.TabIndex = 22
         Me.Chart3.Text = "Chart4"
-        Title12.Name = "Title1"
-        Title12.Text = "WEEKLY EARNINGS"
-        Me.Chart3.Titles.Add(Title12)
+        Title15.Name = "Title1"
+        Title15.Text = "WEEKLY EARNINGS"
+        Me.Chart3.Titles.Add(Title15)
         '
         'SALES_TAB
         '
