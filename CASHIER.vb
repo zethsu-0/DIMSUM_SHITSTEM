@@ -5,12 +5,15 @@ Imports System.Globalization
 Imports System.IO
 Imports System.Runtime.InteropServices
 Imports Guna.UI2.WinForms
+Imports Microsoft.VisualBasic.ApplicationServices
 Public Class CASHIER
 
     Public Property user_Role As String
+    Public Property user_id As String
 
     Private Sub CASHIER_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If con IsNot Nothing AndAlso con.State = ConnectionState.Open Then con.Close()
+        Opencon()
         Opencon()
         con.Close()
         ' --- Set up the Delete Button Column in the DataGridView ---
@@ -55,12 +58,76 @@ Public Class CASHIER
         AddHandler OrdersDataGridView.RowsAdded, AddressOf UpdateTotalSum
 
 
+        ResetRevenueIfNewDay()
         countingproducts()
         GenerateProductButtons()
 
-
         discount_choice.Text = "NONE"
     End Sub
+
+    Private Sub ResetRevenueIfNewDay()
+        ' Try
+        Opencon()
+            Dim todayDate As Date = Date.Today
+
+            Dim selectQuery As String = "
+            SELECT user_id, revenue, dateofremittance, firstname, lastname
+            FROM login
+            WHERE role IN ('Owner','Manager','Employee')
+        "
+            Dim usersToReset As New List(Of (userId As String, revenue As Decimal, firstName As String, lastName As String))
+
+            Using cmd As New SqlCommand(selectQuery, con)
+                Using reader As SqlDataReader = cmd.ExecuteReader()
+                    While reader.Read()
+                        Dim userId = reader("user_id").ToString()
+                        Dim revenueAmt = If(reader.IsDBNull(reader.GetOrdinal("revenue")), 0D, Convert.ToDecimal(reader("revenue")))
+                        Dim lastResetVal = reader("dateofremittance")
+                        Dim lastReset As Date? = If(lastResetVal Is DBNull.Value, CType(Nothing, Date?), CType(lastResetVal, Date))
+                        If (Not lastReset.HasValue OrElse lastReset.Value.Date <> todayDate) AndAlso revenueAmt > 0 Then
+                            usersToReset.Add((userId, revenueAmt, reader("firstname").ToString(), reader("lastname").ToString()))
+                        End If
+                    End While
+                End Using
+            End Using
+
+            ' 2) Now reader is closed, do inserts & updates
+            For Each u In usersToReset
+                ' Insert into remittancehistory
+                Using insertCmd As New SqlCommand("
+                INSERT INTO remittancehistory
+                  (User_id, revenue, date, firstname, lastname)
+                VALUES
+                  (@User_id, @revenue, @date, @firstname, @lastname)
+            ", con)
+                    insertCmd.Parameters.AddWithValue("@User_id", u.userId)
+                    insertCmd.Parameters.AddWithValue("@revenue", u.revenue)
+                    insertCmd.Parameters.AddWithValue("@date", todayDate)
+                    insertCmd.Parameters.AddWithValue("@firstname", u.firstName)
+                    insertCmd.Parameters.AddWithValue("@lastname", u.lastName)
+                    insertCmd.ExecuteNonQuery()
+                End Using
+
+                ' Reset login.revenue & update dateofremittance
+                Using resetCmd As New SqlCommand("
+                UPDATE login
+                SET revenue = 0,
+                    dateofremittance = @today
+                WHERE user_id = @userID
+            ", con)
+                    resetCmd.Parameters.AddWithValue("@today", todayDate)
+                    resetCmd.Parameters.AddWithValue("@userID", u.userId)
+                    resetCmd.ExecuteNonQuery()
+                End Using
+            Next
+
+        ' Catch ex As Exception
+        'MessageBox.Show("Error resetting employee revenues: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        'Finally
+        If con.State = ConnectionState.Open Then con.Close()
+        ' End Try
+    End Sub
+
 
 
     Private Sub countingproducts()
@@ -405,8 +472,6 @@ Public Class CASHIER
 
             End If
 
-
-
             Opencon()
             Dim today As Date = Date.Today
             Dim calendar = CultureInfo.CurrentCulture.Calendar
@@ -559,16 +624,25 @@ Public Class CASHIER
                     cmdYearly.ExecuteNonQuery()
                 End Using
 
+
+                ' === UPDATE employee's revenue ===
+                Dim updateRevenueQuery As String = "
+UPDATE login 
+SET revenue = ISNULL(revenue, 0) + @earnedToday 
+WHERE user_id = @userID
+"
+
+                Using cmdUpdateRevenue As New SqlCommand(updateRevenueQuery, con)
+                    cmdUpdateRevenue.Parameters.AddWithValue("@earnedToday", salesTotalForReport)
+                    cmdUpdateRevenue.Parameters.AddWithValue("@userID", user_id)
+                    cmdUpdateRevenue.ExecuteNonQuery()
+                End Using
+
             Catch ex As Exception
                 MessageBox.Show("Error updating YearlySales: " & ex.Message)
             Finally
                 If con.State = ConnectionState.Open Then con.Close()
             End Try
-
-
-
-
-
 
 
 
@@ -640,6 +714,7 @@ VALUES (@TransactionDate, @TotalAmount, @PaymentAmount, @ChangeGiven, @Total_Ite
 
 
 
+
             lbltotal.Text = "₱0.00"
         Catch ex As Exception
             MessageBox.Show($"Error during checkout process: {ex.Message}", "Checkout Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -647,7 +722,7 @@ VALUES (@TransactionDate, @TotalAmount, @PaymentAmount, @ChangeGiven, @Total_Ite
         Finally
             If con IsNot Nothing AndAlso con.State = ConnectionState.Open Then
                 con.Close()
-
+                UpdateRevenueAndRecordHistory(user_id, salesTotalForReport)
             End If
             MessageBox.Show("Checkout complete!" & vbCrLf & vbCrLf &
     $"Total Sale: ₱{salesTotalForReport:N2}" & vbCrLf &
@@ -657,6 +732,73 @@ VALUES (@TransactionDate, @TotalAmount, @PaymentAmount, @ChangeGiven, @Total_Ite
 
             resetcart()
             paymenttxtbox.Clear()
+        End Try
+    End Sub
+
+
+
+    Private Sub UpdateRevenueAndRecordHistory(userId As String, earnedToday As Decimal)
+        Try
+            Opencon()
+
+            ' Step 1: Add the earned revenue to the existing revenue in login
+            Dim updateRevenueQuery As String = "
+        UPDATE login 
+        SET revenue = ISNULL(revenue, 0) + @earnedToday 
+        WHERE user_id = @userID
+        "
+
+            Using cmdUpdateRevenue As New SqlCommand(updateRevenueQuery, con)
+                cmdUpdateRevenue.Parameters.AddWithValue("@earnedToday", earnedToday)
+                cmdUpdateRevenue.Parameters.AddWithValue("@userID", userId)
+                cmdUpdateRevenue.ExecuteNonQuery()
+            End Using
+
+        Catch ex As Exception
+            MessageBox.Show("Error updating revenue: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            If con.State = ConnectionState.Open Then con.Close()
+        End Try
+    End Sub
+
+    Public Sub logremittance(userId As String, earnedToday As Decimal)
+        Try
+            Opencon()
+            ' Step 2: Insert the earned revenue into remittancehistory
+            Dim todayDate As Date = Date.Today
+            Dim insertHistoryQuery As String = "
+        INSERT INTO remittancehistory (User_id, revenue, date, firstname, lastname)
+        VALUES (@User_id, @revenue, @date, @firstname, @lastname)
+        "
+
+            ' Get user info (first name, last name)
+            Dim firstName As String = ""
+            Dim lastName As String = ""
+
+            Dim nameQuery As String = "SELECT firstname, lastname FROM login WHERE user_id = @userID"
+            Using cmdName As New SqlCommand(nameQuery, con)
+                cmdName.Parameters.AddWithValue("@userID", userId)
+                Using reader As SqlDataReader = cmdName.ExecuteReader()
+                    If reader.Read() Then
+                        firstName = reader("firstname").ToString()
+                        lastName = reader("lastname").ToString()
+                    End If
+                End Using
+            End Using
+
+            ' Insert into remittancehistory
+            Using cmdInsertHistory As New SqlCommand(insertHistoryQuery, con)
+                cmdInsertHistory.Parameters.AddWithValue("@User_id", userId)
+                cmdInsertHistory.Parameters.AddWithValue("@revenue", earnedToday)
+                cmdInsertHistory.Parameters.AddWithValue("@date", todayDate)
+                cmdInsertHistory.Parameters.AddWithValue("@firstname", firstName)
+                cmdInsertHistory.Parameters.AddWithValue("@lastname", lastName)
+                cmdInsertHistory.ExecuteNonQuery()
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error updating revenue: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            If con.State = ConnectionState.Open Then con.Close()
         End Try
     End Sub
 
@@ -862,7 +1004,14 @@ VALUES (@TransactionDate, @TotalAmount, @PaymentAmount, @ChangeGiven, @Total_Ite
     Private Sub CASHIER_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
         If user_Role = "Employee" Then
             LOGIN_PAGE.Show()
+        Else
+            Dim form2 As New Form2()
+            form2.user_role = user_Role
+            form2.user_id = user_id
+            form2.Show()
         End If
+
+
 
         ReturnAllCartItemsAndClearOrders()
     End Sub
@@ -1091,4 +1240,5 @@ JOIN STOCKS S ON O.Item_No = S.Item_No
 
         End If
     End Sub
+
 End Class
