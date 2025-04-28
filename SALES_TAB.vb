@@ -34,12 +34,11 @@ Public Class SALES_TAB
 
 
 
-        salesTotallbl.Text = DateTime.Now.ToString("dddd, MMMM dd, yyyy")
+        salesTotallbl.Text = "0.00"
         dailytotalearn()
         LoadCharts()
     End Sub
     Private Sub LoadCharts()
-        ' === Chart1: Monthly Profit & Sales ===
         Opencon()
         Dim cmd As New SqlCommand("SELECT Month, Profit, Sales_Total FROM MonthlySales", con)
         Dim reader As SqlDataReader
@@ -57,8 +56,8 @@ Public Class SALES_TAB
         monthlySalesSeries.Color = Color.Yellow
         monthlyProfitSeries.IsValueShownAsLabel = True
         monthlySalesSeries.IsValueShownAsLabel = True
-        monthlyProfitSeries("PointWidth") = "0.5"
-        monthlySalesSeries("PointWidth") = "0.5"
+        monthlyProfitSeries("PointWidth") = "0.2"
+        monthlySalesSeries("PointWidth") = "0.2"
 
         Try
             reader = cmd.ExecuteReader()
@@ -68,7 +67,9 @@ Public Class SALES_TAB
                 Dim sales = If(IsDBNull(reader("Sales_Total")), 0D, Convert.ToDecimal(reader("Sales_Total"))) ' Handle Null sales
 
                 If user_Role <> "Manager" Then
+
                     monthlyProfitSeries.Points.AddXY(month, profit)
+
                 End If
 
                 monthlySalesSeries.Points.AddXY(month, sales)
@@ -84,6 +85,11 @@ Public Class SALES_TAB
             Chart1.ChartAreas(0).AxisX.IsMarginVisible = True
             Chart1.ChartAreas(0).AxisX.Interval = 1
 
+            Chart1.ChartAreas(0).AxisX.MajorGrid.Enabled = False
+            With Chart1.ChartAreas(0).AxisY.MajorGrid
+                .LineColor = Color.LightGray
+                .LineDashStyle = ChartDashStyle.Dot
+            End With
         Catch ex As Exception
             MessageBox.Show("Error loading MonthlySales: " & ex.Message)
         Finally
@@ -115,12 +121,10 @@ Public Class SALES_TAB
                 Dim profit = If(IsDBNull(reader2("Profit")), 0D, Convert.ToDecimal(reader2("Profit"))) ' Handle Null profit
                 Dim sales = If(IsDBNull(reader2("Sales_Total")), 0D, Convert.ToDecimal(reader2("Sales_Total"))) ' Handle Null sales
 
-                ' Check if day is Null or empty
                 If String.IsNullOrEmpty(day) Then
-                    day = "Unknown"  ' Or set to any default value like "N/A"
+                    day = "Unknown"
                 End If
 
-                ' Add profit and sales data points
                 If user_Role <> "Manager" Then
                     weeklyProfitSeries.Points.AddXY(day, profit)
                 End If
@@ -134,28 +138,82 @@ Public Class SALES_TAB
             Chart2.Legends(0).Docking = Docking.Top
             Chart2.Legends(0).Font = New Font("Arial", 9, FontStyle.Bold)
             Chart2.ChartAreas(0).Area3DStyle.Enable3D = False
+            Chart2.ChartAreas(0).AxisX.MajorGrid.Enabled = False
+
             weeklyProfitSeries.BorderWidth = 1
             weeklySalesSeries.BorderWidth = 1
 
-            weeklyProfitSeries("PointWidth") = "0.4"
-            weeklySalesSeries("PointWidth") = "0.4"
-
+            weeklyProfitSeries("PointWidth") = "0.2"
+            weeklySalesSeries("PointWidth") = "0.2"
+            With Chart2.ChartAreas(0).AxisY.MajorGrid
+                .LineColor = Color.LightGray
+                .LineDashStyle = ChartDashStyle.Dot
+            End With
         Catch ex As Exception
             MessageBox.Show("Error loading WeeklySales: " & ex.Message)
         Finally
             con.Close()
         End Try
+
+
+        Opencon()
+        Dim cmd3 As New SqlCommand("SELECT Year, Profit, Sales_Total FROM YearlySales", con)
+        Dim reader3 As SqlDataReader
+
+        Chart3.Series.Clear()
+        Chart3.Legends.Clear()
+
+        Dim yearlyProfitSeries As New Series("Yearly Profit")
+        Dim yearlySalesSeries As New Series("Yearly Sales")
+
+        yearlyProfitSeries.ChartType = SeriesChartType.Column
+        yearlySalesSeries.ChartType = SeriesChartType.Column
+        yearlyProfitSeries.Color = Color.Black
+        yearlySalesSeries.Color = Color.Yellow
+        yearlyProfitSeries.IsValueShownAsLabel = True
+        yearlySalesSeries.IsValueShownAsLabel = True
+
+        Try
+            reader3 = cmd3.ExecuteReader()
+            While reader3.Read()
+                Dim month = reader3("Year").ToString()
+                Dim profit = If(IsDBNull(reader3("Profit")), 0D, Convert.ToDecimal(reader3("Profit"))) ' Handle Null profit
+                Dim sales = If(IsDBNull(reader3("Sales_Total")), 0D, Convert.ToDecimal(reader3("Sales_Total"))) ' Handle Null sales
+
+                If String.IsNullOrEmpty(month) Then
+                    month = "Unknown"
+                End If
+
+                If user_Role <> "Manager" Then
+                    yearlyProfitSeries.Points.AddXY(month, profit)
+                End If
+                yearlySalesSeries.Points.AddXY(month, sales)
+            End While
+
+            Chart3.Series.Add(yearlyProfitSeries)
+            Chart3.Series.Add(yearlySalesSeries)
+
+            Chart3.Legends.Add("Legend3")
+            Chart3.Legends(0).Docking = Docking.Top
+            Chart3.Legends(0).Font = New Font("Arial", 9, FontStyle.Bold)
+            Chart3.ChartAreas(0).Area3DStyle.Enable3D = False
+            Chart3.ChartAreas(0).AxisX.MajorGrid.Enabled = False
+
+            yearlyProfitSeries.BorderWidth = 1
+            yearlySalesSeries.BorderWidth = 1
+
+            yearlyProfitSeries("PointWidth") = "0.2"
+            yearlySalesSeries("PointWidth") = "0.2"
+            With Chart3.ChartAreas(0).AxisY.MajorGrid
+                .LineColor = Color.LightGray
+                .LineDashStyle = ChartDashStyle.Dot
+            End With
+        Catch ex As Exception
+            MessageBox.Show("Error loading YearlySales: " & ex.Message)
+        Finally
+            con.Close()
+        End Try
     End Sub
-
-
-
-
-
-
-
-
-
-
     Public Sub dailytotalearn()
         Dim dailyProfit As Decimal = 0
         Dim dailySales_total As Decimal = 0
@@ -193,26 +251,27 @@ Public Class SALES_TAB
     End Sub
 
     Private Sub Guna2CircleButton1_Click(sender As Object, e As EventArgs) Handles Guna2CircleButton1.Click
-        dailytotalearn()
-        LoadCharts()
         RefreshData()
-        Me.DailySalesTableAdapter.Fill(Me.SHITSTEMDataSet.DailySales)
-        Me.MonthlySalesTableAdapter.Fill(Me.SHITSTEMDataSet.MonthlySales)
-        Me.WeeklySalesTableAdapter.Fill(Me.SHITSTEMDataSet.WeeklySales)
-        Me.DailySummaryTableAdapter.Fill(Me.SHITSTEMDataSet.DailySummary)
-        Me.STOCKSTableAdapter.Fill(Me.SHITSTEMDataSet.STOCKS)
-        Me.TransactionsTableAdapter.Fill(Me.SHITSTEMDataSet.Transactions)
-
+        LoadCharts()
     End Sub
 
 
     Private Sub RESTOCKBTN_Click(sender As Object, e As EventArgs) Handles RESTOCKBTN.Click
+        Dim RESTOCK_TAB As New RESTOCK_TAB()
+        AddHandler RESTOCK_TAB.FormClosed, AddressOf RESTOCKBTN_Closed
         RESTOCK_TAB.Show()
     End Sub
 
-
+    Private Sub RESTOCKBTN_Closed(sender As Object, e As FormClosedEventArgs)
+        RefreshData()
+    End Sub
     Public Sub RefreshData()
-        ' Refresh data logic, like re-fetching and binding to DataGridViews
+        Me.DailySalesTableAdapter.Fill(Me.SHITSTEMDataSet.DailySales)
+        Me.MonthlySalesTableAdapter.Fill(Me.SHITSTEMDataSet.MonthlySales)
+        Me.WeeklySalesTableAdapter.Fill(Me.SHITSTEMDataSet.WeeklySales)
+        Me.STOCKSTableAdapter.Fill(Me.SHITSTEMDataSet.STOCKS)
+        Me.DailySummaryTableAdapter.Fill(Me.SHITSTEMDataSet.DailySummary)
+        Me.TransactionsTableAdapter.Fill(Me.SHITSTEMDataSet.Transactions)
         Dim dt As New DataTable()
         Dim query As String = "SELECT * FROM STOCKS"
         Using filtercmd As New SqlCommand(query, con)
@@ -220,6 +279,7 @@ Public Class SALES_TAB
                 da.Fill(dt)
             End Using
         End Using
+
 
         Dim outOfStockView As New DataView(dt)
         outOfStockView.RowFilter = "Quantity = 0"
@@ -229,10 +289,40 @@ Public Class SALES_TAB
         lowStockView.RowFilter = "Quantity <= 5 AND Quantity > 0"
         STOCKSDataGridView.DataSource = lowStockView
 
-        Me.STOCKSTableAdapter.Fill(Me.SHITSTEMDataSet.STOCKS)
+        dailytotalearn()
+        LoadCharts()
     End Sub
 
-    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
+    Private Sub Guna2Button1_Click(sender As Object, e As EventArgs) Handles Guna2Button1.Click
+        salesreport.Show()
+    End Sub
 
+    Private Sub Guna2Button2_Click(sender As Object, e As EventArgs) Handles Guna2Button2.Click
+        resetdatas()
+    End Sub
+    Private Sub resetdatas()
+
+        profitlbl.Text = "0.00"
+        salesTotallbl.Text = "0.00"
+        Dim deleteQuery As String = "
+    DELETE FROM DailySales;
+    DELETE FROM WeeklySales;
+    DELETE FROM MonthlySales;
+    DELETE FROM Yearlysales;
+    DELETE FROM DailySummary;
+    DELETE FROM Transactions;"
+
+        Try
+            Opencon()
+            Using cmd As New SqlCommand(deleteQuery, con)
+                cmd.ExecuteNonQuery()
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error deleting: " & ex.Message)
+        Finally
+            If con.State = ConnectionState.Open Then con.Close()
+        End Try
+
+        RefreshData()
     End Sub
 End Class

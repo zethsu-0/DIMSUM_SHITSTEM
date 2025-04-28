@@ -12,7 +12,7 @@ Public Class Form2
 
     Private PRODUCTS_TAB As New PRODUCTS_TAB()
     Private EMPLOYEE_TAB As New EMPLOYEE_TAB()
-    Private SALES_TAB As New SALES_TAB()
+
 
     Private Sub OpenNewForm(newForm As Form)
         If lastOpenedForm IsNot Nothing AndAlso Not lastOpenedForm.IsDisposed Then
@@ -21,6 +21,7 @@ Public Class Form2
 
         lastOpenedForm = newForm
         newForm.Show()
+
     End Sub
 
     Private Sub Form2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -40,6 +41,7 @@ Public Class Form2
         Timer1.Interval = 1000
         Timer1.Start()
         salesbtn.PerformClick()
+
 
     End Sub
     Private Sub Form2_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
@@ -98,15 +100,18 @@ Public Class Form2
         PRODUCTS_TAB.Dock = DockStyle.Fill
     End Sub
 
+
+    Private SALES_TAB As New SALES_TAB()
     Private Sub salesbtn_Click(sender As Object, e As EventArgs) Handles salesbtn.Click
-        Dim tab As New SALES_TAB()
-        tab.user_Role = user_role
+        loadsalestab()
+    End Sub
+    Private Sub loadsalestab()
+        SALES_TAB.user_Role = user_role
 
         Me.SplitContainer1.Panel2.Controls.Clear()
-        Me.SplitContainer1.Panel2.Controls.Add(tab)
-        tab.Dock = DockStyle.Fill
+        Me.SplitContainer1.Panel2.Controls.Add(SALES_TAB)
+        SALES_TAB.Dock = DockStyle.Fill
     End Sub
-
     Private Sub employeebtn_Click(sender As Object, e As EventArgs) Handles employeebtn.Click
         Dim tab As New EMPLOYEE_TAB()
         tab.user_Role = user_role
@@ -117,8 +122,16 @@ Public Class Form2
         tab.Dock = DockStyle.Fill
     End Sub
 
+    Private CASHIER As New CASHIER()
+
+
     Private Sub cashierbtn_Click(sender As Object, e As EventArgs) Handles cashierbtn.Click
+        Dim CASHIER As New CASHIER()
+        AddHandler CASHIER.FormClosed, AddressOf CASHIER_Closed
         CASHIER.Show()
+    End Sub
+    Private Sub CASHIER_Closed(sender As Object, e As FormClosedEventArgs)
+        SALES_TAB.RefreshData()
     End Sub
 
     Private Sub logoutbtn_Click(sender As Object, e As EventArgs) Handles logoutbtn.Click
@@ -130,8 +143,12 @@ Public Class Form2
                     frm.Close()
                 End If
             Next
+            LOGIN_PAGE.ResetLoginPage()
             LOGIN_PAGE.Show()
         End If
     End Sub
 
+    Private Sub Guna2ControlBox1_Click(sender As Object, e As EventArgs) Handles Guna2ControlBox1.Click
+        LOGIN_PAGE.ResetLoginPage()
+    End Sub
 End Class

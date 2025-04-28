@@ -37,8 +37,8 @@ Public Class EMPLOYEE_TAB
 
         If user_Role = "Owner" OrElse user_Role = "Manager" Then
             Dim userPanel As New Panel()
-            userPanel.Width = 250
-            userPanel.Height = 180
+            userPanel.Width = 203
+            userPanel.Height = 254
             userPanel.BackColor = If(user_Role = "Owner", Color.LightGoldenrodYellow, Color.LightBlue)
             userPanel.BorderStyle = BorderStyle.FixedSingle
             userPanel.Padding = New Padding(10)
@@ -52,20 +52,20 @@ Public Class EMPLOYEE_TAB
 
             Dim lblUserId As New Label()
             lblUserId.Text = $"ID: {User_id}"
-            lblUserId.Location = New Point(10, 70)
+            lblUserId.Location = New Point(120, 10)
             lblUserId.AutoSize = True
 
             Dim editbtn As New Guna2Button()
             editbtn.Text = "Edit"
             editbtn.Size = New Size(60, 20)
-            editbtn.Location = New Point(100, 190)
+            editbtn.Location = New Point(10, 210)
             editbtn.Tag = Me.User_id
             AddHandler editbtn.Click, AddressOf EditUser_Click
             userPanel.Controls.Add(editbtn)
 
-            Dim picBox As New PictureBox()
+            Dim picBox As New Guna2CirclePictureBox()
             picBox.Size = New Size(80, 80)
-            picBox.Location = New Point(60, 70)
+            picBox.Location = New Point(60, 40)
             picBox.SizeMode = PictureBoxSizeMode.StretchImage
             picBox.Image = If(userPhoto IsNot Nothing, userPhoto, My.Resources.defaulticon)
 
@@ -77,6 +77,7 @@ Public Class EMPLOYEE_TAB
     End Sub
     Private Sub LoadOtherUsersIntoFlowLayoutPanel()
         FlowLayoutPanel1.Controls.Clear()
+        FlowLayoutPanel2.Controls.Clear()
 
         Try
             con.Open()
@@ -128,7 +129,7 @@ Public Class EMPLOYEE_TAB
 
                         Dim picBox As New PictureBox()
                         picBox.Size = New Size(80, 80)
-                        picBox.Location = New Point(60, 70)
+                        picBox.Location = New Point(70, 80)
                         picBox.SizeMode = PictureBoxSizeMode.StretchImage
 
                         If Not IsDBNull(reader("Photo")) Then
@@ -144,7 +145,13 @@ Public Class EMPLOYEE_TAB
                         userPanel.Controls.AddRange({lblName, lblRole, lblUserId, editbtn, picBox})
 
 
-                        FlowLayoutPanel1.Controls.Add(userPanel)
+                        Dim userRole As String = reader("role").ToString()
+                        If userRole = "Manager" Then
+                            FlowLayoutPanel1.Controls.Add(userPanel)
+                        ElseIf userRole = "Employee" Then
+                            FlowLayoutPanel2.Controls.Add(userPanel)
+                        End If
+
                     End While
                 End Using
             End Using
@@ -210,5 +217,9 @@ Public Class EMPLOYEE_TAB
 
         LoadLoggedInUserIntoPanel1()
         LoadOtherUsersIntoFlowLayoutPanel()
+    End Sub
+
+    Private Sub FlowLayoutPanel1_Paint(sender As Object, e As PaintEventArgs) Handles FlowLayoutPanel1.Paint
+
     End Sub
 End Class

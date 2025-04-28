@@ -182,6 +182,11 @@
     <Compile Include="loadingscreen.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="PRODUCTS_TAB.Designer.vb">
       <DependentUpon>PRODUCTS_TAB.vb</DependentUpon>
     </Compile>
@@ -209,11 +214,6 @@
     </Compile>
     <Compile Include="Module1.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
-    <Compile Include="My Project\Resources.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="My Project\Settings.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -230,6 +230,18 @@
     </Compile>
     <Compile Include="RESTOCK_TAB.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="salesreport.Designer.vb">
+      <DependentUpon>salesreport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="salesreport.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SALESREPORTDOC.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SALESREPORTDOC.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="SALES_TAB.Designer.vb">
       <DependentUpon>SALES_TAB.vb</DependentUpon>
@@ -299,9 +311,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="EMPLOYEE_TAB.resx">
       <DependentUpon>EMPLOYEE_TAB.vb</DependentUpon>
@@ -312,6 +324,13 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RESTOCK_TAB.resx">
       <DependentUpon>RESTOCK_TAB.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="salesreport.resx">
+      <DependentUpon>salesreport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SALESREPORTDOC.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SALESREPORTDOC.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="SALES_TAB.resx">
       <DependentUpon>SALES_TAB.vb</DependentUpon>
@@ -361,6 +380,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\products01.png" />
+    <None Include="Resources\employees.png" />
+    <None Include="Resources\cashier-machine.png" />
+    <None Include="Resources\cashier-machine %281%29.png" />
+    <None Include="Resources\bar-chart %281%29.png" />
+    <None Include="Resources\employees %281%29.png" />
+    <None Include="Resources\errorimageTR.png" />
+    <None Include="Resources\Logo_transparent.png" />
+    <None Include="Resources\maangs2.png" />
+    <None Include="Resources\Products.png" />
     <None Include="Resources\defaulticon.png" />
     <None Include="Resources\errorimage.jpg" />
     <None Include="Resources\dimsum-factory-logo.png" />

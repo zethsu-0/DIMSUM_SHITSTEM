@@ -14,56 +14,93 @@ Public Class EditUserForm
     Public Property LoggedInUserId As String
     Public Property currentRole As String
 
+    Private Sub EditUserForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If con IsNot Nothing AndAlso con.State = ConnectionState.Open Then con.Close()
+        Opencon()
+
+        txtUserId.Text = user_id
+        If user_id = "" Then
+            txtUserId.ReadOnly = False
+        End If
+        cboRole.Items.Clear()
+
+        If LoggedInUserRole = "Owner" Then
+            cboRole.Items.AddRange(New String() {"Manager", "Employee"})
+        ElseIf LoggedInUserRole = "Manager" Then
+            cboRole.Items.Add("Employee")
+        End If
+
+        If LoggedInUserRole = "Owner" AndAlso user_id = LoggedInUserId Then
+            cboRole.Visible = False
+            cboRole.Items.Add("Owner")
+            cboRole.Text = "Owner"
+            Label6.Visible = False
+            deletebtn.Visible = False
+        End If
+
+        If cboRole.Visible Then
+            cboRole.Text = currentRole
+        End If
+
+        If IsNewUser Then
+            deletebtn.Visible = False
+        End If
+    End Sub
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        If txtUserId.Text = "" Or txtFirstName.Text = "" Or txtLastName.Text = "" Or txtPhone.Text = "" Or txtAddress.Text = "" Or txtAge.Text = "" Or cboRole.Text = "" Or txtpassword.Text = "" Then
+        If LoggedInUserRole = "Owner" Then
+
+        End If
+        If txtUserId.Text = "" Or txtFirstName.Text = "" Or txtLastName.Text = "" Or txtPhone.Text = "" Or txtAddress.Text = "" Or txtAge.Text = "" Or txtpassword.Text = "" Then
 
         Else
-
-
             If IsNewUser Then
                 Dim arrimage() As Byte = Nothing
 
                 If Not picProfile.Image Is My.Resources.defaulticon Then
-                        Dim mstream As New MemoryStream()
-                        picProfile.Image.Save(mstream, System.Drawing.Imaging.ImageFormat.Png)
-                        arrimage = mstream.ToArray()
-                        mstream.Close()
-                    Else
+                    Dim mstream As New MemoryStream()
+                    picProfile.Image.Save(mstream, System.Drawing.Imaging.ImageFormat.Png)
+                    arrimage = mstream.ToArray()
+                    mstream.Close()
+                Else
                     picProfile.Image = My.Resources.defaulticon
                 End If
 
-
-                ' INSERT logic
-
-                Dim insertQuery As String = "INSERT INTO login (user_id,Photo, firstname, lastname, age, address, Phone_no, role, password) 
+                If cboRole.Text = "" Then
+                    MessageBox.Show("Role is empty")
+                Else
+                    Dim insertQuery As String = "INSERT INTO login (user_id,Photo, firstname, lastname, age, address, Phone_no, role, password) 
                                  VALUES (@userId, @Photo,@firstname, @lastname, @age, @address, @phone, @role, @password)"
-                Using cmd As New SqlCommand(insertQuery, con)
-                    cmd.Parameters.AddWithValue("@userId", txtUserId.Text)
-                    cmd.Parameters.AddWithValue("@firstname", txtFirstName.Text)
-                    cmd.Parameters.AddWithValue("@lastname", txtLastName.Text)
-                    cmd.Parameters.AddWithValue("@age", txtAge.Text)
-                    cmd.Parameters.AddWithValue("@address", txtAddress.Text)
-                    cmd.Parameters.AddWithValue("@phone", txtPhone.Text)
-                    cmd.Parameters.AddWithValue("@role", cboRole.Text)
-                    cmd.Parameters.AddWithValue("@password", txtpassword.Text)
-                    If arrimage IsNot Nothing Then
-                        cmd.Parameters.Add("@Photo", SqlDbType.VarBinary).Value = arrimage
-                    Else
-                        cmd.Parameters.Add("@Photo", SqlDbType.VarBinary).Value = DBNull.Value
-                    End If
+                    Using cmd As New SqlCommand(insertQuery, con)
+                        cmd.Parameters.AddWithValue("@userId", txtUserId.Text)
+                        cmd.Parameters.AddWithValue("@firstname", txtFirstName.Text)
+                        cmd.Parameters.AddWithValue("@lastname", txtLastName.Text)
+                        cmd.Parameters.AddWithValue("@age", txtAge.Text)
+                        cmd.Parameters.AddWithValue("@address", txtAddress.Text)
+                        cmd.Parameters.AddWithValue("@phone", txtPhone.Text)
+                        cmd.Parameters.AddWithValue("@role", cboRole.Text)
+                        cmd.Parameters.AddWithValue("@password", txtpassword.Text)
+                        If arrimage IsNot Nothing Then
+                            cmd.Parameters.Add("@Photo", SqlDbType.VarBinary).Value = arrimage
+                        Else
+                            cmd.Parameters.Add("@Photo", SqlDbType.VarBinary).Value = DBNull.Value
+                        End If
 
-                    cmd.ExecuteNonQuery()
-                    con.Close()
-                    Me.Close()
-                End Using
-                MessageBox.Show("New user added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        cmd.ExecuteNonQuery()
+                        con.Close()
+                        Me.Close()
+                    End Using
+                    MessageBox.Show("New user added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
+
             Else
 
                 If user_Role = "Owner" Then
+                    cboRole.Items.Add("Owner")
                     cboRole.Text = "Owner"
                     cboRole.Visible = False
                 End If
                 If user_Role = "Manager" Then
+                    cboRole.Text = "Manager"
                     cboRole.Visible = False
                 End If
                 Dim Filesize As UInt32
@@ -103,32 +140,7 @@ Public Class EditUserForm
         Me.Close()
     End Sub
 
-    Private Sub EditUserForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If con IsNot Nothing AndAlso con.State = ConnectionState.Open Then con.Close()
-        Opencon()
 
-        txtUserId.Text = user_id
-        If user_id = "" Then
-            txtUserId.ReadOnly = False
-        End If
-        cboRole.Items.Clear()
-
-        If LoggedInUserRole = "Owner" Then
-            cboRole.Items.AddRange(New String() {"Manager", "Employee"})
-        ElseIf LoggedInUserRole = "Manager" Then
-            cboRole.Items.Add("Employee")
-        End If
-
-        ' If editing self and Owner, hide role selection
-        If LoggedInUserRole = "Owner" AndAlso user_id = LoggedInUserId Then
-            cboRole.Visible = False
-        End If
-
-        ' Optional: Set selected role only if it's not hidden
-        If cboRole.Visible Then
-            cboRole.Text = currentRole ' This should come from the main form
-        End If
-    End Sub
 
     Private Sub Guna2Button1_Click(sender As Object, e As EventArgs) Handles Guna2Button1.Click
         Dim openFileDialog As New OpenFileDialog()
@@ -177,6 +189,7 @@ Public Class EditUserForm
 
     Private Sub deletebtn_Click(sender As Object, e As EventArgs) Handles deletebtn.Click
         If con IsNot Nothing AndAlso con.State = ConnectionState.Open Then con.Close()
+
         If MessageBox.Show("Are you sure you want to delete this user?", "Confirm Delete",
                      MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.Yes Then
             If LoggedInUserRole = "Owner" AndAlso user_id = LoggedInUserId Then

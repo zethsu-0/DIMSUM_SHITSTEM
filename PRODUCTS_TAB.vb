@@ -22,7 +22,6 @@ Public Class PRODUCTS_TAB
     Dim Quantity As String
     Dim Price As Decimal
     Dim Cost As Decimal
-    Dim taxed_price As Decimal
     Dim product_group As String = ""
 
     Private Sub PRODUCTS_Click(sender As Object, e As EventArgs) Handles Me.Click
@@ -50,7 +49,6 @@ Public Class PRODUCTS_TAB
                 Price = TextBox5.Text
                 Cost = TextBox3.Text
                 product_group = ComboBox1.Text
-                taxed_price = TextBox1.Text
 
 
 
@@ -69,8 +67,11 @@ Public Class PRODUCTS_TAB
                 mstream2.Close()
 
                 ' Insert into database
-                Dim insertQuery As String = "INSERT INTO STOCKS (Item_No, Product_name, product_group, Quantity, Price,Cost, taxed_price, Barcode, Product_image) 
-                             VALUES (@Item_no, @Product_name, @product_group, @Quantity, @Price, @Cost, @taxed_price, @Barcode, @Product_image)"
+                Dim insertQuery As String = "
+INSERT INTO stocks (Item_no, Product_name, product_group, Quantity, , Cost, price, Barcode, Product_image, expdate) 
+VALUES (@Item_no, @Product_name, @product_group, @Quantity, @Cost, @price, @Barcode, @Product_image, @expdate)
+"
+
                 Using insertCmd As New SqlCommand(insertQuery, con)
                     insertCmd.Parameters.AddWithValue("@Item_no", Item_no)
                     insertCmd.Parameters.AddWithValue("@Product_name", Product_name)
@@ -78,10 +79,9 @@ Public Class PRODUCTS_TAB
                     insertCmd.Parameters.AddWithValue("@Quantity", Quantity)
                     insertCmd.Parameters.AddWithValue("@Price", Price)
                     insertCmd.Parameters.AddWithValue("@Cost", Cost)
-                    insertCmd.Parameters.AddWithValue("@taxed_price", taxed_price)
                     insertCmd.Parameters.AddWithValue("@Barcode", arrimage)
                     insertCmd.Parameters.AddWithValue("@Product_image", arrimage2)
-
+                    insertCmd.Parameters.AddWithValue("@expdate", DateTimePicker1.Value.Date)
                     insertCmd.ExecuteNonQuery()
                     con.Close()
                 End Using
@@ -140,8 +140,6 @@ Public Class PRODUCTS_TAB
         TextBox3.Text = ""
         TextBox1.Text = ""
         ComboBox1.Text = ""
-        RadioButton1.Checked = False
-        RadioButton2.Checked = False
         PictureBox1.Image = Nothing
         PictureBox2.Image = My.Resources.errorimage
         Button5.Visible = False
@@ -164,7 +162,6 @@ Public Class PRODUCTS_TAB
                 Quantity = TextBox6.Text
                 Price = TextBox5.Text
                 Cost = TextBox3.Text
-                taxed_price = TextBox1.Text
                 product_group = ComboBox1.Text
 
                 Dim Filesize As UInt32
@@ -181,7 +178,8 @@ Public Class PRODUCTS_TAB
                 Filesize2 = mstream2.Length
                 mstream2.Close()
 
-                Dim query As String = "UPDATE stocks SET Item_no=@Item_no,Product_name=@Product_name,product_group=@product_group,Quantity=@Quantity,Price=@Price,Cost=@Cost, taxed_price=@taxed_price, barcode = @barcode,product_image=@product_image WHERE Item_no = @Item_no"
+                Dim query As String = "UPDATE stocks SET Item_no=@Item_no, Product_name=@Product_name, product_group=@product_group, Quantity=@Quantity, Cost=@Cost, price=@price, barcode=@barcode, product_image=@product_image, expdate=@expdate WHERE Item_no=@Item_no"
+
                 Using cmd As New SqlCommand(query, con)
                     cmd.Parameters.AddWithValue("@Item_no", Item_no)
                     cmd.Parameters.AddWithValue("@Product_name", Product_name)
@@ -189,9 +187,9 @@ Public Class PRODUCTS_TAB
                     cmd.Parameters.AddWithValue("@Quantity", Quantity)
                     cmd.Parameters.AddWithValue("@Price", Price)
                     cmd.Parameters.AddWithValue("@Cost", Cost)
-                    cmd.Parameters.AddWithValue("@taxed_price", taxed_price)
                     cmd.Parameters.AddWithValue("@barcode", arrimage)
                     cmd.Parameters.AddWithValue("@product_image", arrimage2)
+                    cmd.Parameters.AddWithValue("@expdate", DateTimePicker1.Value.Date)
                     con.Open()
                     cmd.ExecuteNonQuery()
                     con.Close()
@@ -224,13 +222,10 @@ Public Class PRODUCTS_TAB
                             TextBox6.Text = dt.Rows(0)("Quantity").ToString()
                             TextBox5.Text = dt.Rows(0)("Price").ToString()
                             TextBox3.Text = dt.Rows(0)("Cost").ToString()
-                            TextBox1.Text = dt.Rows(0)("taxed_price").ToString()
                             ComboBox1.Text = dt.Rows(0)("product_group").ToString()
                             Button5.Visible = False
                             TextBox7.ReadOnly = True
                             TextBox8.ReadOnly = True
-                            RadioButton1.Checked = False
-                            RadioButton2.Checked = False
 
                             If Not IsDBNull(dt.Rows(0)("product_image")) Then
                                 Dim imageData() As Byte = CType(dt.Rows(0)("product_image"), Byte())
@@ -314,24 +309,9 @@ Public Class PRODUCTS_TAB
         Barcodegenerator()
     End Sub
 
-    Private Sub RadioButton2_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton2.CheckedChanged
-        If Decimal.TryParse(TextBox5.Text, Price) Then
-            Dim taxed_price As Decimal = Price
-            TextBox1.Text = taxed_price.ToString()
-        End If
-    End Sub
 
-    Private Sub RadioButton1_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton1.CheckedChanged
-        If Decimal.TryParse(TextBox5.Text, Price) Then
-            Dim tax As Decimal = Price * 0.12
-            Dim taxed_price As Decimal = Price + tax
-            TextBox1.Text = taxed_price.ToString()
-        End If
-    End Sub
 
-    Private Sub TextBox5_TextChanged(sender As Object, e As EventArgs) Handles TextBox5.TextChanged
-        TextBox1.Text = taxed_price
-    End Sub
+
 
     Private Sub Guna2Button1_Click(sender As Object, e As EventArgs) Handles Guna2Button1.Click
         Dim openFileDialog As New OpenFileDialog()
@@ -391,4 +371,24 @@ Public Class PRODUCTS_TAB
             Me.STOCKSTableAdapter.Fill(Me.SHITSTEMDataSet.STOCKS)
         End If
     End Sub
+
+    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
+        Dim searchTerm As String = TextBox1.Text.Trim()
+
+        If String.IsNullOrEmpty(searchTerm) Then
+            STOCKSBindingSource.RemoveFilter() ' Show all if empty
+        Else
+            ' Example: Search by "firstname" column
+            STOCKSBindingSource.Filter = $"product_name LIKE '%{searchTerm}%'"
+        End If
+    End Sub
+    Private Sub DateTimePicker1_Leave(sender As Object, e As EventArgs) Handles DateTimePicker1.Leave
+
+        If DateTimePicker1.Value.Date <= Date.Today Then
+            MessageBox.Show("Expiration date must be in the future.", "Invalid Expiration", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+        End If
+    End Sub
+
+
 End Class

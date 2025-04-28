@@ -58,6 +58,8 @@ Public Class CASHIER
         countingproducts()
         GenerateProductButtons()
 
+
+        discount_choice.Text = "NONE"
     End Sub
 
 
@@ -90,7 +92,7 @@ Public Class CASHIER
             FlowLayoutPanel3.Controls.Clear() ' Only clear Others if we're reloading everything
         End If
 
-        Dim query As String = "SELECT Item_no, Product_name, Product_image, product_group FROM STOCKS WHERE 1=1"
+        Dim query As String = "SELECT Item_no, Product_name, Product_image,Price, product_group FROM STOCKS WHERE 1=1"
         Dim params As New List(Of SqlParameter)
 
         If Not String.IsNullOrWhiteSpace(searchTerm) Then
@@ -110,14 +112,16 @@ Public Class CASHIER
                         Dim itemNo As String = reader("Item_no").ToString()
                         Dim productName As String = reader("Product_name").ToString()
                         Dim productGroup As String = reader("product_group").ToString()
+                        Dim price As String = reader("Price").ToString()
 
-                        ' Only skip if filtering and product_group doesn't match
+
                         If Not String.IsNullOrWhiteSpace(groupFilter) AndAlso productGroup <> groupFilter AndAlso productGroup <> "Others" Then
                             Continue While
                         End If
 
                         Dim btn As New Guna2Button()
                         btn.Name = "DynamicGunaBtn_" & itemNo
+                        btn.Text = productName & " Price: " & price
                         btn.Size = New Size(200, 200)
                         btn.Margin = New Padding(10)
                         btn.BorderRadius = 15
@@ -215,18 +219,18 @@ Public Class CASHIER
     Private Sub AddProductToCart(ByVal itemNoToAdd As String, ByVal quantityToAdd As Integer)
         Dim localProductName As String = ""
         Dim currentStock As Integer = 0
-        Dim unitPrice As Decimal = 0
+        Dim unitPrice As Integer = 0
 
         Try
             Opencon()
-            Dim queryDetails As String = "SELECT Product_name, quantity, taxed_price FROM STOCKS WHERE Item_no = @Item_no"
+            Dim queryDetails As String = "SELECT Product_name, quantity,price FROM STOCKS WHERE Item_no = @Item_no"
             Using cmdDetails As New SqlCommand(queryDetails, con)
                 cmdDetails.Parameters.AddWithValue("@Item_no", itemNoToAdd)
                 Using reader As SqlDataReader = cmdDetails.ExecuteReader()
                     If reader.Read() Then
                         localProductName = reader("Product_name").ToString()
                         currentStock = Convert.ToInt32(reader("quantity"))
-                        unitPrice = Convert.ToDecimal(reader("taxed_price"))
+                        unitPrice = reader("price")
 
                     Else
                         MessageBox.Show("Item not found in stocks.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -260,11 +264,11 @@ Public Class CASHIER
                 End If
             End Using
 
-            Dim sellingPrice As Decimal = unitPrice
+            Dim sellingPrice As Integer = unitPrice
 
             If existingCartQuantity > 0 Then
                 Dim newQuantity As Integer = existingCartQuantity + quantityToAdd
-                Dim newTotalPrice As Decimal = newQuantity * sellingPrice
+                Dim newTotalPrice As Integer = newQuantity * sellingPrice
                 Dim updateQuery As String = "UPDATE Orders SET Quantity = @Quantity, Total_price = @TotalPrice WHERE Item_No = @Item_No"
 
                 Using updateCmd As New SqlCommand(updateQuery, con)
@@ -274,7 +278,7 @@ Public Class CASHIER
                     updateCmd.ExecuteNonQuery()
                 End Using
             Else
-                Dim newTotalPrice As Decimal = quantityToAdd * sellingPrice
+                Dim newTotalPrice As Integer = quantityToAdd * sellingPrice
                 Dim insertQuery As String = "INSERT INTO Orders (Item_No, Product_name, Quantity, Price, Total_price, OrderDate) VALUES (@Item_No, @Product_name, @Quantity, @Price, @Total_price, @OrderDate)"
 
                 Using insertCmd As New SqlCommand(insertQuery, con)
@@ -310,8 +314,8 @@ Public Class CASHIER
 
 
     Private Async Sub checkoutbtn_Click(sender As Object, e As EventArgs) Handles checkoutbtn.Click
-        Dim paymentAmount As Decimal = 0
-        Dim totalSum As Decimal = 0
+        Dim paymentAmount As Integer = 0
+        Dim totalSum As Integer = 0
 
         ' --- Input Validation ---
         If String.IsNullOrWhiteSpace(paymenttxtbox.Text) Then
@@ -320,8 +324,8 @@ Public Class CASHIER
             Return
         End If
 
-        If Not Decimal.TryParse(paymenttxtbox.Text, NumberStyles.Currency, CultureInfo.CurrentCulture, paymentAmount) AndAlso
-           Not Decimal.TryParse(paymenttxtbox.Text, paymentAmount) Then
+        If Not Integer.TryParse(paymenttxtbox.Text, NumberStyles.Currency, CultureInfo.CurrentCulture, paymentAmount) AndAlso
+           Not Integer.TryParse(paymenttxtbox.Text, paymentAmount) Then
             MessageBox.Show("Invalid payment amount. Please enter a valid number.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             paymenttxtbox.SelectAll()
             paymenttxtbox.Focus()
@@ -351,21 +355,21 @@ Public Class CASHIER
         End If
 
         ' --- Calculate Change ---
-        Dim changeAmount As Decimal = paymentAmount - totalSum
+        Dim changeAmount As Integer = paymentAmount - totalSum
 
-        Dim salesTotalForReport As Decimal = 0
-        Dim totalProfitForReport As Decimal = 0
+        Dim salesTotalForReport As Integer = 0
+        Dim totalProfitForReport As Integer = 0
 
         Try
             For Each row As DataGridViewRow In OrdersDataGridView.Rows
                 If Not row.IsNewRow Then
 
                     Dim itemNo As Integer = Convert.ToInt32(row.Cells("Item_no").Value)
-                    Dim sellingPrice As Decimal = Convert.ToDecimal(row.Cells("Price").Value)
+                    Dim sellingPrice As Integer = row.Cells("Price").Value
                     Dim quantity As Integer = Convert.ToInt32(row.Cells("Quantity").Value)
 
                     ' --- Retrieve the cost from STOCKS table based on Item_no ---
-                    Dim cost As Decimal = 0
+                    Dim cost As Integer = 0
                     Dim query As String = "SELECT Cost FROM STOCKS WHERE Item_no = @Item_no"
                     Using cmd As New SqlCommand(query, con)
                         cmd.Parameters.AddWithValue("@Item_no", itemNo)
@@ -375,7 +379,7 @@ Public Class CASHIER
                         Using reader As SqlDataReader = cmd.ExecuteReader()
                             If reader.HasRows Then
                                 reader.Read()
-                                cost = Convert.ToDecimal(reader("Cost"))
+                                cost = reader("Cost")
                             Else
                                 MessageBox.Show($"Error: Item with number {itemNo} not found in STOCKS.", "Data Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Return
@@ -383,10 +387,10 @@ Public Class CASHIER
                         End Using
                     End Using
 
-                    Dim itemTotal As Decimal = sellingPrice * quantity
+                    Dim itemTotal As Integer = sellingPrice * quantity
                     salesTotalForReport += itemTotal
 
-                    Dim itemProfit As Decimal = (sellingPrice - cost) * quantity
+                    Dim itemProfit As Integer = (sellingPrice - cost) * quantity
                     totalProfitForReport += itemProfit
                 End If
                 If con.State = ConnectionState.Open Then
@@ -498,13 +502,6 @@ Public Class CASHIER
                 End If
             End Using
 
-            If resetMonthly Then
-                Dim resetMonthlyQuery As String = "DELETE FROM Monthlysales"
-                Using resetCmd As New SqlCommand(resetMonthlyQuery, con)
-                    resetCmd.ExecuteNonQuery()
-                End Using
-            End If
-
             ' === INSERT or UPDATE for the current month ===
             Dim monthlyUpsertQuery As String = "
     IF EXISTS (SELECT 1 FROM MonthlySales WHERE Month = @Month)
@@ -523,6 +520,54 @@ Public Class CASHIER
                 cmdMonthly.ExecuteNonQuery()
             End Using
 
+            ' === HANDLE YEARLY SALES ===
+            Try
+                If con.State = ConnectionState.Closed Then con.Open()
+
+                Dim todayDate As Date = Date.Today
+                Dim currentYear As String = todayDate.Year.ToString() ' e.g., "2024"
+                Dim resetYearly As Boolean = False
+
+                ' Step 1: Check if reset is needed
+                Dim yearlyQueryReset As String = "SELECT TOP 1 [Year] FROM YearlySales ORDER BY [Year] DESC"
+                Using yearlyCmd As New SqlCommand(yearlyQueryReset, con)
+                    Dim lastYearlyYearObj = yearlyCmd.ExecuteScalar()
+                    If lastYearlyYearObj IsNot Nothing Then
+                        Dim lastYearlyYear As String = lastYearlyYearObj.ToString()
+                        If Not lastYearlyYear.Equals(currentYear, StringComparison.OrdinalIgnoreCase) Then
+                            resetYearly = True
+                        End If
+                    End If
+                End Using
+
+
+                ' Step 3: Insert or Update YearlySales
+                Dim yearlyUpsertQuery As String = "
+    IF EXISTS (SELECT 1 FROM YearlySales WHERE Year = @Year)
+        UPDATE YearlySales
+        SET Sales_total = Sales_total + @Sales_total,
+            Profit = Profit + @Profit
+        WHERE Year = @Year
+    ELSE
+        INSERT INTO YearlySales (Year, Sales_total, Profit)
+        VALUES (@Year, @Sales_total, @Profit)"
+
+                Using cmdYearly As New SqlCommand(yearlyUpsertQuery, con)
+                    cmdYearly.Parameters.AddWithValue("@Year", currentYear)
+                    cmdYearly.Parameters.AddWithValue("@Sales_total", salesTotalForReport)
+                    cmdYearly.Parameters.AddWithValue("@Profit", totalProfitForReport)
+                    cmdYearly.ExecuteNonQuery()
+                End Using
+
+            Catch ex As Exception
+                MessageBox.Show("Error updating YearlySales: " & ex.Message)
+            Finally
+                If con.State = ConnectionState.Open Then con.Close()
+            End Try
+
+
+
+
 
 
 
@@ -536,10 +581,14 @@ Public Class CASHIER
                 End If
             Next
 
+
             Dim transactionId As Integer
-            Dim insertTransactionQuery As String = "INSERT INTO Transactions (TransactionDate, TotalAmount, PaymentAmount, ChangeGiven, Total_Item, Profit) 
-                                      OUTPUT INSERTED.TransactionID 
-                                      VALUES (@TransactionDate, @TotalAmount, @PaymentAmount, @ChangeGiven, @Total_Item, @Profit)"
+            Dim insertTransactionQuery As String = "
+INSERT INTO Transactions (TransactionDate, TotalAmount, PaymentAmount, ChangeGiven, Total_Item, Profit, Discount) 
+OUTPUT INSERTED.TransactionID 
+VALUES (@TransactionDate, @TotalAmount, @PaymentAmount, @ChangeGiven, @Total_Item, @Profit, @Discount)"
+
+
 
             Using transactionCmd As New SqlCommand(insertTransactionQuery, con)
                 transactionCmd.Parameters.AddWithValue("@TransactionDate", DateTime.Now)
@@ -548,6 +597,9 @@ Public Class CASHIER
                 transactionCmd.Parameters.AddWithValue("@ChangeGiven", changeAmount)
                 transactionCmd.Parameters.AddWithValue("@Total_Item", totalItemCount)
                 transactionCmd.Parameters.AddWithValue("@Profit", totalProfitForReport)
+
+                Dim discountText As String = discount_choice.Text
+                transactionCmd.Parameters.AddWithValue("@Discount", discountText)
 
                 If con.State = ConnectionState.Closed Then con.Open()
                 transactionId = Convert.ToInt32(transactionCmd.ExecuteScalar())
@@ -629,15 +681,16 @@ Public Class CASHIER
 
         UpdateTotalSum(Me, EventArgs.Empty)
         OrdersDataGridView.ClearSelection()
+        discount_choice.Text = "NONE"
     End Sub
 
     Private Sub UpdateTotalSum(sender As Object, e As EventArgs)
         Try
-            Dim totalSum As Decimal = 0
+            Dim totalSum As Integer = 0
             For Each row As DataGridViewRow In OrdersDataGridView.Rows
                 ' Check if it's not the new row placeholder and the cell has a value
                 If Not row.IsNewRow AndAlso row.Cells("Total_price") IsNot Nothing AndAlso row.Cells("Total_price").Value IsNot Nothing AndAlso Not IsDBNull(row.Cells("Total_price").Value) Then
-                    totalSum += Convert.ToDecimal(row.Cells("Total_price").Value)
+                    totalSum += row.Cells("Total_price").Value
                 End If
             Next
             lbltotal.Text = totalSum.ToString("C", CultureInfo.GetCultureInfo("en-PH")) ' Format as Philippine Peso
@@ -657,8 +710,8 @@ Public Class CASHIER
 
     Private Sub UpdateItemQuantityInCart(ByVal itemNoToUpdate As String, ByVal newQuantity As Integer)
 
-        Dim sellingPrice As Decimal = 0
-        Dim newTotalPrice As Decimal = 0
+        Dim sellingPrice As Integer = 0
+        Dim newTotalPrice As Integer = 0
 
         Try
             Opencon()
@@ -667,7 +720,7 @@ Public Class CASHIER
                 cmdGetPrice.Parameters.AddWithValue("@Item_No", itemNoToUpdate)
                 Dim result = cmdGetPrice.ExecuteScalar()
                 If result IsNot Nothing AndAlso Not IsDBNull(result) Then
-                    sellingPrice = Convert.ToDecimal(result)
+                    sellingPrice = result
                 Else
                     MessageBox.Show($"Could not find selling price for item {itemNoToUpdate} in cart.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     Return
@@ -901,112 +954,141 @@ Public Class CASHIER
     End Sub
 
     Dim highestproductname As String = ""
-    Dim highestproductprice As Decimal = 0D
+    Dim highestproductprice As Integer = 0D
 
     Public Sub Discount()
-    Dim discountRate As Decimal = 0
+        Dim discountRate As Integer = 0
 
-    ' 1. Determine the selected discount
-    Select Case discount_choice.Text
-        Case "PWD/SENIOR"
-            discountRate = 0.2D
-        Case "10%"
-            discountRate = 0.1D
-        Case "15%"
-            discountRate = 0.15D
-        Case Else
-            discountRate = 0
-    End Select
+        ' 1. Determine the selected discount
+        Select Case discount_choice.Text
+            Case "PWD/SENIOR"
+                discountRate = 0.2D
+            Case "10%"
+                discountRate = 0.1D
+            Case "15%"
+                discountRate = 0.15D
+            Case Else
+                discountRate = 0
+        End Select
 
-    Try
-        Opencon()
+        Try
+            Opencon()
 
-        ' 2. Reset ALL item prices in Orders using their original taxed_price from STOCKS
-        Dim resetQuery As String = "
+            Dim resetQuery As String = "
             UPDATE O
-            SET O.Price = S.taxed_price,
-                O.Total_price = O.Quantity * S.taxed_price
-            FROM Orders O
-            JOIN STOCKS S ON O.Item_No = S.Item_No"
-        Using resetCmd As New SqlCommand(resetQuery, con)
-            resetCmd.ExecuteNonQuery()
-        End Using
-
-        ' 3. Get the highest-priced product again (after reset)
-        Dim query As String = "SELECT TOP 1 Item_No FROM Orders ORDER BY Price DESC"
-        Dim itemNo As String = ""
-
-        Using cmd As New SqlCommand(query, con)
-            Using reader As SqlDataReader = cmd.ExecuteReader()
-                If reader.Read() Then
-                    itemNo = reader("Item_No").ToString()
-                End If
+SET O.Price = S.Price,
+    O.Total_price = O.Quantity * S.Price
+FROM Orders O
+JOIN STOCKS S ON O.Item_No = S.Item_No
+"
+            Using resetCmd As New SqlCommand(resetQuery, con)
+                resetCmd.ExecuteNonQuery()
             End Using
-        End Using
 
-        If itemNo = "" Then Exit Sub
+            ' 3. Get the highest-priced product again (after reset)
+            Dim query As String = "SELECT TOP 1 Item_No FROM Orders ORDER BY Price DESC"
+            Dim itemNo As String = ""
 
-        ' 4. Get original price from STOCKS
-        Dim originalPrice As Decimal = 0
-        Dim getPriceQuery As String = "SELECT taxed_price FROM STOCKS WHERE Item_No = @Item_No"
-        Dim itemNoInt As Integer
-        If Integer.TryParse(itemNo, itemNoInt) Then
-            Using priceCmd As New SqlCommand(getPriceQuery, con)
-                priceCmd.Parameters.AddWithValue("@Item_No", itemNoInt)
-                Dim result = priceCmd.ExecuteScalar()
-                If result IsNot Nothing AndAlso Not IsDBNull(result) Then
-                    originalPrice = Convert.ToDecimal(result)
-                Else
-                    MessageBox.Show("Failed to find original price in STOCKS for Item_No: " & itemNo)
-                    Return
-                End If
+            Using cmd As New SqlCommand(query, con)
+                Using reader As SqlDataReader = cmd.ExecuteReader()
+                    If reader.Read() Then
+                        itemNo = reader("Item_No").ToString()
+                    End If
+                End Using
             End Using
-        Else
-            MessageBox.Show("Invalid Item_No format: " & itemNo)
-            Return
-        End If
 
-        ' 5. Apply discount only to that item
-        Dim discountedPrice As Decimal = originalPrice * (1 - discountRate)
+            If itemNo = "" Then Exit Sub
 
-        Dim updateQuery As String = "
+            ' 4. Get original price from STOCKS
+            Dim originalPrice As Integer = 0
+            Dim getPriceQuery As String = "SELECT Price FROM STOCKS WHERE Item_No = @Item_No"
+
+            Dim itemNoInt As Integer
+            If Integer.TryParse(itemNo, itemNoInt) Then
+                Using priceCmd As New SqlCommand(getPriceQuery, con)
+                    priceCmd.Parameters.AddWithValue("@Item_No", itemNoInt)
+                    Dim result = priceCmd.ExecuteScalar()
+                    If result IsNot Nothing AndAlso Not IsDBNull(result) Then
+                        originalPrice = result
+                    Else
+                        MessageBox.Show("Failed to find original price in STOCKS for Item_No: " & itemNo)
+                        Return
+                    End If
+                End Using
+            Else
+                MessageBox.Show("Invalid Item_No format: " & itemNo)
+                Return
+            End If
+
+            ' 5. Apply discount only to that item
+            Dim discountedPrice As Integer = originalPrice * (1 - discountRate)
+
+            Dim updateQuery As String = "
             UPDATE Orders
             SET Price = @Price,
                 Total_price = Quantity * @Price
             WHERE Item_No = @Item_No"
-        Using updateCmd As New SqlCommand(updateQuery, con)
-            updateCmd.Parameters.AddWithValue("@Price", discountedPrice)
-            updateCmd.Parameters.AddWithValue("@Item_No", itemNo)
-            updateCmd.ExecuteNonQuery()
-        End Using
+            Using updateCmd As New SqlCommand(updateQuery, con)
+                updateCmd.Parameters.AddWithValue("@Price", discountedPrice)
+                updateCmd.Parameters.AddWithValue("@Item_No", itemNo)
+                updateCmd.ExecuteNonQuery()
+            End Using
 
-        ' 6. Refresh UI
-        Me.OrdersTableAdapter.Fill(Me.SHITSTEMDataSet.Orders)
-        UpdateTotalSum(Me, EventArgs.Empty)
+            ' 6. Refresh UI
+            Me.OrdersTableAdapter.Fill(Me.SHITSTEMDataSet.Orders)
+            UpdateTotalSum(Me, EventArgs.Empty)
 
-    Catch ex As Exception
-        MessageBox.Show("Error applying discount: " & ex.Message)
-    Finally
-        If con.State = ConnectionState.Open Then con.Close()
-    End Try
-End Sub
+        Catch ex As Exception
+            MessageBox.Show("Error applying discount: " & ex.Message)
+        Finally
+            If con.State = ConnectionState.Open Then con.Close()
+        End Try
+    End Sub
 
 
     Private Sub paymenttxtbox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles paymenttxtbox.KeyPress
-        If Not Char.IsControl(e.KeyChar) AndAlso Not Char.IsDigit(e.KeyChar) Then
+        OnlyAllowintegerInput(sender, e)
+    End Sub
+    Public Sub OnlyAllowintegerInput(sender As Object, e As KeyPressEventArgs)
+        Dim tb As TextBox = CType(sender, TextBox)
+
+        ' Allow digits, backspace, and one dot (.)
+        If Not Char.IsControl(e.KeyChar) AndAlso Not Char.IsDigit(e.KeyChar) AndAlso e.KeyChar <> "."c Then
+            e.Handled = True ' Block anything else
+        End If
+
+        ' Only allow one dot
+        If e.KeyChar = "."c AndAlso tb.Text.Contains(".") Then
+            e.Handled = True
+        End If
+
+        ' Prevent starting with a dot (.)
+        If tb.SelectionStart = 0 AndAlso e.KeyChar = "."c Then
             e.Handled = True
         End If
     End Sub
 
     Private Sub Guna2Button1_Click(sender As Object, e As EventArgs) Handles Guna2Button1.Click
         If MessageBox.Show("VOID ORDER?", "PA VOID PLS",
-                     MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.Yes Then
-            resetcart()
+                 MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.Yes Then
+
+            ' Instead of resetcart(), loop through each item and delete properly
+            For Each row As DataGridViewRow In OrdersDataGridView.Rows
+                If Not row.IsNewRow Then
+                    Dim rawItemNo As String = row.Cells("Item_No").Value.ToString()
+
+                    If Not String.IsNullOrEmpty(rawItemNo) Then
+                        DeleteItemFromCart(rawItemNo)
+                    End If
+                End If
+            Next
+
+            UpdateTotalSum(Me, EventArgs.Empty)
+            OrdersDataGridView.ClearSelection()
+            discount_choice.Text = "NONE"
+            paymenttxtbox.Clear()
+            lbltotal.Text = "₱0.00"
 
         End If
-    End Sub
-
-    Private Sub lbltotal_Click(sender As Object, e As EventArgs) Handles lbltotal.Click
-
     End Sub
 End Class
