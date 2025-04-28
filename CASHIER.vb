@@ -4,6 +4,7 @@ Imports System.Drawing.Text
 Imports System.Globalization
 Imports System.IO
 Imports System.Runtime.InteropServices
+Imports System.Web.Util
 Imports Guna.UI2.WinForms
 Imports Microsoft.VisualBasic.ApplicationServices
 Public Class CASHIER
@@ -14,7 +15,7 @@ Public Class CASHIER
     Private Sub CASHIER_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If con IsNot Nothing AndAlso con.State = ConnectionState.Open Then con.Close()
         Opencon()
-        Opencon()
+
         con.Close()
         ' --- Set up the Delete Button Column in the DataGridView ---
         Dim deleteButtonColumn As New DataGridViewButtonColumn()
@@ -68,58 +69,58 @@ Public Class CASHIER
     Private Sub ResetRevenueIfNewDay()
         ' Try
         Opencon()
-            Dim todayDate As Date = Date.Today
+        Dim todayDate As Date = Date.Today
 
-            Dim selectQuery As String = "
+        Dim selectQuery As String = "
             SELECT user_id, revenue, dateofremittance, firstname, lastname
             FROM login
             WHERE role IN ('Owner','Manager','Employee')
         "
-            Dim usersToReset As New List(Of (userId As String, revenue As Decimal, firstName As String, lastName As String))
+        Dim usersToReset As New List(Of (userId As String, revenue As Decimal, firstName As String, lastName As String))
 
-            Using cmd As New SqlCommand(selectQuery, con)
-                Using reader As SqlDataReader = cmd.ExecuteReader()
-                    While reader.Read()
-                        Dim userId = reader("user_id").ToString()
-                        Dim revenueAmt = If(reader.IsDBNull(reader.GetOrdinal("revenue")), 0D, Convert.ToDecimal(reader("revenue")))
-                        Dim lastResetVal = reader("dateofremittance")
-                        Dim lastReset As Date? = If(lastResetVal Is DBNull.Value, CType(Nothing, Date?), CType(lastResetVal, Date))
-                        If (Not lastReset.HasValue OrElse lastReset.Value.Date <> todayDate) AndAlso revenueAmt > 0 Then
-                            usersToReset.Add((userId, revenueAmt, reader("firstname").ToString(), reader("lastname").ToString()))
-                        End If
-                    End While
-                End Using
+        Using cmd As New SqlCommand(selectQuery, con)
+            Using reader As SqlDataReader = cmd.ExecuteReader()
+                While reader.Read()
+                    Dim userId = reader("user_id").ToString()
+                    Dim revenueAmt = If(reader.IsDBNull(reader.GetOrdinal("revenue")), 0D, Convert.ToDecimal(reader("revenue")))
+                    Dim lastResetVal = reader("dateofremittance")
+                    Dim lastReset As Date? = If(lastResetVal Is DBNull.Value, CType(Nothing, Date?), CType(lastResetVal, Date))
+                    If (Not lastReset.HasValue OrElse lastReset.Value.Date <> todayDate) AndAlso revenueAmt > 0 Then
+                        usersToReset.Add((userId, revenueAmt, reader("firstname").ToString(), reader("lastname").ToString()))
+                    End If
+                End While
             End Using
+        End Using
 
-            ' 2) Now reader is closed, do inserts & updates
-            For Each u In usersToReset
-                ' Insert into remittancehistory
-                Using insertCmd As New SqlCommand("
+        ' 2) Now reader is closed, do inserts & updates
+        For Each u In usersToReset
+            ' Insert into remittancehistory
+            Using insertCmd As New SqlCommand("
                 INSERT INTO remittancehistory
                   (User_id, revenue, date, firstname, lastname)
                 VALUES
                   (@User_id, @revenue, @date, @firstname, @lastname)
             ", con)
-                    insertCmd.Parameters.AddWithValue("@User_id", u.userId)
-                    insertCmd.Parameters.AddWithValue("@revenue", u.revenue)
-                    insertCmd.Parameters.AddWithValue("@date", todayDate)
-                    insertCmd.Parameters.AddWithValue("@firstname", u.firstName)
-                    insertCmd.Parameters.AddWithValue("@lastname", u.lastName)
-                    insertCmd.ExecuteNonQuery()
-                End Using
+                insertCmd.Parameters.AddWithValue("@User_id", u.userId)
+                insertCmd.Parameters.AddWithValue("@revenue", u.revenue)
+                insertCmd.Parameters.AddWithValue("@date", todayDate)
+                insertCmd.Parameters.AddWithValue("@firstname", u.firstName)
+                insertCmd.Parameters.AddWithValue("@lastname", u.lastName)
+                insertCmd.ExecuteNonQuery()
+            End Using
 
-                ' Reset login.revenue & update dateofremittance
-                Using resetCmd As New SqlCommand("
+            ' Reset login.revenue & update dateofremittance
+            Using resetCmd As New SqlCommand("
                 UPDATE login
                 SET revenue = 0,
                     dateofremittance = @today
                 WHERE user_id = @userID
             ", con)
-                    resetCmd.Parameters.AddWithValue("@today", todayDate)
-                    resetCmd.Parameters.AddWithValue("@userID", u.userId)
-                    resetCmd.ExecuteNonQuery()
-                End Using
-            Next
+                resetCmd.Parameters.AddWithValue("@today", todayDate)
+                resetCmd.Parameters.AddWithValue("@userID", u.userId)
+                resetCmd.ExecuteNonQuery()
+            End Using
+        Next
 
         ' Catch ex As Exception
         'MessageBox.Show("Error resetting employee revenues: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -661,9 +662,6 @@ WHERE user_id = @userID
 INSERT INTO Transactions (TransactionDate, TotalAmount, PaymentAmount, ChangeGiven, Total_Item, Profit, Discount) 
 OUTPUT INSERTED.TransactionID 
 VALUES (@TransactionDate, @TotalAmount, @PaymentAmount, @ChangeGiven, @Total_Item, @Profit, @Discount)"
-
-
-
             Using transactionCmd As New SqlCommand(insertTransactionQuery, con)
                 transactionCmd.Parameters.AddWithValue("@TransactionDate", DateTime.Now)
                 transactionCmd.Parameters.AddWithValue("@TotalAmount", totalSum)
@@ -678,6 +676,8 @@ VALUES (@TransactionDate, @TotalAmount, @PaymentAmount, @ChangeGiven, @Total_Ite
                 If con.State = ConnectionState.Closed Then con.Open()
                 transactionId = Convert.ToInt32(transactionCmd.ExecuteScalar())
             End Using
+
+
 
 
             ' STEP 1: Clear the DailySummary table
@@ -714,6 +714,7 @@ VALUES (@TransactionDate, @TotalAmount, @PaymentAmount, @ChangeGiven, @Total_Ite
 
 
 
+            InsertTransactionDetails(transactionId)
 
             lbltotal.Text = "₱0.00"
         Catch ex As Exception
@@ -722,16 +723,82 @@ VALUES (@TransactionDate, @TotalAmount, @PaymentAmount, @ChangeGiven, @Total_Ite
         Finally
             If con IsNot Nothing AndAlso con.State = ConnectionState.Open Then
                 con.Close()
-                UpdateRevenueAndRecordHistory(user_id, salesTotalForReport)
             End If
+
             MessageBox.Show("Checkout complete!" & vbCrLf & vbCrLf &
     $"Total Sale: ₱{salesTotalForReport:N2}" & vbCrLf &
     $"Payment Received: ₱{paymentAmount:N2}" & vbCrLf &
     $"Change Due: ₱{changeAmount:N2}",
     "Transaction Successful", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            UpdateRevenueAndRecordHistory(user_id, salesTotalForReport)
 
             resetcart()
             paymenttxtbox.Clear()
+        End Try
+    End Sub
+
+    Private Sub InsertTransactionDetails(transactionID As Integer)
+        If con IsNot Nothing AndAlso con.State = ConnectionState.Open Then
+            con.Close()
+        End If
+        Try
+
+            Opencon()
+
+            ' Step 1: Load all current Orders into a list first
+            Dim ordersQuery As String = "
+            SELECT Item_no, Product_name, Quantity
+            FROM Orders
+        "
+
+            Dim orderList As New List(Of (itemNo As String, productName As String, quantity As Integer))
+
+            ' Read all orders into memory
+            Using cmd As New SqlCommand(ordersQuery, con)
+                Using reader As SqlDataReader = cmd.ExecuteReader()
+                    While reader.Read()
+                        Dim itemNo As String = reader("Item_no").ToString()
+                        Dim productName As String = reader("Product_name").ToString()
+                        Dim quantity As Integer = Convert.ToInt32(reader("Quantity"))
+                        orderList.Add((itemNo, productName, quantity))
+                    End While
+                End Using
+            End Using
+            ' === Now the DataReader is closed ===
+
+            ' Step 2: Get the TransactionDate from Transactions table
+            Dim transactionDateQuery As String = "
+            SELECT TransactionDate
+            FROM Transactions
+            WHERE TransactionID = @transactionID
+        "
+            Dim transactionDate As Date
+
+            Using cmdDate As New SqlCommand(transactionDateQuery, con)
+                cmdDate.Parameters.AddWithValue("@transactionID", transactionID)
+                transactionDate = CDate(cmdDate.ExecuteScalar())
+            End Using
+
+            ' Step 3: Now insert all orders into TransactionDetails
+            For Each order In orderList
+                Dim insertQuery As String = "
+                INSERT INTO TransactionDetails (transactionID, Item_no, Product_name, Quantity, date)
+                VALUES (@transactionID, @Item_no, @Product_name, @Quantity, @date)
+            "
+                Using cmdInsert As New SqlCommand(insertQuery, con)
+                    cmdInsert.Parameters.AddWithValue("@transactionID", transactionID)
+                    cmdInsert.Parameters.AddWithValue("@Item_no", order.itemNo)
+                    cmdInsert.Parameters.AddWithValue("@Product_name", order.productName)
+                    cmdInsert.Parameters.AddWithValue("@Quantity", order.quantity)
+                    cmdInsert.Parameters.AddWithValue("@date", transactionDate)
+                    cmdInsert.ExecuteNonQuery()
+                End Using
+            Next
+
+        Catch ex As Exception
+            MessageBox.Show("Error inserting transaction details: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            If con.State = ConnectionState.Open Then con.Close()
         End Try
     End Sub
 
@@ -754,47 +821,6 @@ VALUES (@TransactionDate, @TotalAmount, @PaymentAmount, @ChangeGiven, @Total_Ite
                 cmdUpdateRevenue.ExecuteNonQuery()
             End Using
 
-        Catch ex As Exception
-            MessageBox.Show("Error updating revenue: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Finally
-            If con.State = ConnectionState.Open Then con.Close()
-        End Try
-    End Sub
-
-    Public Sub logremittance(userId As String, earnedToday As Decimal)
-        Try
-            Opencon()
-            ' Step 2: Insert the earned revenue into remittancehistory
-            Dim todayDate As Date = Date.Today
-            Dim insertHistoryQuery As String = "
-        INSERT INTO remittancehistory (User_id, revenue, date, firstname, lastname)
-        VALUES (@User_id, @revenue, @date, @firstname, @lastname)
-        "
-
-            ' Get user info (first name, last name)
-            Dim firstName As String = ""
-            Dim lastName As String = ""
-
-            Dim nameQuery As String = "SELECT firstname, lastname FROM login WHERE user_id = @userID"
-            Using cmdName As New SqlCommand(nameQuery, con)
-                cmdName.Parameters.AddWithValue("@userID", userId)
-                Using reader As SqlDataReader = cmdName.ExecuteReader()
-                    If reader.Read() Then
-                        firstName = reader("firstname").ToString()
-                        lastName = reader("lastname").ToString()
-                    End If
-                End Using
-            End Using
-
-            ' Insert into remittancehistory
-            Using cmdInsertHistory As New SqlCommand(insertHistoryQuery, con)
-                cmdInsertHistory.Parameters.AddWithValue("@User_id", userId)
-                cmdInsertHistory.Parameters.AddWithValue("@revenue", earnedToday)
-                cmdInsertHistory.Parameters.AddWithValue("@date", todayDate)
-                cmdInsertHistory.Parameters.AddWithValue("@firstname", firstName)
-                cmdInsertHistory.Parameters.AddWithValue("@lastname", lastName)
-                cmdInsertHistory.ExecuteNonQuery()
-            End Using
         Catch ex As Exception
             MessageBox.Show("Error updating revenue: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
@@ -1240,5 +1266,6 @@ JOIN STOCKS S ON O.Item_No = S.Item_No
 
         End If
     End Sub
+
 
 End Class

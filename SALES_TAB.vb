@@ -1,5 +1,6 @@
 ﻿Imports System.Data.SqlClient
 Imports System.Reflection
+Imports System.Web
 Imports System.Windows.Forms.DataVisualization.Charting
 Imports SixLabors.ImageSharp.PixelFormats
 
@@ -13,6 +14,9 @@ Public Class SALES_TAB
         Me.STOCKSTableAdapter.Fill(Me.SHITSTEMDataSet.STOCKS)
         Me.DailySummaryTableAdapter.Fill(Me.SHITSTEMDataSet.DailySummary)
         Me.TransactionsTableAdapter.Fill(Me.SHITSTEMDataSet.Transactions)
+        ' Somewhere in Form_Load or the Designer code:
+        TransactionDetailsDataGridView.DataSource = TransactionDetailsBindingSource
+
         Dim dt As New DataTable()
         Dim query As String = "SELECT * FROM STOCKS"
         Using filtercmd As New SqlCommand(query, con)
@@ -31,12 +35,15 @@ Public Class SALES_TAB
         lowStockView.RowFilter = "Quantity <= 5 AND Quantity > 0"
         STOCKSDataGridView.DataSource = lowStockView
 
-
+        If user_Role = "Manager" Then
+            TransactionsDataGridView.Columns("Profit").Visible = False
+        End If
 
 
         salesTotallbl.Text = "0.00"
         dailytotalearn()
         LoadCharts()
+
     End Sub
     Private Sub LoadCharts()
         Opencon()
@@ -324,5 +331,76 @@ Public Class SALES_TAB
         End Try
 
         RefreshData()
+    End Sub
+
+    Private Sub TransactionsDataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs) _
+    Handles TransactionsDataGridView.CellClick
+
+        ' ignore header or out-of-range clicks
+        If e.RowIndex < 0 Then Return
+
+        ' grab the ID from the clicked row of TransactionsDataGridView
+        Dim cellVal = TransactionsDataGridView.Rows(e.RowIndex).Cells("TransactionID").Value
+        If cellVal Is Nothing OrElse IsDBNull(cellVal) Then Return
+
+        Dim transactionID As Integer
+        If Integer.TryParse(cellVal.ToString(), transactionID) Then
+            TransactionDetailsDataGridView.Width = 503
+            TransactionDetailsDataGridView.DataSource = TransactionDetailsBindingSource
+            LoadTransactionDetails(transactionID)
+        End If
+    End Sub
+
+    Private Sub LoadTransactionDetails(transactionID As Integer)
+        Try
+            Opencon()
+
+            ' Query to get details
+            Dim query As String = "
+        SELECT Item_no, Product_name, Quantity, date
+        FROM TransactionDetails
+        WHERE transactionID = @transactionID
+        "
+
+            Using cmd As New SqlCommand(query, con)
+                cmd.Parameters.AddWithValue("@transactionID", transactionID)
+
+                Using da As New SqlDataAdapter(cmd)
+                    Dim dt As New DataTable()
+                    da.Fill(dt)
+
+                    ' Check if data is returned
+                    If dt.Rows.Count > 0 Then
+                        ' Set the DataTable to the BindingSource
+                        TransactionDetailsBindingSource.DataSource = dt
+
+                        ' Refresh the DataGridView
+                        TransactionDetailsBindingSource.ResetBindings(False)
+                        TransactionDetailsDataGridView.Refresh() ' Correct DataGridView name here
+                    Else
+                        ' If no data, inform the user (optional)
+                        MessageBox.Show("No details found for this transaction.", "No Data", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    End If
+                End Using
+            End Using
+
+        Catch ex As Exception
+            MessageBox.Show("Error loading transaction details: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            If con.State = ConnectionState.Open Then con.Close()
+        End Try
+    End Sub
+
+
+    Private Sub DateTimePicker1_ValueChanged(sender As Object, e As EventArgs) Handles DateTimePicker1.ValueChanged
+        Dim selectedDate As Date = DateTimePicker1.Value.Date
+
+        ' Filter where TransactionDate = selected date
+        TransactionsBindingSource.Filter = $"TransactionDate >= '#{selectedDate:MM/dd/yyyy}#' AND TransactionDate < '#{selectedDate.AddDays(1):MM/dd/yyyy}#'"
+    End Sub
+
+    Private Sub Guna2Button3_Click(sender As Object, e As EventArgs) Handles Guna2Button3.Click
+        TransactionDetailsDataGridView.DataSource = Nothing
+        TransactionDetailsDataGridView.Width = 10
     End Sub
 End Class

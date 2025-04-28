@@ -119,7 +119,7 @@ Partial Class CASHIER
         Me.Cancel.Font = New System.Drawing.Font("ITC Kabel", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Cancel.ForeColor = System.Drawing.Color.Black
         Me.Cancel.Location = New System.Drawing.Point(20, 20)
-        Me.Cancel.Margin = New System.Windows.Forms.Padding(20, 20, 20, 20)
+        Me.Cancel.Margin = New System.Windows.Forms.Padding(20)
         Me.Cancel.Name = "Cancel"
         Me.Cancel.Size = New System.Drawing.Size(80, 80)
         Me.Cancel.TabIndex = 24
@@ -139,7 +139,7 @@ Partial Class CASHIER
         Me.SiomaiFilter.Font = New System.Drawing.Font("ITC Kabel", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SiomaiFilter.ForeColor = System.Drawing.Color.Black
         Me.SiomaiFilter.Location = New System.Drawing.Point(20, 140)
-        Me.SiomaiFilter.Margin = New System.Windows.Forms.Padding(20, 20, 20, 20)
+        Me.SiomaiFilter.Margin = New System.Windows.Forms.Padding(20)
         Me.SiomaiFilter.Name = "SiomaiFilter"
         Me.SiomaiFilter.Size = New System.Drawing.Size(80, 80)
         Me.SiomaiFilter.TabIndex = 19
@@ -159,7 +159,7 @@ Partial Class CASHIER
         Me.SiopaoFilter.Font = New System.Drawing.Font("ITC Kabel", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SiopaoFilter.ForeColor = System.Drawing.Color.Black
         Me.SiopaoFilter.Location = New System.Drawing.Point(20, 260)
-        Me.SiopaoFilter.Margin = New System.Windows.Forms.Padding(20, 20, 20, 20)
+        Me.SiopaoFilter.Margin = New System.Windows.Forms.Padding(20)
         Me.SiopaoFilter.Name = "SiopaoFilter"
         Me.SiopaoFilter.Size = New System.Drawing.Size(80, 80)
         Me.SiopaoFilter.TabIndex = 25
@@ -179,7 +179,7 @@ Partial Class CASHIER
         Me.DrinksFilter.Font = New System.Drawing.Font("ITC Kabel", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DrinksFilter.ForeColor = System.Drawing.Color.Black
         Me.DrinksFilter.Location = New System.Drawing.Point(20, 380)
-        Me.DrinksFilter.Margin = New System.Windows.Forms.Padding(20, 20, 20, 20)
+        Me.DrinksFilter.Margin = New System.Windows.Forms.Padding(20)
         Me.DrinksFilter.Name = "DrinksFilter"
         Me.DrinksFilter.Size = New System.Drawing.Size(80, 80)
         Me.DrinksFilter.TabIndex = 20
@@ -261,7 +261,7 @@ Partial Class CASHIER
         Me.Guna2Button1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.Guna2Button1.ForeColor = System.Drawing.Color.White
         Me.Guna2Button1.Location = New System.Drawing.Point(204, 638)
-        Me.Guna2Button1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Guna2Button1.Margin = New System.Windows.Forms.Padding(2)
         Me.Guna2Button1.Name = "Guna2Button1"
         Me.Guna2Button1.Size = New System.Drawing.Size(137, 24)
         Me.Guna2Button1.TabIndex = 28
@@ -281,7 +281,7 @@ Partial Class CASHIER
         Me.discount_choice.ItemHeight = 30
         Me.discount_choice.Items.AddRange(New Object() {"NONE", "PWD/SENIOR", "20%", "10%"})
         Me.discount_choice.Location = New System.Drawing.Point(13, 464)
-        Me.discount_choice.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.discount_choice.Margin = New System.Windows.Forms.Padding(2)
         Me.discount_choice.Name = "discount_choice"
         Me.discount_choice.Size = New System.Drawing.Size(134, 36)
         Me.discount_choice.TabIndex = 26
@@ -443,7 +443,7 @@ Partial Class CASHIER
         Me.checkoutbtn.HoverState.FillColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.checkoutbtn.HoverState.ForeColor = System.Drawing.Color.White
         Me.checkoutbtn.Location = New System.Drawing.Point(99, 561)
-        Me.checkoutbtn.Margin = New System.Windows.Forms.Padding(20, 20, 20, 20)
+        Me.checkoutbtn.Margin = New System.Windows.Forms.Padding(20)
         Me.checkoutbtn.Name = "checkoutbtn"
         Me.checkoutbtn.Size = New System.Drawing.Size(153, 51)
         Me.checkoutbtn.TabIndex = 17
@@ -517,7 +517,7 @@ Partial Class CASHIER
         Me.FlowLayoutPanel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.FlowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.FlowLayoutPanel3.Location = New System.Drawing.Point(0, 561)
-        Me.FlowLayoutPanel3.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.FlowLayoutPanel3.Margin = New System.Windows.Forms.Padding(2)
         Me.FlowLayoutPanel3.Name = "FlowLayoutPanel3"
         Me.FlowLayoutPanel3.Size = New System.Drawing.Size(708, 130)
         Me.FlowLayoutPanel3.TabIndex = 27
@@ -577,11 +577,13 @@ Partial Class CASHIER
         Me.TableAdapterManager.MonthlySalesTableAdapter = Nothing
         Me.TableAdapterManager.OrdersTableAdapter = Me.OrdersTableAdapter
         Me.TableAdapterManager.ProductGroupsTableAdapter = Nothing
+        Me.TableAdapterManager.remittancehistoryTableAdapter = Nothing
         Me.TableAdapterManager.STOCKSTableAdapter = Nothing
         Me.TableAdapterManager.TransactionDetailsTableAdapter = Nothing
         Me.TableAdapterManager.TransactionsTableAdapter = Nothing
         Me.TableAdapterManager.UpdateOrder = DIMSUM_SHITSTEM.SHITSTEMDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
         Me.TableAdapterManager.WeeklySalesTableAdapter = Nothing
+        Me.TableAdapterManager.YearlySalesTableAdapter = Nothing
         '
         'CASHIER
         '

@@ -53,10 +53,11 @@ Public Class LOGIN_PAGE
                 Select Case userRole
                     Case "Employee"
                         Dim user_Role As String = userRole
-
+                        Dim user_id As String = TextBox1.Text
                         If Not String.IsNullOrEmpty(user_Role) Then
                             Dim CASHIER As New CASHIER()
                             CASHIER.user_Role = user_Role
+                            CASHIER.user_id = user_id
                             CASHIER.Show()
                             Me.Hide()
                             showRolefields()
@@ -73,8 +74,10 @@ Public Class LOGIN_PAGE
 
                         If Not String.IsNullOrEmpty(user_Role) Then
                             Dim form2 As New Form2()
+                            Dim CASHIER As New CASHIER()
                             form2.user_role = user_Role
                             form2.user_id = user_id
+                            CASHIER.user_id = user_id
                             form2.Show()
                             Me.Hide()
                             showRolefields()
@@ -88,8 +91,10 @@ Public Class LOGIN_PAGE
 
                         If Not String.IsNullOrEmpty(user_id) Then
                             Dim form2 As New Form2()
+                            Dim CASHIER As New CASHIER()
                             form2.user_role = user_Role
                             form2.user_id = user_id
+                            CASHIER.user_id = user_id
                             form2.Show()
                             Me.Hide()
                             showRolefields()

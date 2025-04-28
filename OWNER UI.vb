@@ -41,7 +41,7 @@ Public Class Form2
         Timer1.Interval = 1000
         Timer1.Start()
         salesbtn.PerformClick()
-
+        Label4.Text = Date.Today
 
     End Sub
     Private Sub Form2_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
@@ -127,8 +127,11 @@ Public Class Form2
 
     Private Sub cashierbtn_Click(sender As Object, e As EventArgs) Handles cashierbtn.Click
         Dim CASHIER As New CASHIER()
+        CASHIER.user_id = user_id
+        CASHIER.user_Role = user_role
         AddHandler CASHIER.FormClosed, AddressOf CASHIER_Closed
         CASHIER.Show()
+        Me.Hide()
     End Sub
     Private Sub CASHIER_Closed(sender As Object, e As FormClosedEventArgs)
         SALES_TAB.RefreshData()
@@ -148,7 +151,11 @@ Public Class Form2
         End If
     End Sub
 
-    Private Sub Guna2ControlBox1_Click(sender As Object, e As EventArgs) Handles Guna2ControlBox1.Click
+    Private Sub Guna2ControlBox1_Click(sender As Object, e As EventArgs)
         LOGIN_PAGE.ResetLoginPage()
+    End Sub
+
+    Private Sub Guna2Button1_Click(sender As Object, e As EventArgs)
+        MsgBox(user_id & user_role)
     End Sub
 End Class

@@ -81,7 +81,7 @@ Partial Class LOGIN_PAGE
         Me.Label1.Location = New System.Drawing.Point(768, 136)
         Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(137, 44)
+        Me.Label1.Size = New System.Drawing.Size(110, 36)
         Me.Label1.TabIndex = 7
         Me.Label1.Text = "Crew"
         Me.Label1.Visible = False
@@ -94,7 +94,7 @@ Partial Class LOGIN_PAGE
         Me.Label2.Location = New System.Drawing.Point(743, 136)
         Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(225, 44)
+        Me.Label2.Size = New System.Drawing.Size(183, 36)
         Me.Label2.TabIndex = 8
         Me.Label2.Text = "Manager"
         Me.Label2.Visible = False
@@ -107,7 +107,7 @@ Partial Class LOGIN_PAGE
         Me.Label3.Location = New System.Drawing.Point(758, 136)
         Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(172, 44)
+        Me.Label3.Size = New System.Drawing.Size(139, 36)
         Me.Label3.TabIndex = 9
         Me.Label3.Text = "Owner"
         Me.Label3.Visible = False
@@ -197,7 +197,7 @@ Partial Class LOGIN_PAGE
         Me.Label4.Font = New System.Drawing.Font("ITC Kabel", 16.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.Location = New System.Drawing.Point(3, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(214, 34)
+        Me.Label4.Size = New System.Drawing.Size(167, 26)
         Me.Label4.TabIndex = 0
         Me.Label4.Text = "DIMSUM factory"
         '
@@ -210,7 +210,7 @@ Partial Class LOGIN_PAGE
         Me.Guna2CheckBox1.CheckedState.FillColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.Guna2CheckBox1.Location = New System.Drawing.Point(844, 352)
         Me.Guna2CheckBox1.Name = "Guna2CheckBox1"
-        Me.Guna2CheckBox1.Size = New System.Drawing.Size(131, 21)
+        Me.Guna2CheckBox1.Size = New System.Drawing.Size(109, 19)
         Me.Guna2CheckBox1.TabIndex = 18
         Me.Guna2CheckBox1.Text = "Show Password"
         Me.Guna2CheckBox1.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(125, Byte), Integer), CType(CType(137, Byte), Integer), CType(CType(149, Byte), Integer))
@@ -274,7 +274,7 @@ Partial Class LOGIN_PAGE
         Me.Button4.BackgroundImage = Global.DIMSUM_SHITSTEM.My.Resources.Resources.owner
         Me.Button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Button4.Location = New System.Drawing.Point(650, 170)
+        Me.Button4.Location = New System.Drawing.Point(629, 189)
         Me.Button4.Margin = New System.Windows.Forms.Padding(4, 2, 4, 2)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(387, 448)
@@ -370,7 +370,7 @@ Partial Class LOGIN_PAGE
         'LOGIN_PAGE
         '
         Me.AcceptButton = Me.Button1
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 17.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Yellow
         Me.ClientSize = New System.Drawing.Size(1847, 804)

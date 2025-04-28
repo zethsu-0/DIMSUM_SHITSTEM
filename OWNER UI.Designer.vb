@@ -27,24 +27,22 @@ Partial Class Form2
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
         Me.SHITSTEMDataSet = New DIMSUM_SHITSTEM.SHITSTEMDataSet()
         Me.LoginBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Guna2BorderlessLOGIN_PAGE = New Guna.UI2.WinForms.Guna2BorderlessForm(Me.components)
         Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.Guna2ControlBox1 = New Guna.UI2.WinForms.Guna2ControlBox()
-        Me.Guna2ControlBox2 = New Guna.UI2.WinForms.Guna2ControlBox()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.logoutbtn = New Guna.UI2.WinForms.Guna2Button()
         Me.cashierbtn = New Guna.UI2.WinForms.Guna2Button()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.Guna2Panel1 = New Guna.UI2.WinForms.Guna2Panel()
-        Me.Guna2HtmlLabel1 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.salesbtn = New Guna.UI2.WinForms.Guna2Button()
         Me.employeebtn = New Guna.UI2.WinForms.Guna2Button()
         Me.productbtn = New Guna.UI2.WinForms.Guna2Button()
+        Me.Guna2Panel1 = New Guna.UI2.WinForms.Guna2Panel()
         Me.profilepic = New Guna.UI2.WinForms.Guna2CirclePictureBox()
+        Me.Guna2HtmlLabel1 = New Guna.UI2.WinForms.Guna2HtmlLabel()
+        Me.Label4 = New System.Windows.Forms.Label()
         CType(Me.SHITSTEMDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LoginBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel4.SuspendLayout()
@@ -90,14 +88,6 @@ Partial Class Form2
         Me.Label1.TabIndex = 9
         Me.Label1.Text = "Label1"
         '
-        'DateTimePicker1
-        '
-        Me.DateTimePicker1.Font = New System.Drawing.Font("ITC Kabel", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DateTimePicker1.Location = New System.Drawing.Point(5, 7)
-        Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(198, 22)
-        Me.DateTimePicker1.TabIndex = 2
-        '
         'SHITSTEMDataSet
         '
         Me.SHITSTEMDataSet.DataSetName = "SHITSTEMDataSet"
@@ -120,40 +110,13 @@ Partial Class Form2
         'Panel4
         '
         Me.Panel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(253, Byte), Integer), CType(CType(246, Byte), Integer), CType(CType(227, Byte), Integer))
+        Me.Panel4.Controls.Add(Me.Label4)
         Me.Panel4.Controls.Add(Me.Label1)
-        Me.Panel4.Controls.Add(Me.Guna2ControlBox1)
-        Me.Panel4.Controls.Add(Me.Guna2ControlBox2)
-        Me.Panel4.Controls.Add(Me.DateTimePicker1)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel4.Location = New System.Drawing.Point(0, 0)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(933, 39)
         Me.Panel4.TabIndex = 3
-        '
-        'Guna2ControlBox1
-        '
-        Me.Guna2ControlBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Guna2ControlBox1.FillColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.Guna2ControlBox1.HoverState.FillColor = System.Drawing.Color.Red
-        Me.Guna2ControlBox1.IconColor = System.Drawing.Color.Black
-        Me.Guna2ControlBox1.Location = New System.Drawing.Point(890, 0)
-        Me.Guna2ControlBox1.Margin = New System.Windows.Forms.Padding(2, 0, 0, 0)
-        Me.Guna2ControlBox1.Name = "Guna2ControlBox1"
-        Me.Guna2ControlBox1.Size = New System.Drawing.Size(43, 39)
-        Me.Guna2ControlBox1.TabIndex = 0
-        '
-        'Guna2ControlBox2
-        '
-        Me.Guna2ControlBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Guna2ControlBox2.ControlBoxType = Guna.UI2.WinForms.Enums.ControlBoxType.MinimizeBox
-        Me.Guna2ControlBox2.FillColor = System.Drawing.Color.FromArgb(CType(CType(253, Byte), Integer), CType(CType(246, Byte), Integer), CType(CType(227, Byte), Integer))
-        Me.Guna2ControlBox2.HoverState.FillColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.Guna2ControlBox2.IconColor = System.Drawing.Color.Black
-        Me.Guna2ControlBox2.Location = New System.Drawing.Point(841, 0)
-        Me.Guna2ControlBox2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Guna2ControlBox2.Name = "Guna2ControlBox2"
-        Me.Guna2ControlBox2.Size = New System.Drawing.Size(45, 39)
-        Me.Guna2ControlBox2.TabIndex = 1
         '
         'SplitContainer1
         '
@@ -247,34 +210,6 @@ Partial Class Form2
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(150, 331)
         Me.TableLayoutPanel1.TabIndex = 0
         '
-        'Guna2Panel1
-        '
-        Me.Guna2Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.Guna2Panel1.BorderColor = System.Drawing.Color.Black
-        Me.Guna2Panel1.BorderRadius = 6
-        Me.Guna2Panel1.BorderThickness = 2
-        Me.Guna2Panel1.Controls.Add(Me.Label2)
-        Me.Guna2Panel1.Controls.Add(Me.Label3)
-        Me.Guna2Panel1.Controls.Add(Me.profilepic)
-        Me.Guna2Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Guna2Panel1.Location = New System.Drawing.Point(2, 2)
-        Me.Guna2Panel1.Margin = New System.Windows.Forms.Padding(2)
-        Me.Guna2Panel1.Name = "Guna2Panel1"
-        Me.Guna2Panel1.Size = New System.Drawing.Size(146, 78)
-        Me.Guna2Panel1.TabIndex = 4
-        '
-        'Guna2HtmlLabel1
-        '
-        Me.Guna2HtmlLabel1.AutoSize = False
-        Me.Guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent
-        Me.Guna2HtmlLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Guna2HtmlLabel1.ForeColor = System.Drawing.Color.Yellow
-        Me.Guna2HtmlLabel1.Location = New System.Drawing.Point(281, 212)
-        Me.Guna2HtmlLabel1.Name = "Guna2HtmlLabel1"
-        Me.Guna2HtmlLabel1.Size = New System.Drawing.Size(235, 36)
-        Me.Guna2HtmlLabel1.TabIndex = 0
-        Me.Guna2HtmlLabel1.Text = "DIMSUM FACTORY"
-        '
         'salesbtn
         '
         Me.salesbtn.Animated = True
@@ -359,15 +294,53 @@ Partial Class Form2
         Me.productbtn.Text = "PRODUCT"
         Me.productbtn.TextOffset = New System.Drawing.Point(20, 0)
         '
+        'Guna2Panel1
+        '
+        Me.Guna2Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.Guna2Panel1.BorderColor = System.Drawing.Color.Black
+        Me.Guna2Panel1.BorderRadius = 6
+        Me.Guna2Panel1.BorderThickness = 2
+        Me.Guna2Panel1.Controls.Add(Me.Label2)
+        Me.Guna2Panel1.Controls.Add(Me.Label3)
+        Me.Guna2Panel1.Controls.Add(Me.profilepic)
+        Me.Guna2Panel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Guna2Panel1.Location = New System.Drawing.Point(2, 2)
+        Me.Guna2Panel1.Margin = New System.Windows.Forms.Padding(2)
+        Me.Guna2Panel1.Name = "Guna2Panel1"
+        Me.Guna2Panel1.Size = New System.Drawing.Size(146, 78)
+        Me.Guna2Panel1.TabIndex = 4
+        '
         'profilepic
         '
         Me.profilepic.ImageRotate = 0!
-        Me.profilepic.Location = New System.Drawing.Point(8, 28)
+        Me.profilepic.Location = New System.Drawing.Point(8, 25)
         Me.profilepic.Name = "profilepic"
         Me.profilepic.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle
         Me.profilepic.Size = New System.Drawing.Size(51, 50)
         Me.profilepic.TabIndex = 1
         Me.profilepic.TabStop = False
+        '
+        'Guna2HtmlLabel1
+        '
+        Me.Guna2HtmlLabel1.AutoSize = False
+        Me.Guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent
+        Me.Guna2HtmlLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2HtmlLabel1.ForeColor = System.Drawing.Color.Yellow
+        Me.Guna2HtmlLabel1.Location = New System.Drawing.Point(307, 212)
+        Me.Guna2HtmlLabel1.Name = "Guna2HtmlLabel1"
+        Me.Guna2HtmlLabel1.Size = New System.Drawing.Size(125, 36)
+        Me.Guna2HtmlLabel1.TabIndex = 0
+        Me.Guna2HtmlLabel1.Text = "DIMSUM FACTORY"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("ITC Kabel", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(9, 6)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(65, 23)
+        Me.Label4.TabIndex = 10
+        Me.Label4.Text = "Label4"
         '
         'Form2
         '
@@ -402,13 +375,10 @@ Partial Class Form2
     Friend WithEvents Label3 As Label
     Friend WithEvents SHITSTEMDataSet As SHITSTEMDataSet
     Friend WithEvents LoginBindingSource As BindingSource
-    Friend WithEvents DateTimePicker1 As DateTimePicker
     Friend WithEvents Label1 As Label
     Friend WithEvents Timer1 As Timer
     Friend WithEvents Guna2BorderlessLOGIN_PAGE As Guna.UI2.WinForms.Guna2BorderlessForm
     Friend WithEvents Panel4 As Panel
-    Friend WithEvents Guna2ControlBox2 As Guna.UI2.WinForms.Guna2ControlBox
-    Friend WithEvents Guna2ControlBox1 As Guna.UI2.WinForms.Guna2ControlBox
     Friend WithEvents SplitContainer1 As SplitContainer
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
     Friend WithEvents logoutbtn As Guna.UI2.WinForms.Guna2Button
@@ -419,4 +389,5 @@ Partial Class Form2
     Friend WithEvents profilepic As Guna.UI2.WinForms.Guna2CirclePictureBox
     Friend WithEvents Guna2HtmlLabel1 As Guna.UI2.WinForms.Guna2HtmlLabel
     Friend WithEvents Guna2Panel1 As Guna.UI2.WinForms.Guna2Panel
+    Friend WithEvents Label4 As Label
 End Class
