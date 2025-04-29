@@ -70,6 +70,7 @@ Public Class CASHIER
         GenerateProductButtons()
 
         discount_choice.Text = "NONE"
+        ExpireOldProducts()
     End Sub
 
     Private Sub ResetRevenueIfNewDay()
@@ -196,14 +197,17 @@ Public Class CASHIER
                         Dim btn As New Guna2Button()
                         btn.Name = "DynamicGunaBtn_" & itemNo
                         btn.Text = productName & " Price: " & price
+                        btn.Font = New Font("Arial", 12, FontStyle.Bold)
+                        btn.BackColor = Color.Yellow
+                        btn.Padding = New Padding(5, 80, 5, 0)
                         btn.Size = New Size(200, 200)
                         btn.Margin = New Padding(10)
                         btn.BorderRadius = 15
                         btn.BorderThickness = 2
                         btn.FillColor = Color.Transparent
-                        btn.ForeColor = Color.Black
+                        btn.ForeColor = Color.Red
                         btn.TextOffset = New Point(0, 40)
-                        btn.ImageSize = New Size(60, 60)
+                        btn.ImageSize = New Size(60, 30)
                         btn.TextAlign = HorizontalAlignment.Center
                         btn.ImageAlign = HorizontalAlignment.Center
                         btn.Tag = itemNo
@@ -462,8 +466,8 @@ Public Class CASHIER
         Dim salesTotalForReport As Integer = 0
         Dim totalProfitForReport As Integer = 0
 
-        Try
-            For Each row As DataGridViewRow In OrdersDataGridView.Rows
+        ' Try
+        For Each row As DataGridViewRow In OrdersDataGridView.Rows
                 If Not row.IsNewRow Then
 
                     Dim itemNo As Integer = Convert.ToInt32(row.Cells("Item_no").Value)
@@ -547,102 +551,109 @@ Public Class CASHIER
             End Using
 
 
-            ' --- WEEKLY SALES RESET ---
-            Dim currentDay As String = DateTime.Today.DayOfWeek.ToString()
-            Dim resetWeek As Boolean = False
 
-            Dim weeklyCheckQuery As String = "SELECT COUNT(*) FROM WeeklySales"
-            Using checkCmd As New SqlCommand(weeklyCheckQuery, con)
-                Dim count = Convert.ToInt32(checkCmd.ExecuteScalar())
-                If count >= 7 Then
-                    ' If all 7 weekdays have been filled, reset weekly sales
-                    resetWeek = True
-                End If
+
+            Dim dailyUpsertQuery As String = "
+IF EXISTS (SELECT 1 FROM WeeklySales WHERE SaleDate = @SaleDate)
+    UPDATE WeeklySales
+    SET Sales_total = Sales_total + @Sales_total,
+        Profit = Profit + @Profit
+    WHERE SaleDate = @SaleDate
+ELSE
+    INSERT INTO WeeklySales (SaleDate, Sales_total, Profit)
+    VALUES (@SaleDate, @Sales_total, @Profit)"
+            Using cmdDaily As New SqlCommand(dailyUpsertQuery, con)
+                cmdDaily.Parameters.AddWithValue("@SaleDate", today)
+                cmdDaily.Parameters.AddWithValue("@Sales_total", salesTotalForReport)
+                cmdDaily.Parameters.AddWithValue("@Profit", totalProfitForReport)
+                cmdDaily.ExecuteNonQuery()
             End Using
 
-            If resetWeek Then
-                Dim resetWeeklyQuery As String = "DELETE FROM WeeklySales"
-                Using resetCmd As New SqlCommand(resetWeeklyQuery, con)
-                    resetCmd.ExecuteNonQuery()
-                End Using
+
+        ' === MONTHLY SALES RESET ===
+
+        Dim currentMonthNum As Integer = today.Month
+        Dim currentMonthName As String = today.ToString("MMMM") ' "April", "May", etc.
+        Dim resetMonthly As Boolean = False
+
+        ' === STEP 1: Check last recorded month in MonthlySales table ===
+        Dim monthlyQueryReset As String = "SELECT TOP 1 [Month] FROM MonthlySales ORDER BY [Month] DESC"
+        Using monthlyCmd As New SqlCommand(monthlyQueryReset, con)
+            Dim lastMonthObj = monthlyCmd.ExecuteScalar()
+            If lastMonthObj IsNot Nothing Then
+                Dim lastMonthName As String = lastMonthObj.ToString().Trim()
+
+                ' Convert month name to number
+                Dim lastMonthNum As Integer
+                If DateTime.TryParseExact(lastMonthName, "MMMM", CultureInfo.InvariantCulture, DateTimeStyles.None, Nothing) Then
+                    lastMonthNum = DateTime.ParseExact(lastMonthName, "MMMM", CultureInfo.InvariantCulture).Month
+                Else
+                    MessageBox.Show("Invalid month format in MonthlySales: " & lastMonthName)
+                    Exit Sub
+                End If
+
+                If lastMonthNum <> currentMonthNum Then
+                    resetMonthly = True
+                End If
             End If
+        End Using
 
-            Dim currentDayOfWeek As String = DateTime.Today.DayOfWeek.ToString()
-
-            Dim weeklyQuery As String = "
-    IF EXISTS (SELECT 1 FROM WeeklySales WHERE Day = @dayParam)
-        UPDATE WeeklySales 
-        SET Sales_total = Sales_total + @Sales_total, 
-            Profit = Profit + @Profit 
-        WHERE Day = @dayParam
-    ELSE
-        INSERT INTO WeeklySales (Day, Sales_total, Profit) 
-        VALUES (@dayParam, @Sales_total, @Profit)"
-
-            Using cmdWeekly As New SqlCommand(weeklyQuery, con)
-                cmdWeekly.Parameters.AddWithValue("@dayParam", currentDayOfWeek)
-                cmdWeekly.Parameters.AddWithValue("@Sales_total", salesTotalForReport)
-                cmdWeekly.Parameters.AddWithValue("@Profit", totalProfitForReport)
-                cmdWeekly.ExecuteNonQuery()
+        ' === STEP 2: If needed, reset the MonthlySales table ===
+        If resetMonthly Then
+            Using deleteCmd As New SqlCommand("DELETE FROM MonthlySales", con)
+                deleteCmd.ExecuteNonQuery()
             End Using
+        End If
 
-            ' === MONTHLY SALES RESET ===
-            Dim today1 As Date = Date.Today
-            Dim currentMonthName As String = today1.ToString("MMMM") ' e.g., "April"
-            Dim resetMonthly As Boolean = False
+        ' === STEP 3: Insert or update MonthlySales for the current month ===
+        Dim monthlyUpsertQuery As String = "
+IF EXISTS (SELECT 1 FROM MonthlySales WHERE LTRIM(RTRIM([Month])) = @Month)
+    UPDATE MonthlySales
+    SET Sales_total = Sales_total + @Sales_total,
+        Profit = Profit + @Profit
+    WHERE LTRIM(RTRIM([Month])) = @Month
+ELSE
+    INSERT INTO MonthlySales ([Month], Sales_total, Profit)
+    VALUES (@Month, @Sales_total, @Profit)
+"
 
-            Dim monthlyQueryreset As String = "SELECT TOP 1 [Month] FROM Monthlysales ORDER BY [Month] DESC"
-            Using monthlyCmd As New SqlCommand(monthlyQueryreset, con)
-                Dim lastMonthlyMonthObj = monthlyCmd.ExecuteScalar()
-                If lastMonthlyMonthObj IsNot Nothing Then
-                    Dim lastMonthlyMonth As String = lastMonthlyMonthObj.ToString()
-                    If Not lastMonthlyMonth.Equals(currentMonthName, StringComparison.OrdinalIgnoreCase) Then
-                        resetMonthly = True
-                    End If
-                End If
-            End Using
-
-            ' === INSERT or UPDATE for the current month ===
-            Dim monthlyUpsertQuery As String = "
-    IF EXISTS (SELECT 1 FROM MonthlySales WHERE Month = @Month)
-        UPDATE MonthlySales
-        SET Sales_total = Sales_total + @Sales_total,
-            Profit = Profit + @Profit
-        WHERE Month = @Month
-    ELSE
-        INSERT INTO MonthlySales (Month, Sales_total, Profit)
-        VALUES (@Month, @Sales_total, @Profit)"
-
+        Try
             Using cmdMonthly As New SqlCommand(monthlyUpsertQuery, con)
                 cmdMonthly.Parameters.AddWithValue("@Month", currentMonthName)
                 cmdMonthly.Parameters.AddWithValue("@Sales_total", salesTotalForReport)
                 cmdMonthly.Parameters.AddWithValue("@Profit", totalProfitForReport)
                 cmdMonthly.ExecuteNonQuery()
             End Using
+        Catch ex As Exception
+            MessageBox.Show("Error updating MonthlySales: " & ex.Message)
+        End Try
 
-            ' === HANDLE YEARLY SALES ===
-            Try
-                If con.State = ConnectionState.Closed Then con.Open()
 
-                Dim todayDate As Date = Date.Today
-                Dim currentYear As String = todayDate.Year.ToString() ' e.g., "2024"
-                Dim resetYearly As Boolean = False
 
-                ' Step 1: Check if reset is needed
-                Dim yearlyQueryReset As String = "SELECT TOP 1 [Year] FROM YearlySales ORDER BY [Year] DESC"
-                Using yearlyCmd As New SqlCommand(yearlyQueryReset, con)
-                    Dim lastYearlyYearObj = yearlyCmd.ExecuteScalar()
-                    If lastYearlyYearObj IsNot Nothing Then
-                        Dim lastYearlyYear As String = lastYearlyYearObj.ToString()
-                        If Not lastYearlyYear.Equals(currentYear, StringComparison.OrdinalIgnoreCase) Then
-                            resetYearly = True
-                        End If
+
+        ' === HANDLE YEARLY SALES ===
+        Try
+            If con.State = ConnectionState.Closed Then con.Open()
+
+            Dim todayDate As Date = Date.Today
+            Dim currentYear As String = todayDate.Year.ToString() ' e.g., "2024"
+            Dim resetYearly As Boolean = False
+
+            ' Step 1: Check if reset is needed
+            Dim yearlyQueryReset As String = "SELECT TOP 1 [Year] FROM YearlySales ORDER BY [Year] DESC"
+            Using yearlyCmd As New SqlCommand(yearlyQueryReset, con)
+                Dim lastYearlyYearObj = yearlyCmd.ExecuteScalar()
+                If lastYearlyYearObj IsNot Nothing Then
+                    Dim lastYearlyYear As String = lastYearlyYearObj.ToString()
+                    If Not lastYearlyYear.Equals(currentYear, StringComparison.OrdinalIgnoreCase) Then
+                        resetYearly = True
                     End If
-                End Using
+                End If
+            End Using
 
 
-                ' Step 3: Insert or Update YearlySales
-                Dim yearlyUpsertQuery As String = "
+            ' Step 3: Insert or Update YearlySales
+            Dim yearlyUpsertQuery As String = "
     IF EXISTS (SELECT 1 FROM YearlySales WHERE Year = @Year)
         UPDATE YearlySales
         SET Sales_total = Sales_total + @Sales_total,
@@ -652,31 +663,31 @@ Public Class CASHIER
         INSERT INTO YearlySales (Year, Sales_total, Profit)
         VALUES (@Year, @Sales_total, @Profit)"
 
-                Using cmdYearly As New SqlCommand(yearlyUpsertQuery, con)
-                    cmdYearly.Parameters.AddWithValue("@Year", currentYear)
-                    cmdYearly.Parameters.AddWithValue("@Sales_total", salesTotalForReport)
-                    cmdYearly.Parameters.AddWithValue("@Profit", totalProfitForReport)
-                    cmdYearly.ExecuteNonQuery()
-                End Using
+            Using cmdYearly As New SqlCommand(yearlyUpsertQuery, con)
+                cmdYearly.Parameters.AddWithValue("@Year", currentYear)
+                cmdYearly.Parameters.AddWithValue("@Sales_total", salesTotalForReport)
+                cmdYearly.Parameters.AddWithValue("@Profit", totalProfitForReport)
+                cmdYearly.ExecuteNonQuery()
+            End Using
 
 
-                ' === UPDATE employee's revenue ===
-                Dim updateRevenueQuery As String = "
+            ' === UPDATE employee's revenue ===
+            Dim updateRevenueQuery As String = "
 UPDATE login 
 SET revenue = ISNULL(revenue, 0) + @earnedToday 
 WHERE user_id = @userID
 "
 
-                Using cmdUpdateRevenue As New SqlCommand(updateRevenueQuery, con)
-                    cmdUpdateRevenue.Parameters.AddWithValue("@earnedToday", salesTotalForReport)
-                    cmdUpdateRevenue.Parameters.AddWithValue("@userID", user_id)
-                    cmdUpdateRevenue.ExecuteNonQuery()
-                End Using
+            Using cmdUpdateRevenue As New SqlCommand(updateRevenueQuery, con)
+                cmdUpdateRevenue.Parameters.AddWithValue("@earnedToday", salesTotalForReport)
+                cmdUpdateRevenue.Parameters.AddWithValue("@userID", user_id)
+                cmdUpdateRevenue.ExecuteNonQuery()
+            End Using
 
-            Catch ex As Exception
-                MessageBox.Show("Error updating YearlySales: " & ex.Message)
-            Finally
-                If con.State = ConnectionState.Open Then con.Close()
+        Catch ex As Exception
+            MessageBox.Show("Error updating YearlySales: " & ex.Message)
+        Finally
+            If con.State = ConnectionState.Open Then con.Close()
             End Try
 
 
@@ -752,33 +763,28 @@ VALUES (@TransactionDate, @TotalAmount, @PaymentAmount, @ChangeGiven, @Total_Ite
             InsertTransactionDetails(transactionId)
 
             lbltotal.Text = "₱0.00"
-        Catch ex As Exception
-            MessageBox.Show($"Error during checkout process: {ex.Message}", "Checkout Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        ' Catch ex As Exception
+        'MessageBox.Show($"Error during checkout process: {ex.Message}", "Checkout Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
 
-        Finally
-            If con IsNot Nothing AndAlso con.State = ConnectionState.Open Then
+        'Finally
+        If con IsNot Nothing AndAlso con.State = ConnectionState.Open Then
                 con.Close()
             End If
 
-            MessageBox.Show("Checkout complete!" & vbCrLf & vbCrLf &
-    $"Total Sale: ₱{salesTotalForReport:N2}" & vbCrLf &
-    $"Payment Received: ₱{paymentAmount:N2}" & vbCrLf &
-    $"Change Due: ₱{changeAmount:N2}",
-    "Transaction Successful", MessageBoxButtons.OK, MessageBoxIcon.Information)
-            UpdateRevenueAndRecordHistory(user_id, salesTotalForReport)
 
-            resetcart()
+
+        resetcart()
             paymenttxtbox.Clear()
-        End Try
+        'End Try
     End Sub
 
     Private Sub InsertTransactionDetails(transactionID As Integer)
         If con IsNot Nothing AndAlso con.State = ConnectionState.Open Then
             con.Close()
         End If
-        Try
+        'Try
 
-            Opencon()
+        Opencon()
 
             ' Step 1: Load all current Orders into a list first
             Dim ordersQuery As String = "
@@ -830,11 +836,11 @@ VALUES (@TransactionDate, @TotalAmount, @PaymentAmount, @ChangeGiven, @Total_Ite
                 End Using
             Next
 
-        Catch ex As Exception
-            MessageBox.Show("Error inserting transaction details: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Finally
+            '  Catch ex As Exception
+            '  MessageBox.Show("Error inserting transaction details: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            ' Finally
             If con.State = ConnectionState.Open Then con.Close()
-        End Try
+      '  End Try
     End Sub
 
 
@@ -1167,84 +1173,69 @@ VALUES (@TransactionDate, @TotalAmount, @PaymentAmount, @ChangeGiven, @Total_Ite
     Dim highestproductprice As Integer = 0D
 
     Public Sub Discount()
-        Dim discountRate As Integer = 0
+        Dim discountRate As Decimal = 0D
 
-        ' 1. Determine the selected discount
+        ' Determine the selected discount
         Select Case discount_choice.Text
             Case "PWD/SENIOR"
                 discountRate = 0.2D
+            Case "20%"
+                discountRate = 0.2D
             Case "10%"
                 discountRate = 0.1D
-            Case "15%"
-                discountRate = 0.15D
             Case Else
-                discountRate = 0
+                discountRate = 0D
         End Select
 
         Try
             Opencon()
 
+            ' 1. Reset all prices first to original prices
             Dim resetQuery As String = "
             UPDATE O
-SET O.Price = S.Price,
-    O.Total_price = O.Quantity * S.Price
-FROM Orders O
-JOIN STOCKS S ON O.Item_No = S.Item_No
-"
+            SET O.Price = S.Price,
+                O.Total_price = O.Quantity * S.Price
+            FROM Orders O
+            JOIN STOCKS S ON O.Item_No = S.Item_No
+        "
             Using resetCmd As New SqlCommand(resetQuery, con)
                 resetCmd.ExecuteNonQuery()
             End Using
 
-            ' 3. Get the highest-priced product again (after reset)
-            Dim query As String = "SELECT TOP 1 Item_No FROM Orders ORDER BY Price DESC"
-            Dim itemNo As String = ""
+            ' 2. Find the Item_No of the highest priced product
+            Dim itemNoHighest As String = ""
+            Dim findHighestQuery As String = "SELECT TOP 1 Item_No FROM Orders ORDER BY Price DESC"
 
-            Using cmd As New SqlCommand(query, con)
-                Using reader As SqlDataReader = cmd.ExecuteReader()
-                    If reader.Read() Then
-                        itemNo = reader("Item_No").ToString()
-                    End If
-                End Using
+            Using findCmd As New SqlCommand(findHighestQuery, con)
+                Dim result = findCmd.ExecuteScalar()
+                If result IsNot Nothing Then
+                    itemNoHighest = result.ToString()
+                End If
             End Using
 
-            If itemNo = "" Then Exit Sub
-
-            ' 4. Get original price from STOCKS
-            Dim originalPrice As Integer = 0
-            Dim getPriceQuery As String = "SELECT Price FROM STOCKS WHERE Item_No = @Item_No"
-
-            Dim itemNoInt As Integer
-            If Integer.TryParse(itemNo, itemNoInt) Then
-                Using priceCmd As New SqlCommand(getPriceQuery, con)
-                    priceCmd.Parameters.AddWithValue("@Item_No", itemNoInt)
-                    Dim result = priceCmd.ExecuteScalar()
-                    If result IsNot Nothing AndAlso Not IsDBNull(result) Then
-                        originalPrice = result
-                    Else
-                        MessageBox.Show("Failed to find original price in STOCKS for Item_No: " & itemNo)
-                        Return
-                    End If
-                End Using
-            Else
-                MessageBox.Show("Invalid Item_No format: " & itemNo)
-                Return
+            If itemNoHighest = "" Then
+                ' Nothing to discount
+                Me.OrdersTableAdapter.Fill(Me.SHITSTEMDataSet.Orders)
+                UpdateTotalSum(Me, EventArgs.Empty)
+                Exit Sub
             End If
 
-            ' 5. Apply discount only to that item
-            Dim discountedPrice As Integer = originalPrice * (1 - discountRate)
+            ' 3. Apply discount ONLY to the highest-priced item
+            If discountRate > 0 Then
+                Dim discountQuery As String = "
+                UPDATE Orders
+                SET Price = ROUND(Price * @DiscountFactor, 0),
+                    Total_price = ROUND(Quantity * (Price * @DiscountFactor), 0)
+                WHERE Item_No = @ItemNo
+            "
+                Using discountCmd As New SqlCommand(discountQuery, con)
+                    discountCmd.Parameters.AddWithValue("@DiscountFactor", 1D - discountRate)
+                    discountCmd.Parameters.AddWithValue("@ItemNo", itemNoHighest)
+                    discountCmd.ExecuteNonQuery()
+                End Using
+            End If
 
-            Dim updateQuery As String = "
-            UPDATE Orders
-            SET Price = @Price,
-                Total_price = Quantity * @Price
-            WHERE Item_No = @Item_No"
-            Using updateCmd As New SqlCommand(updateQuery, con)
-                updateCmd.Parameters.AddWithValue("@Price", discountedPrice)
-                updateCmd.Parameters.AddWithValue("@Item_No", itemNo)
-                updateCmd.ExecuteNonQuery()
-            End Using
-
-            ' 6. Refresh UI
+            ' 4. Reload Grid
             Me.OrdersTableAdapter.Fill(Me.SHITSTEMDataSet.Orders)
             UpdateTotalSum(Me, EventArgs.Empty)
 
@@ -1279,28 +1270,60 @@ JOIN STOCKS S ON O.Item_No = S.Item_No
     End Sub
 
     Private Sub Guna2Button1_Click(sender As Object, e As EventArgs) Handles Guna2Button1.Click
-        If MessageBox.Show("VOID ORDER?", "PA VOID PLS",
-                 MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.Yes Then
+        If MessageBox.Show("VOID ORDER?", "PA VOID PLS", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.Yes Then
 
-            ' Instead of resetcart(), loop through each item and delete properly
+            ' Step 1: Gather all Item_No first
+            Dim itemNosToDelete As New List(Of String)()
+
             For Each row As DataGridViewRow In OrdersDataGridView.Rows
                 If Not row.IsNewRow Then
                     Dim rawItemNo As String = row.Cells("Item_No").Value.ToString()
-
                     If Not String.IsNullOrEmpty(rawItemNo) Then
-                        DeleteItemFromCart(rawItemNo)
+                        itemNosToDelete.Add(rawItemNo)
                     End If
                 End If
             Next
 
+            ' Step 2: Now delete one-by-one
+            For Each itemNo In itemNosToDelete
+                DeleteItemFromCart(itemNo)
+            Next
+
+            ' Step 3: Update UI
             UpdateTotalSum(Me, EventArgs.Empty)
             OrdersDataGridView.ClearSelection()
             discount_choice.Text = "NONE"
             paymenttxtbox.Clear()
-            lbltotal.Text = "₱0.00"
+            lbltotal.Text = "₱0"
 
         End If
     End Sub
 
+    Private Sub ExpireOldProducts()
+        Try
+            Opencon()
+
+            ' Update all products where expdate is today or earlier
+            Dim expireQuery As String = "
+            UPDATE STOCKS
+            SET Quantity = 0
+            WHERE expdate <= @today
+        "
+
+            Using cmd As New SqlCommand(expireQuery, con)
+                cmd.Parameters.AddWithValue("@today", Date.Today)
+                Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
+
+                If rowsAffected > 0 Then
+
+                End If
+            End Using
+
+        Catch ex As Exception
+            MessageBox.Show("Error updating expired products: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            If con.State = ConnectionState.Open Then con.Close()
+        End Try
+    End Sub
 
 End Class

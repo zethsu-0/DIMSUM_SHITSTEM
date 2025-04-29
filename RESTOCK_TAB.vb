@@ -36,12 +36,21 @@ Public Class RESTOCK_TAB
                 Integer.TryParse(If(row.Cells("restock").Value?.ToString(), "0"), restockQty)
 
                 If restockQty > 0 Then
-                    row.Cells("Quantity").Value = currentStock + restockQty
+                    ' ✅ Get the bound DataRow and update values
+                    Dim drv As DataRowView = TryCast(row.DataBoundItem, DataRowView)
+                    If drv IsNot Nothing Then
+                        ' Update Quantity
+                        drv("Quantity") = currentStock + restockQty
+
+                        ' ✅ Update expdate (+30 days from current expdate or today)
+                        Dim oldExpDate As Date = If(IsDBNull(drv("expdate")), Date.Today, Convert.ToDateTime(drv("expdate")))
+                        drv("expdate") = oldExpDate.AddDays(30)
+                    End If
                 End If
             End If
         Next
 
-        ' Reset restock column
+        ' Clear restock values
         If STOCKSDataGridView.Columns.Contains("restock") Then
             For Each row As DataGridViewRow In STOCKSDataGridView.Rows
                 If Not row.IsNewRow AndAlso row.Cells("restock") IsNot Nothing Then
@@ -50,9 +59,17 @@ Public Class RESTOCK_TAB
             Next
         End If
 
+        ' ✅ Save changes to database
+        Me.Validate()
+        Me.STOCKSBindingSource.EndEdit()
         Me.STOCKSTableAdapter.Update(Me.SHITSTEMDataSet.STOCKS)
+        Me.SHITSTEMDataSet.STOCKS.AcceptChanges()
+
+        ' ✅ Refresh grid
         Me.STOCKSTableAdapter.Fill(Me.SHITSTEMDataSet.STOCKS)
     End Sub
+
+
 
     Private Sub STOCKSDataGridView_EditingControlShowing(sender As Object, e As DataGridViewEditingControlShowingEventArgs) Handles STOCKSDataGridView.EditingControlShowing
         Dim tb As TextBox = TryCast(e.Control, TextBox)

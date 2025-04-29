@@ -45,8 +45,8 @@ Partial Class loadingscreen
         Me.progressbar.FillColor = System.Drawing.Color.Yellow
         Me.progressbar.Font = New System.Drawing.Font("Segoe UI", 12.0!)
         Me.progressbar.ForeColor = System.Drawing.Color.Red
-        Me.progressbar.Location = New System.Drawing.Point(139, 144)
-        Me.progressbar.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.progressbar.Location = New System.Drawing.Point(574, 119)
+        Me.progressbar.Margin = New System.Windows.Forms.Padding(4)
         Me.progressbar.Minimum = 0
         Me.progressbar.Name = "progressbar"
         Me.progressbar.ProgressBrushMode = Guna.UI2.WinForms.Enums.BrushMode.SolidTransition
@@ -54,7 +54,7 @@ Partial Class loadingscreen
         Me.progressbar.ProgressColor2 = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.progressbar.ProgressEndCap = System.Drawing.Drawing2D.LineCap.Round
         Me.progressbar.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle
-        Me.progressbar.Size = New System.Drawing.Size(319, 319)
+        Me.progressbar.Size = New System.Drawing.Size(452, 452)
         Me.progressbar.TabIndex = 2
         Me.progressbar.Text = "Guna2CircleProgressBar1"
         Me.progressbar.TextMode = Guna.UI2.WinForms.Enums.ProgressBarTextMode.Value
@@ -66,10 +66,10 @@ Partial Class loadingscreen
         Me.Guna2PictureBox1.FillColor = System.Drawing.Color.Transparent
         Me.Guna2PictureBox1.Image = Global.DIMSUM_SHITSTEM.My.Resources.Resources.dimsum_factory_logo
         Me.Guna2PictureBox1.ImageRotate = 0!
-        Me.Guna2PictureBox1.Location = New System.Drawing.Point(45, 95)
+        Me.Guna2PictureBox1.Location = New System.Drawing.Point(100, 146)
         Me.Guna2PictureBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.Guna2PictureBox1.Name = "Guna2PictureBox1"
-        Me.Guna2PictureBox1.Size = New System.Drawing.Size(238, 121)
+        Me.Guna2PictureBox1.Size = New System.Drawing.Size(307, 165)
         Me.Guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.Guna2PictureBox1.TabIndex = 0
         Me.Guna2PictureBox1.TabStop = False
@@ -82,9 +82,9 @@ Partial Class loadingscreen
         Me.BackColor = System.Drawing.Color.Yellow
         Me.Controls.Add(Me.progressbar)
         Me.DoubleBuffered = True
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "loadingscreen"
-        Me.Size = New System.Drawing.Size(704, 671)
+        Me.Size = New System.Drawing.Size(1847, 804)
         Me.progressbar.ResumeLayout(False)
         CType(Me.Guna2PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)

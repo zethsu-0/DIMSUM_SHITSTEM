@@ -164,11 +164,22 @@
       <DependentUpon>CrystalReport1.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CrystalReport2.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CrystalReport2.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="custommultiplier.Designer.vb">
       <DependentUpon>custommultiplier.vb</DependentUpon>
     </Compile>
     <Compile Include="custommultiplier.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataSet1.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
     <Compile Include="EditUserForm.Designer.vb">
       <DependentUpon>EditUserForm.vb</DependentUpon>
@@ -229,6 +240,12 @@
       <DependentUpon>RECEIPT.vb</DependentUpon>
     </Compile>
     <Compile Include="RECEIPT.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportViewerForm.Designer.vb">
+      <DependentUpon>ReportViewerForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportViewerForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="RESTOCK_TAB.Designer.vb">
@@ -293,6 +310,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CrystalReport1.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="CrystalReport2.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CrystalReport2.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="custommultiplier.resx">
       <DependentUpon>custommultiplier.vb</DependentUpon>
     </EmbeddedResource>
@@ -331,6 +352,9 @@
     <EmbeddedResource Include="RECEIPT.resx">
       <DependentUpon>RECEIPT.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportViewerForm.resx">
+      <DependentUpon>ReportViewerForm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="RESTOCK_TAB.resx">
       <DependentUpon>RESTOCK_TAB.vb</DependentUpon>
     </EmbeddedResource>
@@ -339,7 +363,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SALESREPORTDOC.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>SALESREPORTDOC.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="SALES_TAB.resx">
       <DependentUpon>SALES_TAB.vb</DependentUpon>
@@ -352,6 +375,17 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="DataSet1.xsc">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="DataSet1.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet1.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="DataSet1.xss">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>

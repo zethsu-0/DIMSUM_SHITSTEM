@@ -155,7 +155,7 @@ Public Class EMPLOYEE_TAB
         If user_Role = "Manager" Then
             FlowLayoutPanel1.Visible = False
             Label1.Visible = False
-            RemittancehistoryDataGridView.Visible = False
+
         Else
             FlowLayoutPanel1.Visible = True
 

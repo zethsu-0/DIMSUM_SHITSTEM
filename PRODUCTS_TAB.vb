@@ -11,6 +11,7 @@ Public Class PRODUCTS_TAB
         STOCKSDataGridView.Width = 946
         Me.STOCKSTableAdapter.Fill(Me.SHITSTEMDataSet.STOCKS)
         STOCKSDataGridView.ClearSelection()
+
     End Sub
 
     Private editmemo As Boolean = False
@@ -68,9 +69,9 @@ Public Class PRODUCTS_TAB
 
                 ' Insert into database
                 Dim insertQuery As String = "
-INSERT INTO stocks (Item_no, Product_name, product_group, Quantity, , Cost, price, Barcode, Product_image, expdate) 
-VALUES (@Item_no, @Product_name, @product_group, @Quantity, @Cost, @price, @Barcode, @Product_image, @expdate)
-"
+                    INSERT INTO stocks (Item_no, Product_name, product_group, Quantity, Cost, price, Barcode, Product_image, expdate) 
+                    VALUES (@Item_no, @Product_name, @product_group, @Quantity, @Cost, @price, @Barcode, @Product_image, @expdate)
+                        "
 
                 Using insertCmd As New SqlCommand(insertQuery, con)
                     insertCmd.Parameters.AddWithValue("@Item_no", Item_no)
@@ -146,7 +147,7 @@ VALUES (@Item_no, @Product_name, @product_group, @Quantity, @Cost, @price, @Barc
         TextBox8.Enabled = True
         Button5.Visible = True
         TextBox7.ReadOnly = False
-        TextBox8.ReadOnly = False
+        DateTimePicker1.Value = Date.Today
     End Sub
 
 
@@ -201,7 +202,7 @@ VALUES (@Item_no, @Product_name, @product_group, @Quantity, @Cost, @price, @Barc
         End If
         Button5.Visible = True
         TextBox7.ReadOnly = False
-        TextBox8.ReadOnly = False
+
     End Sub
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
@@ -224,9 +225,15 @@ VALUES (@Item_no, @Product_name, @product_group, @Quantity, @Cost, @price, @Barc
                             TextBox3.Text = dt.Rows(0)("Cost").ToString()
                             ComboBox1.Text = dt.Rows(0)("product_group").ToString()
                             Button5.Visible = False
-                            TextBox7.ReadOnly = True
-                            TextBox8.ReadOnly = True
 
+                            ' Set expiration date
+                            If Not IsDBNull(dt.Rows(0)("expdate")) Then
+                                DateTimePicker1.Value = Convert.ToDateTime(dt.Rows(0)("expdate"))
+                            Else
+                                DateTimePicker1.Value = Date.Today ' or any fallback default
+                            End If
+
+                            ' Load image
                             If Not IsDBNull(dt.Rows(0)("product_image")) Then
                                 Dim imageData() As Byte = CType(dt.Rows(0)("product_image"), Byte())
                                 Using ms As New MemoryStream(imageData)
@@ -239,6 +246,7 @@ VALUES (@Item_no, @Product_name, @product_group, @Quantity, @Cost, @price, @Barc
                         Else
                             clearform()
                         End If
+
                     End Using
                 End Using
             End Using
@@ -390,5 +398,52 @@ VALUES (@Item_no, @Product_name, @product_group, @Quantity, @Cost, @price, @Barc
         End If
     End Sub
 
+    Private Sub ExpireOldProducts()
+        Try
+            Opencon()
 
+            ' Update all products where expdate is today or earlier
+            Dim expireQuery As String = "
+            UPDATE STOCKS
+            SET Quantity = 0
+            WHERE expdate <= @today
+        "
+
+            Using cmd As New SqlCommand(expireQuery, con)
+                cmd.Parameters.AddWithValue("@today", Date.Today)
+                Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
+
+                If rowsAffected > 0 Then
+
+                End If
+            End Using
+
+        Catch ex As Exception
+            MessageBox.Show("Error updating expired products: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            If con.State = ConnectionState.Open Then con.Close()
+        End Try
+    End Sub
+
+
+
+    Private Sub TextBox3_TextChanged(sender As Object, e As EventArgs) Handles TextBox3.TextChanged
+
+        If TextBox3.Text IsNot "" Then
+            Cost = TextBox3.Text
+        End If
+    End Sub
+
+    Private Sub TextBox5_TextChanged(sender As Object, e As EventArgs) Handles TextBox5.TextChanged
+        If TextBox5.Text IsNot "" Then
+            Price = TextBox5.Text
+        End If
+
+    End Sub
+    Private Sub TextBox5_MouseLeave(sender As Object, e As EventArgs) Handles TextBox5.Leave
+        If Cost >= Price Then
+            TextBox5.Text = "0"
+            MsgBox("Price cannot be less than the cost")
+        End If
+    End Sub
 End Class

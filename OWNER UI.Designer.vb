@@ -32,6 +32,7 @@ Partial Class Form2
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Guna2BorderlessLOGIN_PAGE = New Guna.UI2.WinForms.Guna2BorderlessForm(Me.components)
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.logoutbtn = New Guna.UI2.WinForms.Guna2Button()
         Me.cashierbtn = New Guna.UI2.WinForms.Guna2Button()
@@ -42,7 +43,6 @@ Partial Class Form2
         Me.Guna2Panel1 = New Guna.UI2.WinForms.Guna2Panel()
         Me.profilepic = New Guna.UI2.WinForms.Guna2CirclePictureBox()
         Me.Guna2HtmlLabel1 = New Guna.UI2.WinForms.Guna2HtmlLabel()
-        Me.Label4 = New System.Windows.Forms.Label()
         CType(Me.SHITSTEMDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LoginBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel4.SuspendLayout()
@@ -60,9 +60,10 @@ Partial Class Form2
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("ITC Kabel", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.Color.Black
-        Me.Label2.Location = New System.Drawing.Point(8, 5)
+        Me.Label2.Location = New System.Drawing.Point(11, 6)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(107, 18)
+        Me.Label2.Size = New System.Drawing.Size(132, 22)
         Me.Label2.TabIndex = 7
         Me.Label2.Text = "HELLO OWNER:"
         '
@@ -72,9 +73,10 @@ Partial Class Form2
         Me.Label3.BackColor = System.Drawing.Color.Transparent
         Me.Label3.Font = New System.Drawing.Font("ITC Kabel", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.Color.Black
-        Me.Label3.Location = New System.Drawing.Point(64, 44)
+        Me.Label3.Location = New System.Drawing.Point(85, 54)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(49, 17)
+        Me.Label3.Size = New System.Drawing.Size(58, 20)
         Me.Label3.TabIndex = 8
         Me.Label3.Text = "Label3"
         '
@@ -82,9 +84,10 @@ Partial Class Form2
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("ITC Kabel", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(230, 6)
+        Me.Label1.Location = New System.Drawing.Point(307, 7)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(65, 23)
+        Me.Label1.Size = New System.Drawing.Size(79, 28)
         Me.Label1.TabIndex = 9
         Me.Label1.Text = "Label1"
         '
@@ -109,42 +112,55 @@ Partial Class Form2
         '
         'Panel4
         '
-        Me.Panel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(253, Byte), Integer), CType(CType(246, Byte), Integer), CType(CType(227, Byte), Integer))
+        Me.Panel4.BackColor = System.Drawing.Color.White
         Me.Panel4.Controls.Add(Me.Label4)
         Me.Panel4.Controls.Add(Me.Label1)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel4.Location = New System.Drawing.Point(0, 0)
+        Me.Panel4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(933, 39)
+        Me.Panel4.Size = New System.Drawing.Size(1244, 48)
         Me.Panel4.TabIndex = 3
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("ITC Kabel", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(12, 7)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(79, 28)
+        Me.Label4.TabIndex = 10
+        Me.Label4.Text = "Label4"
         '
         'SplitContainer1
         '
         Me.SplitContainer1.AllowDrop = True
         Me.SplitContainer1.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.SplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SplitContainer1.Location = New System.Drawing.Point(0, 39)
+        Me.SplitContainer1.Location = New System.Drawing.Point(0, 48)
+        Me.SplitContainer1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.SplitContainer1.Name = "SplitContainer1"
         '
         'SplitContainer1.Panel1
         '
-        Me.SplitContainer1.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.SplitContainer1.Panel1.BackColor = System.Drawing.Color.White
         Me.SplitContainer1.Panel1.Controls.Add(Me.logoutbtn)
-        Me.SplitContainer1.Panel1.Controls.Add(Me.cashierbtn)
         Me.SplitContainer1.Panel1.Controls.Add(Me.TableLayoutPanel1)
         '
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.SplitContainer1.Panel2.Controls.Add(Me.Guna2HtmlLabel1)
-        Me.SplitContainer1.Size = New System.Drawing.Size(933, 464)
-        Me.SplitContainer1.SplitterDistance = 150
+        Me.SplitContainer1.Size = New System.Drawing.Size(1244, 571)
+        Me.SplitContainer1.SplitterDistance = 200
+        Me.SplitContainer1.SplitterWidth = 5
         Me.SplitContainer1.TabIndex = 5
         '
         'logoutbtn
         '
         Me.logoutbtn.Animated = True
-        Me.logoutbtn.BackColor = System.Drawing.Color.Transparent
+        Me.logoutbtn.BackColor = System.Drawing.Color.Yellow
         Me.logoutbtn.BorderRadius = 15
         Me.logoutbtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray
         Me.logoutbtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
@@ -152,15 +168,15 @@ Partial Class Form2
         Me.logoutbtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
         Me.logoutbtn.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.logoutbtn.FillColor = System.Drawing.Color.Transparent
-        Me.logoutbtn.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.logoutbtn.Font = New System.Drawing.Font("ITC Kabel", 16.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.logoutbtn.ForeColor = System.Drawing.Color.Red
         Me.logoutbtn.HoverState.FillColor = System.Drawing.Color.Red
         Me.logoutbtn.HoverState.ForeColor = System.Drawing.Color.White
         Me.logoutbtn.IndicateFocus = True
-        Me.logoutbtn.Location = New System.Drawing.Point(0, 420)
-        Me.logoutbtn.Margin = New System.Windows.Forms.Padding(5)
+        Me.logoutbtn.Location = New System.Drawing.Point(0, 517)
+        Me.logoutbtn.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.logoutbtn.Name = "logoutbtn"
-        Me.logoutbtn.Size = New System.Drawing.Size(150, 44)
+        Me.logoutbtn.Size = New System.Drawing.Size(200, 54)
         Me.logoutbtn.TabIndex = 4
         Me.logoutbtn.Text = "LOGOUT"
         Me.logoutbtn.TextTransform = Guna.UI2.WinForms.Enums.TextTransform.UpperCase
@@ -177,29 +193,32 @@ Partial Class Form2
         Me.cashierbtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
         Me.cashierbtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
         Me.cashierbtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
-        Me.cashierbtn.FillColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.cashierbtn.FillColor = System.Drawing.Color.Yellow
         Me.cashierbtn.Font = New System.Drawing.Font("ITC Kabel", 10.2!, System.Drawing.FontStyle.Bold)
         Me.cashierbtn.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.cashierbtn.HoverState.Image = Global.DIMSUM_SHITSTEM.My.Resources.Resources.cashier_machine__1_
         Me.cashierbtn.Image = Global.DIMSUM_SHITSTEM.My.Resources.Resources.cashier_machine
         Me.cashierbtn.ImageSize = New System.Drawing.Size(100, 60)
-        Me.cashierbtn.Location = New System.Drawing.Point(5, 339)
-        Me.cashierbtn.Margin = New System.Windows.Forms.Padding(5)
+        Me.cashierbtn.Location = New System.Drawing.Point(7, 330)
+        Me.cashierbtn.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.cashierbtn.Name = "cashierbtn"
-        Me.cashierbtn.Size = New System.Drawing.Size(140, 76)
+        Me.cashierbtn.Size = New System.Drawing.Size(186, 71)
         Me.cashierbtn.TabIndex = 3
         Me.cashierbtn.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias
         '
         'TableLayoutPanel1
         '
+        Me.TableLayoutPanel1.BackColor = System.Drawing.Color.White
         Me.TableLayoutPanel1.ColumnCount = 1
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.salesbtn, 0, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.employeebtn, 0, 3)
+        Me.TableLayoutPanel1.Controls.Add(Me.cashierbtn, 0, 4)
         Me.TableLayoutPanel1.Controls.Add(Me.productbtn, 0, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.Guna2Panel1, 0, 0)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 5
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 24.85549!))
@@ -207,12 +226,13 @@ Partial Class Form2
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 17.05202!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(150, 331)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(200, 407)
         Me.TableLayoutPanel1.TabIndex = 0
         '
         'salesbtn
         '
         Me.salesbtn.Animated = True
+        Me.salesbtn.BackColor = System.Drawing.Color.Yellow
         Me.salesbtn.BorderRadius = 4
         Me.salesbtn.BorderThickness = 1
         Me.salesbtn.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton
@@ -221,7 +241,7 @@ Partial Class Form2
         Me.salesbtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
         Me.salesbtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
         Me.salesbtn.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.salesbtn.FillColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.salesbtn.FillColor = System.Drawing.Color.Yellow
         Me.salesbtn.Font = New System.Drawing.Font("ITC Kabel", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.salesbtn.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.salesbtn.HoverState.Image = CType(resources.GetObject("resource.Image"), System.Drawing.Image)
@@ -229,10 +249,10 @@ Partial Class Form2
         Me.salesbtn.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left
         Me.salesbtn.ImageSize = New System.Drawing.Size(50, 50)
         Me.salesbtn.IndicateFocus = True
-        Me.salesbtn.Location = New System.Drawing.Point(5, 87)
-        Me.salesbtn.Margin = New System.Windows.Forms.Padding(5)
+        Me.salesbtn.Location = New System.Drawing.Point(7, 107)
+        Me.salesbtn.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.salesbtn.Name = "salesbtn"
-        Me.salesbtn.Size = New System.Drawing.Size(140, 49)
+        Me.salesbtn.Size = New System.Drawing.Size(186, 61)
         Me.salesbtn.TabIndex = 1
         Me.salesbtn.Text = "DASHBOARD"
         Me.salesbtn.TextOffset = New System.Drawing.Point(30, 0)
@@ -249,7 +269,7 @@ Partial Class Form2
         Me.employeebtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
         Me.employeebtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
         Me.employeebtn.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.employeebtn.FillColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.employeebtn.FillColor = System.Drawing.Color.Yellow
         Me.employeebtn.Font = New System.Drawing.Font("ITC Kabel", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.employeebtn.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.employeebtn.HoverState.Image = Global.DIMSUM_SHITSTEM.My.Resources.Resources.employees__1_
@@ -258,10 +278,10 @@ Partial Class Form2
         Me.employeebtn.ImageOffset = New System.Drawing.Point(-5, 3)
         Me.employeebtn.ImageSize = New System.Drawing.Size(50, 60)
         Me.employeebtn.IndicateFocus = True
-        Me.employeebtn.Location = New System.Drawing.Point(5, 202)
-        Me.employeebtn.Margin = New System.Windows.Forms.Padding(5)
+        Me.employeebtn.Location = New System.Drawing.Point(7, 249)
+        Me.employeebtn.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.employeebtn.Name = "employeebtn"
-        Me.employeebtn.Size = New System.Drawing.Size(140, 56)
+        Me.employeebtn.Size = New System.Drawing.Size(186, 69)
         Me.employeebtn.TabIndex = 2
         Me.employeebtn.Text = "EMPLOYEES"
         Me.employeebtn.TextOffset = New System.Drawing.Point(25, 0)
@@ -278,7 +298,7 @@ Partial Class Form2
         Me.productbtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
         Me.productbtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
         Me.productbtn.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.productbtn.FillColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.productbtn.FillColor = System.Drawing.Color.Yellow
         Me.productbtn.Font = New System.Drawing.Font("ITC Kabel", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.productbtn.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.productbtn.HoverState.Image = Global.DIMSUM_SHITSTEM.My.Resources.Resources.products01
@@ -286,17 +306,17 @@ Partial Class Form2
         Me.productbtn.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left
         Me.productbtn.ImageSize = New System.Drawing.Size(50, 50)
         Me.productbtn.IndicateFocus = True
-        Me.productbtn.Location = New System.Drawing.Point(5, 146)
-        Me.productbtn.Margin = New System.Windows.Forms.Padding(5)
+        Me.productbtn.Location = New System.Drawing.Point(7, 180)
+        Me.productbtn.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.productbtn.Name = "productbtn"
-        Me.productbtn.Size = New System.Drawing.Size(140, 46)
+        Me.productbtn.Size = New System.Drawing.Size(186, 57)
         Me.productbtn.TabIndex = 0
         Me.productbtn.Text = "PRODUCT"
         Me.productbtn.TextOffset = New System.Drawing.Point(20, 0)
         '
         'Guna2Panel1
         '
-        Me.Guna2Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.Guna2Panel1.BackColor = System.Drawing.Color.Yellow
         Me.Guna2Panel1.BorderColor = System.Drawing.Color.Black
         Me.Guna2Panel1.BorderRadius = 6
         Me.Guna2Panel1.BorderThickness = 2
@@ -304,19 +324,20 @@ Partial Class Form2
         Me.Guna2Panel1.Controls.Add(Me.Label3)
         Me.Guna2Panel1.Controls.Add(Me.profilepic)
         Me.Guna2Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Guna2Panel1.Location = New System.Drawing.Point(2, 2)
-        Me.Guna2Panel1.Margin = New System.Windows.Forms.Padding(2)
+        Me.Guna2Panel1.Location = New System.Drawing.Point(3, 2)
+        Me.Guna2Panel1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Guna2Panel1.Name = "Guna2Panel1"
-        Me.Guna2Panel1.Size = New System.Drawing.Size(146, 78)
+        Me.Guna2Panel1.Size = New System.Drawing.Size(194, 97)
         Me.Guna2Panel1.TabIndex = 4
         '
         'profilepic
         '
         Me.profilepic.ImageRotate = 0!
-        Me.profilepic.Location = New System.Drawing.Point(8, 25)
+        Me.profilepic.Location = New System.Drawing.Point(11, 31)
+        Me.profilepic.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.profilepic.Name = "profilepic"
         Me.profilepic.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle
-        Me.profilepic.Size = New System.Drawing.Size(51, 50)
+        Me.profilepic.Size = New System.Drawing.Size(68, 62)
         Me.profilepic.TabIndex = 1
         Me.profilepic.TabStop = False
         '
@@ -326,31 +347,23 @@ Partial Class Form2
         Me.Guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent
         Me.Guna2HtmlLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2HtmlLabel1.ForeColor = System.Drawing.Color.Yellow
-        Me.Guna2HtmlLabel1.Location = New System.Drawing.Point(307, 212)
+        Me.Guna2HtmlLabel1.Location = New System.Drawing.Point(409, 261)
+        Me.Guna2HtmlLabel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Guna2HtmlLabel1.Name = "Guna2HtmlLabel1"
-        Me.Guna2HtmlLabel1.Size = New System.Drawing.Size(125, 36)
+        Me.Guna2HtmlLabel1.Size = New System.Drawing.Size(167, 44)
         Me.Guna2HtmlLabel1.TabIndex = 0
         Me.Guna2HtmlLabel1.Text = "DIMSUM FACTORY"
         '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("ITC Kabel", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(9, 6)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(65, 23)
-        Me.Label4.TabIndex = 10
-        Me.Label4.Text = "Label4"
-        '
         'Form2
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(933, 503)
+        Me.ClientSize = New System.Drawing.Size(1244, 619)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.Panel4)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.MinimizeBox = False
         Me.Name = "Form2"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
