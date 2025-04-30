@@ -65,7 +65,7 @@ Public Class CASHIER
         AddHandler singleClickTimer.Tick, AddressOf SingleClickTimer_Tick
         singleClickTimer.Interval = SystemInformation.DoubleClickTime
 
-        ResetRevenueIfNewDay()
+
         countingproducts()
         GenerateProductButtons()
 
@@ -73,68 +73,9 @@ Public Class CASHIER
         ExpireOldProducts()
     End Sub
 
-    Private Sub ResetRevenueIfNewDay()
-        Try
-            Opencon()
-            Dim todayDate As Date = Date.Today
 
-            Dim selectQuery As String = "
-            SELECT user_id, revenue, dateofremittance, firstname, lastname
-            FROM login
-            WHERE role IN ('Owner','Manager','Employee')
-        "
-            Dim usersToReset As New List(Of (userId As String, revenue As Decimal, firstName As String, lastName As String))
 
-            Using cmd As New SqlCommand(selectQuery, con)
-                Using reader As SqlDataReader = cmd.ExecuteReader()
-                    While reader.Read()
-                        Dim userId = reader("user_id").ToString()
-                        Dim revenueAmt = If(reader.IsDBNull(reader.GetOrdinal("revenue")), 0D, Convert.ToDecimal(reader("revenue")))
-                        Dim lastResetVal = reader("dateofremittance")
-                        Dim lastReset As Date? = If(lastResetVal Is DBNull.Value, CType(Nothing, Date?), CType(lastResetVal, Date))
-                        If (Not lastReset.HasValue OrElse lastReset.Value.Date <> todayDate) AndAlso revenueAmt > 0 Then
-                            usersToReset.Add((userId, revenueAmt, reader("firstname").ToString(), reader("lastname").ToString()))
-                        End If
-                    End While
-                End Using
-            End Using
 
-            ' 2) Now reader is closed, do inserts & updates
-            For Each u In usersToReset
-                ' Insert into remittancehistory
-                Using insertCmd As New SqlCommand("
-                INSERT INTO remittancehistory
-                  (User_id, revenue, date, firstname, lastname)
-                VALUES
-                  (@User_id, @revenue, @date, @firstname, @lastname)
-            ", con)
-                    insertCmd.Parameters.AddWithValue("@User_id", u.userId)
-                    insertCmd.Parameters.AddWithValue("@revenue", u.revenue)
-                    insertCmd.Parameters.AddWithValue("@date", todayDate)
-                    insertCmd.Parameters.AddWithValue("@firstname", u.firstName)
-                    insertCmd.Parameters.AddWithValue("@lastname", u.lastName)
-                    insertCmd.ExecuteNonQuery()
-                End Using
-
-                ' Reset login.revenue & update dateofremittance
-                Using resetCmd As New SqlCommand("
-                UPDATE login
-                SET revenue = 0,
-                    dateofremittance = @today
-                WHERE user_id = @userID
-            ", con)
-                    resetCmd.Parameters.AddWithValue("@today", todayDate)
-                    resetCmd.Parameters.AddWithValue("@userID", u.userId)
-                    resetCmd.ExecuteNonQuery()
-                End Using
-            Next
-
-        Catch ex As Exception
-            MessageBox.Show("Error resetting employee revenues: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Finally
-            If con.State = ConnectionState.Open Then con.Close()
-        End Try
-    End Sub
 
 
 
@@ -512,49 +453,38 @@ Public Class CASHIER
             End If
 
         Opencon()
+
         Dim today As Date = Date.Today
-        Dim calendar = CultureInfo.CurrentCulture.Calendar
 
-        ' === DAILY SALES RESET ===
-        Dim resetDaily As Boolean = False
+        ' === UPSERT logic ===
+        Dim checkQuery As String = "SELECT COUNT(*) FROM Dailysales WHERE [Day] = @Today"
+        Using checkCmd As New SqlCommand(checkQuery, con)
+            checkCmd.Parameters.AddWithValue("@Today", today)
+            Dim exists As Boolean = Convert.ToInt32(checkCmd.ExecuteScalar()) > 0
 
-        Dim dailyQueryreset As String = "SELECT TOP 1 [Day] FROM Dailysales ORDER BY [Day] DESC"
-        Using dailyCmd As New SqlCommand(dailyQueryreset, con)
-            Dim lastDailyDateObj = dailyCmd.ExecuteScalar()
-            If lastDailyDateObj IsNot Nothing Then
-                Dim lastDailyDate As Date
-                If Date.TryParse(lastDailyDateObj.ToString(), lastDailyDate) Then
-                    If lastDailyDate.Date <> today Then
-                        resetDaily = True
-                    End If
-                End If
+            If Not exists Then
+                ' Only insert if there's no record for today
+                Dim insertQuery As String = "INSERT INTO Dailysales (Day, Sales_total, Profit) VALUES (@Day, @Sales_total, @Profit)"
+                Using insertCmd As New SqlCommand(insertQuery, con)
+                    insertCmd.Parameters.AddWithValue("@Day", today)
+                    insertCmd.Parameters.AddWithValue("@Sales_total", salesTotalForReport)
+                    insertCmd.Parameters.AddWithValue("@Profit", totalProfitForReport)
+                    insertCmd.ExecuteNonQuery()
+                End Using
             Else
-                ' No records exist at all
-                resetDaily = False ' (optional — you could keep it False since it's empty)
-            End If
-        End Using
-
-        If resetDaily Then
-            Dim resetQuery As String = "DELETE FROM Dailysales"
-            Using resetCmd As New SqlCommand(resetQuery, con)
-                resetCmd.ExecuteNonQuery()
-            End Using
-        End If
-
-        If resetDaily Then
-                Dim resetQuery As String = "DELETE FROM Dailysales"
-                Using resetCmd As New SqlCommand(resetQuery, con)
-                    resetCmd.ExecuteNonQuery()
+                ' Optionally update today's record instead of inserting
+                Dim updateQuery As String = "
+            UPDATE Dailysales 
+            SET Sales_total = Sales_total + @Sales_total, 
+                Profit = Profit + @Profit
+            WHERE Day = @Day"
+                Using updateCmd As New SqlCommand(updateQuery, con)
+                    updateCmd.Parameters.AddWithValue("@Day", today)
+                    updateCmd.Parameters.AddWithValue("@Sales_total", salesTotalForReport)
+                    updateCmd.Parameters.AddWithValue("@Profit", totalProfitForReport)
+                    updateCmd.ExecuteNonQuery()
                 End Using
             End If
-
-        ' === INSERT for TODAY ===
-        Dim insertDailyQuery As String = "INSERT INTO Dailysales (Day, Sales_total, Profit) VALUES (@Day, @Sales_total, @Profit)"
-        Using cmdDaily As New SqlCommand(insertDailyQuery, con)
-            cmdDaily.Parameters.AddWithValue("@Day", today)
-            cmdDaily.Parameters.AddWithValue("@Sales_total", salesTotalForReport)
-            cmdDaily.Parameters.AddWithValue("@Profit", totalProfitForReport)
-            cmdDaily.ExecuteNonQuery()
         End Using
 
 
@@ -697,17 +627,48 @@ ELSE
 
 
             ' === UPDATE employee's revenue ===
-            Dim updateRevenueQuery As String = "
-UPDATE login 
-SET revenue = ISNULL(revenue, 0) + @earnedToday 
-WHERE user_id = @userID
+
+            ' Check if revenue for this user already exists for today
+            Dim checkRevenueQuery As String = "
+SELECT COUNT(*) 
+FROM EmployeeRevenue 
+WHERE user_id = @userID AND [date] = @today
 "
 
-            Using cmdUpdateRevenue As New SqlCommand(updateRevenueQuery, con)
-                cmdUpdateRevenue.Parameters.AddWithValue("@earnedToday", salesTotalForReport)
-                cmdUpdateRevenue.Parameters.AddWithValue("@userID", user_id)
-                cmdUpdateRevenue.ExecuteNonQuery()
+            Dim revenueExists As Boolean = False
+            Using checkCmd As New SqlCommand(checkRevenueQuery, con)
+                checkCmd.Parameters.AddWithValue("@userID", user_id)
+                checkCmd.Parameters.AddWithValue("@today", today)
+                revenueExists = Convert.ToInt32(checkCmd.ExecuteScalar()) > 0
             End Using
+
+            If revenueExists Then
+                ' Update today's revenue
+                Dim updateQuery As String = "
+    UPDATE EmployeeRevenue 
+    SET revenue = revenue + @earnedToday 
+    WHERE user_id = @userID AND [date] = @today
+    "
+                Using updateCmd As New SqlCommand(updateQuery, con)
+                    updateCmd.Parameters.AddWithValue("@earnedToday", salesTotalForReport)
+                    updateCmd.Parameters.AddWithValue("@userID", user_id)
+                    updateCmd.Parameters.AddWithValue("@today", today)
+                    updateCmd.ExecuteNonQuery()
+                End Using
+            Else
+                ' Insert new revenue record
+                Dim insertQuery As String = "
+    INSERT INTO EmployeeRevenue (user_id, revenue, [date]) 
+    VALUES (@userID, @earnedToday, @today)
+    "
+                Using insertCmd As New SqlCommand(insertQuery, con)
+                    insertCmd.Parameters.AddWithValue("@userID", user_id)
+                    insertCmd.Parameters.AddWithValue("@earnedToday", salesTotalForReport)
+                    insertCmd.Parameters.AddWithValue("@today", today)
+                    insertCmd.ExecuteNonQuery()
+                End Using
+            End If
+
 
         Catch ex As Exception
             MessageBox.Show("Error updating YearlySales: " & ex.Message)

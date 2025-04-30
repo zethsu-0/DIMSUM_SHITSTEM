@@ -10,76 +10,13 @@ Public Class EMPLOYEE_TAB
     Private Sub EMPLOYEE_TAB_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Opencon()
         con.Close()
-        ResetRevenueIfNewDay()
+
         LoadLoggedInUserIntoPanel1()
         LoadOtherUsersIntoFlowLayoutPanel()
         Me.RemittancehistoryTableAdapter.Fill(Me.SHITSTEMDataSet.remittancehistory)
     End Sub
 
-    Private Sub ResetRevenueIfNewDay()
-        Try
-            Opencon()
-            Dim todayDate As Date = Date.Today
 
-            ' 1) Read everything (no nested readers)
-            Dim selectQuery As String = "
-            SELECT user_id, revenue, dateofremittance, firstname, lastname
-            FROM login
-            WHERE role IN ('Owner','Manager','Employee')
-        "
-            Dim usersToReset As New List(Of (userId As String, revenue As Decimal, firstName As String, lastName As String))
-
-            Using cmd As New SqlCommand(selectQuery, con)
-                Using reader As SqlDataReader = cmd.ExecuteReader()
-                    While reader.Read()
-                        Dim userId = reader("user_id").ToString()
-                        Dim revenueAmt = If(reader.IsDBNull(reader.GetOrdinal("revenue")), 0D, Convert.ToDecimal(reader("revenue")))
-                        Dim lastResetVal = reader("dateofremittance")
-                        Dim lastReset As Date? = If(lastResetVal Is DBNull.Value, CType(Nothing, Date?), CType(lastResetVal, Date))
-                        ' if never reset or last reset <> today, and revenue > 0
-                        If (Not lastReset.HasValue OrElse lastReset.Value.Date <> todayDate) AndAlso revenueAmt > 0 Then
-                            usersToReset.Add((userId, revenueAmt, reader("firstname").ToString(), reader("lastname").ToString()))
-                        End If
-                    End While
-                End Using
-            End Using
-
-            ' 2) Now reader is closed, do inserts & updates
-            For Each u In usersToReset
-                ' Insert into remittancehistory
-                Using insertCmd As New SqlCommand("
-                INSERT INTO remittancehistory
-                  (User_id, revenue, date, firstname, lastname)
-                VALUES
-                  (@User_id, @revenue, @date, @firstname, @lastname)
-            ", con)
-                    insertCmd.Parameters.AddWithValue("@User_id", u.userId)
-                    insertCmd.Parameters.AddWithValue("@revenue", u.revenue)
-                    insertCmd.Parameters.AddWithValue("@date", todayDate)
-                    insertCmd.Parameters.AddWithValue("@firstname", u.firstName)
-                    insertCmd.Parameters.AddWithValue("@lastname", u.lastName)
-                    insertCmd.ExecuteNonQuery()
-                End Using
-
-                ' Reset login.revenue & update dateofremittance
-                Using resetCmd As New SqlCommand("
-                UPDATE login
-                SET revenue = 0,
-                    dateofremittance = @today
-                WHERE user_id = @userID
-            ", con)
-                    resetCmd.Parameters.AddWithValue("@today", todayDate)
-                    resetCmd.Parameters.AddWithValue("@userID", u.userId)
-                    resetCmd.ExecuteNonQuery()
-                End Using
-            Next
-
-        Catch ex As Exception
-            MessageBox.Show("Error resetting employee revenues: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Finally
-            If con.State = ConnectionState.Open Then con.Close()
-        End Try
-    End Sub
 
 
 
@@ -168,17 +105,23 @@ Public Class EMPLOYEE_TAB
             con.Open()
 
             Dim query As String = "
-        SELECT user_id, firstname, lastname, role, age, address, phone_no, photo, revenue 
-        FROM login
-        WHERE user_id <> @currentUserId 
-          AND (
-               (@currentRole = 'Owner') 
-            OR (@currentRole = 'Manager' AND role = 'Employee')
-          )"
+SELECT l.user_id, l.firstname, l.lastname, l.role, l.age, l.address, l.phone_no, l.photo,
+       ISNULL(er.revenue, 0) AS revenue
+FROM login l
+LEFT JOIN employeerevenue er
+    ON l.user_id = er.user_id AND er.date = @today
+WHERE l.user_id <> @currentUserId 
+  AND (
+       (@currentRole = 'Owner') 
+    OR (@currentRole = 'Manager' AND l.role = 'Employee')
+  )"
+
 
             Using cmd As New SqlCommand(query, con)
                 cmd.Parameters.AddWithValue("@currentUserId", User_id)
                 cmd.Parameters.AddWithValue("@currentRole", user_Role)
+                cmd.Parameters.AddWithValue("@today", Date.Today)
+
 
                 Using reader As SqlDataReader = cmd.ExecuteReader()
                     While reader.Read()

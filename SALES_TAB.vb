@@ -42,7 +42,8 @@ Public Class SALES_TAB
         End If
 
         ExpireOldProducts()
-        salesTotallbl.Text = "0.00"
+        lblSalesToday.Text = "0.00"
+        lblProfitToday.Text = "0.00"
         dailytotalearn()
         LoadCharts()
 
@@ -50,6 +51,8 @@ Public Class SALES_TAB
 
 
     Private Sub LoadCharts()
+
+
 
         Opencon()
         Dim cmd As New SqlCommand("
@@ -275,32 +278,29 @@ ORDER BY TRY_CAST('01 ' + Month AS DATE)", con)
         End Try
     End Sub
     Public Sub dailytotalearn()
-        Dim dailyProfit As Decimal = 0
-        Dim dailySales_total As Decimal = 0
+        Opencon()
 
-        Dim query As String = "SELECT SUM(Profit) AS TotalProfit, SUM(Sales_total) AS TotalSales 
-                                FROM DailySales 
-                                WHERE CONVERT(date, Day) = CONVERT(date, GETDATE())"
+        Dim today As Date = Date.Today
+        Dim query As String = "SELECT Sales_total, Profit FROM Dailysales WHERE Day = @Today"
 
         Using cmd As New SqlCommand(query, con)
-            If con IsNot Nothing AndAlso con.State = ConnectionState.Open Then con.Close()
-            con.Open()
+            cmd.Parameters.AddWithValue("@Today", today)
+
             Using reader As SqlDataReader = cmd.ExecuteReader()
                 If reader.Read() Then
-                    If Not IsDBNull(reader("TotalProfit")) Then
-                        dailyProfit = Convert.ToDecimal(reader("TotalProfit"))
-                        profitlbl.Text = dailyProfit.ToString()
-                    End If
+                    Dim salesTotal As Decimal = If(IsDBNull(reader("Sales_total")), 0D, Convert.ToDecimal(reader("Sales_total")))
+                    Dim profit As Decimal = If(IsDBNull(reader("Profit")), 0D, Convert.ToDecimal(reader("Profit")))
 
-                    If Not IsDBNull(reader("TotalSales")) Then
-                        dailySales_total = Convert.ToDecimal(reader("TotalSales"))
-                        salesTotallbl.Text = dailySales_total.ToString()
-                    End If
+                    lblSalesToday.Text = "₱" & salesTotal.ToString("N2")
+                    lblProfitToday.Text = "₱" & profit.ToString("N2")
+                Else
+                    lblSalesToday.Text = "₱0.00"
+                    lblProfitToday.Text = "₱0.00"
                 End If
             End Using
-            con.Close()
         End Using
 
+        con.Close()
     End Sub
 
     Private Sub ExpireOldProducts()
@@ -455,8 +455,8 @@ ORDER BY TRY_CAST('01 ' + Month AS DATE)", con)
     End Sub
     Private Sub resetdatas()
 
-        profitlbl.Text = "0.00"
-        salesTotallbl.Text = "0.00"
+        lblSalesToday.Text = "0.00"
+        lblProfitToday.Text = "0.00"
         Dim deleteQuery As String = "
     DELETE FROM DailySales;
     DELETE FROM WeeklySales;
