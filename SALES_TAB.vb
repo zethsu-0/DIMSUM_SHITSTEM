@@ -50,12 +50,18 @@ Public Class SALES_TAB
 
 
     Private Sub LoadCharts()
+
         Opencon()
-        Dim cmd As New SqlCommand("SELECT Month, Profit, Sales_Total FROM MonthlySales", con)
+        Dim cmd As New SqlCommand("
+SELECT Month, Profit, Sales_Total 
+FROM MonthlySales 
+ORDER BY TRY_CAST('01 ' + Month AS DATE)", con)
+
         Dim reader As SqlDataReader
 
         Chart1.Series.Clear()
         Chart1.Legends.Clear()
+
 
         Dim monthlyProfitSeries As New Series("Monthly Profit")
         Dim monthlySalesSeries As New Series("Monthly Sales")
@@ -69,6 +75,8 @@ Public Class SALES_TAB
         monthlySalesSeries.IsValueShownAsLabel = True
         monthlyProfitSeries("PointWidth") = "0.2"
         monthlySalesSeries("PointWidth") = "0.2"
+
+
 
         Try
             reader = cmd.ExecuteReader()
@@ -86,13 +94,23 @@ Public Class SALES_TAB
                 monthlySalesSeries.Points.AddXY(month, sales)
             End While
 
+            Chart1.Titles.Clear()
+            Dim chartTitle As String = "Monthly Earnings - " & Date.Today.ToString("yyyy")
+            Dim title As New Title()
+            title.Text = chartTitle
+            title.Font = New Font("Arial", 12, FontStyle.Bold)
+            title.ForeColor = Color.Black
+            title.Alignment = ContentAlignment.TopCenter
+
+            Chart1.Titles.Add(title)
+
             Chart1.Series.Add(monthlyProfitSeries)
             Chart1.Series.Add(monthlySalesSeries)
 
             Chart1.Legends.Add("Legend1")
             Chart1.Legends(0).Docking = Docking.Top
-            Chart1.Legends(0).Font = New Font("Arial", 9, FontStyle.Bold)
-
+            Chart1.ChartAreas(0).AxisX.LabelStyle.Font = New Font("Arial", 8)
+            Chart1.ChartAreas(0).AxisX.LabelStyle.Angle = -45
             Chart1.ChartAreas(0).AxisX.IsMarginVisible = True
             Chart1.ChartAreas(0).AxisX.Interval = 1
 
@@ -101,6 +119,11 @@ Public Class SALES_TAB
                 .LineColor = Color.LightGray
                 .LineDashStyle = ChartDashStyle.Dot
             End With
+            monthlySalesSeries.ToolTip = "Sales: #VALY"
+            monthlyProfitSeries.ToolTip = "Profit: #VALY"
+
+
+
         Catch ex As Exception
             MessageBox.Show("Error loading MonthlySales: " & ex.Message)
         Finally
@@ -110,27 +133,37 @@ Public Class SALES_TAB
         ' === Chart2: Weekly Profit & Sales ===
         Opencon()
 
-        Dim weekStart As Date = Date.Today.AddDays(-(CInt(Date.Today.DayOfWeek) - 1))
-        If weekStart > Date.Today Then weekStart = weekStart.AddDays(-7)
+        ' --- NEW BLOCK: Get Weekly Date Range and Set Chart Title ---
+        Dim minDate As Date
+        Dim maxDate As Date
 
-        Dim weekEnd As Date = weekStart.AddDays(6)
+        Try
+            Dim rangeCmd As New SqlCommand("SELECT MIN(Day) AS MinDay, MAX(Day) AS MaxDay FROM WeeklySales", con)
+            Using reader1 As SqlDataReader = rangeCmd.ExecuteReader()
+                If reader1.Read() Then
+                    If Not IsDBNull(reader1("MinDay")) AndAlso Not IsDBNull(reader1("MaxDay")) Then
+                        minDate = Convert.ToDateTime(reader1("MinDay"))
+                        maxDate = Convert.ToDateTime(reader1("MaxDay"))
 
-        Dim chartQuery As String = "
-SELECT SaleDate, Profit, Sales_total 
-FROM WeeklySales 
-WHERE SaleDate BETWEEN @WeekStart AND @WeekEnd 
-ORDER BY SaleDate"
+                        Dim dateRange As String = minDate.ToString("MM/dd/yyyy") & " - " & maxDate.ToString("MM/dd/yyyy")
+                        Chart2.Titles.Clear()
+                        Chart2.Titles.Add("Weekly Sales (" & dateRange & ")")
+                    End If
+                End If
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error retrieving week range: " & ex.Message)
+        End Try
 
-        Dim cmd2 As New SqlCommand(chartQuery, con)
-        cmd2.Parameters.AddWithValue("@WeekStart", weekStart)
-        cmd2.Parameters.AddWithValue("@WeekEnd", weekEnd)
-
+        ' --- YOUR EXISTING CODE TO LOAD CHART DATA ---
+        Dim cmd2 As New SqlCommand("SELECT Day, Profit, Sales_Total FROM WeeklySales", con)
         Dim reader2 As SqlDataReader
+
         Chart2.Series.Clear()
         Chart2.Legends.Clear()
 
-        Dim weeklyProfitSeries As New Series("Profit")
-        Dim weeklySalesSeries As New Series("Sales")
+        Dim weeklyProfitSeries As New Series("Weekly Profit")
+        Dim weeklySalesSeries As New Series("Weekly Sales")
 
         weeklyProfitSeries.ChartType = SeriesChartType.Column
         weeklySalesSeries.ChartType = SeriesChartType.Column
@@ -142,32 +175,44 @@ ORDER BY SaleDate"
         Try
             reader2 = cmd2.ExecuteReader()
             While reader2.Read()
-                Dim saleDate As Date = Convert.ToDateTime(reader2("SaleDate"))
-                Dim dayLabel As String = saleDate.ToString("ddd dd") ' e.g., "Mon 22"
-
+                Dim day = Convert.ToDateTime(reader2("Day")).ToString("MM/dd/yyyy")
                 Dim profit = If(IsDBNull(reader2("Profit")), 0D, Convert.ToDecimal(reader2("Profit")))
-                Dim sales = If(IsDBNull(reader2("Sales_total")), 0D, Convert.ToDecimal(reader2("Sales_total")))
+                Dim sales = If(IsDBNull(reader2("Sales_Total")), 0D, Convert.ToDecimal(reader2("Sales_Total")))
+
+                If String.IsNullOrEmpty(day) Then
+                    day = "Unknown"
+                End If
 
                 If user_Role <> "Manager" Then
-                    weeklyProfitSeries.Points.AddXY(dayLabel, profit)
+                    weeklyProfitSeries.Points.AddXY(day, profit)
                 End If
-                weeklySalesSeries.Points.AddXY(dayLabel, sales)
+                weeklySalesSeries.Points.AddXY(day, sales)
             End While
 
             Chart2.Series.Add(weeklyProfitSeries)
             Chart2.Series.Add(weeklySalesSeries)
 
-            Chart2.Legends.Add("Legend")
+            Chart2.Legends.Add("Legend2")
             Chart2.Legends(0).Docking = Docking.Top
             Chart2.Legends(0).Font = New Font("Arial", 9, FontStyle.Bold)
             Chart2.ChartAreas(0).Area3DStyle.Enable3D = False
             Chart2.ChartAreas(0).AxisX.MajorGrid.Enabled = False
+
+            weeklyProfitSeries.BorderWidth = 1
+            weeklySalesSeries.BorderWidth = 1
+
+            weeklyProfitSeries("PointWidth") = "0.2"
+            weeklySalesSeries("PointWidth") = "0.2"
+            With Chart2.ChartAreas(0).AxisY.MajorGrid
+                .LineColor = Color.LightGray
+                .LineDashStyle = ChartDashStyle.Dot
+            End With
+
         Catch ex As Exception
             MessageBox.Show("Error loading WeeklySales: " & ex.Message)
         Finally
             con.Close()
         End Try
-
 
 
 

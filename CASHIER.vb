@@ -493,10 +493,10 @@ Public Class CASHIER
                         End Using
                     End Using
 
-                    Dim itemTotal As Integer = sellingPrice * quantity
-                    salesTotalForReport += itemTotal
+                Dim itemTotal As Integer = Convert.ToInt32(row.Cells("Total_price").Value)
+                salesTotalForReport += itemTotal
 
-                    Dim itemProfit As Integer = (sellingPrice - cost) * quantity
+                Dim itemProfit As Integer = (sellingPrice - cost) * quantity
                     totalProfitForReport += itemProfit
                 End If
                 If con.State = ConnectionState.Open Then
@@ -511,122 +511,147 @@ Public Class CASHIER
 
             End If
 
-            Opencon()
-            Dim today As Date = Date.Today
-            Dim calendar = CultureInfo.CurrentCulture.Calendar
+        Opencon()
+        Dim today As Date = Date.Today
+        Dim calendar = CultureInfo.CurrentCulture.Calendar
 
-            ' === DAILY SALES RESET ===
-            Dim resetDaily As Boolean = False
+        ' === DAILY SALES RESET ===
+        Dim resetDaily As Boolean = False
 
-            Dim dailyQueryreset As String = "SELECT TOP 1 [Day] FROM Dailysales ORDER BY [Day] DESC"
-            Using dailyCmd As New SqlCommand(dailyQueryreset, con)
-                Dim lastDailyDateObj = dailyCmd.ExecuteScalar()
-                If lastDailyDateObj IsNot Nothing Then
-                    Dim lastDailyDate As Date
-                    If Date.TryParse(lastDailyDateObj.ToString(), lastDailyDate) Then
-                        If lastDailyDate.Date <> today Then
-                            resetDaily = True
-                        End If
+        Dim dailyQueryreset As String = "SELECT TOP 1 [Day] FROM Dailysales ORDER BY [Day] DESC"
+        Using dailyCmd As New SqlCommand(dailyQueryreset, con)
+            Dim lastDailyDateObj = dailyCmd.ExecuteScalar()
+            If lastDailyDateObj IsNot Nothing Then
+                Dim lastDailyDate As Date
+                If Date.TryParse(lastDailyDateObj.ToString(), lastDailyDate) Then
+                    If lastDailyDate.Date <> today Then
+                        resetDaily = True
                     End If
-                Else
-                    ' No records exist at all
-                    resetDaily = False ' (optional — you could keep it False since it's empty)
                 End If
-            End Using
+            Else
+                ' No records exist at all
+                resetDaily = False ' (optional — you could keep it False since it's empty)
+            End If
+        End Using
 
-            If resetDaily Then
+        If resetDaily Then
+            Dim resetQuery As String = "DELETE FROM Dailysales"
+            Using resetCmd As New SqlCommand(resetQuery, con)
+                resetCmd.ExecuteNonQuery()
+            End Using
+        End If
+
+        If resetDaily Then
                 Dim resetQuery As String = "DELETE FROM Dailysales"
                 Using resetCmd As New SqlCommand(resetQuery, con)
                     resetCmd.ExecuteNonQuery()
                 End Using
             End If
 
-            ' === INSERT for TODAY ===
-            Dim insertDailyQuery As String = "INSERT INTO Dailysales (Day, Sales_total, Profit) VALUES (@Day, @Sales_total, @Profit)"
-            Using cmdDaily As New SqlCommand(insertDailyQuery, con)
-                cmdDaily.Parameters.AddWithValue("@Day", today)
-                cmdDaily.Parameters.AddWithValue("@Sales_total", salesTotalForReport)
-                cmdDaily.Parameters.AddWithValue("@Profit", totalProfitForReport)
-                cmdDaily.ExecuteNonQuery()
+        ' === INSERT for TODAY ===
+        Dim insertDailyQuery As String = "INSERT INTO Dailysales (Day, Sales_total, Profit) VALUES (@Day, @Sales_total, @Profit)"
+        Using cmdDaily As New SqlCommand(insertDailyQuery, con)
+            cmdDaily.Parameters.AddWithValue("@Day", today)
+            cmdDaily.Parameters.AddWithValue("@Sales_total", salesTotalForReport)
+            cmdDaily.Parameters.AddWithValue("@Profit", totalProfitForReport)
+            cmdDaily.ExecuteNonQuery()
+        End Using
+
+
+        ' --- WEEKLY SALES RESET ---
+        Dim currentDate As Date = Date.Today
+        Dim resetWeek As Boolean = False
+
+        ' Check how many records are in the WeeklySales table
+        Dim weeklyCheckQuery As String = "SELECT COUNT(*) FROM WeeklySales"
+        Using checkCmd As New SqlCommand(weeklyCheckQuery, con)
+            Dim count = Convert.ToInt32(checkCmd.ExecuteScalar())
+            If count >= 7 Then
+                resetWeek = True
+            End If
+        End Using
+
+        ' Reset the table if 7 records exist
+        If resetWeek Then
+            Dim resetWeeklyQuery As String = "DELETE FROM WeeklySales"
+            Using resetCmd As New SqlCommand(resetWeeklyQuery, con)
+                resetCmd.ExecuteNonQuery()
             End Using
+        End If
 
-
-
-
-            Dim dailyUpsertQuery As String = "
-IF EXISTS (SELECT 1 FROM WeeklySales WHERE SaleDate = @SaleDate)
-    UPDATE WeeklySales
-    SET Sales_total = Sales_total + @Sales_total,
-        Profit = Profit + @Profit
-    WHERE SaleDate = @SaleDate
+        ' Insert or update today's sales data using the full date
+        Dim weeklyQuery As String = "
+IF EXISTS (SELECT 1 FROM WeeklySales WHERE Day = @dayParam)
+    UPDATE WeeklySales 
+    SET Sales_total = Sales_total + @Sales_total, 
+        Profit = Profit + @Profit 
+    WHERE Day = @dayParam
 ELSE
-    INSERT INTO WeeklySales (SaleDate, Sales_total, Profit)
-    VALUES (@SaleDate, @Sales_total, @Profit)"
-            Using cmdDaily As New SqlCommand(dailyUpsertQuery, con)
-                cmdDaily.Parameters.AddWithValue("@SaleDate", today)
-                cmdDaily.Parameters.AddWithValue("@Sales_total", salesTotalForReport)
-                cmdDaily.Parameters.AddWithValue("@Profit", totalProfitForReport)
-                cmdDaily.ExecuteNonQuery()
-            End Using
+    INSERT INTO WeeklySales (Day, Sales_total, Profit) 
+    VALUES (@dayParam, @Sales_total, @Profit)"
+
+        Using cmdWeekly As New SqlCommand(weeklyQuery, con)
+            cmdWeekly.Parameters.AddWithValue("@dayParam", currentDate)
+            cmdWeekly.Parameters.AddWithValue("@Sales_total", salesTotalForReport)
+            cmdWeekly.Parameters.AddWithValue("@Profit", totalProfitForReport)
+            cmdWeekly.ExecuteNonQuery()
+        End Using
 
 
         ' === MONTHLY SALES RESET ===
+        Dim today1 As Date = Date.Today
+        Dim currentMonthName As String = today1.ToString("MMMM yyyy") ' e.g., "April 2025"
+        Dim currentYear1 As Integer = today1.Year
+        Dim resetYearly1 As Boolean = False
 
-        Dim currentMonthNum As Integer = today.Month
-        Dim currentMonthName As String = today.ToString("MMMM") ' "April", "May", etc.
-        Dim resetMonthly As Boolean = False
+        ' Get the most recent month stored (for year checking)
+        Dim monthlyQueryreset As String = "SELECT TOP 1 [Month] FROM MonthlySales ORDER BY [Month] DESC"
+        Using monthlyCmd As New SqlCommand(monthlyQueryreset, con)
+            Dim lastMonthlyMonthObj = monthlyCmd.ExecuteScalar()
+            If lastMonthlyMonthObj IsNot Nothing Then
+                Dim lastMonthString As String = lastMonthlyMonthObj.ToString() ' e.g., "December 2024"
+                Dim lastYear As Integer
 
-        ' === STEP 1: Check last recorded month in MonthlySales table ===
-        Dim monthlyQueryReset As String = "SELECT TOP 1 [Month] FROM MonthlySales ORDER BY [Month] DESC"
-        Using monthlyCmd As New SqlCommand(monthlyQueryReset, con)
-            Dim lastMonthObj = monthlyCmd.ExecuteScalar()
-            If lastMonthObj IsNot Nothing Then
-                Dim lastMonthName As String = lastMonthObj.ToString().Trim()
-
-                ' Convert month name to number
-                Dim lastMonthNum As Integer
-                If DateTime.TryParseExact(lastMonthName, "MMMM", CultureInfo.InvariantCulture, DateTimeStyles.None, Nothing) Then
-                    lastMonthNum = DateTime.ParseExact(lastMonthName, "MMMM", CultureInfo.InvariantCulture).Month
-                Else
-                    MessageBox.Show("Invalid month format in MonthlySales: " & lastMonthName)
-                    Exit Sub
-                End If
-
-                If lastMonthNum <> currentMonthNum Then
-                    resetMonthly = True
+                ' Extract the year part from the string (assuming format "MMMM yyyy")
+                If Integer.TryParse(lastMonthString.Split(" "c)(1), lastYear) Then
+                    If lastYear <> currentYear1 Then
+                        resetYearly1 = True
+                    End If
                 End If
             End If
         End Using
 
-        ' === STEP 2: If needed, reset the MonthlySales table ===
-        If resetMonthly Then
-            Using deleteCmd As New SqlCommand("DELETE FROM MonthlySales", con)
+        If resetYearly1 Then
+            Dim deleteQuery As String = "DELETE FROM MonthlySales"
+            Using deleteCmd As New SqlCommand(deleteQuery, con)
                 deleteCmd.ExecuteNonQuery()
             End Using
         End If
 
-        ' === STEP 3: Insert or update MonthlySales for the current month ===
+        ' === INSERT or UPDATE for the current month ===
         Dim monthlyUpsertQuery As String = "
-IF EXISTS (SELECT 1 FROM MonthlySales WHERE LTRIM(RTRIM([Month])) = @Month)
+IF EXISTS (SELECT 1 FROM MonthlySales WHERE [Month] = @Month)
     UPDATE MonthlySales
     SET Sales_total = Sales_total + @Sales_total,
         Profit = Profit + @Profit
-    WHERE LTRIM(RTRIM([Month])) = @Month
+    WHERE [Month] = @Month
 ELSE
     INSERT INTO MonthlySales ([Month], Sales_total, Profit)
-    VALUES (@Month, @Sales_total, @Profit)
-"
+    VALUES (@Month, @Sales_total, @Profit)"
 
-        Try
-            Using cmdMonthly As New SqlCommand(monthlyUpsertQuery, con)
-                cmdMonthly.Parameters.AddWithValue("@Month", currentMonthName)
-                cmdMonthly.Parameters.AddWithValue("@Sales_total", salesTotalForReport)
-                cmdMonthly.Parameters.AddWithValue("@Profit", totalProfitForReport)
-                cmdMonthly.ExecuteNonQuery()
-            End Using
-        Catch ex As Exception
-            MessageBox.Show("Error updating MonthlySales: " & ex.Message)
-        End Try
+
+        Using cmdMonthly As New SqlCommand(monthlyUpsertQuery, con)
+            cmdMonthly.Parameters.AddWithValue("@Month", currentMonthName)
+            cmdMonthly.Parameters.AddWithValue("@Sales_total", salesTotalForReport)
+            cmdMonthly.Parameters.AddWithValue("@Profit", totalProfitForReport)
+            cmdMonthly.ExecuteNonQuery()
+        End Using
+
+
+
+
+
+
 
 
 
